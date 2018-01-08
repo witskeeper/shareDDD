@@ -1,0 +1,120 @@
+2017-12-24 21:12:42,959 - dbBaseHelper - 7800 - ERROR - write - write sql:
+        insert into user (userName,phone,sex,Gmt) values (%(user_name)s,%(user_phone)s,%(user_sex)s,now())
+         args:{'phone': u'1xxxxxx', 'user_name': u'jes', 'sex': 'male'} Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 56, in write
+    db.write(sql,args,is_execute_many)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'user_phone'
+
+2017-12-24 21:13:48,803 - dbBaseHelper - 7128 - ERROR - write - write sql:
+        insert into user (userName,phone,sex,Gmt) values (%(user_name)s,%(user_phone)s,%(user_sex)s,now())
+         args:{'user_phone': u'1xxxxxx', 'user_name': u'jes', 'sex': 'male'} Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 56, in write
+    db.write(sql,args,is_execute_many)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'user_sex'
+
+2017-12-31 17:26:18,226 - dbBaseHelper - 9128 - ERROR - write - func [deleteUser] exec sql Not provided
+2017-12-31 17:32:52,457 - dbBaseHelper - 9128 - ERROR - write - func [deleteUser] exec sql Not provided
+2017-12-31 17:35:51,237 - dbBaseHelper - 6348 - ERROR - write - func [deleteUser] exec sql Not provided
+2017-12-31 17:36:49,539 - dbBaseHelper - 6348 - ERROR - write - func [deleteUser] exec sql Not provided
+2017-12-31 17:40:41,964 - dbBaseHelper - 8764 - ERROR - write - func [deleteUser] exec sql Not provided
+2017-12-31 17:44:26,028 - dbBaseHelper - 8328 - ERROR - write - func [deleteUser] exec sql Not provided
+2017-12-31 17:49:02,953 - dbBaseHelper - 8328 - ERROR - read - func [getUserInfo] exec sql Not provided
+2017-12-31 17:51:43,868 - dbBaseHelper - 9116 - ERROR - read - select sql:
+        select * from user where userName= %(user_name)s
+         args:None Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 38, in read
+    ret = db.read(sql,args)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%(user_name)s' at line 1")
+
+2017-12-31 17:52:05,825 - dbBaseHelper - 9116 - ERROR - write - write sql:
+        delete from user where userName= %(user_name)s
+         args:None Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 72, in write
+    db.write(sql,args,is_execute_many)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%(user_name)s' at line 1")
+
+2017-12-31 17:56:22,082 - dbBaseHelper - 5040 - ERROR - write - write sql:
+        delete from user where userName= %(user_name)s
+         args:None Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 73, in write
+    db.write(sql,args,is_execute_many)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%(user_name)s' at line 1")
+
+2017-12-31 17:57:03,344 - dbBaseHelper - 5040 - ERROR - read - select sql:
+        select * from user where userName= %(user_name)s
+         args:None Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 38, in read
+    ret = db.read(sql,args)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%(user_name)s' at line 1")
+
+2017-12-31 18:41:44,315 - dbBaseHelper - 2480 - ERROR - write - write sql:
+        insert into user (userName,phone,sex,Gmt) values (%(user_name)s,%(user_phone)s,%(user_sex)s,now())
+         args:{'createuserid': u'4', 'version': u'v0.1.0', 'name': u'SCP'} Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 72, in write
+    db.write(sql,self.args,self.is_execute_many)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'user_name'
+
+2017-12-31 18:50:59,000 - dbBaseHelper - 6340 - ERROR - write - func [addProject] exec sql Not provided
+2017-12-31 18:53:58,891 - dbBaseHelper - 6340 - ERROR - write - func [addProject] exec sql Not provided
+2018-01-01 18:25:59,391 - dbBaseHelper - 8836 - ERROR - read - select sql:
+        select * from project where name = %(name)s
+         args:{'name': {'name': u'SCP'}} Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 33, in read
+    ret = db.read(self.sql,self.args)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\'name\': "\'SCP\'"}\' at line 1')
+
+2018-01-01 18:30:58,585 - dbBaseHelper - 8836 - ERROR - read - select sql:
+        select * from project where name = %(name)s
+         args:{'name': {'name': u'SCP'}} Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 33, in read
+    ret = db.read(self.sql,self.args)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\'name\': "\'SCP\'"}\' at line 1')
+

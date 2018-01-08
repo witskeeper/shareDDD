@@ -1,0 +1,27 @@
+2017-12-31 19:52:29,825 - ProjectServiceImpl - 364 - ERROR - addProject - Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\service\impl\ProjectServiceImpl.py", line 24, in addProject
+    if dataResult.getSuccess() and len(json.loads(dataResult.getMessage())) > 0:
+  File "C:\python27\lib\json\__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "C:\python27\lib\json\decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+TypeError: expected string or buffer
+
+2017-12-31 19:56:26,565 - ProjectServiceImpl - 8308 - ERROR - addProject - Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\service\impl\ProjectServiceImpl.py", line 25, in addProject
+    if dataResult.getSuccess() and len(json.loads(dataResult.getMessage())) > 0:
+  File "C:\python27\lib\json\__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "C:\python27\lib\json\decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+TypeError: expected string or buffer
+
+2017-12-31 19:57:55,265 - ProjectServiceImpl - 8892 - ERROR - addProject - Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\service\impl\ProjectServiceImpl.py", line 25, in addProject
+    if dataResult.getSuccess() and len(json.loads(dataResult.getMessage())) > 0:
+  File "C:\python27\lib\json\__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "C:\python27\lib\json\decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+TypeError: expected string or buffer
+
