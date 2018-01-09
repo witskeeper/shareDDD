@@ -16,6 +16,10 @@ class ProjectSQLMapper:
         addProjectSQL="""
         insert into project (name,createuserid,createtime,version) values (%(name)s,%(createuserid)s,now(),%(version)s)
         """
+        editProjectSQL="""
+        update 
+        """
+
         getProjectInfoByNameSQL="""
         select * from project where name = %(name)s
         """
@@ -26,4 +30,5 @@ class ProjectSQLMapper:
         self.data.setdefault("addProject",addProjectSQL)
         self.data.setdefault("getProjectInfoByName",getProjectInfoByNameSQL)
         self.data.setdefault("deleteProject",deleteProjectSQL)
+        self.data.setdefault("editProject",editProjectSQL)
 

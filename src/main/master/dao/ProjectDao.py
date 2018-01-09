@@ -19,6 +19,13 @@ class ProjectDaoInterface:
         daoOperate =DbBaseHelper(sql,args)
         return daoOperate.write()
 
+    def editProject(self,args):
+        #实例化
+        logger.info(inspect.stack()[0][3])
+        sql = ProjectSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate =DbBaseHelper(sql,args)
+        return daoOperate.write()
+
     def getProjectInfoByName(self,args):
         #实例化
         logger.info(inspect.stack()[0][3])

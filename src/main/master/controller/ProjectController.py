@@ -58,7 +58,8 @@ class ProjectHandler(tornado.web.RequestHandler):
             task_name = self.get_argument('task_name')
             tasks = {
                 'addProject' : lambda : self.addProject(),
-                'deleteProject':lambda :self.deleteProject()
+                'deleteProject':lambda :self.deleteProject(),
+                'editProject':lambda:self.editProject()
             }
             self.write(json.dumps(tasks[task_name]().__dict__,cls=CJsonEncoder))
         except:
@@ -83,6 +84,19 @@ class ProjectHandler(tornado.web.RequestHandler):
         args.setdefault("name",name)
         args.setdefault("createuserid",createuserid)
         args.setdefault("version",version)
+        return ProjectService().addProject(args)
+
+    def editProject(self):
+        name = self.get_argument('name')
+        edituserid = self.get_argument('edituserid')
+        version = self.get_argument('version')
+        projectid=self.get_argument('projectid')
+        args = {}
+        # NOTICE
+        args.setdefault("name", name)
+        args.setdefault("edituserid", edituserid)
+        args.setdefault("version", version)
+        args.setdefault("projectid",projectid)
         return ProjectService().addProject(args)
 
     def getProjectInfoByName(self):
