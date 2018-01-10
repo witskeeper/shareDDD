@@ -1,1 +1,190 @@
-test
+CREATE TABLE `user` (
+`id` int(11) NOT NULL auto_increment,
+`username` varchar(255) NOT NULL,
+`passwd` varchar(255) NOT NULL,
+`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
+`remarks` varchar(255) default NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`),
+PRIMARY KEY(`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `environment` (
+`id` int(11) NOT NULL auto_increment,
+`name` varchar(255) NOT NULL,
+`url` varchar(255) NOT NULL,
+`datatemplate` longtext default NULL,
+`dbname` varchar(255) NOT NULL,
+`dbhostname` varchar(255) NOT NULL,
+`dbport` varchar(255) NOT NULL,
+`dbusername` varchar(255) NOT NULL,
+`dbpasswd` varchar(255) NOT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`),
+PRIMARY KEY(`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `project` (
+`id` int(11) NOT NULL auto_increment,
+`name` varchar(255) NOT NULL,
+`create_userid` int(11) NOT NULL,
+`create_username` varchar(255) NOT NULL,
+`version` varchar(255) DEFAULT NULL,
+`remarks` varchar(255) DEFAULT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`),
+PRIMARY KEY(`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `group` (
+`id` int(11) NOT NULL auto_increment,
+`name` varchar(255) NOT NULL,
+`create_userid` int(11) NOT NULL,
+`type` tinyint(4) default 0 COMMENT '0: api 1: case',
+`projectid` int(11) NOT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`),
+KEY `project_id` (`projectid`),
+CONSTRAINT `project_id` FOREIGN KEY (`projectid`) REFERENCES `project` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `interface` (
+`id` int(11) NOT NULL auto_increment,
+`name` varchar(255) NOT NULL,
+`url` varchar(255) NOT NULL,
+`create_userid` int(11) NOT NULL,
+`create_username` varchar(255) NOT NULL,
+`update_userid` int(11) NOT NULL,
+`update_username` varchar(255) NOT NULL,
+`describe` varchar(255) NOT NULL,
+`params` text DEFAULT NULL,
+`success_response` text DEFAULT NULL,
+`failure_response` text DEFAULT NULL,
+`method` tinyint(4) NOT NULL COMMENT '0: GET 1: POST 2.PUT 3. DELETE',
+`format` tinyint(4) NOT NULL COMMENT '0: form-data 1: json',
+`response_type` tinyint(4) default 0 COMMENT '0: json 1: view',
+`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
+`remarks` varchar(255) DEFAULT NULL,
+`projectid` int(11) NOT NULL,
+`groupid` int(11) NOT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`),
+KEY `project_id` (`projectid`),
+KEY `group_id` (`groupid`),
+CONSTRAINT `project_id` FOREIGN KEY (`projectid`) REFERENCES `project` (`id`),
+CONSTRAINT `group_id` FOREIGN KEY (`groupid`) REFERENCES `group` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `testcase` (
+`id` int(11) NOT NULL auto_increment,
+`name` varchar(255) NOT NULL,
+`create_userid` int(11) NOT NULL,
+`create_username` varchar(255) NOT NULL,
+`update_userid` int(11) NOT NULL,
+`update_username` varchar(255) NOT NULL,
+`describe` varchar(255) NOT NULL,
+`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
+`remarks` varchar(255) DEFAULT NULL,
+`projectid` int(11) NOT NULL,
+`groupid` int(11) NOT NULL,
+`envid` int(11) NOT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`),
+KEY `project_id` (`projectid`),
+KEY `group_id` (`groupid`),
+CONSTRAINT `project_id` FOREIGN KEY (`projectid`) REFERENCES `project` (`id`),
+CONSTRAINT `group_id` FOREIGN KEY (`groupid`) REFERENCES `group` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `casecontent` (
+`id` int(11) NOT NULL auto_increment,
+`step_name` varchar(255) NOT NULL,
+`caseid` int(11) NOT NULL,
+`step` int(11) NOT NULL,
+`interfaceid` int(11) DEFAULT NULL,
+`method` tinyint(4) DEFAULT NULL COMMENT '0: GET 1: POST 2.PUT 3. DELETE',
+`format` tinyint(4) DEFAULT NULL COMMENT '0: form-data 1: json',
+`request_params` varchar(255) DEFAULT NULL,
+`timeout` int(11) DEFAULT NULL,
+`type` tinyint(4) default 0 COMMENT '0: api 1: sql',
+`sqlcontent` varchar(255) DEFAULT NULL,
+PRIMARY KEY(`id`),
+KEY `case_id` (`caseid`),
+CONSTRAINT `case_id` FOREIGN KEY (`caseid`) REFERENCES `testcase` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `assert` (
+`id` int(11) NOT NULL auto_increment,
+`casecontentid` int(11) NOT NULL,
+`actual` varchar(255) NOT NULL,
+`expect` varchar(255) DEFAULT NULL,
+`assert_type` varchar(255) NOT NULL COMMENT '0: equal 1: not equal 2: contain 3:not contain ',
+`sqlcontent` varchar(255) DEFAULT NULL,
+PRIMARY KEY(`id`),
+KEY `casecontent_id` (`casecontent`),
+CONSTRAINT `casecontent_id` FOREIGN KEY (`casecontent`) REFERENCES `casecontent` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `testsuite` (
+`id` int(11) NOT NULL auto_increment,
+`name` varchar(255) NOT NULL,
+`testcaseids` varchar(255) NOT NULL,
+`create_userid` int(11) NOT NULL,
+`create_username` varchar(255) NOT NULL,
+`update_userid` int(11) NOT NULL,
+`update_username` varchar(255) NOT NULL,
+`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
+`remarks` varchar(255) DEFAULT NULL,
+`envid` int(11) NOT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `testcaseinstance` (
+`id` int(11) NOT NULL auto_increment,
+`create_userid` int(11) NOT NULL,
+`create_username` varchar(255) NOT NULL,
+`suite_name` varchar(255) NOT NULL,
+`suite_id` int(11) NOT NULL,
+`status` varchar(255) NOT NULL COMMENT 'wait,run,stop,fail,success,timeout,error',
+`build_start` datetime DEFAULT NULL,
+`build_end` datetime DEFAULT NULL,
+`trigger_type` tinyint(4) default 0 COMMENT '0: manual 1: ci 2:crontab',
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `caseresult` (
+`id` int(11) NOT NULL auto_increment,
+`instanceid` int(11) NOT NULL,
+`caseid` int(11) NOT NULL,
+`casename` varchar(255) NOT NULL,
+`runtime` int(11) DEFAULT NULL,
+`status` varchar(255) NOT NULL COMMENT 'wait,run,stop,fail,success,timeout,error',
+`exec_start` datetime DEFAULT NULL,
+`exec_end` datetime DEFAULT NULL,
+`message` text DEFAULT NULL,
+`remarks` varchar(255) DEFAULT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+
+
+
+
