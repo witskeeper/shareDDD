@@ -71,9 +71,20 @@ class ProjectService(object):
             dataResult.setStatusCode(500)
             return dataResult
 
-    def deleteProject(self,args):
+    def deleteProject(self,projectid):
         try:
-            return self.ProjectDaoInterface.deleteProject(args)
+            return self.ProjectDaoInterface.deleteProject(projectid)
+        except Exception, e:
+            dataResult = DataResult()
+            logger.error(traceback.format_exc())
+            dataResult.setMessage(traceback.format_exc())
+            dataResult.setSuccess(False)
+            dataResult.setStatusCode(500)
+            return dataResult
+
+    def getProjectList(self):
+        try:
+            return self.ProjectDaoInterface.getProjectList()
         except Exception, e:
             dataResult = DataResult()
             logger.error(traceback.format_exc())

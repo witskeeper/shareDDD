@@ -35,7 +35,8 @@ class ProjectHandler(tornado.web.RequestHandler):
         try:
             task_name = self.get_argument('task_name')
             tasks = {
-                'getProjectInfoByName' : lambda : self.getProjectInfoByName()
+                'getProjectInfoByName' : lambda : self.getProjectInfoByName(),
+                'getProjectList':lambda :self.getProjectList()
                 # lambda alias
             }
             self.write(json.dumps(tasks[task_name]().__dict__,cls=CJsonEncoder))
@@ -108,3 +109,6 @@ class ProjectHandler(tornado.web.RequestHandler):
         args={}
         args.setdefault("projectid",projectid)
         return ProjectService().deleteProject(args)
+
+    def getProjectList(self):
+        return ProjectService().getProjectList()

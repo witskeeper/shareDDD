@@ -26,9 +26,15 @@ class ProjectSQLMapper:
         deleteProjectSQL="""
         delete from project where id = %(projectid)s
         """
+
+        getProjectListSQL="""
+        select * from project
+        """
+
         #SET SQL FOR DAO
         self.data.setdefault("addProject",addProjectSQL)
         self.data.setdefault("getProjectInfoByName",getProjectInfoByNameSQL)
         self.data.setdefault("deleteProject",deleteProjectSQL)
         self.data.setdefault("editProject",editProjectSQL)
+        self.data.setdefault("getProjectList",getProjectListSQL)
 
