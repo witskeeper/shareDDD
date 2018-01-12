@@ -11,8 +11,8 @@ def start_server():
     
     app = tornado.web.Application(handlers=[
               #route
-              (r"/v1/user",UserHandler),
-              (r"/v1/project",ProjectHandler)
+              (r"/v1/user/(.*)",UserHandler),
+              (r"/v1/project/(.*)",ProjectHandler)
               ])
 
     http_server = tornado.httpserver.HTTPServer(app)

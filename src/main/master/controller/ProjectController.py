@@ -21,24 +21,23 @@ class ProjectHandler(tornado.web.RequestHandler):
 
     @tornado.web.asynchronous
     @tornado.gen.coroutine
-    def get(self):
-        yield self.execute_get()
+    def get(self,APIName):
+        yield self.execute_get(APIName)
 
     @tornado.web.asynchronous
     @tornado.gen.coroutine
-    def post(self):
-        yield self.execute_post()
+    def post(self,APIName):
+        yield self.execute_post(APIName)
 
     @run_on_executor
-    def execute_get(self):
+    def execute_get(self,APIName):
         dataResult = DataResult()
         try:
-            task_name = self.get_argument('task_name')
             tasks = {
                 'getProjectInfoByName' : lambda : self.getProjectInfoByName()
                 # lambda alias
             }
-            self.write(json.dumps(tasks[task_name]().__dict__,cls=CJsonEncoder))
+            self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
             logger.error(traceback.format_exc())
             dataResult.setMessage(traceback.format_exc())
@@ -52,15 +51,14 @@ class ProjectHandler(tornado.web.RequestHandler):
                 pass
 
     @run_on_executor
-    def execute_post(self):
+    def execute_post(self,APIName):
         dataResult = DataResult()
         try:
-            task_name = self.get_argument('task_name')
             tasks = {
                 'addProject' : lambda : self.addProject(),
                 'deleteProject':lambda :self.deleteProject()
             }
-            self.write(json.dumps(tasks[task_name]().__dict__,cls=CJsonEncoder))
+            self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
             logger.error(traceback.format_exc())
             dataResult.setMessage(traceback.format_exc())
@@ -73,24 +71,14 @@ class ProjectHandler(tornado.web.RequestHandler):
             except:
                 pass
 
-
     def addProject(self):
-        name = self.get_argument('name')
-        createuserid = self.get_argument('createuserid')
-        version=self.get_argument('version')
-        args={}
-        #NOTICE
-        args.setdefault("name",name)
-        args.setdefault("createuserid",createuserid)
-        args.setdefault("version",version)
-        return ProjectService().addProject(args)
+        data = json.loads(self.request.body)
+        return ProjectService().addProject(data)
 
     def getProjectInfoByName(self):
         name= self.get_argument("name")
         return ProjectService().getProjectInfoByName(name)
 
     def deleteProject(self):
-        projectid=self.get_argument("projectid")
-        args={}
-        args.setdefault("projectid",projectid)
-        return ProjectService().deleteProject(args)
+        data = json.loads(self.request.body)
+        return ProjectService().deleteProject(data)
