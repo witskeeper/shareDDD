@@ -1,18 +1,19 @@
 CREATE TABLE `user` (
 `id` int(11) NOT NULL auto_increment,
-`username` varchar(255) NOT NULL,
+`username` varchar(255) NOT NULL unique,
 `passwd` varchar(255) NOT NULL,
 `status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
 `remarks` varchar(255) default NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-PRIMARY KEY(`id`),
-PRIMARY KEY(`username`)
+PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `user` ADD unique(`username`);
 
 CREATE TABLE `environment` (
 `id` int(11) NOT NULL auto_increment,
-`name` varchar(255) NOT NULL,
+`name` varchar(255) NOT NULL unique,
 `url` varchar(255) NOT NULL,
 `datatemplate` longtext default NULL,
 `dbname` varchar(255) NOT NULL,
@@ -22,22 +23,24 @@ CREATE TABLE `environment` (
 `dbpasswd` varchar(255) NOT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-PRIMARY KEY(`id`),
-PRIMARY KEY(`name`)
+PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `environment` ADD unique(`name`);
 
 CREATE TABLE `project` (
 `id` int(11) NOT NULL auto_increment,
-`name` varchar(255) NOT NULL,
+`name` varchar(255) NOT NULL unique,
 `create_userid` int(11) NOT NULL,
 `create_username` varchar(255) NOT NULL,
 `version` varchar(255) DEFAULT NULL,
 `remarks` varchar(255) DEFAULT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-PRIMARY KEY(`id`),
-PRIMARY KEY(`name`)
+PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `project` ADD unique(`name`);
 
 CREATE TABLE `group` (
 `id` int(11) NOT NULL auto_increment,
@@ -74,9 +77,9 @@ CREATE TABLE `interface` (
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`),
-KEY `project_id` (`projectid`),
+KEY `projectId` (`projectid`),
 KEY `group_id` (`groupid`),
-CONSTRAINT `project_id` FOREIGN KEY (`projectid`) REFERENCES `project` (`id`),
+CONSTRAINT `projectId` FOREIGN KEY (`projectid`) REFERENCES `project` (`id`),
 CONSTRAINT `group_id` FOREIGN KEY (`groupid`) REFERENCES `group` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -96,10 +99,10 @@ CREATE TABLE `testcase` (
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`),
-KEY `project_id` (`projectid`),
-KEY `group_id` (`groupid`),
-CONSTRAINT `project_id` FOREIGN KEY (`projectid`) REFERENCES `project` (`id`),
-CONSTRAINT `group_id` FOREIGN KEY (`groupid`) REFERENCES `group` (`id`)
+KEY `proId` (`projectid`),
+KEY `groupId` (`groupid`),
+CONSTRAINT `proId` FOREIGN KEY (`projectid`) REFERENCES `project` (`id`),
+CONSTRAINT `groupId` FOREIGN KEY (`groupid`) REFERENCES `group` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `casecontent` (
@@ -127,8 +130,8 @@ CREATE TABLE `assert` (
 `assert_type` varchar(255) NOT NULL COMMENT '0: equal 1: not equal 2: contain 3:not contain ',
 `sqlcontent` varchar(255) DEFAULT NULL,
 PRIMARY KEY(`id`),
-KEY `casecontent_id` (`casecontent`),
-CONSTRAINT `casecontent_id` FOREIGN KEY (`casecontent`) REFERENCES `casecontent` (`id`)
+KEY `casecontent_id` (`casecontentid`),
+CONSTRAINT `casecontent_id` FOREIGN KEY (`casecontentid`) REFERENCES `casecontent` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `testsuite` (
@@ -173,6 +176,19 @@ CREATE TABLE `caseresult` (
 `exec_end` datetime DEFAULT NULL,
 `message` text DEFAULT NULL,
 `remarks` varchar(255) DEFAULT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `taskmetaqinfo` (
+`id` int(11) NOT NULL auto_increment,
+`instanceid` int(11) NOT NULL,
+`status` varchar(255) NOT NULL COMMENT '0 wait 1 send 2 receive',
+`running_consumer` varchar(255) DEFAULT NULL,
+`msg_id` varchar(255) DEFAULT NULL COMMENT 'process id',
+`message` text DEFAULT NULL,
+`is_deleted` tinyint(4) DEFAULT 0,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)
