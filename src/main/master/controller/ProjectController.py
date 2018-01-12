@@ -72,13 +72,11 @@ class ProjectHandler(tornado.web.RequestHandler):
                 pass
 
     def addProject(self):
-        data = json.loads(self.request.body)
-        return ProjectService().addProject(data)
+        return ProjectService().addProject(json.loads(self.request.body))
 
     def getProjectInfoByName(self):
         name= self.get_argument("name")
         return ProjectService().getProjectInfoByName(name)
 
     def deleteProject(self):
-        data = json.loads(self.request.body)
-        return ProjectService().deleteProject(data)
+        return ProjectService().deleteProject(json.loads(self.request.body))

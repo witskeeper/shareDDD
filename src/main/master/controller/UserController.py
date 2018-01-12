@@ -76,27 +76,11 @@ class UserHandler(tornado.web.RequestHandler):
         return UserService().getUserInfo(userName)
 
     def add_user_info(self):
-        dataResult = DataResult()
-        data = json.loads(self.request.body)
-        if 'userName' not in data:
-            dataResult.setSuccess(False);
-            dataResult.setMessage("Request Params[userName] must be provided")
-            return dataResult
-        if 'phone' not in data:
-            dataResult.setSuccess(False);
-            dataResult.setMessage("Request Params[phone] must be provided")
-            return dataResult
-        if 'sex' not in data:
-            sex ="male"
-        else:
-            sex = data.get("sex")
-        args={}
-        #NOTICE
-        args.setdefault("user_name",data.get("userName"))
-        args.setdefault("user_phone",data.get("phone"))
-        args.setdefault("user_sex",sex)
-        return UserService().addUser(args)
+        return UserService().addUser(json.loads(self.request.body))
 
     def delete_user_info(self):
-        data = json.loads(self.request.body)
-        return UserService().deleteUser(data["userName"])
+        return UserService().deleteUser(json.loads(self.request.body))
+
+    def get_user_info_by_user_id(self):
+        userId = self.get_argument('userId')
+        return UserService().getUserInfoById(userId)
