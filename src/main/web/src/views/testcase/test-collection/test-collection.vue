@@ -24,7 +24,7 @@
                     <div class="height-120px">
                         <Row type="flex" justify="center" align="middle" class="height-100">
                             <Upload action="//jsonplaceholder.typicode.com/posts/">
-                                <Button type="ghost" icon="ios-cloud-upload-outline">添加用例</Button>
+                                <Button type="ghost" icon="ios-plus-empty">添加用例</Button>
                             </Upload>
                         </Row>
                     </div>
@@ -40,7 +40,7 @@
                         <Row type="flex" justify="center" align="middle" class="height-100">
                             <Upload multiple action="//jsonplaceholder.typicode.com/posts/">
                                 <!--<span>多选文件上传&nbsp;&nbsp;</span>-->
-                                <Button type="ghost" icon="ios-cloud-upload-outline">添加用例</Button>
+                                <Button type="ghost" icon="ios-plus-empty">添加用例</Button>
                             </Upload>
                         </Row>
                     </div>
@@ -60,7 +60,7 @@
                                 :on-format-error="handleFormatError"
                             >
                                 <!--<span>选择图片上传&nbsp;&nbsp;</span>-->
-                                <Button type="ghost" icon="ios-cloud-upload-outline">添加用例</Button>
+                                <Button type="ghost" icon="ios-plus-empty">添加用例</Button>
                             </Upload>
                         </Row>
                     </div>
@@ -82,7 +82,7 @@
                                 :on-format-error="handleFormatError"
                             >
                                 <!--<span>选择图片上传&nbsp;&nbsp;</span>-->
-                                <Button type="ghost" icon="ios-cloud-upload-outline">添加用例</Button>
+                                <Button type="ghost" icon="ios-plus-empty">添加用例</Button>
                             </Upload>
                         </Row>
                     </div>
@@ -102,7 +102,7 @@
                                 :on-format-error="handleFormatError"
                             >
                                 <!--<span>选择图片上传&nbsp;&nbsp;</span>-->
-                                <Button type="ghost" icon="ios-cloud-upload-outline">添加用例</Button>
+                                <Button type="ghost" icon="ios-plus-empty">添加用例</Button>
                             </Upload>
                         </Row>
                     </div>
@@ -122,7 +122,7 @@
                                 :on-format-error="handleFormatError"
                             >
                                 <!--<span>选择图片上传&nbsp;&nbsp;</span>-->
-                                <Button type="ghost" icon="ios-cloud-upload-outline">添加用例</Button>
+                                <Button type="ghost" icon="ios-plus-empty">添加用例</Button>
                             </Upload>
                         </Row>
                     </div>
