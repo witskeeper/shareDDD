@@ -6,13 +6,15 @@ import tornado.httpserver
 from src.main.master.common.constants import SystemConfig
 from src.main.master.controller.UserController import UserHandler
 from src.main.master.controller.ProjectController import ProjectHandler
+from src.main.master.controller.EnvironmentController import EnvironmentHandler
 
 def start_server():
     
     app = tornado.web.Application(handlers=[
               #route
               (r"/v1/user/(.*)",UserHandler),
-              (r"/v1/project/(.*)",ProjectHandler)
+              (r"/v1/project/(.*)",ProjectHandler),
+              (r"/v1/env/(.*)",EnvironmentHandler)
               ])
 
     http_server = tornado.httpserver.HTTPServer(app)

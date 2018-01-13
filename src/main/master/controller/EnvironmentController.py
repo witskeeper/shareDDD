@@ -9,14 +9,14 @@ from concurrent.futures import ThreadPoolExecutor
 from src.main.master.common.constants import SystemConfig
 from src.main.master.util.logUtil.log import Log
 from src.main.master.entity.DataResult import DataResult
-from src.main.master.service.impl.UserServiceImpl import UserService
+from src.main.master.service.impl.EnvironmentServiceImpl import EnvironmentService
 from src.main.master.util.jsonUtil.JsonUtil import CJsonEncoder
 
 #set log
-logger = Log('UserController')
-logger.write_to_file(SystemConfig.logPathPrefix+"UserController.log")
+logger = Log('EnvironmentController')
+logger.write_to_file(SystemConfig.logPathPrefix+"EnvironmentController.log")
 
-class UserHandler(tornado.web.RequestHandler):
+class EnvironmentHandler(tornado.web.RequestHandler):
     executor = ThreadPoolExecutor(30)
 
     @tornado.web.asynchronous
@@ -34,7 +34,7 @@ class UserHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'get_user_info_by_user_name' : lambda : self.get_user_info_by_user_name()
+                'getEnvironmentInfoById' : lambda : self.getEnvironmentInfoById()
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -55,8 +55,8 @@ class UserHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'add_user_info' : lambda : self.add_user_info(),
-                'delete_user_info':lambda :self.delete_user_info()
+                'addEnvironmentItem' : lambda : self.addEnvironmentItem(),
+                'deleteEnvironmentItem':lambda :self.deleteEnvironmentItem()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -71,20 +71,12 @@ class UserHandler(tornado.web.RequestHandler):
             except:
                 pass
 
-    def get_user_info_by_user_name(self):
-        userName = self.get_argument('userName')
-        return UserService().getUserInfo(userName)
+    def getEnvironmentInfoById(self):
+        envId = self.get_argument('envId')
+        return EnvironmentService().getEnvironmentInfoById(envId)
 
-    def add_user_info(self):
-        data = json.loads(self.request.body)
-        #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
-        if "remarks" not in  data:
-            data.setdefault("remarks",None)
-        return UserService().addUser(data)
+    def addEnvironmentItem(self):
+        return EnvironmentService().addEnvironmentItem(json.loads(self.request.body))
 
-    def delete_user_info(self):
-        return UserService().deleteUser(json.loads(self.request.body))
-
-    def get_user_info_by_user_id(self):
-        userId = self.get_argument('userId')
-        return UserService().getUserInfoById(userId)
+    def deleteEnvironmentItem(self):
+        return EnvironmentService().deleteEnvironmentItem(json.loads(self.request.body))

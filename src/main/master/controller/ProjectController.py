@@ -34,7 +34,8 @@ class ProjectHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'getProjectInfoByName' : lambda : self.getProjectInfoByName()
+                'getProjectInfoByName' : lambda : self.getProjectInfoByName(),
+                'getProjectInfoById': lambda: self.getProjectInfoById(),
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -72,11 +73,21 @@ class ProjectHandler(tornado.web.RequestHandler):
                 pass
 
     def addProject(self):
-        return ProjectService().addProject(json.loads(self.request.body))
+        data = json.loads(self.request.body)
+        #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
+        if "remarks" not in  data:
+            data.setdefault("remarks",None)
+        if "version" not in  data:
+            data.setdefault("version",None)
+        return ProjectService().addProject(data)
 
     def getProjectInfoByName(self):
         name= self.get_argument("name")
         return ProjectService().getProjectInfoByName(name)
+
+    def getProjectInfoById(self):
+        name= self.get_argument("name")
+        return ProjectService().getProjectInfoById(name)
 
     def deleteProject(self):
         return ProjectService().deleteProject(json.loads(self.request.body))
