@@ -21,24 +21,23 @@ class UserHandler(tornado.web.RequestHandler):
 
     @tornado.web.asynchronous
     @tornado.gen.coroutine
-    def get(self):
-        yield self.execute_get()
+    def get(self,APIName):
+        yield self.execute_get(APIName)
 
     @tornado.web.asynchronous
     @tornado.gen.coroutine
-    def post(self):
-        yield self.execute_post()
+    def post(self,APIName):
+        yield self.execute_post(APIName)
 
     @run_on_executor
-    def execute_get(self):
+    def execute_get(self,APIName):
         dataResult = DataResult()
         try:
-            task_name = self.get_argument('task_name')
             tasks = {
                 'get_user_info_by_user_name' : lambda : self.get_user_info_by_user_name()
                 # lambda alias
             }
-            self.write(json.dumps(tasks[task_name]().__dict__,cls=CJsonEncoder))
+            self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
             logger.error(traceback.format_exc())
             dataResult.setMessage(traceback.format_exc())
@@ -52,15 +51,14 @@ class UserHandler(tornado.web.RequestHandler):
                 pass
 
     @run_on_executor
-    def execute_post(self):
+    def execute_post(self,APIName):
         dataResult = DataResult()
         try:
-            task_name = self.get_argument('task_name')
             tasks = {
                 'add_user_info' : lambda : self.add_user_info(),
                 'delete_user_info':lambda :self.delete_user_info()
             }
-            self.write(json.dumps(tasks[task_name]().__dict__,cls=CJsonEncoder))
+            self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
             logger.error(traceback.format_exc())
             dataResult.setMessage(traceback.format_exc())
@@ -78,17 +76,27 @@ class UserHandler(tornado.web.RequestHandler):
         return UserService().getUserInfo(userName)
 
     def add_user_info(self):
-        userName = self.get_argument('userName')
-        phone = self.get_argument('phone')
-        #如果不传值，默认是'male'
-        sex = self.get_argument('sex','male')
+        dataResult = DataResult()
+        data = json.loads(self.request.body)
+        if 'userName' not in data:
+            dataResult.setSuccess(False);
+            dataResult.setMessage("Request Params[userName] must be provided")
+            return dataResult
+        if 'phone' not in data:
+            dataResult.setSuccess(False);
+            dataResult.setMessage("Request Params[phone] must be provided")
+            return dataResult
+        if 'sex' not in data:
+            sex ="male"
+        else:
+            sex = data.get("sex")
         args={}
         #NOTICE
-        args.setdefault("user_name",userName)
-        args.setdefault("user_phone",phone)
+        args.setdefault("user_name",data.get("userName"))
+        args.setdefault("user_phone",data.get("phone"))
         args.setdefault("user_sex",sex)
         return UserService().addUser(args)
 
     def delete_user_info(self):
-        userName = self.get_argument('userName')
-        return UserService().deleteUser(userName)
+        data = json.loads(self.request.body)
+        return UserService().deleteUser(data["userName"])
