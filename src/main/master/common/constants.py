@@ -7,6 +7,9 @@ class SystemConfig:
     httpPost=8090
     #钉钉通知webhook
     dingTalkWebHook=""
+    #consumer 消费消息最大个数
+    maxThreadSize= 20
+
 
 class DbConfig:
     #host="localhost"

@@ -29,7 +29,7 @@ class UserService(object):
         return self.userDaoInterface.getUserInfo(args)
 
     @AdminDecoratorServer.execImplDecorator()
-    def deleteUser(self,userName):
+    def deleteUser(self,args):
         return self.userDaoInterface.deleteUser(args)
 
     @AdminDecoratorServer.execImplDecorator()
