@@ -31,3 +31,30 @@ class AdminDecoratorServer(object):
             return __deco
         return _deco
 
+    @staticmethod
+    def webInterceptorDecorator(adminIps):
+        def _deco(func):
+            def __deco(*args,**kwargs):
+                dataResult = DataResult()
+                try:
+                    isAdmin = False
+                    ips = adminIps.split(",")
+                    #get remote ip of client
+                    remote_ip = args[0].__dict__['request'].remote_ip
+                    for ip in ips:
+                        if remote_ip == ip:
+                            isAdmin= True
+                    if not isAdmin:
+                        dataResult.setSuccess(False)
+                        dataResult.setMessage("Request IP [{0}]without a white list，to be intercepted".format(remote_ip))
+                        return dataResult
+                    return func(*args,**kwargs)
+                except Exception,err:
+                    logger.error(traceback.format_exc())
+                    dataResult.setMessage(traceback.format_exc())
+                    dataResult.setSuccess(False)
+                    dataResult.setStatusCode(500)
+                    return dataResult
+            return __deco
+        return _deco
+
