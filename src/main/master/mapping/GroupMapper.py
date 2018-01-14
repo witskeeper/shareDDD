@@ -2,14 +2,16 @@
 
 #CREATE TABLE `group_info` (
 #`id` int(11) NOT NULL auto_increment,
-#`name` varchar(255) NOT NULL,
+#`name` varchar(255) NOT NULL unique,
 #`create_userid` int(11) NOT NULL,
-#`type` tinyint(4) default 0 COMMENT '0: api 1: case',
+#`type` tinyint(4) DEFAULT 0 COMMENT '0: api 1: case',
 #`projectid` int(11) NOT NULL,
 #`gmt_create` datetime DEFAULT NULL,
 #`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 #PRIMARY KEY(`id`)
 #) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+#ALTER TABLE `group_info` ADD unique(`name`);
 
 class GroupSQLMapper:
 
