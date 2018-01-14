@@ -124,8 +124,8 @@ PRIMARY KEY(`id`)
 
 CREATE TABLE `testsuite` (
 `id` int(11) NOT NULL auto_increment,
-`name` varchar(255) NOT NULL,
-`testcaseids` varchar(255) NOT NULL,
+`name` varchar(255) NOT NULL unique,
+`testcaseids` text DEFAULT NULL,
 `create_userid` int(11) NOT NULL,
 `create_username` varchar(255) NOT NULL,
 `update_userid` int(11) NOT NULL,
@@ -137,6 +137,8 @@ CREATE TABLE `testsuite` (
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `testsuite` ADD unique(`name`);
 
 CREATE TABLE `testcaseinstance` (
 `id` int(11) NOT NULL auto_increment,
