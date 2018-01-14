@@ -123,23 +123,9 @@ export const appRouter = [
                 path: 'environment-configuration',
                 title: '环境配置',
                 name: 'environment-configuration',
-                icon: 'clipboard',
-                component: resolve => { require(['@/views/environment/environment-configuration.vue'], resolve); }
-            },
-            {
-                path: 'data-configuration',
-                title: '数据配置',
-                name: 'data-configuration',
-                icon: 'arrow-graph-up-right',
-                component: resolve => { require(['@/views/environment/data-configuration.vue'], resolve); }
-            },
-            {
-                path: 'db-configuration',
-                title: '数据库',
-                name: 'db-configuration',
                 icon: 'crop',
-                component: resolve => { require(['@/views/environment/db-configuration.vue'], resolve); }
-            },
+                component: resolve => { require(['@/views/environment/environment-configuration.vue'], resolve); }
+            }
         ]
     },
     {
@@ -150,18 +136,18 @@ export const appRouter = [
         component: Main,
         children: [
             {
-                path: 'task-Timed',
+                path: 'task-timed',
                 title: '定时任务',
-                name: 'task-Timed',
+                name: 'task-timed',
                 icon: 'ionic',
-                component: resolve => { require(['@/views/task/task-Timed.vue'], resolve); }
+                component: resolve => { require(['@/views/task/task-timed/task-timed.vue'], resolve); }
             },
             {
                 path: 'task-trigger',
                 title: '触发任务',
                 name: 'task-trigger',
                 icon: 'arrow-shrink',
-                component: resolve => { require(['@/views/task/task-trigger.vue'], resolve); }
+                component: resolve => { require(['@/views/task/task-trigger/task-trigger.vue'], resolve); }
             }
         ]
     },
@@ -207,14 +193,14 @@ export const appRouter = [
                 title: '指标监控',
                 name: 'performance-monitoring',
                 icon: 'ios-monitor',
-                component: resolve => { require(['@/views/performance/performance-monitoring.vue'], resolve); }
+                component: resolve => { require(['@/views/performance/performance-monitoring/performance-monitoring.vue'], resolve); }
             },
             {
                 path: 'performance-test',
                 title: '性能测试',
                 name: 'performance-test',
                 icon: 'ios-flask',
-                component: resolve => { require(['@/views/performance/performance-test.vue'], resolve); }
+                component: resolve => { require(['@/views/performance/performance-test/performance-test.vue'], resolve); }
             }
         ]
     },
@@ -240,11 +226,11 @@ export const appRouter = [
                 component: resolve => { require(['@/views/analysis/analysis-case.vue'], resolve); }
             },
             {
-                path: 'analysis-case',
+                path: 'analysis-coverage',
                 title: '覆盖率分析',
-                name: 'analysis-case',
+                name: 'analysis-coverage',
                 icon: 'ios-pie-outline',
-                component: resolve => { require(['@/views/analysis/analysis-case.vue'], resolve); }
+                component: resolve => { require(['@/views/analysis/analysis-coverage.vue'], resolve); }
             }
         ]
     },

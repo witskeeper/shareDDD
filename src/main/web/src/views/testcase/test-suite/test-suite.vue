@@ -5,18 +5,26 @@
 
 
 <template>
+
     <div>
+        <Row type="flex" class="height-100">
+            <Col span="8">
+                <i-button type="success" @click="addnewcase" style="margin-top-10">新建套件</i-button>
+
+                <i-button type="success">导入套件</i-button>
+            </Col>
+        </Row>
         <Row>
             <Col span="8">
                 <Card>
                     <p slot="title">
-                        <Icon type="ios-cloud-upload-outline"></Icon>
-                        基本上传功能
+                        <Icon type="ios-copy-outline"></Icon>
+                        ERP回归测试套件
                     </p>
                     <div class="height-120px">
                         <Row type="flex" justify="center" align="middle" class="height-100">
                             <Upload action="//jsonplaceholder.typicode.com/posts/">
-                                <Button type="ghost" icon="ios-cloud-upload-outline">上传文件</Button>
+                                <Button type="ghost" icon="ios-plus-empty">添加用例</Button>
                             </Upload>
                         </Row>
                     </div>
@@ -26,13 +34,13 @@
                 <Card>
                     <p slot="title">
                         <Icon type="ios-copy-outline"></Icon>
-                        可多选的上传
+                        校宝秀回归测试套件
                     </p>
                     <div class="height-120px">
                         <Row type="flex" justify="center" align="middle" class="height-100">
                             <Upload multiple action="//jsonplaceholder.typicode.com/posts/">
-                                <span>多选文件上传&nbsp;&nbsp;</span>
-                                <Button type="ghost" icon="ios-cloud-upload-outline">上传文件</Button>
+                                <!--<span>多选文件上传&nbsp;&nbsp;</span>-->
+                                <Button type="ghost" icon="ios-plus-empty">添加用例</Button>
                             </Upload>
                         </Row>
                     </div>
@@ -41,8 +49,8 @@
             <Col span="8" class="padding-left-10">
                 <Card>
                     <p slot="title">
-                        <Icon type="upload"></Icon>
-                        可限制文件类型
+                        <Icon type="ios-copy-outline"></Icon>
+                        员工移动端预发布测试套件
                     </p>
                     <div class="height-120px">
                         <Row type="flex" justify="center" align="middle" class="height-100">
@@ -51,8 +59,8 @@
                                 :format="['jpg', 'png', 'jpeg', 'gif', 'bmp', 'svg']"
                                 :on-format-error="handleFormatError"
                             >
-                                <span>选择图片上传&nbsp;&nbsp;</span>
-                                <Button type="ghost" icon="ios-cloud-upload-outline">上传文件</Button>
+                                <!--<span>选择图片上传&nbsp;&nbsp;</span>-->
+                                <Button type="ghost" icon="ios-plus-empty">添加用例</Button>
                             </Upload>
                         </Row>
                     </div>
@@ -60,112 +68,72 @@
             </Col>
         </Row>
         <div class="margin-top-10">
-            <Col span="8">
-                <div>
-                    <Card>
-                        <p slot="title">
-                            <Icon type="android-funnel"></Icon>
-                            可监听上传各个阶段
-                        </p>
-                        <div class="height-200px">
-                            <Row type="flex" justify="center" align="middle" class="height-100">
-                                <div style="display: block;width: 100%;text-align: center;">
-                                    <Upload
-                                        action="//jsonplaceholder.typicode.com/posts/"
-                                        :on-format-error="handleFormatError"
-                                        :before-upload="handleBeforeUpload"
-                                        :on-progress="handleProgress"
-                                        :on-success="handleSuccess"
-                                        :on-error="handleError"
-                                    >
-                                        <span>请选择文件&nbsp;&nbsp;</span>
-                                        <Button type="ghost" icon="ios-cloud-upload-outline">上传文件</Button>
-                                    </Upload>
-                                </div>
-                            </Row>
-                        </div>
-                    </Card>
-                </div>
-                <div class="margin-top-10">
-                    <Card>
-                        <p slot="title">
-                            <Icon type="android-hand"></Icon>
-                            可拖拽上传
-                        </p>
-                        <div class="height-200px">
+            <Col span="8" class="padding-left-10">
+                <Card>
+                    <p slot="title">
+                        <Icon type="ios-copy-outline"></Icon>
+                        校宝家巡检测试套件
+                    </p>
+                    <div class="height-120px">
+                        <Row type="flex" justify="center" align="middle" class="height-100">
                             <Upload
-                                multiple
-                                type="drag"
-                                action="//jsonplaceholder.typicode.com/posts/">
-                                <div style="padding: 60px 0;height: 200px;">
-                                    <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
-                                    <p>点击或将文件拖拽到这里上传</p>
-                                </div>
+                                action="//jsonplaceholder.typicode.com/posts/"
+                                :format="['jpg', 'png', 'jpeg', 'gif', 'bmp', 'svg']"
+                                :on-format-error="handleFormatError"
+                            >
+                                <!--<span>选择图片上传&nbsp;&nbsp;</span>-->
+                                <Button type="ghost" icon="ios-plus-empty">添加用例</Button>
                             </Upload>
-                        </div>
-                    </Card>
-                </div>
+                        </Row>
+                    </div>
+                </Card>
             </Col>
-            <Col span="16">
-                <div class="padding-left-10">
-                    <Card>
-                        <p slot="title">
-                            <Icon type="ios-analytics"></Icon>
-                            综合实例
-                        </p>
-                        <div class="height-492px">
-                            <Col span="8">
-                                <Card>
-                                    <Upload
-                                        ref="upload"
-                                        :show-upload-list="false"
-                                        :default-file-list="defaultList"
-                                        :on-success="handleSuccess2"
-                                        :format="['jpg','jpeg','png']"
-                                        :max-size="2048"
-                                        :on-format-error="handleFormatError2"
-                                        :on-exceeded-size="handleMaxSize"
-                                        :before-upload="handleBeforeUpload2"
-                                        multiple
-                                        type="drag"
-                                        action="//jsonplaceholder.typicode.com/posts/"
-                                        style="display: inline-block;width:58px;">
-                                        <div style="width: 58px;height:58px;line-height: 58px;">
-                                            <Icon type="camera" size="20"></Icon>
-                                        </div>
-                                    </Upload>
-                                    <Modal title="查看图片" v-model="visible">
-                                        <img :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'" v-if="visible" style="width: 100%">
-                                    </Modal>
-                                </Card>
-                            </Col>
-                            <Col span="16" class="padding-left-10">
-                                <Card>
-                                    <div class="height-460px">
-                                        <div class="admin-upload-list" v-for="item in uploadList" :key="item.url">
-                                            <template v-if="item.status === 'finished'">
-                                                <img :src="item.url">
-                                                <div class="admin-upload-list-cover">
-                                                    <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
-                                                    <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
-                                                </div>
-                                            </template>
-                                            <template v-else>
-                                                <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </Card>
-                            </Col>
-                        </div>
-                    </Card>
-                </div>
+            <Col span="8" class="padding-left-10">
+                <Card>
+                    <p slot="title">
+                        <Icon type="ios-copy-outline"></Icon>
+                        SCP B端验收测试套件
+                    </p>
+                    <div class="height-120px">
+                        <Row type="flex" justify="center" align="middle" class="height-100">
+                            <Upload
+                                action="//jsonplaceholder.typicode.com/posts/"
+                                :format="['jpg', 'png', 'jpeg', 'gif', 'bmp', 'svg']"
+                                :on-format-error="handleFormatError"
+                            >
+                                <!--<span>选择图片上传&nbsp;&nbsp;</span>-->
+                                <Button type="ghost" icon="ios-plus-empty">添加用例</Button>
+                            </Upload>
+                        </Row>
+                    </div>
+                </Card>
+            </Col>
+            <Col span="8" class="padding-left-10">
+                <Card>
+                    <p slot="title">
+                        <Icon type="ios-copy-outline"></Icon>
+                        SCP C端回归测试套件
+                    </p>
+                    <div class="height-120px">
+                        <Row type="flex" justify="center" align="middle" class="height-100">
+                            <Upload
+                                action="//jsonplaceholder.typicode.com/posts/"
+                                :format="['jpg', 'png', 'jpeg', 'gif', 'bmp', 'svg']"
+                                :on-format-error="handleFormatError"
+                            >
+                                <!--<span>选择图片上传&nbsp;&nbsp;</span>-->
+                                <Button type="ghost" icon="ios-plus-empty">添加用例</Button>
+                            </Upload>
+                        </Row>
+                    </div>
+                </Card>
             </Col>
         </div>
     </div>
 </template>
 
 <script>
+import axios  from 'axios';
 export default {
     name: 'file-upload',
     data () {
@@ -250,6 +218,16 @@ export default {
                 });
             }
             return check;
+        },
+        addnewcase(){
+            axios.get("http://localhost:8090/v1/project",{
+                params:{
+                    task:"getProjectInfoByName",
+                    name:"jessica"
+                }
+            }).then(function(res){
+                console.log(res)
+            })
         }
     },
     mounted () {
