@@ -1,25 +1,16 @@
-
 # -*- coding: utf-8 -*-
 
-#CREATE TABLE `testcase` (
+#CREATE TABLE `assert` (
 #`id` int(11) NOT NULL auto_increment,
-#`name` varchar(255) NOT NULL,
-#`create_userid` int(11) NOT NULL,
-#`create_username` varchar(255) NOT NULL,
-#`update_userid` int(11) NOT NULL,
-#`update_username` varchar(255) NOT NULL,
-#`describe` varchar(255) NOT NULL,
-#`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
-#`remarks` varchar(255) DEFAULT NULL,
-#`projectid` int(11) NOT NULL,
-#`groupid` int(11) NOT NULL,
-#`envid` int(11) NOT NULL,
-#`gmt_create` datetime DEFAULT NULL,
-#`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+#`casecontentid` int(11) NOT NULL,
+#`actual` varchar(255) NOT NULL,
+#`expect` varchar(255) DEFAULT NULL,
+#`assert_type` varchar(255) NOT NULL COMMENT '0: equal 1: not equal 2: contain 3:not contain ',
+#`sqlcontent` varchar(255) DEFAULT NULL,
 #PRIMARY KEY(`id`)
 #) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-class TestCaseSQLMapper:
+class AssertSQLMapper:
 
     def __init__(self):
         self.data={}
@@ -32,24 +23,27 @@ class TestCaseSQLMapper:
     #为了安全性，设置为私有方法
     def __setSQL(self):
         #WRITE SQL FOR API
-        addTestCaseSQL="""
-        insert into testcase (name,create_userid,create_username,update_userid,update_username,
-        describe,status,remarks,projectid,groupid,envid,gmt_create) values (%(name)s,%(userId)s,%(userName)s,
-        %(userId)s,%(userName)s,describe,status,remarks,projectid,groupid,envid,now())
+        addAssertSQL="""
+        insert into assert (casecontentid,actual,expect,assert_type,sqlcontent) 
+        values (%(casecontentid)s,%(actual)s,%(expect)s,%(assert_type)s,%(sqlcontent)s)
         """
-        deleteTestCaseSQL="""
-        delete from testcase where id = %(groupId)s
+        deleteAssertSQL="""
+        delete from assert where id = %(assertId)s
         """
-        updateTestCaseSQL="""
-        update testcase (name,create_userid,create_username,update_userid,update_username,
-        describe,status,remarks,projectid,groupid,envid,gmt_create) values (%(name)s,%(userId)s,%(userName)s,
-        %(userId)s,%(userName)s,describe,status,remarks,projectid,groupid,envid,now())
+        updateAssertSQL="""
+        update assert set actual=%(actual)s,expect=%(expect)s,assert_type=%(assert_type)s,
+        sqlcontent=%(sqlcontent)s where id =%(assertId)s
         """
-        getGroupInfoByProjectIdSQL="""
-        select * from testcase where projectid = %(projectId)s and type = %(type)s
+        getAssertInfosByContentIdSQL="""
+        select * from assert where casecontentid = %(contentId)s
+        """
+        getAssertInfoByIdSQL="""
+        select * from assert where id = %(assertId)s
         """
         #SET SQL FOR DAO
-        self.data.setdefault("addGroup",addGroupSQL)
-        self.data.setdefault("deleteGroup",deleteGroupSQL)
-        self.data.setdefault("getGroupInfoByProjectId",getGroupInfoByProjectIdSQL)
+        self.data.setdefault("addAssert",addAssertSQL)
+        self.data.setdefault("deleteAssert",deleteAssertSQL)
+        self.data.setdefault("updateAssert",updateAssertSQL)
+        self.data.setdefault("getAssertInfosByContentId",getAssertInfosByContentIdSQL)
+        self.data.setdefault("getAssertInfoById", getAssertInfoByIdSQL)
 
