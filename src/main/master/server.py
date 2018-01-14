@@ -13,6 +13,7 @@ from src.main.master.controller.CaseContentController import CaseContentHandler
 from src.main.master.controller.TestCaseController import TestCaseHandler
 from src.main.master.controller.AssertController import AssertHandler
 from src.main.master.controller.TestSuiteController import TestSuiteHandler
+from src.main.master.controller.TestCaseInstanceController import TestCaseInstanceHandler
 
 def start_server():
     
@@ -26,7 +27,8 @@ def start_server():
               (r"/v1/case/(.*)", TestCaseHandler),
               (r"/v1/content/(.*)", CaseContentHandler),
               (r"/v1/assert/(.*)", AssertHandler),
-              (r"/v1/suite/(.*)", TestSuiteHandler)
+              (r"/v1/suite/(.*)", TestSuiteHandler),
+              (r"/v1/instance/(.*)", TestCaseInstanceHandler)
               ])
 
     http_server = tornado.httpserver.HTTPServer(app,xheaders=True)
