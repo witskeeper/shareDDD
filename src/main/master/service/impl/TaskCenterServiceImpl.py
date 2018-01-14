@@ -106,7 +106,6 @@ class TaskCenterService(object):
     @staticmehtod
     @AdminDecoratorServer.execImplDecorator()
     def __execTaskCaseJob(caseId):
-        pass
         return DataResult()
 
     @AdminDecoratorServer.execImplDecorator()
