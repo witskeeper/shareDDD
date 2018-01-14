@@ -31,3 +31,12 @@ class GroupDaoInterface:
         sql = GroupSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate = DbBaseHelper(sql, args)
         return daoOperate.write()
+
+    def getGroupInfoByName(self,args):
+        #实例化
+        logger.info(inspect.stack()[0][3])
+        sql = GroupSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate =DbBaseHelper(sql,args)
+        return daoOperate.read()
+
+

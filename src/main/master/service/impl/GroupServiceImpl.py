@@ -21,7 +21,14 @@ class GroupService(object):
     def addGroup(self,args):
         if "type" not in args:
             args.setdefault("type",0)
-        return self.GroupDaoInterface.addGroup(args)
+        logger.error("args={0}".format(args))
+        dataResult = self.GroupDaoInterface.getGroupInfoByName(args)
+        logger.error("dataResult={0}".format(dataResult.getMessage()))
+        if dataResult.getSuccess() and len(dataResult.getMessage()) == 0:
+            return self.GroupDaoInterface.addGroup(args)
+        dataResult.setMessage("group name [{0}] is exist,please retry other name".format(args.get("name")))
+        dataResult.setSuccess(False)
+        return dataResult
 
     @AdminDecoratorServer.execImplDecorator()
     def getGroupInfoByProjectId(self,projectId,type=0):
