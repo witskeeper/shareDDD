@@ -138,5 +138,3 @@ class TaskCenterService(object):
     @AdminDecoratorServer.execImplDecorator()
     def execTask(self,args):
         return self.taskMetaqInfoDaoInterface.addTaskInfo(args)
-
-
