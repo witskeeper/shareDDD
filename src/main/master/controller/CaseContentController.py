@@ -9,15 +9,15 @@ from concurrent.futures import ThreadPoolExecutor
 from src.main.master.common.constants import SystemConfig
 from src.main.master.util.logUtil.log import Log
 from src.main.master.entity.DataResult import DataResult
-from src.main.master.service.impl.EnvironmentServiceImpl import EnvironmentService
+from src.main.master.service.impl.CaseContentServiceImpl import CaseContentService
 from src.main.master.util.jsonUtil.JsonUtil import CJsonEncoder
 from src.main.master.core.AdminDecorator import AdminDecoratorServer
 
 #set log
-logger = Log('EnvironmentController')
-logger.write_to_file(SystemConfig.logPathPrefix+"EnvironmentController.log")
+logger = Log('CaseContentController')
+logger.write_to_file(SystemConfig.logPathPrefix+"CaseContentController.log")
 
-class EnvironmentHandler(tornado.web.RequestHandler):
+class CaseContentHandler(tornado.web.RequestHandler):
     executor = ThreadPoolExecutor(30)
 
     @tornado.web.asynchronous
@@ -35,7 +35,8 @@ class EnvironmentHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'getEnvironmentInfoById' : lambda : self.getEnvironmentInfoById()
+                'getContentInfosByCaseId' : lambda : self.getContentInfosByCaseId(),
+                'getContentInfosByContentId': lambda: self.getContentInfosByContentId()
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -56,8 +57,10 @@ class EnvironmentHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'addEnvironmentItem' : lambda : self.addEnvironmentItem(),
-                'deleteEnvironmentItem':lambda :self.deleteEnvironmentItem()
+                'addCaseContent' : lambda : self.addCaseContent(),
+                'deleteTestContent':lambda :self.deleteTestContent(),
+                'deleteTestContentByCaseId': lambda: self.deleteTestContentByCaseId(),
+                'updateTestContent': lambda: self.updateTestContent()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -72,14 +75,26 @@ class EnvironmentHandler(tornado.web.RequestHandler):
             except:
                 pass
 
-    def getEnvironmentInfoById(self):
-        envId = self.get_argument('envId')
-        return EnvironmentService().getEnvironmentInfoById(envId)
+    def getContentInfosByCaseId(self):
+        caseId = self.get_argument('caseId')
+        return CaseContentService().getContentInfosByCaseId(caseId)
+
+    def getContentInfosByContentId(self):
+        contentId = self.get_argument('contentId')
+        return CaseContentService().getContentInfosByContentId(contentId)
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def addEnvironmentItem(self):
-        return EnvironmentService().addEnvironmentItem(json.loads(self.request.body))
+    def addCaseContent(self):
+        return CaseContentService().addCaseContent(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def deleteEnvironmentItem(self):
-        return EnvironmentService().deleteEnvironmentItem(json.loads(self.request.body))
+    def deleteTestContent(self):
+        return CaseContentService().deleteTestContent(json.loads(self.request.body))
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def deleteTestContentByCaseId(self):
+        return CaseContentService().deleteTestContentByCaseId(json.loads(self.request.body))
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def updateTestContent(self):
+        return CaseContentService().updateTestContent(json.loads(self.request.body))

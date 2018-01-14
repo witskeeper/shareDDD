@@ -11,6 +11,7 @@ from src.main.master.util.logUtil.log import Log
 from src.main.master.entity.DataResult import DataResult
 from src.main.master.service.impl.UserServiceImpl import UserService
 from src.main.master.util.jsonUtil.JsonUtil import CJsonEncoder
+from src.main.master.core.AdminDecorator import AdminDecoratorServer
 
 #set log
 logger = Log('UserController')
@@ -75,6 +76,7 @@ class UserHandler(tornado.web.RequestHandler):
         userName = self.get_argument('userName')
         return UserService().getUserInfo(userName)
 
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def add_user_info(self):
         data = json.loads(self.request.body)
         #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
@@ -82,6 +84,7 @@ class UserHandler(tornado.web.RequestHandler):
             data.setdefault("remarks",None)
         return UserService().addUser(data)
 
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def delete_user_info(self):
         return UserService().deleteUser(json.loads(self.request.body))
 

@@ -11,6 +11,7 @@ from src.main.master.util.logUtil.log import Log
 from src.main.master.entity.DataResult import DataResult
 from src.main.master.service.impl.GroupServiceImpl import GroupService
 from src.main.master.util.jsonUtil.JsonUtil import CJsonEncoder
+from src.main.master.core.AdminDecorator import AdminDecoratorServer
 
 #set log
 logger = Log('GroupController')
@@ -76,8 +77,10 @@ class GroupHandler(tornado.web.RequestHandler):
         type = self.get_argument('type',0)
         return GroupService().getGroupInfoByProjectId(projectId,type)
 
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def addGroup(self):
         return GroupService().addGroup(json.loads(self.request.body))
 
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def deleteGroup(self):
         return GroupService().deleteGroup(json.loads(self.request.body))

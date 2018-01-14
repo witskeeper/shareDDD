@@ -1,24 +1,21 @@
 # -*- coding: utf-8 -*-
 
-#CREATE TABLE `testcase` (
+#CREATE TABLE `casecontent` (
 #`id` int(11) NOT NULL auto_increment,
-#`name` varchar(255) NOT NULL,
-#`create_userid` int(11) NOT NULL,
-#`create_username` varchar(255) NOT NULL,
-#`update_userid` int(11) NOT NULL,
-#`update_username` varchar(255) NOT NULL,
-#`describe` varchar(255) NOT NULL,
-#`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
-#`remarks` varchar(255) DEFAULT NULL,
-#`projectid` int(11) NOT NULL,
-#`groupid` int(11) NOT NULL,
-#`envid` int(11) NOT NULL,
-#`gmt_create` datetime DEFAULT NULL,
-#`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+#`step_name` varchar(255) NOT NULL,
+#`caseid` int(11) NOT NULL,
+#`step` int(11) NOT NULL,
+#`interfaceid` int(11) DEFAULT NULL,
+#`method` tinyint(4) DEFAULT NULL COMMENT '0: GET 1: POST 2.PUT 3. DELETE',
+#`format` tinyint(4) DEFAULT NULL COMMENT '0: form-data 1: json',
+#`request_params` varchar(255) DEFAULT NULL,
+#`timeout` int(11) DEFAULT NULL,
+#`type` tinyint(4) default 0 COMMENT '0: api 1: sql',
+#`sqlcontent` varchar(255) DEFAULT NULL,
 #PRIMARY KEY(`id`)
 #) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-class TestCaseSQLMapper:
+class CaseContentSQLMapper:
 
     def __init__(self):
         self.data={}
@@ -31,24 +28,34 @@ class TestCaseSQLMapper:
     #为了安全性，设置为私有方法
     def __setSQL(self):
         #WRITE SQL FOR API
-        addTestCaseSQL="""
-        insert into testcase (name,create_userid,create_username,update_userid,update_username,
-        describe,status,remarks,projectid,groupid,envid,gmt_create) values (%(name)s,%(userId)s,%(userName)s,
-        %(userId)s,%(userName)s,describe,status,remarks,projectid,groupid,envid,now())
+        addCaseContentSQL="""
+        insert into casecontent (step_name,caseid,step,interfaceid,method,
+        format,request_params,timeout,type,sqlcontent) values (%(step_name)s,%(caseid)s,
+        %(step)s,%(interfaceid)s,%(method)s,%(format)s,%(request_params)s,%(timeout)s,
+        %(type)s,%(sqlcontent)s)
         """
-        deleteTestCaseSQL="""
-        delete from testcase where id = %(groupId)s
+        deleteTestContentSQL="""
+        delete from casecontent where id = %(contentId)s
         """
-        updateTestCaseSQL="""
-        update testcase (name,create_userid,create_username,update_userid,update_username,
-        describe,status,remarks,projectid,groupid,envid,gmt_create) values (%(name)s,%(userId)s,%(userName)s,
-        %(userId)s,%(userName)s,describe,status,remarks,projectid,groupid,envid,now())
+        deleteTestContentByCaseIdSQL="""
+        delete from casecontent where caseid = %(caseId)s
         """
-        getGroupInfoByProjectIdSQL="""
-        select * from testcase where projectid = %(projectId)s and type = %(type)s
+        updateTestContentSQL="""
+        update casecontent set step_name=%(step_name)s,step=%(step)s,interfaceid=%(interfaceid),
+        method=%(method)s,format=%(format)s,request_params=%(request_params)s,type=%(type)s,
+        sqlcontent=%(sqlcontent)s where id = %(contentId)s
+        """
+        getContentInfosByCaseIdSQL="""
+        select * from casecontent where caseid = %(caseId)s
+        """
+        getContentInfosByContentIdSQL="""
+        select * from casecontent where id = %(contentId)s
         """
         #SET SQL FOR DAO
-        self.data.setdefault("addGroup",addGroupSQL)
-        self.data.setdefault("deleteGroup",deleteGroupSQL)
-        self.data.setdefault("getGroupInfoByProjectId",getGroupInfoByProjectIdSQL)
+        self.data.setdefault("addCaseContent",addCaseContentSQL)
+        self.data.setdefault("deleteTestContent",deleteTestContentSQL)
+        self.data.setdefault("deleteTestContentByCaseId",deleteTestContentByCaseIdSQL)
+        self.data.setdefault("updateTestContent",updateTestContentSQL)
+        self.data.setdefault("getContentInfosByCaseId",getContentInfosByCaseIdSQL)
+        self.data.setdefault("getContentInfosByContentId", getContentInfosByContentIdSQL)
 

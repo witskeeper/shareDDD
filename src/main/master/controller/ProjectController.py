@@ -11,6 +11,7 @@ from src.main.master.util.logUtil.log import Log
 from src.main.master.entity.DataResult import DataResult
 from src.main.master.service.impl.ProjectServiceImpl import ProjectService
 from src.main.master.util.jsonUtil.JsonUtil import CJsonEncoder
+from src.main.master.core.AdminDecorator import AdminDecoratorServer
 
 #set log
 logger = Log('ProjectController')
@@ -72,6 +73,7 @@ class ProjectHandler(tornado.web.RequestHandler):
             except:
                 pass
 
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def addProject(self):
         data = json.loads(self.request.body)
         #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
@@ -89,5 +91,6 @@ class ProjectHandler(tornado.web.RequestHandler):
         name= self.get_argument("name")
         return ProjectService().getProjectInfoById(name)
 
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def deleteProject(self):
         return ProjectService().deleteProject(json.loads(self.request.body))
