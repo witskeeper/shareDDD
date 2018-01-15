@@ -14,6 +14,12 @@ from src.main.master.dao.TaskMetaqInfoDao import TaskMetaqInfoDaoInterface
 from src.main.master.core.AdminDecorator import AdminDecoratorServer
 from src.main.master.dao.TestCaseInstanceDao import TestCaseInstanceDaoInterface
 from src.main.master.dao.TestSuiteDao import TestSuiteDaoInterface
+from src.main.master.dao.TestCaseDao import TestCaseDaoInterface
+from src.main.master.dao.CaseContentDao import CaseContentDaoInterface
+from src.main.master.dao.AssertDao import AssertDaoInterface
+from src.main.master.dao.CaseResultDao import CaseResultDaoInterface
+from src.main.master.dao.EnvironmentDao import EnvironmentDaoInterface
+from operator import attrgetter
 
 #set log
 logger = Log('TaskCenterServiceImpl')
@@ -75,6 +81,7 @@ class TaskCenterService(object):
                     TestCaseInstanceDaoInterface().updateTestInstance(args)
                     dataResult =TestSuiteDaoInterface().getSuiteInfoById({"suiteId":suiteId})
                     if dataResult.getSuccess() and len(dataResult.getMessage()) > 0:
+                        envId = dataResult.getMessage()[0].get("envid")
                         caseIds = dataResult.getMessage()[0].get("testcaseids")
                         if caseIds is None:
                             caseIds = []
@@ -83,7 +90,7 @@ class TaskCenterService(object):
                         for caseId in caseIds:
                             dataResult =TestCaseInstanceDaoInterface().getTestInstanceInfoById(args)
                             if dataResult.getMessage()[0].get("status") not in ["Stopped","TimeOut"]:
-                                execResult = TaskCenterService.__execTaskCaseJob(caseId)
+                                execResult = TaskCenterService.__execTaskCaseJob(caseId,envId)
                                 if not execResult.getSuccess():
                                     #set instance db
                                     taskGlobalStatus = execResult.getMessage()
@@ -105,7 +112,47 @@ class TaskCenterService(object):
 
     @staticmehtod
     @AdminDecoratorServer.execImplDecorator()
-    def __execTaskCaseJob(caseId):
+    def __execTaskCaseJob(caseId,envId,single=False):
+        args={}
+        args.setdefault("caseId",caseId)
+        args.setdefault("envId",envId)
+        dataResult = EnvironmentDaoInterface().getEnvironmentInfoById(args)
+        if dataResult.getSuccess() and len(dataResult.getMessage())>0:
+            if not single:
+                dataResult = CaseContentDaoInterface().getContentInfosByCaseId(args)
+                if dataResult.getSuccess():
+                    for content in sorted(dataResult.getMessage(), key=attrgetter('step')):
+                        pass
+        return DataResult()
+
+    @staticmehtod
+    @AdminDecoratorServer.execImplDecorator()
+    def __execAssertJob(caseId,envId,single=False):
+        args={}
+        args.setdefault("caseId",caseId)
+        args.setdefault("envId",envId)
+        dataResult = EnvironmentDaoInterface().getEnvironmentInfoById(args)
+        if dataResult.getSuccess() and len(dataResult.getMessage())>0:
+            if not single:
+                dataResult = CaseContentDaoInterface().getContentInfosByCaseId(args)
+                if dataResult.getSuccess():
+                    for content in sorted(dataResult.getMessage(), key=attrgetter('step')):
+                        pass
+        return DataResult()
+
+    @staticmehtod
+    @AdminDecoratorServer.execImplDecorator()
+    def __execRequestJob(contentJson,envId):
+        args={}
+        args.setdefault("caseId",caseId)
+        args.setdefault("envId",envId)
+        dataResult = EnvironmentDaoInterface().getEnvironmentInfoById(args)
+        if dataResult.getSuccess() and len(dataResult.getMessage())>0:
+            if not single:
+                dataResult = CaseContentDaoInterface().getContentInfosByCaseId(args)
+                if dataResult.getSuccess():
+                    for content in sorted(dataResult.getMessage(), key=attrgetter('step')):
+                        pass
         return DataResult()
 
     @AdminDecoratorServer.execImplDecorator()
