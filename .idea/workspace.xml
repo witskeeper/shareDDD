@@ -2,228 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89aa7f38-1636-468d-b4af-2db860d82534" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/analysis/analysis-bug.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/analysis/analysis-case.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/analysis/analysis-coverage.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/performance/performance-monitoring/performance-monitoring.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/performance/performance-test/performance-test.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/task/task-timed/task-timed.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/task/task-trigger/task-trigger.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/tools/tools-MD5.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/tools/tools-mock.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/tools/tools-sign.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/user/user-authority.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/user/user-list.vue" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/components/ExportExcel.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/components/dragableTable.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/components/multiPageTable.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/dragable-table.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/exportable-table.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/table-to-image.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/area-linkage/area-linkage.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/area-linkage/area-linkage.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/area-linkage/components/al-cascader.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/area-linkage/components/al-selector.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/area-linkage/util/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/count-to/CountTo.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/count-to/count-to.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/count-to/count-to.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/draggable-list/draggable-list.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/draggable-list/draggable-list.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/image-editor/cropper.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/image-editor/image-editor.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/image-editor/image-editor.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/markdown-editor/markdown-editor.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/markdown-editor/markdown-editor.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/markdown-editor/simplemde.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/text-editor.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/langs/en_GB.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/langs/zh_CN.GB2312.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/advlist/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/advlist/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/advlist/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/anchor/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/anchor/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/anchor/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/autolink/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/autolink/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/autolink/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/autoresize/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/autoresize/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/autoresize/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/autosave/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/autosave/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/autosave/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/bbcode/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/bbcode/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/bbcode/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/charmap/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/charmap/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/charmap/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/code/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/code/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/code/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/codesample/css/prism.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/codesample/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/codesample/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/codesample/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/colorpicker/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/colorpicker/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/colorpicker/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/contextmenu/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/contextmenu/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/contextmenu/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/directionality/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/directionality/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/directionality/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-cool.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-cry.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-embarassed.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-foot-in-mouth.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-frown.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-innocent.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-kiss.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-laughing.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-money-mouth.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-sealed.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-smile.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-surprised.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-tongue-out.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-undecided.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-wink.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/img/smiley-yell.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/emoticons/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/fullpage/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/fullpage/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/fullpage/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/fullscreen/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/fullscreen/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/fullscreen/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/help/img/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/help/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/help/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/help/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/hr/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/hr/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/hr/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/image/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/image/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/image/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/imagetools/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/imagetools/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/imagetools/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/importcss/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/importcss/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/importcss/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/insertdatetime/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/insertdatetime/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/insertdatetime/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/legacyoutput/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/legacyoutput/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/legacyoutput/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/link/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/link/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/link/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/lists/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/lists/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/lists/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/media/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/media/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/media/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/nonbreaking/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/nonbreaking/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/nonbreaking/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/noneditable/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/noneditable/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/noneditable/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/pagebreak/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/pagebreak/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/pagebreak/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/paste/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/paste/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/paste/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/preview/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/preview/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/preview/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/print/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/print/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/print/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/save/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/save/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/save/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/searchreplace/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/searchreplace/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/searchreplace/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/spellchecker/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/spellchecker/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/spellchecker/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/tabfocus/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/tabfocus/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/tabfocus/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/table/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/table/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/table/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/template/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/template/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/template/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/textcolor/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/textcolor/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/textcolor/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/textpattern/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/textpattern/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/textpattern/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/toc/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/toc/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/toc/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/visualblocks/css/visualblocks.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/visualblocks/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/visualblocks/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/visualblocks/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/visualchars/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/visualchars/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/visualchars/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/wordcount/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/wordcount/plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/plugins/wordcount/plugin.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/content.inline.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/content.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/content.mobile.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/fonts/tinymce-mobile.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/fonts/tinymce-small.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/fonts/tinymce-small.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/fonts/tinymce-small.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/fonts/tinymce-small.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/fonts/tinymce.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/fonts/tinymce.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/fonts/tinymce.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/fonts/tinymce.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/img/anchor.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/img/loader.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/img/object.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/img/trans.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/skin.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/skins/lightgray/skin.mobile.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/themes/inlite/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/themes/inlite/theme.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/themes/inlite/theme.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/themes/modern/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/themes/modern/theme.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/text-editor/tinymce/themes/modern/theme.min.js" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/src/router/router.js" afterPath="$PROJECT_DIR$/src/main/web/src/router/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/src/views/testcase/test-suite/test-suite.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/testcase/test-suite/test-suite.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/components/canEditTable.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/components/canEditTable.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/components/editable-table.less" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/components/editable-table.less" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/components/table.less" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/components/table.less" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/components/table_data.js" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/components/table_data.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/data/search.js" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/data/search.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/data/table2csv.js" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/data/table2csv.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/data/table2excel.js" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/data/table2excel.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/editable-table.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/web/src/views/tables/searchable-table.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/project-document.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/src/views/performance/performance-monitoring/performance-monitoring.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/performance/performance-monitoring/performance-monitoring.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/src/views/task/task-timed/task-timed.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/task/task-timed/task-timed.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/src/views/task/task-trigger/task-trigger.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/task/task-trigger/task-trigger.vue" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -232,23 +16,14 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="router.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/web/src/router/router.js">
+      <file leaf-file-name="performance-monitoring.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/web/src/views/performance/performance-monitoring/performance-monitoring.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="67" column="17" lean-forward="true" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="environment-configuration.vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="550">
+              <caret line="61" column="49" lean-forward="false" selection-start-line="61" selection-start-column="49" selection-end-line="61" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -275,6 +50,7 @@
       <find>key</find>
       <find>editInlineData</find>
       <find>editInlineColumns</find>
+      <find>mutative-router</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -322,14 +98,18 @@
         <option value="$PROJECT_DIR$/src/main/web/src/views/testcase/test-suite/test-suite.less" />
         <option value="$PROJECT_DIR$/src/main/web/src/views/testcase/test-collection/test-collection.vue" />
         <option value="$PROJECT_DIR$/src/main/web/src/views/testcase/test-suite/test-suite.vue" />
+        <option value="$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.vue" />
+        <option value="$PROJECT_DIR$/src/main/web/src/views/task/task-trigger/task-trigger.vue" />
+        <option value="$PROJECT_DIR$/src/main/web/src/views/task/task-timed/task-timed.vue" />
+        <option value="$PROJECT_DIR$/src/main/web/src/views/performance/performance-monitoring/performance-monitoring.vue" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1378" />
-    <option name="height" value="780" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -346,77 +126,253 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
-          <expand>
-            <path>
-              <item name="shareDDD" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shareDDD" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shareDDD" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shareDDD" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shareDDD" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shareDDD" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shareDDD" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shareDDD" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shareDDD" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shareDDD" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shareDDD" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shareDDD" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shareDDD" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shareDDD" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="environment" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="performance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="performance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="performance-monitoring" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="home" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../iview-admin-dev" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\shareDDD\src\main\web\src\views\task\task-timed" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\shareDDD\src\main\web\src\views\task" />
+      <recent name="D:\code\shareDDD\src\main\web\src\views\environment" />
       <recent name="F:\shareDDD\src\main\web\src\views\interface\interface-manage" />
       <recent name="F:\shareDDD\src\main\web\src\views\interface" />
       <recent name="F:\2018\src\main\web\src\views\testcase" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\shareDDD\src\main\web\src\views\task\task-timed" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -432,7 +388,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.dbBaseHelper">
-    <configuration name="UserDao" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="UserDao" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -448,6 +404,25 @@
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="dbBaseHelper" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/main/master/util/dbUtil" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="2018" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main/master/util/dbUtil/dbBaseHelper.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -467,22 +442,52 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
-    <configuration name="dbBaseHelper" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="true" type="Tox" factoryName="Tox">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
+      <envs />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/main/master/util/dbUtil" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="2018" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main/master/util/dbUtil/dbBaseHelper.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="2018" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="2018" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
     </configuration>
     <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.UserDao" />
@@ -509,12 +514,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2510981" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29850745" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -528,7 +534,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -542,48 +547,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/worker/taskmanager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="18" column="10" lean-forward="true" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/worker/taskworker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="19" column="35" lean-forward="true" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/mapping/UserMapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="11" column="31" lean-forward="true" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/LogFiles/UserController.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2075">
-          <caret line="83" column="54" lean-forward="false" selection-start-line="83" selection-start-column="54" selection-end-line="83" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/entity/DataResult.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/master/common/constants.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
@@ -619,13 +582,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/master/core/ExecDecorator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -655,55 +611,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage.vue" />
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/project-document/project-document.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/task/task-timed/task-timed.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/task/task-trigger/task-trigger.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/tools/tools-mock.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/tools/tools-sign.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/tools/tools-MD5.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/performance/performance-monitoring/performance-monitoring.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/project-document/project-document.vue" />
     <entry file="file://$PROJECT_DIR$/src/main/web/src/views/performance/performance-test/performance-test.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -725,13 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/analysis/analysis-coverage.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/web/src/views/user/user-list.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -746,13 +647,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage/interface-manage.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-808">
-          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage/interface-manage.less" />
     <entry file="file://$PROJECT_DIR$/src/main/web/src/views/main-components/shrinkable-menu/shrinkable-menu.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2">
@@ -760,26 +655,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/Main.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="38" column="67" lean-forward="true" selection-start-line="38" selection-start-column="67" selection-end-line="38" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage/interface-manage.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="23" column="8" lean-forward="true" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage/interface-manage.vue" />
     <entry file="file://$PROJECT_DIR$/src/main/web/src/app.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="25" column="7" lean-forward="false" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -787,7 +667,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3561">
           <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -795,7 +674,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2541">
           <caret line="4" column="21" lean-forward="true" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -803,23 +681,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/components/multiPageTable.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/components/multiPageTable.vue" />
     <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/data/search.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-747">
           <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -827,7 +696,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -835,7 +703,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-873">
           <caret line="6" column="27" lean-forward="true" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -843,15 +710,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="21" column="20" lean-forward="true" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -859,7 +717,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="23" column="10" lean-forward="true" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -867,7 +724,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="17" column="1" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="35" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -875,7 +731,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="22" column="14" lean-forward="true" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -883,7 +738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1449">
           <caret line="69" column="29" lean-forward="true" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -891,22 +745,149 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
           <caret line="114" column="36" lean-forward="false" selection-start-line="114" selection-start-column="36" selection-end-line="114" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/web/src/router/router.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
-          <caret line="67" column="17" lean-forward="true" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
+          <caret line="67" column="17" lean-forward="false" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/advanced-router/argument-page.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.vue">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/task/task.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="1" column="29" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/advanced-router/mutative-router.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="32" column="18" lean-forward="true" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/task/task-trigger/task-trigger.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="109" column="0" lean-forward="true" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1025">
+          <caret line="19" column="36" lean-forward="true" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/Main.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1625">
+          <caret line="65" column="10" lean-forward="true" selection-start-line="65" selection-start-column="10" selection-end-line="65" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/analysis/analysis-coverage.vue">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/home/home.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="119" column="34" lean-forward="false" selection-start-line="119" selection-start-column="34" selection-end-line="119" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/tools/tools-sign.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/tools/tools-mock.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/tools/tools-MD5.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/task/task-timed/task-timed.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/performance/performance-monitoring/performance-monitoring.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="61" column="49" lean-forward="false" selection-start-line="61" selection-start-column="49" selection-end-line="61" selection-end-column="49" />
           <folding />
         </state>
       </provider>
