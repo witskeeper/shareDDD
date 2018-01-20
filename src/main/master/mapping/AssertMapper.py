@@ -6,7 +6,6 @@
 #`actual` varchar(255) NOT NULL,
 #`expect` varchar(255) DEFAULT NULL,
 #`assert_type` varchar(255) NOT NULL COMMENT '0: equal 1: not equal 2: contain 3:not contain ',
-#`sqlcontent` varchar(255) DEFAULT NULL,
 #PRIMARY KEY(`id`)
 #) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

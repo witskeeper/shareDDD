@@ -12,7 +12,7 @@
 #`remarks` varchar(255) DEFAULT NULL,
 #`projectid` int(11) NOT NULL,
 #`groupid` int(11) NOT NULL,
-#`envid` int(11) NOT NULL,
+#`envid` int(11) DEFAULT NULL,
 #`gmt_create` datetime DEFAULT NULL,
 #`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 #PRIMARY KEY(`id`)
@@ -52,10 +52,14 @@ class TestCaseSQLMapper:
         getCaseInfosByIdSQL="""
         select * from testcase where id=%(caseId)s
         """
+        getInitCaseInfoByIdsSQL="""
+        select * from testcase where id in (%(caseIds)s) where name="init" limit 1
+        """
         #SET SQL FOR DAO
         self.data.setdefault("addTestCase",addTestCaseSQL)
         self.data.setdefault("deleteTestCase",deleteTestCaseSQL)
         self.data.setdefault("updateTestCase",updateTestCaseSQL)
         self.data.setdefault("getCaseInfosByCondition", getCaseInfosByConditionSQL)
         self.data.setdefault("getCaseInfosById", getCaseInfosByIdSQL)
+        self.data.setdefault("getInitCaseInfoByIds", getInitCaseInfoByIdsSQL)
 

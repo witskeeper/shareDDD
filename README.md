@@ -184,6 +184,16 @@ CREATE TABLE `taskmetaqinfo` (
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `session_manage` (
+`id` int(11) NOT NULL auto_increment,
+`user_id` int(11) NOT NULL,
+`session` varchar(255) NOT NULL,
+`domain` varchar(255) DEFAULT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 
 
 

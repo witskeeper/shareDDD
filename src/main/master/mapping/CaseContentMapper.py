@@ -5,7 +5,7 @@
 #`step_name` varchar(255) NOT NULL,
 #`caseid` int(11) NOT NULL,
 #`step` int(11) NOT NULL,
-#`interfaceid` int(11) DEFAULT NULL,
+#`url` varchar(255) DEFAULT NULL,
 #`method` tinyint(4) DEFAULT NULL COMMENT '0: GET 1: POST 2.PUT 3. DELETE',
 #`format` tinyint(4) DEFAULT NULL COMMENT '0: form-data 1: json',
 #`request_params` varchar(255) DEFAULT NULL,
@@ -29,9 +29,9 @@ class CaseContentSQLMapper:
     def __setSQL(self):
         #WRITE SQL FOR API
         addCaseContentSQL="""
-        insert into casecontent (step_name,caseid,step,interfaceid,method,
+        insert into casecontent (step_name,caseid,step,url,method,
         format,request_params,timeout,type,sqlcontent) values (%(step_name)s,%(caseid)s,
-        %(step)s,%(interfaceid)s,%(method)s,%(format)s,%(request_params)s,%(timeout)s,
+        %(step)s,%(url)s,%(method)s,%(format)s,%(request_params)s,%(timeout)s,
         %(type)s,%(sqlcontent)s)
         """
         deleteTestContentSQL="""
@@ -41,7 +41,7 @@ class CaseContentSQLMapper:
         delete from casecontent where caseid = %(caseId)s
         """
         updateTestContentSQL="""
-        update casecontent set step_name=%(step_name)s,step=%(step)s,interfaceid=%(interfaceid),
+        update casecontent set step_name=%(step_name)s,step=%(step)s,url=%(url),
         method=%(method)s,format=%(format)s,request_params=%(request_params)s,type=%(type)s,
         sqlcontent=%(sqlcontent)s where id = %(contentId)s
         """

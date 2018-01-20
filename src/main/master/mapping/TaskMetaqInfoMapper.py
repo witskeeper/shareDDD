@@ -38,9 +38,13 @@ class TaskMetaqInfoSQLMapper:
         getWaitingTaskInfosSQL="""
         select * from taskmetaqinfo where status=0 and is_deleted =0 order by gmt_create limit %(limit)s
         """
+        updateTaskStatusSQL="""
+        update taskmetaqinfo set status=%(status)s where id = %(taskId)s
+        """
         #SET SQL FOR DAO
         self.data.setdefault("addTaskInfo",addTaskInfoSQL)
         self.data.setdefault("deleteTaskInfo",deleteTaskInfoSQL)
         self.data.setdefault("updateTaskInfo",updateTaskInfoSQL)
         self.data.setdefault("getWaitingTaskInfos", getWaitingTaskInfosSQL)
+        self.data.setdefault("updateTaskStatus", updateTaskStatusSQL)
 
