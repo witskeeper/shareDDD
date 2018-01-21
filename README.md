@@ -15,12 +15,14 @@ CREATE TABLE `environment` (
 `id` int(11) NOT NULL auto_increment,
 `name` varchar(255) NOT NULL unique,
 `url` varchar(255) NOT NULL,
+`create_userid` int(11) NOT NULL,
+`create_username` varchar(255) NOT NULL,
 `datatemplate` longtext default NULL,
-`dbname` varchar(255) NOT NULL,
-`dbhostname` varchar(255) NOT NULL,
-`dbport` varchar(255) NOT NULL,
-`dbusername` varchar(255) NOT NULL,
-`dbpasswd` varchar(255) NOT NULL,
+`dbname` varchar(255) DEFAULT NULL,
+`dbhostname` varchar(255) DEFAULT NULL,
+`dbport` varchar(255) DEFAULT NULL,
+`dbusername` varchar(255) DEFAULT NULL,
+`dbpasswd` varchar(255) DEFAULT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)
@@ -42,17 +44,15 @@ PRIMARY KEY(`id`)
 
 ALTER TABLE `project` ADD unique(`name`);
 
-CREATE TABLE `group` (
+CREATE TABLE `group_info` (
 `id` int(11) NOT NULL auto_increment,
 `name` varchar(255) NOT NULL,
 `create_userid` int(11) NOT NULL,
-`type` tinyint(4) default 0 COMMENT '0: api 1: case',
+`type` tinyint(4) DEFAULT 0 COMMENT '0: api 1: case',
 `projectid` int(11) NOT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-PRIMARY KEY(`id`),
-KEY `project_id` (`projectid`),
-CONSTRAINT `project_id` FOREIGN KEY (`projectid`) REFERENCES `project` (`id`)
+PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `interface` (
@@ -76,11 +76,7 @@ CREATE TABLE `interface` (
 `groupid` int(11) NOT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-PRIMARY KEY(`id`),
-KEY `projectId` (`projectid`),
-KEY `group_id` (`groupid`),
-CONSTRAINT `projectId` FOREIGN KEY (`projectid`) REFERENCES `project` (`id`),
-CONSTRAINT `group_id` FOREIGN KEY (`groupid`) REFERENCES `group` (`id`)
+PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `testcase` (
@@ -98,11 +94,7 @@ CREATE TABLE `testcase` (
 `envid` int(11) NOT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-PRIMARY KEY(`id`),
-KEY `proId` (`projectid`),
-KEY `groupId` (`groupid`),
-CONSTRAINT `proId` FOREIGN KEY (`projectid`) REFERENCES `project` (`id`),
-CONSTRAINT `groupId` FOREIGN KEY (`groupid`) REFERENCES `group` (`id`)
+PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `casecontent` (
@@ -117,9 +109,7 @@ CREATE TABLE `casecontent` (
 `timeout` int(11) DEFAULT NULL,
 `type` tinyint(4) default 0 COMMENT '0: api 1: sql',
 `sqlcontent` varchar(255) DEFAULT NULL,
-PRIMARY KEY(`id`),
-KEY `case_id` (`caseid`),
-CONSTRAINT `case_id` FOREIGN KEY (`caseid`) REFERENCES `testcase` (`id`)
+PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `assert` (
@@ -129,15 +119,13 @@ CREATE TABLE `assert` (
 `expect` varchar(255) DEFAULT NULL,
 `assert_type` varchar(255) NOT NULL COMMENT '0: equal 1: not equal 2: contain 3:not contain ',
 `sqlcontent` varchar(255) DEFAULT NULL,
-PRIMARY KEY(`id`),
-KEY `casecontent_id` (`casecontentid`),
-CONSTRAINT `casecontent_id` FOREIGN KEY (`casecontentid`) REFERENCES `casecontent` (`id`)
+PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `testsuite` (
 `id` int(11) NOT NULL auto_increment,
-`name` varchar(255) NOT NULL,
-`testcaseids` varchar(255) NOT NULL,
+`name` varchar(255) NOT NULL unique,
+`testcaseids` text DEFAULT NULL,
 `create_userid` int(11) NOT NULL,
 `create_username` varchar(255) NOT NULL,
 `update_userid` int(11) NOT NULL,
@@ -149,6 +137,8 @@ CREATE TABLE `testsuite` (
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `testsuite` ADD unique(`name`);
 
 CREATE TABLE `testcaseinstance` (
 `id` int(11) NOT NULL auto_increment,
@@ -189,6 +179,16 @@ CREATE TABLE `taskmetaqinfo` (
 `msg_id` varchar(255) DEFAULT NULL COMMENT 'process id',
 `message` text DEFAULT NULL,
 `is_deleted` tinyint(4) DEFAULT 0,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `session_manage` (
+`id` int(11) NOT NULL auto_increment,
+`user_id` int(11) NOT NULL,
+`session` varchar(255) NOT NULL,
+`domain` varchar(255) DEFAULT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)

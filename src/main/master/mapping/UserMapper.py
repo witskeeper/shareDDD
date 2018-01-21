@@ -1,4 +1,16 @@
 # -*- coding: utf-8 -*-
+#CREATE TABLE `user` (
+#`id` int(11) NOT NULL auto_increment,
+#`username` varchar(255) NOT NULL unique,
+#`passwd` varchar(255) NOT NULL,
+#`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
+#`remarks` varchar(255) default NULL,
+#`gmt_create` datetime DEFAULT NULL,
+#`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+#PRIMARY KEY(`id`)
+#) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+#ALTER TABLE `user` ADD unique(`username`);
 
 class UserSQLMapper:
 
@@ -14,15 +26,19 @@ class UserSQLMapper:
     def __setSQL(self):
         #WRITE SQL FOR API
         addUserSQL="""
-        insert into user (userName,phone,sex,Gmt) values (%(user_name)s,%(user_phone)s,%(user_sex)s,now())
+        insert into user (username,passwd,remarks,gmt_create) values (%(userName)s,%(userPasswd)s,%(remarks)s,now())
         """
         getUserInfoSQL="""
-        select * from user where userName= %(user_name)s
+        select id,username,passwd,remarks from user where username= %(userName)s and status = 0
         """
         deleteUserInfoSQL="""
-        delete from user where userName= %(user_name)s
+        delete from user where id = %(userId)s
+        """
+        getUserInfoByIdSQL="""
+        select username,passwd,remarks,status from user where id = %(userId)s
         """
         #SET SQL FOR DAO
         self.data.setdefault("addUser",addUserSQL)
         self.data.setdefault("getUserInfo", getUserInfoSQL)
         self.data.setdefault("deleteUser", deleteUserInfoSQL)
+        self.data.setdefault("getUserInfoById", getUserInfoByIdSQL)

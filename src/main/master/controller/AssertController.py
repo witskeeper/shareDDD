@@ -9,15 +9,15 @@ from concurrent.futures import ThreadPoolExecutor
 from src.main.master.common.constants import SystemConfig
 from src.main.master.util.logUtil.log import Log
 from src.main.master.entity.DataResult import DataResult
-from src.main.master.service.impl.ProjectServiceImpl import ProjectService
+from src.main.master.service.impl.AssertServiceImpl import AssertService
 from src.main.master.util.jsonUtil.JsonUtil import CJsonEncoder
 from src.main.master.core.AdminDecorator import AdminDecoratorServer
 
 #set log
-logger = Log('ProjectController')
-logger.write_to_file(SystemConfig.logPathPrefix+"ProjectController.log")
+logger = Log('AssertController')
+logger.write_to_file(SystemConfig.logPathPrefix+"AssertController.log")
 
-class ProjectHandler(tornado.web.RequestHandler):
+class AssertHandler(tornado.web.RequestHandler):
     executor = ThreadPoolExecutor(30)
 
     @tornado.web.asynchronous
@@ -35,8 +35,8 @@ class ProjectHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'getProjectInfoByName' : lambda : self.getProjectInfoByName(),
-                'getProjectInfoById': lambda: self.getProjectInfoById(),
+                'getAssertInfosByContentId' : lambda : self.getAssertInfosByContentId(),
+                'getAssertInfoById': lambda: self.getAssertInfoById()
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -57,8 +57,9 @@ class ProjectHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'addProject' : lambda : self.addProject(),
-                'deleteProject':lambda :self.deleteProject()
+                'addAssert' : lambda : self.addAssert(),
+                'deleteAssert':lambda :self.deleteAssert(),
+                'updateAssert': lambda: self.updateAssert()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -73,24 +74,22 @@ class ProjectHandler(tornado.web.RequestHandler):
             except:
                 pass
 
-    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def addProject(self):
-        data = json.loads(self.request.body)
-        #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
-        if "remarks" not in  data:
-            data.setdefault("remarks",None)
-        if "version" not in  data:
-            data.setdefault("version",None)
-        return ProjectService().addProject(data)
+    def getAssertInfoById(self):
+        assertId = self.get_argument('assertId')
+        return AssertService().getAssertInfoById(assertId)
 
-    def getProjectInfoByName(self):
-        name= self.get_argument("name")
-        return ProjectService().getProjectInfoByName(name)
-
-    def getProjectInfoById(self):
-        name= self.get_argument("name")
-        return ProjectService().getProjectInfoById(name)
+    def getAssertInfosByContentId(self):
+        contentId = self.get_argument('contentId')
+        return AssertService().getAssertInfosByContentId(contentId)
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def deleteProject(self):
-        return ProjectService().deleteProject(json.loads(self.request.body))
+    def addAssert(self):
+        return AssertService().addAssert(json.loads(self.request.body))
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def deleteAssert(self):
+        return AssertService().deleteAssert(json.loads(self.request.body))
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def updateAssert(self):
+        return AssertService().updateAssert(json.loads(self.request.body))

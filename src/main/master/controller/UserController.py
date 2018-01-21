@@ -11,6 +11,7 @@ from src.main.master.util.logUtil.log import Log
 from src.main.master.entity.DataResult import DataResult
 from src.main.master.service.impl.UserServiceImpl import UserService
 from src.main.master.util.jsonUtil.JsonUtil import CJsonEncoder
+from src.main.master.core.AdminDecorator import AdminDecoratorServer
 
 #set log
 logger = Log('UserController')
@@ -75,28 +76,18 @@ class UserHandler(tornado.web.RequestHandler):
         userName = self.get_argument('userName')
         return UserService().getUserInfo(userName)
 
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def add_user_info(self):
-        dataResult = DataResult()
         data = json.loads(self.request.body)
-        if 'userName' not in data:
-            dataResult.setSuccess(False);
-            dataResult.setMessage("Request Params[userName] must be provided")
-            return dataResult
-        if 'phone' not in data:
-            dataResult.setSuccess(False);
-            dataResult.setMessage("Request Params[phone] must be provided")
-            return dataResult
-        if 'sex' not in data:
-            sex ="male"
-        else:
-            sex = data.get("sex")
-        args={}
-        #NOTICE
-        args.setdefault("user_name",data.get("userName"))
-        args.setdefault("user_phone",data.get("phone"))
-        args.setdefault("user_sex",sex)
-        return UserService().addUser(args)
+        #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
+        if "remarks" not in  data:
+            data.setdefault("remarks",None)
+        return UserService().addUser(data)
 
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def delete_user_info(self):
-        data = json.loads(self.request.body)
-        return UserService().deleteUser(data["userName"])
+        return UserService().deleteUser(json.loads(self.request.body))
+
+    def get_user_info_by_user_id(self):
+        userId = self.get_argument('userId')
+        return UserService().getUserInfoById(userId)

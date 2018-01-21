@@ -12,7 +12,7 @@ logger.write_to_file(SystemConfig.logPathPrefix+"dbBaseHelper.log")
 #本类只提供了base操作
 class DbBaseHelper(object):
 
-    def __init__(self,sql,args=None,is_execute_many=False):
+    def __init__(self,sql=None,args=None,is_execute_many=False):
         self.data = DataResult()
         self.sql=sql
         self.args =args
@@ -65,5 +65,16 @@ class DbBaseHelper(object):
             self.data.setMessage(traceback.format_exc())
             self.data.setStatusCode(500)
             return self.data
+        finally:
+            db.close()
+
+    def execReadOnlySQL(self,dbConfig,sql):
+        db = Connection(autocommit=False,**dbConfig)
+        try:
+            ret = db.read(sql)
+            return list(ret)
+        except Exception, e:
+            logger.error("execReadOnlySQL Exception:sql{0}  reason:{1}".format(sql,traceback.format_exc()))
+            return []
         finally:
             db.close()

@@ -9,15 +9,15 @@ from concurrent.futures import ThreadPoolExecutor
 from src.main.master.common.constants import SystemConfig
 from src.main.master.util.logUtil.log import Log
 from src.main.master.entity.DataResult import DataResult
-from src.main.master.service.impl.ProjectServiceImpl import ProjectService
+from src.main.master.service.impl.InterfaceServiceImpl import InterfaceService
 from src.main.master.util.jsonUtil.JsonUtil import CJsonEncoder
 from src.main.master.core.AdminDecorator import AdminDecoratorServer
 
 #set log
-logger = Log('ProjectController')
-logger.write_to_file(SystemConfig.logPathPrefix+"ProjectController.log")
+logger = Log('InterfaceController')
+logger.write_to_file(SystemConfig.logPathPrefix+"InterfaceController.log")
 
-class ProjectHandler(tornado.web.RequestHandler):
+class InterfaceHandler(tornado.web.RequestHandler):
     executor = ThreadPoolExecutor(30)
 
     @tornado.web.asynchronous
@@ -35,8 +35,8 @@ class ProjectHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'getProjectInfoByName' : lambda : self.getProjectInfoByName(),
-                'getProjectInfoById': lambda: self.getProjectInfoById(),
+                'getInterfaceInfosByProject' : lambda : self.getInterfaceInfosByProject(),
+                'getInterfaceInfoById': lambda: self.getInterfaceInfoById()
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -57,8 +57,11 @@ class ProjectHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'addProject' : lambda : self.addProject(),
-                'deleteProject':lambda :self.deleteProject()
+                'addInterfaceItem' : lambda : self.addInterfaceItem(),
+                'deleteInterfaceItem':lambda :self.deleteInterfaceItem(),
+                'updateInterfaceItem': lambda : self.updateInterfaceItem(),
+                'enableInterfaceItem': lambda: self.enableInterfaceItem(),
+                'disableInterfaceItem': lambda: self.disableInterfaceItem()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -74,23 +77,32 @@ class ProjectHandler(tornado.web.RequestHandler):
                 pass
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def addProject(self):
-        data = json.loads(self.request.body)
-        #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
-        if "remarks" not in  data:
-            data.setdefault("remarks",None)
-        if "version" not in  data:
-            data.setdefault("version",None)
-        return ProjectService().addProject(data)
+    def addInterfaceItem(self):
+        return InterfaceService().addInterfaceItem(json.loads(self.request.body))
 
-    def getProjectInfoByName(self):
-        name= self.get_argument("name")
-        return ProjectService().getProjectInfoByName(name)
-
-    def getProjectInfoById(self):
-        name= self.get_argument("name")
-        return ProjectService().getProjectInfoById(name)
+    def getInterfaceInfoById(self):
+        apiId = self.get_argument('apiId')
+        return InterfaceService().getInterfaceInfoById(apiId)
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def deleteProject(self):
-        return ProjectService().deleteProject(json.loads(self.request.body))
+    def deleteInterfaceItem(self):
+        return InterfaceService().deleteInterfaceItem(json.loads(self.request.body))
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def disableInterfaceItem(self):
+        return InterfaceService().disableInterfaceItem(json.loads(self.request.body))
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def updateInterfaceItem(self):
+        return InterfaceService().updateInterfaceItem(json.loads(self.request.body))
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def enableInterfaceItem(self):
+        return InterfaceService().enableInterfaceItem(json.loads(self.request.body))
+
+    def getInterfaceInfosByProject(self):
+        projectId = self.get_argument('projectId')
+        groupId = self.get_argument('groupId')
+        offset = self.get_argument('offset')
+        limit = self.get_argument('limit')
+        return InterfaceService().getInterfaceInfosByProject(projectId,groupId,offset,limit)

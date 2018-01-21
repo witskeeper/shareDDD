@@ -4,36 +4,39 @@ import inspect
 from src.main.master.util.dbUtil.dbBaseHelper import DbBaseHelper
 from src.main.master.util.logUtil.log import Log
 from src.main.master.common.constants import SystemConfig
-from src.main.master.mapping.ProjectMapper import ProjectSQLMapper
+from src.main.master.mapping.GroupMapper import GroupSQLMapper
 
 #set log
-logger = Log('ProjectDao')
-logger.write_to_file(SystemConfig.logPathPrefix+"ProjectDao.log")
+logger = Log('GroupDao')
+logger.write_to_file(SystemConfig.logPathPrefix+"GroupDao.log")
 
-class ProjectDaoInterface:
+class GroupDaoInterface:
 
-    def addProject(self,args):
+    def addGroup(self,args):
         #实例化
         logger.info(inspect.stack()[0][3])
-        sql = ProjectSQLMapper().getSQL(inspect.stack()[0][3])
+        sql = GroupSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate =DbBaseHelper(sql,args)
         return daoOperate.write()
 
-    def getProjectInfoByName(self,args):
+    def getGroupInfoByProjectId(self,args):
         #实例化
         logger.info(inspect.stack()[0][3])
-        sql = ProjectSQLMapper().getSQL(inspect.stack()[0][3])
+        sql = GroupSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate =DbBaseHelper(sql,args)
         return daoOperate.read()
 
-    def deleteProject(self,args):
+    def deleteGroup(self,args):
         logger.info(inspect.stack()[0][3])
-        sql = ProjectSQLMapper().getSQL(inspect.stack()[0][3])
+        sql = GroupSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate = DbBaseHelper(sql, args)
         return daoOperate.write()
 
-    def getProjectInfoById(self,args):
+    def getGroupInfoByName(self,args):
+        #实例化
         logger.info(inspect.stack()[0][3])
-        sql = ProjectSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate = DbBaseHelper(sql, args)
+        sql = GroupSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate =DbBaseHelper(sql,args)
         return daoOperate.read()
+
+

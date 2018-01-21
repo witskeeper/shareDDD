@@ -9,15 +9,15 @@ from concurrent.futures import ThreadPoolExecutor
 from src.main.master.common.constants import SystemConfig
 from src.main.master.util.logUtil.log import Log
 from src.main.master.entity.DataResult import DataResult
-from src.main.master.service.impl.ProjectServiceImpl import ProjectService
+from src.main.master.service.impl.GroupServiceImpl import GroupService
 from src.main.master.util.jsonUtil.JsonUtil import CJsonEncoder
 from src.main.master.core.AdminDecorator import AdminDecoratorServer
 
 #set log
-logger = Log('ProjectController')
-logger.write_to_file(SystemConfig.logPathPrefix+"ProjectController.log")
+logger = Log('GroupController')
+logger.write_to_file(SystemConfig.logPathPrefix+"GroupController.log")
 
-class ProjectHandler(tornado.web.RequestHandler):
+class GroupHandler(tornado.web.RequestHandler):
     executor = ThreadPoolExecutor(30)
 
     @tornado.web.asynchronous
@@ -35,8 +35,7 @@ class ProjectHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'getProjectInfoByName' : lambda : self.getProjectInfoByName(),
-                'getProjectInfoById': lambda: self.getProjectInfoById(),
+                'getGroupInfoByProjectId' : lambda : self.getGroupInfoByProjectId()
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -57,8 +56,8 @@ class ProjectHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'addProject' : lambda : self.addProject(),
-                'deleteProject':lambda :self.deleteProject()
+                'addGroup' : lambda : self.addGroup(),
+                'deleteGroup':lambda :self.deleteGroup()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -73,24 +72,15 @@ class ProjectHandler(tornado.web.RequestHandler):
             except:
                 pass
 
-    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def addProject(self):
-        data = json.loads(self.request.body)
-        #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
-        if "remarks" not in  data:
-            data.setdefault("remarks",None)
-        if "version" not in  data:
-            data.setdefault("version",None)
-        return ProjectService().addProject(data)
-
-    def getProjectInfoByName(self):
-        name= self.get_argument("name")
-        return ProjectService().getProjectInfoByName(name)
-
-    def getProjectInfoById(self):
-        name= self.get_argument("name")
-        return ProjectService().getProjectInfoById(name)
+    def getGroupInfoByProjectId(self):
+        projectId = self.get_argument('projectId')
+        type = self.get_argument('type',0)
+        return GroupService().getGroupInfoByProjectId(projectId,type)
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def deleteProject(self):
-        return ProjectService().deleteProject(json.loads(self.request.body))
+    def addGroup(self):
+        return GroupService().addGroup(json.loads(self.request.body))
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def deleteGroup(self):
+        return GroupService().deleteGroup(json.loads(self.request.body))

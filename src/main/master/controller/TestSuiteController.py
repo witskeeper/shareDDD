@@ -9,15 +9,15 @@ from concurrent.futures import ThreadPoolExecutor
 from src.main.master.common.constants import SystemConfig
 from src.main.master.util.logUtil.log import Log
 from src.main.master.entity.DataResult import DataResult
-from src.main.master.service.impl.ProjectServiceImpl import ProjectService
+from src.main.master.service.impl.TestSuiteServiceImpl import TestSuiteService
 from src.main.master.util.jsonUtil.JsonUtil import CJsonEncoder
 from src.main.master.core.AdminDecorator import AdminDecoratorServer
 
 #set log
-logger = Log('ProjectController')
-logger.write_to_file(SystemConfig.logPathPrefix+"ProjectController.log")
+logger = Log('TestSuiteController')
+logger.write_to_file(SystemConfig.logPathPrefix+"TestSuiteController.log")
 
-class ProjectHandler(tornado.web.RequestHandler):
+class TestSuiteHandler(tornado.web.RequestHandler):
     executor = ThreadPoolExecutor(30)
 
     @tornado.web.asynchronous
@@ -35,8 +35,7 @@ class ProjectHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'getProjectInfoByName' : lambda : self.getProjectInfoByName(),
-                'getProjectInfoById': lambda: self.getProjectInfoById(),
+                'getSuiteInfoById': lambda: self.getSuiteInfoById()
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -57,8 +56,9 @@ class ProjectHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'addProject' : lambda : self.addProject(),
-                'deleteProject':lambda :self.deleteProject()
+                'addTestSuite' : lambda : self.addTestSuite(),
+                'deleteTestSuite':lambda :self.deleteTestSuite(),
+                'updateTestSuite': lambda : self.updateTestSuite()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -74,23 +74,17 @@ class ProjectHandler(tornado.web.RequestHandler):
                 pass
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def addProject(self):
-        data = json.loads(self.request.body)
-        #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
-        if "remarks" not in  data:
-            data.setdefault("remarks",None)
-        if "version" not in  data:
-            data.setdefault("version",None)
-        return ProjectService().addProject(data)
+    def addTestSuite(self):
+        return TestSuiteService().addTestSuite(json.loads(self.request.body))
 
-    def getProjectInfoByName(self):
-        name= self.get_argument("name")
-        return ProjectService().getProjectInfoByName(name)
-
-    def getProjectInfoById(self):
-        name= self.get_argument("name")
-        return ProjectService().getProjectInfoById(name)
+    def getSuiteInfoById(self):
+        suiteId = self.get_argument('suiteId')
+        return TestSuiteService().getSuiteInfoById(suiteId)
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def deleteProject(self):
-        return ProjectService().deleteProject(json.loads(self.request.body))
+    def deleteTestSuite(self):
+        return TestSuiteService().deleteTestSuite(json.loads(self.request.body))
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def updateTestSuite(self):
+        return TestSuiteService().updateTestSuite(json.loads(self.request.body))
