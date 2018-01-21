@@ -38,6 +38,7 @@ class TaskCenterService(object):
     def __init__(self):
         pass
 
+    #2
     @staticmethod
     @AdminDecoratorServer.execImplDecorator()
     def __sendTaskJob(taskInfo):
@@ -54,6 +55,7 @@ class TaskCenterService(object):
             logger.error("send task failed.reason:{0}".format(dataResult.getMessage()))
             return TaskMetaqInfoDaoInterface().deleteTaskInfo(tmp_args)
 
+    #3
     @staticmethod
     @AdminDecoratorServer.execImplDecorator()
     def __execTaskJob(taskInfo):
@@ -109,13 +111,13 @@ class TaskCenterService(object):
                         initCaseInfo = initResult.getMessage()[0]
                         initCaseId = initCaseInfo.get("id")
                         #return request Object
-                        RequestObject = TaskCenterService.__execTaskCaseJob(initCaseId,userId,envResult[0],None,True)
+                        initRequest = TaskCenterService.__execTaskCaseJob(initCaseId,userId,envResult[0],None,True,taskInstanceId,"init")
                         for caseId in list(caseIds):
                             if caseId == initCaseId:
                                 continue
                             dataResult =TestCaseInstanceDaoInterface().getTestInstanceInfoById(args)
                             if dataResult.getMessage()[0].get("status") not in ["Stopped","TimeOut"]:
-                                execResult = TaskCenterService.__execTaskCaseJob(caseId,None,envResult[0],RequestObject,True)
+                                execResult = TaskCenterService.__execTaskCaseJob(caseId,None,envResult[0],initRequest.getMessage(),True,taskInstanceId,None)
                                 if not execResult.getSuccess():
                                     #set instance db
                                     taskGlobalStatus = execResult.getMessage()
@@ -133,8 +135,9 @@ class TaskCenterService(object):
         finally:
             args.setdefault("build_end", datetime.datetime.now())
             args.setdefault("status",taskGlobalStatus)
-            return TestCaseInstanceDaoInterface().updateTestInstance(args)
+            TestCaseInstanceDaoInterface().updateTestInstance(args)
 
+    #4
     @staticmethod
     @AdminDecoratorServer.execImplDecorator()
     def __execTaskCaseJob(caseId,userId=None,envConfig=False,requestObject=None,init=False, \
@@ -164,6 +167,7 @@ class TaskCenterService(object):
         if contentResult.getSuccess() and len(contentResult.getMessage()) > 0:
             for content in sorted(ontentResult.getMessage(), key=attrgetter('step')):
                 #TODO "DATARESULT" + STEP
+                response=None
                 #request api
                 if content.get("type")==0:
                     if envConfig.get("datatemplate").endswith("/"):
@@ -173,11 +177,11 @@ class TaskCenterService(object):
                     params = TaskCenterService.__rendeTemplate(content.get("request_params"),envConfig.get("datatemplate"),Presult)
                     requestUtil = RequestBase(url=url,method=content.get("method"),format=content.get("format"),params=params,
                                               object=requestObject,userId=userId,saveSession=saveSession)
-                    response = requestUtil.route()
+                    response,obj = requestUtil.route()
                     try:
                         response = json.loads(response)
                     except Exception, e:
-                        logger.warn("")
+                        logger.warn("return result is not json:{0} Exception:{1}".format(response,e))
                 #request sql
                 elif content.get("type")==1:
                     dbConfig={}
@@ -218,7 +222,10 @@ class TaskCenterService(object):
             CaseResultDaoInterface().addCaseResult(caseResultInfo)
         dataResult =DataResult()
         dataResult.setSuccess(statusFlag)
-        dataResult.setMessage(status)
+        if init:
+            dataResult.setMessage(obj)
+        else:
+            dataResult.setMessage(status)
         return dataResult
 
     @staticmethod
@@ -240,7 +247,7 @@ class TaskCenterService(object):
             result = False
         assertResult = DataResult()
         assertResult.setSuccess(result)
-        assertResult.setMessage("Notice:actual={0},expect={1}".format(actual,expect))
+        assertResult.setMessage("Notice:actual={0},expect={1}\n".format(actual,expect))
         return assertResult
 
     @staticmethod
@@ -270,6 +277,7 @@ class TaskCenterService(object):
             return tmplJson
         return eval("Presult."+tmplString)
 
+    #1
     @AdminDecoratorServer.execImplDecorator()
     def sendTask(self):
         args={}
@@ -290,12 +298,12 @@ class TaskCenterService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def stopTask(self,args):
-        return self.taskMetaqInfoDaoInterface.addTaskInfo(args)
+        pass
 
     @AdminDecoratorServer.execImplDecorator()
     def startTask(self,args):
-        return self.taskMetaqInfoDaoInterface.addTaskInfo(args)
+        pass
 
     @AdminDecoratorServer.execImplDecorator()
     def execTask(self,args):
-        return self.taskMetaqInfoDaoInterface.addTaskInfo(args)
+        pass

@@ -84,7 +84,7 @@ class RequestBase(object):
                         SessionManageDaoInterface().updateSession(args)
             else:
                 logger.warn("get session fail:Result [{0}]".format(r.text))
-        return r.text
+        return r.text,self.getRequestInstance()
 
     @AdminDecoratorServer.execImplDecorator()
     def post(self):
@@ -118,7 +118,7 @@ class RequestBase(object):
                         SessionManageDaoInterface().updateSession(args)
             else:
                 logger.warn("get session fail:Result [{0}]".format(r.text))
-        return r.text
+        return r.text,self.getRequestInstance()
 
     def init(self,s):
         url =self.test + "apiBusiness/MerchantBusiness/InitCurrentUser"
