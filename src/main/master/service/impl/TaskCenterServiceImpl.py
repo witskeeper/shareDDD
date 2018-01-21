@@ -38,7 +38,7 @@ class TaskCenterService(object):
     def __init__(self):
         pass
 
-    @staticmehtod
+    @staticmethod
     @AdminDecoratorServer.execImplDecorator()
     def __sendTaskJob(taskInfo):
         #set task queue status is send
@@ -54,7 +54,7 @@ class TaskCenterService(object):
             logger.error("send task failed.reason:{0}".format(dataResult.getMessage()))
             return TaskMetaqInfoDaoInterface().deleteTaskInfo(tmp_args)
 
-    @staticmehtod
+    @staticmethod
     @AdminDecoratorServer.execImplDecorator()
     def __execTaskJob(taskInfo):
         taskInstanceId = taskInfo.get("instanceid")
@@ -135,7 +135,7 @@ class TaskCenterService(object):
             args.setdefault("status",taskGlobalStatus)
             return TestCaseInstanceDaoInterface().updateTestInstance(args)
 
-    @staticmehtod
+    @staticmethod
     @AdminDecoratorServer.execImplDecorator()
     def __execTaskCaseJob(caseId,userId=None,envConfig=False,requestObject=None,init=False, \
                           instanceId=None,caseName=None):
@@ -221,7 +221,7 @@ class TaskCenterService(object):
         dataResult.setMessage(status)
         return dataResult
 
-    @staticmehtod
+    @staticmethod
     @AdminDecoratorServer.execImplDecorator()
     def __execAssertJob(actual,expect,assert_type="0"):
         #equal
@@ -243,7 +243,7 @@ class TaskCenterService(object):
         assertResult.setMessage("Notice:actual={0},expect={1}".format(actual,expect))
         return assertResult
 
-    @staticmehtod
+    @staticmethod
     @AdminDecoratorServer.execImplDecorator()
     def __getInitCaseJob(caseIds):
         #eg:[1,2,3,4,5,6,7]
@@ -257,7 +257,7 @@ class TaskCenterService(object):
         dataResult.setSuccess(False)
         return dataResult
 
-    @staticmehtod
+    @staticmethod
     @AdminDecoratorServer.execImplDecorator()
     def __rendeTemplate(tmpl,param,Presult,isJson=True):
         template = Template(tmpl)
