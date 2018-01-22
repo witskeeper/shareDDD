@@ -18,3 +18,6 @@
 2017-12-31 18:05:34,790 - UserDao - 5860 - INFO - deleteUser - deleteUser
 2017-12-31 18:06:16,319 - UserDao - 9020 - INFO - deleteUser - deleteUser
 2017-12-31 18:41:44,299 - UserDao - 2480 - INFO - addUser - addUser
+2018-01-22 14:31:07,829 - UserDao - 7452 - INFO - addUser - addUser
+2018-01-22 14:31:59,532 - UserDao - 7452 - INFO - addUser - addUser
+2018-01-22 14:32:07,640 - UserDao - 6476 - INFO - addUser - addUser

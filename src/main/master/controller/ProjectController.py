@@ -60,6 +60,9 @@ class ProjectHandler(tornado.web.RequestHandler):
                 'addProject' : lambda : self.addProject(),
                 'deleteProject':lambda :self.deleteProject()
             }
+            self.set_header("Access-Control-Allow-Origin", "*")
+            self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+            self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
             logger.error(traceback.format_exc())

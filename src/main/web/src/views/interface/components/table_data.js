@@ -57,7 +57,7 @@ export const editInlineColumns = [
         align: 'center'
     },
     {
-        title: '姓名',
+        title: '项目名称',
         align: 'center',
         key: 'name',
         width: 90,

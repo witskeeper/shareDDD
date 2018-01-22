@@ -31,3 +31,7 @@
 2018-01-01 21:11:26,049 - ProjectDao - 8672 - INFO - deleteProject - deleteProject
 2018-01-01 21:12:12,221 - ProjectDao - 8028 - INFO - deleteProject - deleteProject
 2018-01-01 21:12:33,806 - ProjectDao - 8028 - INFO - deleteProject - deleteProject
+2018-01-22 14:40:14,375 - ProjectDao - 7984 - INFO - addProject - addProject
+2018-01-22 16:15:09,012 - ProjectDao - 8152 - INFO - getProjectInfoByName - getProjectInfoByName
+2018-01-22 16:15:43,062 - ProjectDao - 7984 - INFO - getProjectInfoByName - getProjectInfoByName
+2018-01-22 18:18:42,078 - ProjectDao - 8152 - INFO - getProjectInfoByName - getProjectInfoByName

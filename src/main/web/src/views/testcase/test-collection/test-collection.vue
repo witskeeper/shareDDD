@@ -220,10 +220,9 @@ export default {
             return check;
         },
         addnewcase(){
-            axios.get("http://localhost:8090/v1/project",{
+            axios.get("http://localhost:8090/v1/project/getProjectInfoByName",{
                 params:{
-                    task:"getProjectInfoByName",
-                    name:"jessica"
+                    name:"SchoolpalShow"
                 }
             }).then(function(res){
                 console.log(res)

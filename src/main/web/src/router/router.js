@@ -125,6 +125,13 @@ export const appRouter = [
                 name: 'environment-configuration',
                 icon: 'crop',
                 component: resolve => { require(['@/views/environment/environment-configuration.vue'], resolve); }
+            },
+            {
+                path: 'environment-db',
+                title: '数据库管理',
+                name: 'environment-db',
+                icon: 'soup-can',
+                component: resolve => { require(['@/views/environment/environment-db.vue'], resolve); }
             }
         ]
     },

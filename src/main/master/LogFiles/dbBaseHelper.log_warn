@@ -118,3 +118,25 @@ ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual
     raise errorclass, errorvalue
 ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\'name\': "\'SCP\'"}\' at line 1')
 
+2018-01-22 14:31:07,931 - dbBaseHelper - 7452 - ERROR - write - write sql:
+        insert into user (username,passwd,remarks,gmt_create) values (%(userName)s,%(userPasswd)s,%(remarks)s,now())
+         args:{u'username': u'jessica', u'passwd': u'123456', 'remarks': None} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'userName'
+
+2018-01-22 14:31:59,535 - dbBaseHelper - 7452 - ERROR - write - write sql:
+        insert into user (username,passwd,remarks,gmt_create) values (%(userName)s,%(userPasswd)s,%(remarks)s,now())
+         args:{u'userName': u'jessica', u'passwd': u'123456', 'remarks': None} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'userPasswd'
+

@@ -7,7 +7,7 @@
     <div>
         <Row type="flex" class="height-100">
             <Col span="8">
-                <i-button type="success" style="margin-top-10">新建项目</i-button>
+                <i-button type="success" @click="addProject" style="margin-top-10">新建项目</i-button>
 
                 <i-button type="success">导入项目</i-button>
             </Col>
@@ -27,6 +27,8 @@
 <script>
 import canEditTable from './components/canEditTable.vue';
 import tableData from './components/table_data.js';
+import axios  from 'axios';
+import qs from 'qs'
 export default {
     name: 'editable-table',
     components: {
@@ -75,6 +77,20 @@ export default {
         },
         handleChange (val, index) {
             this.$Message.success('修改了第' + (index + 1) + '行数据');
+        },
+        addProject(){
+            axios.post("http://localhost:8090/v1/project/addProject",qs.stringify(
+            {
+                    name:"SchoolpalShow",
+                    userName:"jessica",
+                    userId:1,
+                    version:"v0.1.0",
+                    remarks:"当前版本为v0.1.0，该项目新增拼团小程序"
+            })
+            ).then(function(res){
+                console.log(res)
+            }
+            )
         }
     },
     created () {

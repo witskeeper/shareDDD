@@ -72,3 +72,8 @@ MissingArgumentError: HTTP 400: Bad Request (Missing argument task_name)
     raise MissingArgumentError(name)
 MissingArgumentError: HTTP 400: Bad Request (Missing argument task_name)
 
+2018-01-22 15:17:49,457 - ProjectController - 7984 - ERROR - execute_get - Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\controller\ProjectController.py", line 42, in execute_get
+    self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
+KeyError: u'addProject'
+

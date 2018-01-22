@@ -22,7 +22,7 @@
                     type="dot"
                     v-for="(item, index) in pageTagsList" 
                     ref="tagsPageOpened"
-                    :key="item.name" 
+                    :key="item.name"
                     :name="item.name" 
                     @on-close="closePage"
                     @click.native="linkTo(item)"
