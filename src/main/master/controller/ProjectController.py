@@ -30,6 +30,16 @@ class ProjectHandler(tornado.web.RequestHandler):
     def post(self,APIName):
         yield self.execute_post(APIName)
 
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "Authorization,Origin,x-requested-with,Content-Type, Accept")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+
+    def options(self,APIName):
+        # no body
+        self.set_status(204)
+        self.finish()
+
     @run_on_executor
     def execute_get(self,APIName):
         dataResult = DataResult()
@@ -60,9 +70,6 @@ class ProjectHandler(tornado.web.RequestHandler):
                 'addProject' : lambda : self.addProject(),
                 'deleteProject':lambda :self.deleteProject()
             }
-            self.set_header("Access-Control-Allow-Origin", "*")
-            self.set_header("Access-Control-Allow-Headers", "x-requested-with")
-            self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
             logger.error(traceback.format_exc())
@@ -78,6 +85,7 @@ class ProjectHandler(tornado.web.RequestHandler):
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def addProject(self):
+        logger.info(self.request.body)
         data = json.loads(self.request.body)
         #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
         if "remarks" not in  data:

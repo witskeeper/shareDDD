@@ -77,3 +77,10 @@ MissingArgumentError: HTTP 400: Bad Request (Missing argument task_name)
     self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
 KeyError: u'addProject'
 
+2018-01-22 22:52:33,121 - ProjectController - 3976 - INFO - addProject - name=SchoolpalShow&userName=jessica&userId=1&version=v0.1.0&remarks=%E5%BD%93%E5%89%8D%E7%89%88%E6%9C%AC%E4%B8%BAv0.1.0%EF%BC%8C%E8%AF%A5%E9%A1%B9%E7%9B%AE%E6%96%B0%E5%A2%9E%E6%8B%BC%E5%9B%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F
+2018-01-23 00:37:44,497 - ProjectController - 1716 - INFO - addProject - {"data":{"name":"SchoolpalShow","userName":"jessica","userId":1,"version":"v0.1.0","remarks":"当前版本为v0.1.0，该项目新增拼团小程序"},"crossDomain":true,"headers":{"Content-type":"application/json"}}
+2018-01-23 00:40:04,086 - ProjectController - 1716 - INFO - addProject - {"data":{"name":"SchoolpalShow","userName":"jessica","userId":1,"version":"v0.1.0","remarks":"当前版本为v0.1.0，该项目新增拼团小程序"},"crossDomain":true,"headers":{"Content-type":"application/json"}}
+2018-01-23 00:45:37,259 - ProjectController - 4796 - INFO - addProject - {"data":{"name":"SchoolpalShow","userName":"jessica","userId":1,"version":"v0.1.0","remarks":"当前版本为v0.1.0，该项目新增拼团小程序"},"crossDomain":true,"headers":{"Content-type":"application/json"}}
+2018-01-23 00:48:12,710 - ProjectController - 4796 - INFO - addProject - {"params":{"name":"SchoolpalShow","userName":"jessica","userId":1,"version":"v0.1.0","remarks":"当前版本为v0.1.0，该项目新增拼团小程序"},"crossDomain":true,"headers":{"Content-type":"application/json"}}
+2018-01-23 01:08:38,227 - ProjectController - 4796 - INFO - addProject - {"name":"SchoolpalShow","userName":"jessica","userId":1,"version":"v0.1.0","remarks":"当前版本为v0.1.0，该项目新增拼团小程序"}
+2018-01-23 01:10:49,234 - ProjectController - 6268 - INFO - addProject - {"name":"SchoolpalShow","userName":"jessica","userId":1,"version":"v0.1.0","remarks":"当前版本为v0.1.0，该项目新增拼团小程序"}

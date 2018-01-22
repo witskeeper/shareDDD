@@ -143,3 +143,49 @@ KeyError: 'userName'
     for key, item in args.iteritems())
 KeyError: 'userPasswd'
 
+2018-01-23 00:40:04,134 - dbBaseHelper - 1716 - ERROR - write - write sql:
+        insert into project (name,create_username,create_userid,version,remarks,gmt_create) values (%(name)s,%(userName)s,%(userId)s,%(version)s,%(remarks)s,now())
+         args:{'remarks': None, u'headers': {u'Content-type': u'application/json'}, 'version': None, u'data': {u'userName': u'jessica', u'remarks': u'\u5f53\u524d\u7248\u672c\u4e3av0.1.0\uff0c\u8be5\u9879\u76ee\u65b0\u589e\u62fc\u56e2\u5c0f\u7a0b\u5e8f', u'version': u'v0.1.0', u'userId': 1, u'name': u'SchoolpalShow'}, u'crossDomain': True} Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'name'
+
+2018-01-23 00:45:37,315 - dbBaseHelper - 4796 - ERROR - write - write sql:
+        insert into project (name,create_username,create_userid,version,remarks,gmt_create) values (%(name)s,%(userName)s,%(userId)s,%(version)s,%(remarks)s,now())
+         args:{'remarks': None, u'headers': {u'Content-type': u'application/json'}, 'version': None, u'data': {u'userName': u'jessica', u'remarks': u'\u5f53\u524d\u7248\u672c\u4e3av0.1.0\uff0c\u8be5\u9879\u76ee\u65b0\u589e\u62fc\u56e2\u5c0f\u7a0b\u5e8f', u'version': u'v0.1.0', u'userId': 1, u'name': u'SchoolpalShow'}, u'crossDomain': True} Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'name'
+
+2018-01-23 00:48:12,716 - dbBaseHelper - 4796 - ERROR - write - write sql:
+        insert into project (name,create_username,create_userid,version,remarks,gmt_create) values (%(name)s,%(userName)s,%(userId)s,%(version)s,%(remarks)s,now())
+         args:{'remarks': None, u'headers': {u'Content-type': u'application/json'}, 'version': None, u'params': {u'userName': u'jessica', u'remarks': u'\u5f53\u524d\u7248\u672c\u4e3av0.1.0\uff0c\u8be5\u9879\u76ee\u65b0\u589e\u62fc\u56e2\u5c0f\u7a0b\u5e8f', u'version': u'v0.1.0', u'userId': 1, u'name': u'SchoolpalShow'}, u'crossDomain': True} Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'name'
+
+2018-01-23 01:10:49,286 - dbBaseHelper - 6268 - ERROR - write - write sql:
+        insert into project (name,create_username,create_userid,version,remarks,gmt_create) values (%(name)s,%(userName)s,%(userId)s,%(version)s,%(remarks)s,now())
+         args:{u'userName': u'jessica', u'remarks': u'\u5f53\u524d\u7248\u672c\u4e3av0.1.0\uff0c\u8be5\u9879\u76ee\u65b0\u589e\u62fc\u56e2\u5c0f\u7a0b\u5e8f', u'version': u'v0.1.0', u'userId': 1, u'name': u'SchoolpalShow'} Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+IntegrityError: (1062, "Duplicate entry 'SchoolpalShow' for key 'name'")
+

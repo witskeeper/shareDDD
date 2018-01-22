@@ -79,14 +79,14 @@ export default {
             this.$Message.success('修改了第' + (index + 1) + '行数据');
         },
         addProject(){
-            axios.post("http://localhost:8090/v1/project/addProject",qs.stringify(
+            axios.post("http://localhost:8090/v1/project/addProject",
             {
                     name:"SchoolpalShow",
                     userName:"jessica",
                     userId:1,
                     version:"v0.1.0",
                     remarks:"当前版本为v0.1.0，该项目新增拼团小程序"
-            })
+            }
             ).then(function(res){
                 console.log(res)
             }

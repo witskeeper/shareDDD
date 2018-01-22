@@ -35,3 +35,10 @@
 2018-01-22 16:15:09,012 - ProjectDao - 8152 - INFO - getProjectInfoByName - getProjectInfoByName
 2018-01-22 16:15:43,062 - ProjectDao - 7984 - INFO - getProjectInfoByName - getProjectInfoByName
 2018-01-22 18:18:42,078 - ProjectDao - 8152 - INFO - getProjectInfoByName - getProjectInfoByName
+2018-01-23 00:37:44,611 - ProjectDao - 1716 - INFO - addProject - addProject
+2018-01-23 00:40:04,091 - ProjectDao - 1716 - INFO - addProject - addProject
+2018-01-23 00:45:37,296 - ProjectDao - 4796 - INFO - addProject - addProject
+2018-01-23 00:48:12,713 - ProjectDao - 4796 - INFO - addProject - addProject
+2018-01-23 00:49:49,900 - ProjectDao - 2408 - INFO - getProjectInfoByName - getProjectInfoByName
+2018-01-23 01:08:38,227 - ProjectDao - 4796 - INFO - addProject - addProject
+2018-01-23 01:10:49,266 - ProjectDao - 6268 - INFO - addProject - addProject
