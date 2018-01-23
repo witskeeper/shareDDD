@@ -8,7 +8,6 @@
         <Row type="flex" class="height-100">
             <Col span="8">
                 <i-button type="success" @click="addProject" style="margin-top-10">新建项目</i-button>
-
                 <i-button type="success">导入项目</i-button>
             </Col>
         </Row>
@@ -16,7 +15,7 @@
             <Col>
                 <Card>
                     <div class="edittable-table-height-con">
-                        <can-edit-table refs="table2" v-model="editInlineData" :columns-list="editInlineColumns"></can-edit-table>
+                        <Table border :columns="lsitColumns" :data="list" @on-row-click="onRowClick"></Table>
                     </div>
                 </Card>
             </Col>
@@ -25,72 +24,169 @@
 </template>
 
 <script>
-import canEditTable from './components/canEditTable.vue';
-import tableData from './components/table_data.js';
 import axios  from 'axios';
-import qs from 'qs'
 export default {
-    name: 'editable-table',
-    components: {
-        canEditTable
-    },
+    name: 'interface-manage',
     data () {
         return {
-            columnsList: [],
-            tableData: [],
-            editInlineColumns: [],
-            editInlineData: [],
-            editIncellColumns: [],
-            editIncellData: [],
-            editInlineAndCellColumn: [],
-            editInlineAndCellData: [],
-            showCurrentColumns: [],
-            showCurrentTableData: false
+            lsitColumns: [
+                    {
+                        title: 'create_username',
+                        key: 'create_username'
+                    },
+                    {
+                        title: 'name',
+                        key: 'name'
+                    },
+                    {
+                        title: 'gmt_modify',
+                        key: 'gmt_modify'
+                    },
+                    {
+                        title: 'version',
+                        key: 'version'
+                    },
+                    {
+                        title: 'remarks',
+                        key: 'remarks'
+                    },
+                    {
+                        title: '操作',
+                        key: 'action',
+                        width: 150,
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.show(params.index)
+                                        }
+                                    }
+                                }, '编辑'),
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.remove(params.index)
+                                        }
+                                    }
+                                }, '删除')
+                            ]);
+                        }
+                    }
+            ],
+            list:[],
+            addProjectData:{
+                    name:"",
+                    userName:"",
+                    userId:0,
+                    version:"",
+                    remarks:""
+            }
         };
     },
     methods: {
+        onRowClick(rowData,index){
+                console.log(rowData)
+                this.$router.push({path:"/interface/interface-info",query:{projectId:rowData.id}})
+        },
         getData () {
-            this.columnsList = tableData.table1Columns;
-            this.tableData = tableData.table1Data;
-            this.editInlineColumns = tableData.editInlineColumns;
-            this.editInlineData = tableData.editInlineData;
-            this.editIncellColumns = tableData.editIncellColumns;
-            this.editIncellData = tableData.editIncellData;
-            this.editInlineAndCellColumn = tableData.editInlineAndCellColumn;
-            this.editInlineAndCellData = tableData.editInlineAndCellData;
-            this.showCurrentColumns = tableData.showCurrentColumns;
-        },
-        handleNetConnect (state) {
-            this.breakConnect = state;
-        },
-        handleLowSpeed (state) {
-            this.lowNetSpeed = state;
-        },
-        getCurrentData () {
-            this.showCurrentTableData = true;
-        },
-        handleDel (val, index) {
-            this.$Message.success('删除了第' + (index + 1) + '行数据');
-        },
-        handleCellChange (val, index, key) {
-            this.$Message.success('修改了第 ' + (index + 1) + ' 行列名为 ' + key + ' 的数据');
-        },
-        handleChange (val, index) {
-            this.$Message.success('修改了第' + (index + 1) + '行数据');
-        },
-        addProject(){
-            axios.post("http://localhost:8090/v1/project/addProject",
-            {
-                    name:"SchoolpalShow",
-                    userName:"jessica",
-                    userId:1,
-                    version:"v0.1.0",
-                    remarks:"当前版本为v0.1.0，该项目新增拼团小程序"
-            }
-            ).then(function(res){
+                axios.get("http://localhost:8090/v1/project/getProjectInfoByName?name=SchoolpalShow").then((res)=>{
                 console.log(res)
+                if(res.data.success){
+                    this.list = res.data.message;
+                }else{
+                    this.$Message.error("失败")
+                }
             }
             )
+        },
+        addProject(){
+            this.$Modal.confirm({
+                onOk: () => {
+                       this.addProjectNet();
+                    },
+                    render: (h) => {
+                    return h('div',[
+                        h('Input', {
+                            props: {
+                                value: this.addProjectData.name,
+                                autofocus: true,
+                                placeholder: '项目名称'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.addProjectData.name = val;
+                                }
+                            }
+                        }),
+                        h('Input', {
+                            props: {
+                                value: this.addProjectData.version,
+                                autofocus: false,
+                                placeholder: '项目版本'
+                            },
+                            style: {
+                                marginTop: '8px'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.addProjectData.version = val;
+                                }
+                            }
+                        }),
+                        h('Input', {
+                            props: {
+                                value: this.addProjectData.remarks,
+                                autofocus: false,
+                                placeholder: '项目描述'
+                            },
+                            style: {
+                                marginTop: '8px'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.addProjectData.remarks = val;
+                                }
+                            }
+                        })
+                    ])
+                }
+            })
+        },
+        addProjectNet(){
+            axios.post("http://localhost:8090/v1/project/addProject",
+            this.addProjectData
+            ).then((res)=>{
+                //console.log(res)
+                if(res.data.success){
+                    this.$Message.success("成功");
+                    this.getData();
+
+                }else{
+                    this.$Message.error("失败")
+                }
+            }
+            )
+            this.addProjectData = {
+                name:"",
+                userName:"",
+                userId:0,
+                version:"",
+                remarks:""
+
+            };
         }
     },
     created () {

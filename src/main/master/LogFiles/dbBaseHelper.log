@@ -189,3 +189,68 @@ KeyError: 'name'
     raise errorclass, errorvalue
 IntegrityError: (1062, "Duplicate entry 'SchoolpalShow' for key 'name'")
 
+2018-01-23 18:44:40,348 - dbBaseHelper - 1372 - ERROR - write - write sql:
+        insert into project (name,create_username,create_userid,version,remarks,gmt_create) values (%(name)s,%(userName)s,%(userId)s,%(version)s,%(remarks)s,now())
+         args:{u'userName': u'jessica', u'remarks': u'\u5f53\u524d\u7248\u672c\u4e3av0.1.0\uff0c\u8be5\u9879\u76ee\u65b0\u589e\u62fc\u56e2\u5c0f\u7a0b\u5e8f', u'version': u'v0.1.0', u'userId': 0, u'name': u'SchoolpalShow'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+IntegrityError: (1062, "Duplicate entry 'SchoolpalShow' for key 'name'")
+
+2018-01-23 19:03:17,221 - dbBaseHelper - 8492 - ERROR - write - write sql:
+        insert into project (name,create_username,create_userid,version,remarks,gmt_create) values (%(name)s,%(userName)s,%(userId)s,%(version)s,%(remarks)s,now())
+         args:{u'userName': u'', u'remarks': u'', u'version': u'', u'userId': 0, u'name': u''} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+IntegrityError: (1062, "Duplicate entry '' for key 'name'")
+
+2018-01-23 19:04:01,289 - dbBaseHelper - 8768 - ERROR - write - write sql:
+        insert into project (name,create_username,create_userid,version,remarks,gmt_create) values (%(name)s,%(userName)s,%(userId)s,%(version)s,%(remarks)s,now())
+         args:{u'userName': u'', u'remarks': u'', u'version': u'', u'userId': 0, u'name': u''} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+IntegrityError: (1062, "Duplicate entry '' for key 'name'")
+
+2018-01-23 19:04:12,579 - dbBaseHelper - 6668 - ERROR - write - write sql:
+        insert into project (name,create_username,create_userid,version,remarks,gmt_create) values (%(name)s,%(userName)s,%(userId)s,%(version)s,%(remarks)s,now())
+         args:{u'userName': u'', u'remarks': u'', u'version': u'', u'userId': 0, u'name': u''} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+IntegrityError: (1062, "Duplicate entry '' for key 'name'")
+
+2018-01-23 19:09:18,542 - dbBaseHelper - 8492 - ERROR - write - write sql:
+        insert into project (name,create_username,create_userid,version,remarks,gmt_create) values (%(name)s,%(userName)s,%(userId)s,%(version)s,%(remarks)s,now())
+         args:{u'userName': u'', u'remarks': u'', u'version': u'', u'userId': 0, u'name': u''} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+IntegrityError: (1062, "Duplicate entry '' for key 'name'")
+

@@ -84,3 +84,24 @@ KeyError: u'addProject'
 2018-01-23 00:48:12,710 - ProjectController - 4796 - INFO - addProject - {"params":{"name":"SchoolpalShow","userName":"jessica","userId":1,"version":"v0.1.0","remarks":"当前版本为v0.1.0，该项目新增拼团小程序"},"crossDomain":true,"headers":{"Content-type":"application/json"}}
 2018-01-23 01:08:38,227 - ProjectController - 4796 - INFO - addProject - {"name":"SchoolpalShow","userName":"jessica","userId":1,"version":"v0.1.0","remarks":"当前版本为v0.1.0，该项目新增拼团小程序"}
 2018-01-23 01:10:49,234 - ProjectController - 6268 - INFO - addProject - {"name":"SchoolpalShow","userName":"jessica","userId":1,"version":"v0.1.0","remarks":"当前版本为v0.1.0，该项目新增拼团小程序"}
+2018-01-23 18:44:40,279 - ProjectController - 1372 - INFO - addProject - {"name":"SchoolpalShow","userName":"jessica","userId":0,"version":"v0.1.0","remarks":"当前版本为v0.1.0，该项目新增拼团小程序"}
+2018-01-23 18:45:17,792 - ProjectController - 1372 - INFO - addProject - {"name":"点点滴滴","userName":"jessica","userId":0,"version":"得得得","remarks":"得得得"}
+2018-01-23 18:59:36,720 - ProjectController - 8768 - INFO - addProject - {"name":"312312","userName":"","userId":0,"version":"31231","remarks":"3123123"}
+2018-01-23 19:02:19,049 - ProjectController - 1372 - INFO - addProject - {"name":"","userName":"","userId":0,"version":"","remarks":""}
+2018-01-23 19:03:17,214 - ProjectController - 8492 - INFO - addProject - {"name":"","userName":"","userId":0,"version":"","remarks":""}
+2018-01-23 19:04:01,282 - ProjectController - 8768 - INFO - addProject - {"name":"","userName":"","userId":0,"version":"","remarks":""}
+2018-01-23 19:04:12,573 - ProjectController - 6668 - INFO - addProject - {"name":"","userName":"","userId":0,"version":"","remarks":""}
+2018-01-23 19:05:16,299 - ProjectController - 5440 - INFO - addProject - {"name":"ddd","userName":"","userId":0,"version":"ddd","remarks":"ddd"}
+2018-01-23 19:05:27,967 - ProjectController - 2796 - INFO - addProject - {"name":"cxf","userName":"","userId":0,"version":"fsdf","remarks":"fsdfsd"}
+2018-01-23 19:09:18,538 - ProjectController - 8492 - INFO - addProject - {"name":"","userName":"","userId":0,"version":"","remarks":""}
+2018-01-23 19:10:28,582 - ProjectController - 8768 - ERROR - execute_get - Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\controller\ProjectController.py", line 52, in execute_get
+    self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
+KeyError: u'addProject'
+
+2018-01-23 19:11:19,986 - ProjectController - 9168 - ERROR - execute_get - Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\controller\ProjectController.py", line 52, in execute_get
+    self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
+KeyError: u'addProject'
+
+2018-01-23 19:18:59,845 - ProjectController - 6668 - INFO - addProject - {"name":"dasda","userName":"","userId":0,"version":"dasd","remarks":"dasda"}

@@ -77,3 +77,13 @@ MissingArgumentError: HTTP 400: Bad Request (Missing argument task_name)
     self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
 KeyError: u'addProject'
 
+2018-01-23 19:10:28,582 - ProjectController - 8768 - ERROR - execute_get - Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\controller\ProjectController.py", line 52, in execute_get
+    self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
+KeyError: u'addProject'
+
+2018-01-23 19:11:19,986 - ProjectController - 9168 - ERROR - execute_get - Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\controller\ProjectController.py", line 52, in execute_get
+    self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
+KeyError: u'addProject'
+
