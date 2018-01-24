@@ -47,6 +47,7 @@ class ProjectHandler(tornado.web.RequestHandler):
             tasks = {
                 'getProjectInfoByName' : lambda : self.getProjectInfoByName(),
                 'getProjectInfoById': lambda: self.getProjectInfoById(),
+                'getProjectList':lambda :self.getProjectList(),
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -99,8 +100,11 @@ class ProjectHandler(tornado.web.RequestHandler):
         return ProjectService().getProjectInfoByName(name)
 
     def getProjectInfoById(self):
-        name= self.get_argument("name")
-        return ProjectService().getProjectInfoById(name)
+        projectId= self.get_argument("projectId")
+        return ProjectService().getProjectInfoById(projectId)
+
+    def getProjectList(self):
+        return ProjectService().getProjectList()
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def deleteProject(self):

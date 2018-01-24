@@ -37,3 +37,7 @@ class ProjectService(object):
         args.setdefault("projectId",projectId)
         return self.ProjectDaoInterface.getProjectInfoById(args)
 
+    @AdminDecoratorServer.execImplDecorator()
+    def getProjectList(self):
+        return self.ProjectDaoInterface.getProjectList()
+

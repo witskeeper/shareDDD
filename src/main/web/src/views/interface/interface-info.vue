@@ -1,13 +1,34 @@
 <template>
-    <Tree :data="data5" :render="renderContent"></Tree>
+    <div>
+        <Row type="flex" class="height-100">
+            <Col span="8">
+                <i-button type="success" @click="addInterface" style="margin-top-10">新增接口</i-button>
+                <i-button type="success">导入接口</i-button>
+            </Col>
+        </Row>
+        <Row class="margin-top-20">
+            <Col span="6">
+                <Card>
+                    <Tree :data="groupData" :render="renderContent" style="width:260px"></Tree>
+                </Card>
+            </Col>
+            <Col span="18" class="padding-left-10">
+                <Card>
+                    <div >
+                        <Table border :columns="lsitColumns" :data="list" @on-row-click="onRowClick"></Table>
+                    </div>
+                </Card>
+            </Col>
+        </Row>
+    </div>
 </template>
 <script>
     export default {
         data () {
             return {
-                data5: [
+                groupData: [
                     {
-                        title: 'parent 1',
+                        title: 'rowData.Name',
                         expand: true,
                         render: (h, { root, node, data }) => {
                             return h('span', {
@@ -56,24 +77,6 @@
                                 children: [
                                     {
                                         title: 'leaf 1-1-1',
-                                        expand: true
-                                    },
-                                    {
-                                        title: 'leaf 1-1-2',
-                                        expand: true
-                                    }
-                                ]
-                            },
-                            {
-                                title: 'child 1-2',
-                                expand: true,
-                                children: [
-                                    {
-                                        title: 'leaf 1-2-1',
-                                        expand: true
-                                    },
-                                    {
-                                        title: 'leaf 1-2-1',
                                         expand: true
                                     }
                                 ]
@@ -131,6 +134,18 @@
                             on: {
                                 click: () => { this.remove(root, node, data) }
                             }
+                        }),
+                        h('Button', {
+                            props: {
+                                type: 'text',
+                                icon: 'edit'
+                            },
+                            on: {
+                                click: (event) => {
+                                    this.data = true;
+                                    this.data = JSON.parse(JSON.stringify(this.data));
+                                }
+                            }
                         })
                     ])
                 ]);
@@ -148,7 +163,18 @@
                 const parent = root.find(el => el.nodeKey === parentKey).node;
                 const index = parent.children.indexOf(data);
                 parent.children.splice(index, 1);
+            },
+            groupData () {
+                axios.get("http://localhost:8090/v1/group/getGroupInfoByProjectId").then((res)=>{
+                console.log(res)
+                if(res.data.success){
+                    this.list = res.data.message;
+                }else{
+                    this.$Message.error("失败")
+                }
             }
+            )
+        },
         }
     }
 </script>

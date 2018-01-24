@@ -39,9 +39,14 @@ class ProjectSQLMapper:
         getProjectInfoByIdSQL="""
         select * from project where id = %(projectId)s
         """
+        getProjectListSQL="""
+        select * from project
+        """
+
         #SET SQL FOR DAO
         self.data.setdefault("addProject",addProjectSQL)
         self.data.setdefault("getProjectInfoByName",getProjectInfoByNameSQL)
         self.data.setdefault("deleteProject",deleteProjectSQL)
         self.data.setdefault("getProjectInfoById",getProjectInfoByIdSQL)
+        self.data.setdefault("getProjectList", getProjectListSQL)
 

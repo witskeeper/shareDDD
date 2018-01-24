@@ -30,25 +30,26 @@ export default {
     data () {
         return {
             lsitColumns: [
+
                     {
-                        title: 'create_username',
-                        key: 'create_username'
-                    },
-                    {
-                        title: 'name',
+                        title: '项目名称',
                         key: 'name'
                     },
                     {
-                        title: 'gmt_modify',
+                        title: '项目描述',
+                        key: 'remarks'
+                    },
+                    {
+                        title: '编辑时间',
                         key: 'gmt_modify'
                     },
                     {
-                        title: 'version',
+                        title: '版本信息',
                         key: 'version'
                     },
                     {
-                        title: 'remarks',
-                        key: 'remarks'
+                        title: '创建人',
+                        key: 'create_username'
                     },
                     {
                         title: '操作',
@@ -102,7 +103,7 @@ export default {
                 this.$router.push({path:"/interface/interface-info",query:{projectId:rowData.id}})
         },
         getData () {
-                axios.get("http://localhost:8090/v1/project/getProjectInfoByName?name=SchoolpalShow").then((res)=>{
+                axios.get("http://localhost:8090/v1/project/getProjectList").then((res)=>{
                 console.log(res)
                 if(res.data.success){
                     this.list = res.data.message;

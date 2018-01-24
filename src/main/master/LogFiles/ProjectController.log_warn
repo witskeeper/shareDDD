@@ -87,3 +87,13 @@ KeyError: u'addProject'
     self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
 KeyError: u'addProject'
 
+2018-01-24 15:54:54,493 - ProjectController - 8836 - ERROR - execute_get - Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\controller\ProjectController.py", line 52, in execute_get
+    self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
+KeyError: u'getProjectList'
+
+2018-01-24 15:56:48,313 - ProjectController - 8256 - ERROR - execute_get - Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\controller\ProjectController.py", line 52, in execute_get
+    self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
+KeyError: u'getProjectList'
+

@@ -254,3 +254,4 @@ IntegrityError: (1062, "Duplicate entry '' for key 'name'")
     raise errorclass, errorvalue
 IntegrityError: (1062, "Duplicate entry '' for key 'name'")
 
+2018-01-24 16:01:20,092 - dbBaseHelper - 10884 - ERROR - read - sql params [<src.main.master.service.impl.ProjectServiceImpl.ProjectService object at 0x036B47F0>] type is error,must be dict
