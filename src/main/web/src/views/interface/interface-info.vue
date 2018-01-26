@@ -28,7 +28,7 @@
             return {
                 groupData: [
                     {
-                        title: 'rowData.Name',
+                        title: "parents",
                         expand: true,
                         render: (h, { root, node, data }) => {
                             return h('span', {
@@ -87,7 +87,62 @@
                 buttonProps: {
                     type: 'ghost',
                     size: 'small',
-                }
+                },
+                lsitColumns: [
+
+                    {
+                        title: '接口名称',
+                        key: 'name'
+                    },
+                    {
+                        title: '接口地址',
+                        key: 'url'
+                    },
+                    {
+                        title: '编辑时间',
+                        key: 'gmt_modify'
+                    },
+                    {
+                        title: '编辑人',
+                        key: 'create_username'
+                    },
+                    {
+                        title: '操作',
+                        key: 'action',
+                        width: 150,
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.show(params.index)
+                                        }
+                                    }
+                                }, '编辑'),
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.remove(params.index)
+                                        }
+                                    }
+                                }, '删除')
+                            ]);
+                        }
+                    }
+            ],
+                list:[],
             }
         },
         methods: {
@@ -172,9 +227,30 @@
                 }else{
                     this.$Message.error("失败")
                 }
-            }
-            )
-        },
+            })
+            },
+            getData () {
+                axios.get("http://localhost:8090/v1/interface/getInterfaceInfosByProject",this.getInterfaceListData).then((res)=>{
+                console.log(res)
+                if(res.data.success){
+                    this.list = res.data.message;
+                }else{
+                    this.$Message.error("失败")
+                }
+            })
+            this.getInterfaceListData = {
+                projectId:"",
+                groupId:""
+            };
+            },
+            addInterface(index){
+
+                this.$router.push({path:"/interface/interface-edit",query:{interfaceId:""}})
+            },
+            onRowClick(rowData,index){
+                console.log(rowData)
+                this.$router.push({path:"/interface/interface-edit",query:{interfaceId:rowData.id}})
+            },
         }
     }
 </script>
