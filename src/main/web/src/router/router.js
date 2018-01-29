@@ -62,7 +62,9 @@ export const otherRouter = {
         { path: 'shopping', title: '购物详情', name: 'shopping', component: resolve => { require(['@/views/advanced-router/component/shopping-info.vue'], resolve); } }, // 用于展示带参路由
         { path: 'message', title: '消息中心', name: 'message_index', component: resolve => { require(['@/views/message/message.vue'], resolve); } },
         { path: 'interface/interface-info', title: '项目详情', name: 'interface-info', component: resolve => { require(['@/views/interface/interface-info.vue'], resolve); } },
-        { path: 'interface/interface-edit', title: '编辑接口', name: 'interface-edit', component: resolve => { require(['@/views/interface/interface-edit.vue'], resolve); } }
+        { path: 'interface/interface-edit', title: '编辑接口', name: 'interface-edit', component: resolve => { require(['@/views/interface/interface-edit.vue'], resolve); } },
+        { path: 'testcase/test-collection/case-list', title: '用例列表', name: 'case-list', component: resolve => { require(['@/views/testcase/test-collection/case-list.vue'], resolve); } },
+        { path: 'testcase/test-collection/case-edit', title: '用例编辑', name: 'case-edit', component: resolve => { require(['@/views/testcase/test-collection/case-edit.vue'], resolve); } }
     ]
 };
 
@@ -102,7 +104,7 @@ export const appRouter = [
                 path: 'test-collection',
                 icon: 'compose',
                 name: 'test-collection',
-                title: '用例列表',
+                title: '用例集',
                 component: resolve => { require(['@/views/testcase/test-collection/test-collection.vue'], resolve); }
             },
             {

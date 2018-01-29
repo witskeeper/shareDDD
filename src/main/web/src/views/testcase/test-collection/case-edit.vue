@@ -9,50 +9,57 @@
             <Col span="18">
                 <Card>
                     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+                        <FormItem label="Desc" prop="desc">
+                            <Input v-model="formValidate.desc" placeholder="Enter case desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}"></Input>
+                        </FormItem>
                         <FormItem label="Name" prop="name">
-                            <Input v-model="formValidate.name" placeholder="Enter your name"></Input>
+                            <Input v-model="formValidate.name" placeholder="Enter case name"></Input>
                         </FormItem>
-                        <FormItem label="E-mail" prop="mail">
-                            <Input v-model="formValidate.mail" placeholder="Enter your e-mail"></Input>
+                        <FormItem >
+                            <Button type="primary" @click="selectInterface" >select Interface </Button>
                         </FormItem>
-                        <FormItem label="City" prop="city">
-                            <Select v-model="formValidate.city" placeholder="Select your city">
-                                <Option value="beijing">New York</Option>
-                                <Option value="shanghai">London</Option>
-                                <Option value="shenzhen">Sydney</Option>
-                            </Select>
-                        </FormItem>
-                        <FormItem label="Date">
+                        <FormItem label="Url">
                             <Row>
-                                <Col span="11">
-                                    <FormItem prop="date">
-                                        <DatePicker type="date" placeholder="Select date" v-model="formValidate.date"></DatePicker>
+                                <Col span="2">
+                                    <FormItem prop="method">
+                                        <Select v-model="formValidate.method" placeholder="Get">
+                                            <Option value="Get">Get</Option>
+                                            <Option value="Post">Post</Option>
+                                        </Select>
                                     </FormItem>
                                 </Col>
-                                <Col span="2" style="text-align: center">-</Col>
                                 <Col span="11">
-                                    <FormItem prop="time">
-                                        <TimePicker type="time" placeholder="Select time" v-model="formValidate.time"></TimePicker>
+                                    <FormItem prop="path">
+                                        <Input v-model="formValidate.path" placeholder="Enter Request path"></Input>
                                     </FormItem>
                                 </Col>
                             </Row>
                         </FormItem>
-                        <FormItem label="Gender" prop="gender">
-                            <RadioGroup v-model="formValidate.gender">
-                                <Radio label="male">Male</Radio>
-                                <Radio label="female">Female</Radio>
-                            </RadioGroup>
+                        <FormItem label="Params" prop="params">
+                            <Input v-model="formValidate.params" type="textarea" :autosize="{minRows: 2,maxRows: 100}"></Input>
                         </FormItem>
-                        <FormItem label="Hobby" prop="interest">
-                            <CheckboxGroup v-model="formValidate.interest">
-                                <Checkbox label="Eat"></Checkbox>
-                                <Checkbox label="Sleep"></Checkbox>
-                                <Checkbox label="Run"></Checkbox>
-                                <Checkbox label="Movie"></Checkbox>
-                            </CheckboxGroup>
+                        <FormItem
+                                v-for="(item, index) in formDynamic.items"
+                                v-if="item.status"
+                                :key="index"
+                                :label="'Item ' + item.index"
+                                :prop="'items.' + index + '.value'"
+                                :rules="{required: true, message: 'Item ' + item.index +' can not be empty', trigger: 'blur'}">
+                            <Row>
+                                <Col span="18">
+                                    <Input type="text" v-model="item.value" placeholder="Enter something..."></Input>
+                                </Col>
+                                <Col span="4" offset="1">
+                                    <Button type="ghost" @click="handleRemove(index)">Delete</Button>
+                                </Col>
+                            </Row>
                         </FormItem>
-                        <FormItem label="Desc" prop="desc">
-                            <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+                        <FormItem>
+                            <Row>
+                                <Col span="12">
+                                    <Button type="dashed" long @click="handleAdd" icon="plus-round">Add item</Button>
+                                </Col>
+                            </Row>
                         </FormItem>
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
@@ -203,6 +210,17 @@ export default {
             addingNewTag: false, // 添加新标签
             newTagName: '', // 新建标签名
 
+            index: 1,
+            formDynamic: {
+                items: [
+                    {
+                        value: '',
+                        index: 1,
+                        status: 1
+                    }
+                ]
+            },
+
             formValidate: {
                     name: '',
                     mail: '',
@@ -345,6 +363,19 @@ export default {
         handleSelectTag () {
             localStorage.tagsList = JSON.stringify(this.articleTagSelected); // 本地存储文章标签列表
         },
+
+        handleAdd () {
+            this.index++;
+            this.formDynamic.items.push({
+                value: '',
+                index: this.index,
+                status: 1
+            });
+        },
+        handleRemove (index) {
+            this.formDynamic.items[index].status = 0;
+        },
+
         handleSubmit (name) {
             this.$refs[name].validate((valid) => {
                 if (valid) {
@@ -356,6 +387,9 @@ export default {
         },
         handleReset (name) {
             this.$refs[name].resetFields();
+        },
+        selectInterface(){
+
         }
     },
     mounted () {
