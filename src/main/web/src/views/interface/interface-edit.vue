@@ -83,9 +83,8 @@
 </template>
 
 <script>
-import tinymce from 'tinymce';
 export default {
-    name: 'artical-publish',
+    name: 'interface-edit',
     data () {
         return {
             interfaceStateList: [{value: '正常'}, {value: '废弃'}],

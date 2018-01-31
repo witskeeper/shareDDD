@@ -15,7 +15,13 @@
                         <FormItem label="Name" prop="name">
                             <Input v-model="formValidate.name" placeholder="Enter case name"></Input>
                         </FormItem>
-                        <FormItem >
+                        <FormItem label="Type" prop="type">
+                            <RadioGroup v-model="formValidate.type">
+                                <Radio label="api">API</Radio>
+                                <Radio label="sql">SQL</Radio>
+                            </RadioGroup>
+                        </FormItem>
+                        <FormItem>
                             <Button type="primary" @click="selectInterface" >select Interface </Button>
                         </FormItem>
                         <FormItem label="Url">
@@ -35,21 +41,37 @@
                                 </Col>
                             </Row>
                         </FormItem>
+                        <FormItem label="Header" prop="header">
+                            <Input v-model="formValidate.header" type="textarea" :autosize="{minRows: 1,maxRows: 10}"></Input>
+                        </FormItem>
                         <FormItem label="Params" prop="params">
                             <Input v-model="formValidate.params" type="textarea" :autosize="{minRows: 2,maxRows: 100}"></Input>
                         </FormItem>
                         <FormItem
-                                v-for="(item, index) in formDynamic.items"
+                                v-for="(item, index) in formValidate.items"
                                 v-if="item.status"
                                 :key="index"
-                                :label="'Item ' + item.index"
-                                :prop="'items.' + index + '.value'"
-                                :rules="{required: true, message: 'Item ' + item.index +' can not be empty', trigger: 'blur'}">
-                            <Row>
-                                <Col span="18">
-                                    <Input type="text" v-model="item.value" placeholder="Enter something..."></Input>
+                                :label="'Assert ' + item.index"
+                                :prop="'items.' + index + '.actual'"
+                                :rules="{required: true, message: 'Assert ' + item.index +' can not be empty', trigger: 'blur'}">
+                            <Row :gutter="10">
+                                <Col span="8">
+                                    <Input type="text" v-model="item.actual" placeholder="Enter actual..."></Input>
                                 </Col>
-                                <Col span="4" offset="1">
+                                <Col span="2">
+                                    <FormItem prop="rules">
+                                        <Select v-model="item.rules" placeholder="=">
+                                            <Option value="=">=</Option>
+                                            <Option value="!=">!=</Option>
+                                            <Option value="<"><</Option>
+                                            <Option value=">">></Option>
+                                        </Select>
+                                    </FormItem>
+                                </Col>
+                                <Col span="8">
+                                    <Input type="text" v-model="item.expect" placeholder="Enter expect..."></Input>
+                                </Col>
+                                <Col span="2" offset="1">
                                     <Button type="ghost" @click="handleRemove(index)">Delete</Button>
                                 </Col>
                             </Row>
@@ -57,7 +79,30 @@
                         <FormItem>
                             <Row>
                                 <Col span="12">
-                                    <Button type="dashed" long @click="handleAdd" icon="plus-round">Add item</Button>
+                                    <Button type="dashed" long @click="handleAdd" icon="plus-round">Add Assert</Button>
+                                </Col>
+                            </Row>
+                        </FormItem>
+                        <FormItem
+                                v-for="(itemPre, indexPre) in formValidate.itemsPre"
+                                v-if="itemPre.statusPre"
+                                :key="indexPre"
+                                :label="'PreStep ' + itemPre.indexPre"
+                                :prop="'itemsPre.' + indexPre + '.valuePre'"
+                                :rules="{required: true, message: 'Item ' + itemPre.indexPre +' can not be empty', trigger: 'blur'}">
+                            <Row>
+                                <Col span="18">
+                                    <Input type="text" v-model="itemPre.valuePre" placeholder="Enter something..."></Input>
+                                </Col>
+                                <Col span="4" offset="1">
+                                    <Button type="ghost" @click="handleRemovePre(indexPre)">Delete</Button>
+                                </Col>
+                            </Row>
+                        </FormItem>
+                        <FormItem>
+                            <Row>
+                                <Col span="12">
+                                    <Button type="dashed" long @click="handleAddPre" icon="plus-round">Add PreStep</Button>
                                 </Col>
                             </Row>
                         </FormItem>
@@ -211,54 +256,44 @@ export default {
             newTagName: '', // 新建标签名
 
             index: 1,
-            formDynamic: {
-                items: [
-                    {
-                        value: '',
-                        index: 1,
-                        status: 1
-                    }
-                ]
-            },
+            indexPre: 1,
 
             formValidate: {
+                    desc: '',
                     name: '',
-                    mail: '',
-                    city: '',
-                    gender: '',
-                    interest: [],
-                    date: '',
-                    time: '',
-                    desc: ''
+                    type:'',
+                    method: '',
+                    path: '',
+                    header: '',
+                    params: '',
+                    items: [
+                        {
+                            actual: '',
+                            expect: '',
+                            rules: '',
+                            index: 1,
+                            status: 1
+                        }
+                    ],
+                    itemsPre: [
+                        {
+                            valuePre: '',
+                            indexPre: 1,
+                            statusPre: 1
+                        }
+                    ]
                 },
             ruleValidate: {
                 name: [
                         { required: true, message: 'The name cannot be empty', trigger: 'blur' }
                     ],
-                mail: [
-                        { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
-                        { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
-                    ],
-                city: [
-                        { required: true, message: 'Please select the city', trigger: 'change' }
-                    ],
-                gender: [
-                        { required: true, message: 'Please select gender', trigger: 'change' }
-                    ],
-                interest: [
-                        { required: true, type: 'array', min: 1, message: 'Choose at least one hobby', trigger: 'change' },
-                        { type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change' }
-                    ],
-                date: [
-                        { required: true, type: 'date', message: 'Please select the date', trigger: 'change' }
-                    ],
-                time: [
-                        { required: true, type: 'date', message: 'Please select time', trigger: 'change' }
-                    ],
                 desc: [
                         { required: true, message: 'Please enter a personal introduction', trigger: 'blur' },
-                        { type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur' }
-                    ]
+                        { type: 'string', min: 10, message: 'Introduce no less than 10 words', trigger: 'blur' }
+                    ],
+                type: [
+                        { required: true, message: 'Please select type', trigger: 'change' }
+                    ],
                 }
         };
     },
@@ -366,15 +401,27 @@ export default {
 
         handleAdd () {
             this.index++;
-            this.formDynamic.items.push({
+            this.formValidate.items.push({
                 value: '',
                 index: this.index,
                 status: 1
             });
         },
         handleRemove (index) {
-            this.formDynamic.items[index].status = 0;
+            this.formValidate.items[index].status = 0;
         },
+
+        handleAddPre () {
+                this.indexPre++;
+                this.formValidate.itemsPre.push({
+                    valuePre: '',
+                    indexPre: this.indexPre,
+                    statusPre: 1
+                });
+            },
+        handleRemovePre (indexPre) {
+                this.formValidate.itemsPre[indexPre].statusPre = 0;
+            },
 
         handleSubmit (name) {
             this.$refs[name].validate((valid) => {

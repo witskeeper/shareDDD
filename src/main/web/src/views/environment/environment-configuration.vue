@@ -1,94 +1,152 @@
 <style lang="less">
-    @import './environment-configuration.less';
+    @import '../../styles/common.less';
 </style>
 
 <template>
     <div>
-        <Row>
-            <Card>
-                <p slot="title">
-                    <Icon type="ios-list"></Icon>
-                    环境列表
-                </p>
-                <Row type="flex" justify="center" align="middle" class="advanced-router">
-                    <Table :columns="shoppingColumns" :data="shoppingData" style="width: 100%;"></Table>
-                </Row>
-            </Card>
+        <Row type="flex" class="height-100">
+            <Col span="8">
+                <i-button type="success" @click="addProject" style="margin-top-10">添加环境</i-button>
+            </Col>
+        </Row>
+        <Row class="margin-top-10">
+            <Col>
+                <Card>
+                    <div>
+                        <Table border :columns="lsitColumns" :data="list" @on-row-click="onRowClick"></Table>
+                    </div>
+                </Card>
+            </Col>
         </Row>
     </div>
 </template>
 
 <script>
+import axios  from 'axios';
 export default {
-    name: 'argument-page',
+    name: 'interface-manage',
     data () {
         return {
-            shoppingColumns: [
-                {
-                    type: 'index',
-                    title: '序号',
-                    width: 60
-                },
-                {
-                    title: '环境名称',
-                    key: 'name',
-                    align: 'center'
-                },
-                {
-                    title: '编辑人',
-                    key: 'edit_user',
-                    align: 'center'
-                },
-                {
-                    title: '编辑时间',
-                    key: 'time'
-                },
-                {
-                    title: '操作',
-                    key: 'option',
-                    align: 'center',
-                    render: (h, params) => {
-                        return h('Button', {
+            lsitColumns: [
+
+                    {
+                        title: '环境名称',
+                        key: 'name'
+                    },
+                    {
+                        title: '创建人',
+                        key: 'create_username'
+                    },
+                    {
+                        title: '编辑时间',
+                        key: 'gmt_modify'
+                    },
+                    {
+                        title: '操作',
+                        key: 'action',
+                        width: 150,
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.show(params.index)
+                                        }
+                                    }
+                                }, '编辑'),
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.remove(params.index)
+                                        }
+                                    }
+                                }, '删除')
+                            ]);
+                        }
+                    }
+            ],
+            list:[],
+            addProjectData:{
+                    name:"",
+                    userName:"",
+                    userId:0
+            }
+        };
+    },
+    methods: {
+        onRowClick(rowData,index){
+                console.log(rowData)
+                this.$router.push({path:"/environment/environment-info",query:{environmentId:rowData.id}})
+        },
+        getData () {
+                axios.get("http://localhost:8090/v1/project/getProjectList").then((res)=>{
+                console.log(res)
+                if(res.data.success){
+                    this.list = res.data.message;
+                }else{
+                    this.$Message.error("失败")
+                }
+            }
+            )
+        },
+        addProject(){
+            this.$Modal.confirm({
+                onOk: () => {
+                       this.addProjectNet();
+                    },
+                    render: (h) => {
+                    return h('div',[
+                        h('Input', {
                             props: {
-                                type: 'text',
-                                size: 'small'
+                                value: this.addProjectData.name,
+                                autofocus: true,
+                                placeholder: '环境名称'
                             },
                             on: {
-                                click: () => {
-                                    let query = {name: params.row.name};
-                                    this.$router.push({
-                                        name: 'name',
-                                        query: query
-                                    });
+                                input: (val) => {
+                                    this.addProjectData.name = val;
                                 }
                             }
-                        }, '编辑');
-                    }
+                        }),
+                    ])
                 }
-            ],
-            shoppingData: [
-                {
-                    edit_user: 100001,
-                    name: 'ERP测试环境新库',
-                    time: '2017年11月12日'
-                },
-                {
-                    edit_user: 100002,
-                    name: 'ERP测试环境老库',
-                    time: '2017年11月5日'
-                },
-                {
-                    edit_user: 100003,
-                    name: 'SCP测试环境',
-                    time: '2017年11月8日'
-                },
-                {
-                    edit_user: 100004,
-                    name: 'SCP巡检环境',
-                    time: '2017年11月9日'
+            })
+        },
+        addProjectNet(){
+            axios.post("http://localhost:8090/v1/project/addProject",
+            this.addProjectData
+            ).then((res)=>{
+                //console.log(res)
+                if(res.data.success){
+                    this.$Message.success("成功");
+                    this.getData();
+
+                }else{
+                    this.$Message.error("失败")
                 }
-            ]
-        };
+            }
+            )
+            this.addProjectData = {
+                name:"",
+                userName:"",
+                userId:0
+            };
+        }
+    },
+    created () {
+        this.getData();
     }
 };
 </script>
