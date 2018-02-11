@@ -69,7 +69,8 @@ class ProjectHandler(tornado.web.RequestHandler):
         try:
             tasks = {
                 'addProject' : lambda : self.addProject(),
-                'deleteProject':lambda :self.deleteProject()
+                'deleteProject' :lambda :self.deleteProject(),
+                'editProject' : lambda :self.editProject()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -109,3 +110,6 @@ class ProjectHandler(tornado.web.RequestHandler):
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def deleteProject(self):
         return ProjectService().deleteProject(json.loads(self.request.body))
+
+    def editProject(self):
+        return ProjectService().editProject(json.loads(self.request.body))

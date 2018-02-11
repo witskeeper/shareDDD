@@ -37,7 +37,9 @@ class ProjectService(object):
         args.setdefault("projectId",projectId)
         return self.ProjectDaoInterface.getProjectInfoById(args)
 
+    def editProject(self,args):
+        return self.ProjectDaoInterface.editProject(args)
+
     @AdminDecoratorServer.execImplDecorator()
     def getProjectList(self):
         return self.ProjectDaoInterface.getProjectList()
-

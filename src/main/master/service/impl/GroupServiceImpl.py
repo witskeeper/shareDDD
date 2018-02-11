@@ -30,6 +30,9 @@ class GroupService(object):
         # dataResult.setSuccess(False)
         return dataResult
 
+    def editGroup(self,args):
+        return self.GroupDaoInterface.editGroup(args)
+
     @AdminDecoratorServer.execImplDecorator()
     def getGroupInfoByProjectId(self,projectId,type=0):
         args={}

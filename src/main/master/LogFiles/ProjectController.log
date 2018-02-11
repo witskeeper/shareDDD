@@ -115,3 +115,8 @@ KeyError: u'getProjectList'
     self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
 KeyError: u'getProjectList'
 
+2018-02-11 17:04:29,732 - ProjectController - 6740 - ERROR - execute_post - Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\controller\ProjectController.py", line 74, in execute_post
+    self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
+KeyError: u'editProject'
+

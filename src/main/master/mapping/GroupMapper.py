@@ -36,10 +36,16 @@ class GroupSQLMapper:
         getGroupInfoByNameSQL="""
         select * from group_info where projectid = %(projectId)s and type= %(type)s and name=%(name)s
         """
+        editGropSQL="""
+        update group_info set name=%(name)s where id=%(groupId)s
+        """
+
         #SET SQL FOR DAO
         self.data.setdefault("addGroup",addGroupSQL)
         self.data.setdefault("deleteGroup",deleteGroupSQL)
         self.data.setdefault("getGroupInfoByProjectId",getGroupInfoByProjectIdSQL)
         self.data.setdefault("getGroupInfoByName", getGroupInfoByNameSQL)
+        self.data.setdefault("editGroup",editGropSQL)
 
 
+    #group 需调整数据结构，添加父级和子级，详细修改方案结合前端页面修改

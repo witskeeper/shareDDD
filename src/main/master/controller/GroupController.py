@@ -57,7 +57,8 @@ class GroupHandler(tornado.web.RequestHandler):
         try:
             tasks = {
                 'addGroup' : lambda : self.addGroup(),
-                'deleteGroup':lambda :self.deleteGroup()
+                'deleteGroup':lambda :self.deleteGroup(),
+                'editGroup' : lambda :self.editGroup()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -84,3 +85,6 @@ class GroupHandler(tornado.web.RequestHandler):
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def deleteGroup(self):
         return GroupService().deleteGroup(json.loads(self.request.body))
+
+    def editGroup(self):
+        return GroupService().editGroup(json.loads(self.request.body))

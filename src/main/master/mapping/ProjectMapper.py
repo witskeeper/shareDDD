@@ -42,6 +42,9 @@ class ProjectSQLMapper:
         getProjectListSQL="""
         select * from project
         """
+        editProjectSQL="""
+        update project set name=%(name)s,remarks=%(remarks)s,gmt_create=now() where id = %(projectId)s
+        """
 
         #SET SQL FOR DAO
         self.data.setdefault("addProject",addProjectSQL)
@@ -49,4 +52,4 @@ class ProjectSQLMapper:
         self.data.setdefault("deleteProject",deleteProjectSQL)
         self.data.setdefault("getProjectInfoById",getProjectInfoByIdSQL)
         self.data.setdefault("getProjectList", getProjectListSQL)
-
+        self.data.setdefault("editProject", editProjectSQL)
