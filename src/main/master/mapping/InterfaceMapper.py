@@ -41,7 +41,7 @@ class InterfaceSQLMapper:
         insert into interface (name,url,create_userid,create_username,update_userid,update_username,describe,
         params,success_response,failure_response,method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
         values (%(name)s,%(url),%(create_userid)s,%(create_username)s,%(update_userid)s,%(update_username)s,%(describe)s,
-        s%(params)s,%(success_response)s,%(failure_response)s,%(method)s,%(format)s,%(response_type)s,%(status)s,
+        %(params)s,%(success_response)s,%(failure_response)s,%(method)s,%(format)s,%(response_type)s,%(status)s,
         %(remarks)s,%(projectid)s,%(groupid)s,now())
         """
         updateInterfaceItemSQL="""

@@ -658,3 +658,33 @@ ValueError: unsupported format character ',' (0x2c) at index 265
     for key, item in args.iteritems())
 ValueError: unsupported format character ',' (0x2c) at index 265
 
+2018-02-12 15:20:50,931 - dbBaseHelper - 9460 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,create_username,update_userid,update_username,describe,
+        params,success_response,failure_response,method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url),%(create_userid)s,%(create_username)s,%(update_userid)s,%(update_username)s,%(describe)s,
+        s%(params)s,%(success_response)s,%(failure_response)s,%(method)s,%(format)s,%(response_type)s,%(status)s,
+        %(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface1', u'format': 1, u'url': u'v1/interface/addInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+ValueError: unsupported format character ',' (0x2c) at index 265
+
+2018-02-12 15:47:31,825 - dbBaseHelper - 7600 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,create_username,update_userid,update_username,describe,
+        params,success_response,failure_response,method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url),%(create_userid)s,%(create_username)s,%(update_userid)s,%(update_username)s,%(describe)s,
+        %(params)s,%(success_response)s,%(failure_response)s,%(method)s,%(format)s,%(response_type)s,%(status)s,
+        %(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface1', u'format': 1, u'url': u'v1/interface/addInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+ValueError: unsupported format character ',' (0x2c) at index 265
+

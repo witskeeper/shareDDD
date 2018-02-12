@@ -1,6 +1,5 @@
 <style lang="less">
     @import '../../styles/common.less';
-    @import './components/table.less';
 </style>
 
 <template>
@@ -14,8 +13,13 @@
         <Row class="margin-top-10">
             <Col>
                 <Card>
-                    <div class="edittable-table-height-con">
-                        <Table border :columns="lsitColumns" :data="list" @on-row-click="onRowClick"></Table>
+                    <div>
+                        <can-edit-table
+                                    v-model="list"
+                                    @on-cell-change="handleCellChange"
+                                    :editIncell="true"
+                                    :columns-list="lsitColumns"
+                         ></can-edit-table>
                     </div>
                 </Card>
             </Col>
@@ -24,20 +28,25 @@
 </template>
 
 <script>
+import canEditTable from './canEditTable.vue';
 import axios  from 'axios';
 export default {
     name: 'interface-manage',
+    components: {
+        canEditTable
+    },
     data () {
         return {
             lsitColumns: [
-
                     {
                         title: '项目名称',
-                        key: 'name'
+                        key: 'name',
+                        editable: true
                     },
                     {
                         title: '项目描述',
-                        key: 'remarks'
+                        key: 'remarks',
+                        editable: true
                     },
                     {
                         title: '编辑时间',
@@ -68,10 +77,10 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.show(params.index)
+                                            this.onRowClick(params.index)
                                         }
                                     }
-                                }, '编辑'),
+                                }, '查看'),
                                 h('Button', {
                                     props: {
                                         type: 'error',
@@ -94,6 +103,9 @@ export default {
                     userId:0,
                     version:"",
                     remarks:""
+            },
+            removeProjectData:{
+                projectId:"",
             }
         };
     },
@@ -108,10 +120,33 @@ export default {
                 if(res.data.success){
                     this.list = res.data.message;
                 }else{
+                    this.$Message.error("获取数据失败")
+                }
+            }
+            )
+        },
+        handleCellChange (val, index, key) {
+            this.$Message.success('修改了第 ' + (index + 1) + ' 行列名为 ' + key + ' 的数据');
+        },
+        handleChange (val, index) {
+            this.$Message.success('修改了第' + (index + 1) + '行数据');
+        },
+        removeProject() {
+                axios.post("http://localhost:8090/v1/project/deleteProject",
+                this.removeProjectData).then((res)=>{
+                //console.log(res)
+                if(res.data.success){
+                    this.$Message.success("成功");
+                    this.getData();
+
+                }else{
                     this.$Message.error("失败")
                 }
             }
             )
+            this.removeProjectData = {
+                projectId:"",
+            };
         },
         addProject(){
             this.$Modal.confirm({

@@ -50,7 +50,7 @@ class DbBaseHelper(object):
                     self.data.setMessage("sql params type is error,must be list")
                     self.data.setSuccess(False)
                     return self.data
-            if self.args is not None and not isinstance(self.args,dict):
+            elif self.args is not None and not isinstance(self.args,dict):
                 logger.error("sql params [{0}] type is error,must be dict".format(self.args))
                 self.data.setMessage("sql params type is error,must be dict")
                 self.data.setSuccess(False)

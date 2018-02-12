@@ -96,7 +96,7 @@ export default {
                 if(res.data.success){
                     this.list = res.data.message;
                 }else{
-                    this.$Message.error("失败")
+                    this.$Message.error("获取数据失败")
                 }
             }
             )
