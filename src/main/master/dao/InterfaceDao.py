@@ -49,6 +49,8 @@ class InterfaceDaoInterface:
         #实例化
         logger.info(inspect.stack()[0][3])
         sql = InterfaceSQLMapper().getSQL(inspect.stack()[0][3])
+        # logger.error(sql)
+        # logger.error(args)
         daoOperate =DbBaseHelper(sql,args)
         return daoOperate.read()
 

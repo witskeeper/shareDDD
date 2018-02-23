@@ -35,7 +35,8 @@ class EnvironmentHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'getEnvironmentInfoById' : lambda : self.getEnvironmentInfoById()
+                'getEnvironmentInfoById' : lambda : self.getEnvironmentInfoById(),
+                'getEnvironmentInfos' : lambda : self.getEnvironmentInfos()
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -57,7 +58,8 @@ class EnvironmentHandler(tornado.web.RequestHandler):
         try:
             tasks = {
                 'addEnvironmentItem' : lambda : self.addEnvironmentItem(),
-                'deleteEnvironmentItem':lambda :self.deleteEnvironmentItem()
+                'deleteEnvironmentItem':lambda :self.deleteEnvironmentItem(),
+                'editEnvironmentItem' : lambda :self.editEnvironmentItem()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -83,3 +85,9 @@ class EnvironmentHandler(tornado.web.RequestHandler):
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def deleteEnvironmentItem(self):
         return EnvironmentService().deleteEnvironmentItem(json.loads(self.request.body))
+
+    def editEnvironmentItem(self):
+        return EnvironmentService().editEnvironmentItem(json.loads(self.request.body))
+
+    def getEnvironmentInfos(self):
+        return EnvironmentService().getEnvironmentInfos()

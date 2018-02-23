@@ -691,3 +691,365 @@ ValueError: unsupported format character ',' (0x2c) at index 265
     for key, item in args.iteritems())
 ValueError: unsupported format character ',' (0x2c) at index 265
 
+2018-02-23 10:16:51,062 - dbBaseHelper - 5668 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,create_username,update_userid,update_username,describe,
+        params,success_response,failure_response,method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url),%(create_userid)s,%(create_username)s,%(update_userid)s,%(update_username)s,%(describe)s,
+        %(params)s,%(success_response)s,%(failure_response)s,%(method)s,%(format)s,%(response_type)s,%(status)s,
+        %(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface1', u'format': 1, u'url': u'v1/interface/addInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+ValueError: unsupported format character ',' (0x2c) at index 265
+
+2018-02-23 10:34:07,286 - dbBaseHelper - 5668 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,create_username,update_userid,update_username,describe,
+        params,success_response,failure_response,method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url),%(create_userid)s,%(create_username)s,%(update_userid)s,%(update_username)s,%(describe)s,
+        %(params)s,%(success_response)s,%(failure_response)s,%(method)s,%(format)s,%(response_type)s,%(status)s,
+        %(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface1', u'format': 1, u'url': u'v1/interface/addInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+ValueError: unsupported format character ',' (0x2c) at index 265
+
+2018-02-23 10:59:00,427 - dbBaseHelper - 6516 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,create_username,update_userid,update_username,describe,
+        params,success_response,failure_response,method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url)s,%(create_userid)s,%(create_username)s,%(update_userid)s,%(update_username)s,%(describe)s,
+        %(params)s,%(success_response)s,%(failure_response)s,%(method)s,%(format)s,%(response_type)s,%(status)s,
+        %(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface1', u'format': 1, u'url': u'v1/interface/addInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'create_username'
+
+2018-02-23 11:03:20,405 - dbBaseHelper - 6516 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,create_username,update_userid,update_username,describe,
+        params,success_response,failure_response,method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url)s,%(create_userid)s,%(create_username)s,%(update_userid)s,%(update_username)s,%(describe)s,
+        %(params)s,%(success_response)s,%(failure_response)s,%(method)s,%(format)s,%(response_type)s,%(status)s,
+        %(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'create_username': u'jessica', u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface1', u'format': 1, u'url': u'v1/interface/addInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'status': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'update_userid'
+
+2018-02-23 11:03:55,921 - dbBaseHelper - 844 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,create_username,update_userid,update_username,describe,
+        params,success_response,failure_response,method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url)s,%(create_userid)s,%(create_username)s,%(update_userid)s,%(update_username)s,%(describe)s,
+        %(params)s,%(success_response)s,%(failure_response)s,%(method)s,%(format)s,%(response_type)s,%(status)s,
+        %(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'create_username': u'jessica', u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface1', u'format': 1, u'url': u'v1/interface/addInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'status': 1, u'params': {u'id': 1}, u'update_username': u'', u'projectid': 1, u'remarks': u'remarks', u'response_type': 0, u'create_userid': 1, u'method': 1, u'update_userid': u''} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'describe,\n        params,success_response,failure_response,method,format,respons' at line 1")
+
+2018-02-23 11:10:22,305 - dbBaseHelper - 6516 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,create_username,update_userid,update_username,describe,params,success_response,failure_response,method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url)s,%(create_userid)s,%(create_username)s,%(update_userid)s,%(update_username)s,%(describe)s,%(params)s,%(success_response)s,%(failure_response)s,%(method)s,%(format)s,%(response_type)s,%(status)s,%(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'create_username': u'jessica', u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface1', u'format': 1, u'url': u'v1/interface/addInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'status': 1, u'params': {u'id': 1}, u'update_username': u'', u'projectid': 1, u'remarks': u'remarks', u'response_type': 0, u'create_userid': 1, u'method': 1, u'update_userid': u''} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'describe,params,success_response,failure_response,method,format,response_type,st' at line 1")
+
+2018-02-23 11:11:50,296 - dbBaseHelper - 7124 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,create_username,update_userid,update_username,describe,params,success_response,failure_response,method,format,response_type,status,remarks,projectid,groupid,gmt_create) values (%(name)s,%(url)s,%(create_userid)s,%(create_username)s,%(update_userid)s,%(update_username)s,%(describe)s,%(params)s,%(success_response)s,%(failure_response)s,%(method)s,%(format)s,%(response_type)s,%(status)s,%(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'create_username': u'jessica', u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface1', u'format': 1, u'url': u'v1/interface/addInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'status': 1, u'params': {u'id': 1}, u'update_username': u'', u'projectid': 1, u'remarks': u'remarks', u'response_type': 0, u'create_userid': 1, u'method': 1, u'update_userid': u''} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'describe,params,success_response,failure_response,method,format,response_type,st' at line 1")
+
+2018-02-23 14:32:11,801 - dbBaseHelper - 8668 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,interface_describe,params,success_response,failure_response,
+        method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url),%(create_userid)s,%(describe)s,%(params)s,%(success_response)s,%(failure_response)s,
+        %(method)s,%(format)s,%(response_type)s,%(status)s,%(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface2', u'format': 1, u'url': u'v1/interface/updateInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+ValueError: unsupported format character ',' (0x2c) at index 229
+
+2018-02-23 14:34:19,339 - dbBaseHelper - 9732 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,interface_describe,params,success_response,failure_response,
+        method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url)s,%(create_userid)s,%(describe)s,%(params)s,%(success_response)s,%(failure_response)s,
+        %(method)s,%(format)s,%(response_type)s,%(status)s,%(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface2', u'format': 1, u'url': u'v1/interface/updateInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': \'1\'},{u\'success\': "\'true\'", u\'statusCode\': \'0\'},{u\'success\': "\'false\'", u\'stat\' at line 3')
+
+2018-02-23 14:42:19,355 - dbBaseHelper - 7388 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,interface_describe,params,success_response,failure_response,
+        method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url)s,%(create_userid)s,%(describe)s,%(params)s,%(success_response)s,%(failure_response)s,
+        %(method)s,%(format)s,%(response_type)s,%(status)s,%(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface2', u'format': 1, u'url': u'v1/interface/updateInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': \'1\'},{u\'success\': "\'true\'", u\'statusCode\': \'0\'},{u\'success\': "\'false\'", u\'stat\' at line 3')
+
+2018-02-23 14:48:40,003 - dbBaseHelper - 7340 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,interface_describe,params,success_response,failure_response,
+        method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url)s,%(create_userid)s,%(describe)s,%(params)s,%(success_response)s,%(failure_response)s,
+        %(method)s,%(format)s,%(response_type)s,%(status)s,%(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface2', u'format': 1, u'url': u'v1/interface/updateInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': \'1\'},{u\'success\': "\'true\'", u\'statusCode\': \'0\'},{u\'success\': "\'false\'", u\'stat\' at line 3')
+
+2018-02-23 14:56:55,849 - dbBaseHelper - 10056 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,interface_describe,params,success_response,failure_response,
+        method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url)s,%(create_userid)s,%(describe)s,%(params)s,%(success_response)s,%(failure_response)s,
+        %(method)s,%(format)s,%(response_type)s,%(status)s,%(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface2', u'format': 1, u'url': u'v1/interface/updateInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': \'1\'},{u\'success\': "\'true\'", u\'statusCode\': \'0\'},{u\'success\': "\'false\'", u\'stat\' at line 3')
+
+2018-02-23 15:04:34,009 - dbBaseHelper - 9616 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,interface_describe,params,success_response,failure_response,
+        method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url)s,%(create_userid)s,%(describe)s,%(params)s,%(success_response)s,%(failure_response)s,
+        %(method)s,%(format)s,%(response_type)s,%(status)s,%(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface2', u'format': 1, u'url': u'v1/interface/updateInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': \'1\'},{u\'success\': "\'true\'", u\'statusCode\': \'0\'},{u\'success\': "\'false\'", u\'stat\' at line 3')
+
+2018-02-23 15:06:59,805 - dbBaseHelper - 8768 - ERROR - write - write sql:
+        insert into interface (name,url,create_userid,interface_describe,params,success_response,failure_response,
+        method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        values (%(name)s,%(url)s,%(create_userid)s,%(describe)s,%(params)s,%(success_response)s,%(failure_response)s,
+        %(method)s,%(format)s,%(response_type)s,%(status)s,%(remarks)s,%(projectid)s,%(groupid)s,now())
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'interface2', u'format': 1, u'url': u'v1/interface/updateInterfaceItem', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'describe': u'the first interface', u'groupid': 1, u'params': {u'id': 1}, u'response_type': 0, u'projectid': 1, u'remarks': u'remarks', u'create_userid': 1, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': \'1\'},{u\'success\': "\'true\'", u\'statusCode\': \'0\'},{u\'success\': "\'false\'", u\'stat\' at line 3')
+
+2018-02-23 16:17:20,979 - dbBaseHelper - 6508 - ERROR - read - sql params [5] type is error,must be dict
+2018-02-23 16:17:51,953 - dbBaseHelper - 6508 - ERROR - read - select sql:
+        select * from interface where id = %(apiId)s
+         args:None Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 30, in read
+    ret = db.read(self.sql,self.args)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%(apiId)s' at line 1")
+
+2018-02-23 16:18:14,301 - dbBaseHelper - 10184 - ERROR - read - sql params [5] type is error,must be dict
+2018-02-23 16:22:12,042 - dbBaseHelper - 6508 - ERROR - read - sql params [5] type is error,must be dict
+2018-02-23 16:22:17,832 - dbBaseHelper - 8400 - ERROR - read - sql params [6] type is error,must be dict
+2018-02-23 16:34:16,642 - dbBaseHelper - 10008 - ERROR - read - sql params [6] type is error,must be dict
+2018-02-23 16:35:54,676 - dbBaseHelper - 10660 - ERROR - read - sql params [6] type is error,must be dict
+2018-02-23 16:38:39,151 - dbBaseHelper - 11104 - ERROR - read - sql params [6] type is error,must be dict
+2018-02-23 16:41:37,305 - dbBaseHelper - 10256 - ERROR - read - sql params [6] type is error,must be dict
+2018-02-23 16:41:37,305 - dbBaseHelper - 10256 - ERROR - write - write sql:
+        update interface set name=%(name)s,url=%(url)s,update_userid=%(userId)s,interface_describe=%(describe)s,
+        params=%(params)s,success_response=%(success_response)s,failure_response=%(failure_response)s,method=%(method)s,
+        format=%(format)s,response_type=%(response_type)s,status=%(status)s,remarks=%(remarks)s) where id =%(apiId)s
+         args:{u'status': 1, u'success_response': {u'success': u'true', u'statusCode': 0}, u'name': u'updateupdate', u'format': 1, u'url': u'v1/interface/updateInter', u'apiId': 6, u'describe': u'the first dfaert', u'userId': 1, u'params': {u'id': 1}, u'response_type': 0, u'remarks': u'remarks', u'failure_response': {u'success': u'false', u'statusCode': 0}, u'method': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': \'1\'},success_response={u\'success\': "\'true\'", u\'statusCode\': \'0\'},failure_respo\' at line 2')
+
+2018-02-23 16:48:12,312 - dbBaseHelper - 10792 - ERROR - read - select sql:
+        select * from interface where projectid=%(projectId)s and groupid=%(groupId)s 
+        order by id desc limit %(offset)s,%(limit)s
+         args:{'projectId': u'1', 'limit': u'10', 'groupId': u'1', 'offset': u'1'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 30, in read
+    ret = db.read(self.sql,self.args)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1','10'' at line 2")
+
+2018-02-23 16:48:28,734 - dbBaseHelper - 11184 - ERROR - read - select sql:
+        select * from interface where projectid=%(projectId)s and groupid=%(groupId)s 
+        order by id desc limit %(offset)s,%(limit)s
+         args:{'projectId': u'1', 'limit': u'3', 'groupId': u'1', 'offset': u'1'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 30, in read
+    ret = db.read(self.sql,self.args)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1','3'' at line 2")
+
+2018-02-23 16:49:32,075 - dbBaseHelper - 8764 - ERROR - read - select sql:
+        select * from interface where projectid=%(projectId)s and groupid=%(groupId)s 
+        order by id desc limit %(offset)s,%(limit)s
+         args:{'projectId': u'1', 'limit': u'5', 'groupId': u'1', 'offset': u'1'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 30, in read
+    ret = db.read(self.sql,self.args)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1','5'' at line 2")
+
+2018-02-23 17:03:18,851 - dbBaseHelper - 6320 - ERROR - read - select sql:
+        select * from interface where projectid=%(projectId)s and groupid=%(groupId)s 
+        order by id desc limit %(offset)s,%(limit)s
+         args:{'projectId': u'1', 'limit': u'5', 'groupId': u'1', 'offset': u'1'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 30, in read
+    ret = db.read(self.sql,self.args)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1','5'' at line 2")
+
+2018-02-23 17:06:31,395 - dbBaseHelper - 8484 - ERROR - read - select sql:
+        select * from interface where projectid=%(projectId)s and groupid=%(groupId)s 
+        order by id desc limit %(offset)s,%(limit)s
+         args:{'projectId': u'1', 'limit': u'5', 'groupId': u'1', 'offset': u'1'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 30, in read
+    ret = db.read(self.sql,self.args)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1','5'' at line 2")
+
+2018-02-23 18:21:04,298 - dbBaseHelper - 11880 - ERROR - write - write sql:
+        insert into environment (name,url,create_userid,datatemplate,dbname,dbhostname,dbport,dbusername,dbpasswd,gmt_create) 
+        values (%(name)s,%(url)s,%(userId)s,%(template)s,%(dbname)s,%(dbhostname)s,%(dbport)s,%(dbusername)s,%(dbpasswd)s,now())
+         args:{u'dbusername': u'xbtest', u'dbport': 3309, u'name': u'testenv', u'url': u'http://www.json.cn/', u'userId': 1, u'dbpasswd': u'gint123', u'template': {u'id': 1, u'name': u'org'}, u'dbname': u'dafwe', u'dbhostname': u'dafawere'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': \'1\', u\'name\': "\'org\'"},\'dafwe\',\'dafawere\',3309,\'xbtest\',\'gint123\',now())\' at line 2')
+
+2018-02-23 18:21:19,808 - dbBaseHelper - 11880 - ERROR - write - write sql:
+        insert into environment (name,url,create_userid,datatemplate,dbname,dbhostname,dbport,dbusername,dbpasswd,gmt_create) 
+        values (%(name)s,%(url)s,%(userId)s,%(template)s,%(dbname)s,%(dbhostname)s,%(dbport)s,%(dbusername)s,%(dbpasswd)s,now())
+         args:{u'dbusername': u'xbtest', u'dbport': 3309, u'name': u'testenv', u'url': u'http://www.json.cn/', u'userId': 1, u'dbpasswd': u'gint123', u'template': {u'id': 1, u'name': u'org'}, u'dbname': u'dafwe', u'dbhostname': u'dafawere'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': \'1\', u\'name\': "\'org\'"},\'dafwe\',\'dafawere\',3309,\'xbtest\',\'gint123\',now())\' at line 2')
+
+2018-02-23 18:24:32,219 - dbBaseHelper - 11444 - ERROR - write - write sql:
+        insert into environment (name,url,create_userid,datatemplate,dbname,dbhostname,dbport,dbusername,dbpasswd,gmt_create) 
+        values (%(name)s,%(url)s,%(userId)s,%(template)s,%(dbname)s,%(dbhostname)s,%(dbport)s,%(dbusername)s,%(dbpasswd)s,now())
+         args:{u'dbusername': u'xbtest', u'dbport': 3309, u'name': u'testenv', u'url': u'http://www.json.cn/', u'userId': 1, u'dbpasswd': u'gint123', u'template': {u'id': 1, u'name': u'org'}, u'dbname': u'dafwe', u'dbhostname': u'dafawere'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': \'1\', u\'name\': "\'org\'"},\'dafwe\',\'dafawere\',3309,\'xbtest\',\'gint123\',now())\' at line 2')
+

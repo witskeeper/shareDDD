@@ -21,16 +21,30 @@ class InterfaceService(object):
     def addInterfaceItem(self,args):
         if "params" not in args:
             args.setdefault("params",None)
+        else:
+            params=json.dumps(args.get("params"))
+            args.pop("params")
+            args.setdefault("params",params)
         if "failure_response" not in args:
             args.setdefault("failure_response",None)
+        else:
+            failure_response=json.dumps(args.get("failure_response"))
+            args.pop("failure_response")
+            args.setdefault("failure_response",failure_response)
         if "success_response" not in args:
             args.setdefault("success_response",None)
+        else:
+            success_response=json.dumps(args.get("success_response"))
+            args.pop("success_response")
+            args.setdefault("success_response",success_response)
         if "response_type" not in args:
             args.setdefault("response_type",None)
         if "status" not in args:
             args.setdefault("status",None)
         if "remarks" not in args:
             args.setdefault("remarks",None)
+        # logger.error(args.get("params"))
+        # logger.error(type(args.get("success_response")))
         return self.interfaceDaoInterface.addInterfaceItem(args)
 
     @AdminDecoratorServer.execImplDecorator()
@@ -68,7 +82,7 @@ class InterfaceService(object):
         args={}
         args.setdefault("projectId",projectId)
         args.setdefault("groupId", groupId)
-        args.setdefault("offset", offset)
-        args.setdefault("limit", limit)
+        args.setdefault("offset", int(offset))
+        args.setdefault("limit", int(limit))
         return self.interfaceDaoInterface.getInterfaceInfosByProject(args)
 

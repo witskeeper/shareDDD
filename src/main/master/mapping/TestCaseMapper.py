@@ -32,18 +32,14 @@ class TestCaseSQLMapper:
     def __setSQL(self):
         #WRITE SQL FOR API
         addTestCaseSQL="""
-        insert into testcase (name,create_userid,create_username,update_userid,update_username,
-        describe,status,remarks,projectid,groupid,envid,gmt_create) 
-        values 
-        (%(name)s,%(userId)s,%(userName)s,%(userId)s,%(userName)s,%(describe)s,
-        %(status)s,%(remarks)s,%(projectId)%,%(groupId)s,%(envId)s,now())
+        insert into testcase (name,create_userid,case_describe,status,remarks,projectid,groupid,envid,gmt_create) 
+        values(%(name)s,%(userId)s,%(describe)s,%(status)s,%(remarks)s,%(projectId)%,%(groupId)s,%(envId)s,now())
         """
         deleteTestCaseSQL="""
         delete from testcase where id = %(caseId)s
         """
         updateTestCaseSQL="""
-        update testcase set name=%(name)s,update_userid=%(userId)s,update_username=%(userName)s,
-        describe=%(describe)s,status=%(status)s,remarks=%(remarks)s,envid=%(envid)s where id=%(caseId)s
+        update testcase set name=%(name)s,update_userid=%(userId)s,case_describe=%(describe)s,status=%(status)s,remarks=%(remarks)s,envid=%(envid)s where id=%(caseId)s
         """
         getCaseInfosByConditionSQL="""
         select * from testcase where projectid = %(projectId)s and groupid= %(groupId)s 
