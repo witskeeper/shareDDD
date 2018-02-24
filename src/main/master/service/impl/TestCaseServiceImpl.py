@@ -30,8 +30,8 @@ class TestCaseService(object):
         args={}
         args.setdefault("projectId",projectId)
         args.setdefault("groupId", groupId)
-        args.setdefault("offset", offset)
-        args.setdefault("limit", limit)
+        args.setdefault("offset", int(offset))
+        args.setdefault("limit", int(limit))
         return self.testCaseDaoInterface.getCaseInfosByCondition(args)
 
     @AdminDecoratorServer.execImplDecorator()

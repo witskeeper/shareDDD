@@ -35,7 +35,8 @@ class TestSuiteHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'getSuiteInfoById': lambda: self.getSuiteInfoById()
+                'getSuiteInfoById': lambda: self.getSuiteInfoById(),
+                'getSuiteList' : lambda : self.getSuiteList()
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -88,3 +89,6 @@ class TestSuiteHandler(tornado.web.RequestHandler):
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def updateTestSuite(self):
         return TestSuiteService().updateTestSuite(json.loads(self.request.body))
+
+    def getSuiteList(self):
+        return TestSuiteService().getSuiteList()

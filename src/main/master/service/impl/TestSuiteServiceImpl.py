@@ -35,7 +35,7 @@ class TestSuiteService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def deleteTestSuite(self,args):
-        return self.testCaseDaoInterface.deleteTestSuite(args)
+        return self.testSuiteDaoInterface.deleteTestSuite(args)
 
     @AdminDecoratorServer.execImplDecorator()
     def updateTestSuite(self,args):
@@ -48,3 +48,6 @@ class TestSuiteService(object):
         logger.error("suiteId [{}] is invalid".format(args.get("suiteId")))
         dataResult.setMessage("suiteId [{}] is invalid".format(args.get("suiteId")))
         return dataResult
+
+    def getSuiteList(self):
+        return self.testSuiteDaoInterface.getSuiteList()

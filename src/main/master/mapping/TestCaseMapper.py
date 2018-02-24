@@ -33,7 +33,7 @@ class TestCaseSQLMapper:
         #WRITE SQL FOR API
         addTestCaseSQL="""
         insert into testcase (name,create_userid,case_describe,status,remarks,projectid,groupid,envid,gmt_create) 
-        values(%(name)s,%(userId)s,%(describe)s,%(status)s,%(remarks)s,%(projectId)%,%(groupId)s,%(envId)s,now())
+        values(%(name)s,%(userId)s,%(describe)s,%(status)s,%(remarks)s,%(projectId)s,%(groupId)s,%(envId)s,now())
         """
         deleteTestCaseSQL="""
         delete from testcase where id = %(caseId)s

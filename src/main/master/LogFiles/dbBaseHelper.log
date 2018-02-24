@@ -1053,3 +1053,32 @@ ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual
     raise errorclass, errorvalue
 ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': \'1\', u\'name\': "\'org\'"},\'dafwe\',\'dafawere\',3309,\'xbtest\',\'gint123\',now())\' at line 2')
 
+2018-02-24 10:49:06,970 - dbBaseHelper - 12700 - ERROR - write - write sql:
+        insert into testcase (name,create_userid,case_describe,status,remarks,projectid,groupid,envid,gmt_create) 
+        values(%(name)s,%(userId)s,%(describe)s,%(status)s,%(remarks)s,%(projectId)%,%(groupId)s,%(envId)s,now())
+         args:{u'status': 0, u'envId': 2, u'name': u'testcase1', u'projectId': 1, u'describe': u'dfaerfdsfawer', u'userId': 1, u'remarks': u'dafer3412rsdf', u'groupId': 1} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%,1,2,now())' at line 2")
+
+2018-02-24 10:58:53,677 - dbBaseHelper - 11976 - ERROR - read - sql params [2] type is error,must be dict
+2018-02-24 11:01:21,921 - dbBaseHelper - 12696 - ERROR - read - select sql:
+        select * from testcase where projectid = %(projectId)s and groupid= %(groupId)s 
+        order by id desc limit %(offset)s,%(limit)s 
+         args:{'projectId': u'1', 'limit': u'5', 'groupId': u'1', 'offset': u'1'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 30, in read
+    ret = db.read(self.sql,self.args)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1','5'' at line 2")
+

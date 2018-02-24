@@ -86,7 +86,7 @@ CREATE TABLE `testcase` (
 `create_username` varchar(255) NOT NULL,
 `update_userid` int(11) NOT NULL,
 `update_username` varchar(255) NOT NULL,
-`describe` varchar(255) NOT NULL,
+`case_describe` varchar(255) NOT NULL,
 `status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
 `remarks` varchar(255) DEFAULT NULL,
 `projectid` int(11) NOT NULL,
@@ -193,14 +193,3 @@ CREATE TABLE `session_manage` (
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-
-
-
-
-
-
-
-
-
-

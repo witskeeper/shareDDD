@@ -36,3 +36,8 @@ class TestSuiteDaoInterface:
         daoOperate = DbBaseHelper(sql, args)
         return daoOperate.write()
 
+    def getSuiteList(self):
+        logger.info(inspect.stack()[0][3])
+        sql = TestSuiteSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql)
+        return daoOperate.read()
