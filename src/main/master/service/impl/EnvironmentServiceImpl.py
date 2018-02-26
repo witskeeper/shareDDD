@@ -19,24 +19,29 @@ class EnvironmentService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def addEnvironmentItem(self,args):
-        if "datatemplate" not in args:
+        if "template" not in args:
             args.setdefault("template",None)
         else:
-            if not isinstance(args.get("datatemplate"),dict):
+            if not isinstance(args.get("template"),dict):
                 try:
                     #验证data模板是否为json
-                    logger.info("datatemplate is not dict:{0}".format(args.get("datatemplate")))
-                    json.loads(args.get("datatemplate"))
-                    args.setdefault("template", args.get("datatemplate"))
-                except Exception,err:
+                    logger.info("template is not dict:{0}".format(args.get("template")))
+                    datatemplate=json.dumps(json.loads(args.get("template")))
+                    # logger.error(datatemplate)
+                    # logger.error(type(datatemplate))
+                    args.pop("template")
+                    args.setdefault("template", datatemplate)
+                except Exception:
                     logger.error(traceback.format_exc())
                     dataResult = DataResult()
-                    dataResult.setMessage("datatemplate param [{0}]is invalid, must be dict".format(args.get("datatemplate")))
+                    dataResult.setMessage("template param [{0}]is invalid, must be dict".format(args.get("template")))
                     dataResult.setSuccess(False)
                     return dataResult
             else:
-                logger.info("datatemplate is dict:{0}".format(args.get("datatemplate")))
-                datatemplateJSONString = json.dumps(args.get("datatemplate"))
+                logger.info("template is dict:{0}".format(args.get("template")))
+                datatemplateJSONString = json.dumps(args.get("template"))
+                # logger.error(datatemplateJSONString)
+                args.pop("template")
                 args.setdefault("template",datatemplateJSONString)
         if "dbname" not in args:
             args.setdefault("dbname",None)
@@ -61,36 +66,36 @@ class EnvironmentService(object):
         return self.EnvironmentDaoInterface.deleteEnvironmentItem(args)
 
     def editEnvironmentItem(self,args):
-        if "datatemplate" not in args:
+        if "template" not in args:
             args.setdefault("template",None)
         else:
-            if not isinstance(args.get("datatemplate"),dict):
+            if not isinstance(args.get("template"),dict):
                 try:
                     #验证data模板是否为json
-                    logger.info("datatemplate is not dict:{0}".format(args.get("datatemplate")))
-                    json.loads(args.get("datatemplate"))
-                    args.setdefault("template", args.get("datatemplate"))
+                    logger.info("template is not dict:{0}".format(args.get("template")))
+                    datatemplate = json.dumps(json.loads(args.get("template")))
+                    args.pop("template")
+                    args.setdefault("template", datatemplate)
                 except Exception,err:
                     logger.error(traceback.format_exc())
                     dataResult = DataResult()
-                    dataResult.setMessage("datatemplate param [{0}]is invalid, must be dict".format(args.get("datatemplate")))
+                    dataResult.setMessage("template param [{0}]is invalid, must be dict".format(args.get("template")))
                     dataResult.setSuccess(False)
                     return dataResult
             else:
-                logger.info("datatemplate is dict:{0}".format(args.get("datatemplate")))
-                datatemplateJSONString = json.dumps(args.get("datatemplate"))
+                logger.info("template is dict:{0}".format(args.get("template")))
+                datatemplateJSONString = json.dumps(args.get("template"))
+                args.pop("template")
                 args.setdefault("template",datatemplateJSONString)
-        if "dbname" not in args:
-            args.setdefault("dbname",None)
-        if "dbhostname" not in args:
-            args.setdefault("dbhostname",None)
-        if "dbport" not in args:
-            args.setdefault("dbport",None)
-        if "dbusername" not in args:
-            args.setdefault("dbusername",None)
-        if "dbpasswd" not in args:
-            args.setdefault("dbpasswd",None)
-        return self.EnvironmentDaoInterface.editEnvironmentItem(args)
+
+        dataResult = self.EnvironmentDaoInterface.getEnvironmentInfoById(args)
+        if dataResult.getSuccess() and len(dataResult.getMessage()) > 0:
+            for key,value in dataResult.getMessage()[0].items():
+                if key not in args:
+                    args.setdefault(key,value)
+            return self.EnvironmentDaoInterface.editEnvironmentItem(args)
+        dataResult.setMessage("apiId [{0}] is invalid".format(args.get("envId")))
+        return dataResult
 
     def getEnvironmentInfos(self):
         return self.EnvironmentDaoInterface.getEnvironmentInfos()

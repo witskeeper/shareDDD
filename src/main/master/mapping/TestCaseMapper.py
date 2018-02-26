@@ -39,7 +39,8 @@ class TestCaseSQLMapper:
         delete from testcase where id = %(caseId)s
         """
         updateTestCaseSQL="""
-        update testcase set name=%(name)s,update_userid=%(userId)s,case_describe=%(describe)s,status=%(status)s,remarks=%(remarks)s,envid=%(envid)s where id=%(caseId)s
+        update testcase set name=%(name)s,update_userid=%(userId)s,case_describe=%(describe)s,status=%(status)s,
+        remarks=%(remarks)s,envid=%(envid)s where id=%(caseId)s
         """
         getCaseInfosByConditionSQL="""
         select * from testcase where projectid = %(projectId)s and groupid= %(groupId)s 

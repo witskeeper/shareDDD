@@ -26,7 +26,7 @@ class CaseContentDaoInterface:
         daoOperate =DbBaseHelper(sql,args)
         return daoOperate.read()
 
-    def deleteTestContent(self,args):
+    def deleteTestContentByContentId(self,args):
         logger.info(inspect.stack()[0][3])
         sql = CaseContentSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate = DbBaseHelper(sql, args)

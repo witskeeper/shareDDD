@@ -34,7 +34,7 @@ class CaseContentSQLMapper:
         %(step)s,%(url)s,%(method)s,%(format)s,%(request_params)s,%(timeout)s,
         %(type)s,%(sqlcontent)s)
         """
-        deleteTestContentSQL="""
+        deleteTestContentByContentIdSQL="""
         delete from casecontent where id = %(contentId)s
         """
         deleteTestContentByCaseIdSQL="""
@@ -53,7 +53,7 @@ class CaseContentSQLMapper:
         """
         #SET SQL FOR DAO
         self.data.setdefault("addCaseContent",addCaseContentSQL)
-        self.data.setdefault("deleteTestContent",deleteTestContentSQL)
+        self.data.setdefault("deleteTestContentByContentId",deleteTestContentByContentIdSQL)
         self.data.setdefault("deleteTestContentByCaseId",deleteTestContentByCaseIdSQL)
         self.data.setdefault("updateTestContent",updateTestContentSQL)
         self.data.setdefault("getContentInfosByCaseId",getContentInfosByCaseIdSQL)

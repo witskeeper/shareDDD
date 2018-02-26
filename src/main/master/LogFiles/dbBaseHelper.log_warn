@@ -1079,3 +1079,8 @@ ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual
     raise errorclass, errorvalue
 ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1','5'' at line 2")
 
+2018-02-26 14:44:04,808 - dbBaseHelper - 17332 - ERROR - read - sql params [3] type is error,must be dict
+2018-02-26 14:44:16,045 - dbBaseHelper - 15876 - ERROR - read - sql params [3] type is error,must be dict
+2018-02-26 14:44:47,336 - dbBaseHelper - 17332 - ERROR - read - sql params [2] type is error,must be dict
+2018-02-26 14:47:46,232 - dbBaseHelper - 16852 - ERROR - read - sql params [2] type is error,must be dict
+2018-02-26 14:49:02,903 - dbBaseHelper - 3540 - ERROR - read - sql params [2] type is error,must be dict

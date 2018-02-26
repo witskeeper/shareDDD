@@ -41,7 +41,8 @@ class EnvironmentSQLMapper:
         """
         editEnvironmentItemSQL="""
         update environment set name=%(name)s,url=%(url)s,datatemplate=%(template)s,dbname=%(dbname)s,
-        dbhostname=%(dbhostname)s,dbport=%(dbport)s,dbusername=%(dbusername)s,dbpasswd=%(dbpasswd)s
+        dbhostname=%(dbhostname)s,dbport=%(dbport)s,dbusername=%(dbusername)s,dbpasswd=%(dbpasswd)s 
+        where id=%(envId)s
         """
         getEnvironmentInfoByIdSQL="""
         select * from environment where id = %(envId)s
@@ -53,7 +54,7 @@ class EnvironmentSQLMapper:
         #SET SQL FOR DAO
         self.data.setdefault("addEnvironmentItem",addEnvironmentItemSQL)
         self.data.setdefault("deleteEnvironmentItem",deleteEnvironmentItemSQL)
-        self.data.setdefault("deleteEnvironmentItem",editEnvironmentItemSQL)
+        self.data.setdefault("editEnvironmentItem",editEnvironmentItemSQL)
         self.data.setdefault("getEnvironmentInfoById",getEnvironmentInfoByIdSQL)
         self.data.setdefault("getEnvironmentInfos", getEnvironmentInfosSQL)
 

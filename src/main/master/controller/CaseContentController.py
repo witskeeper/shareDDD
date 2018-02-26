@@ -58,7 +58,7 @@ class CaseContentHandler(tornado.web.RequestHandler):
         try:
             tasks = {
                 'addCaseContent' : lambda : self.addCaseContent(),
-                'deleteTestContent':lambda :self.deleteTestContent(),
+                'deleteTestContent':lambda :self.deleteTestContentByContentId(),
                 'deleteTestContentByCaseId': lambda: self.deleteTestContentByCaseId(),
                 'updateTestContent': lambda: self.updateTestContent()
             }
@@ -88,8 +88,8 @@ class CaseContentHandler(tornado.web.RequestHandler):
         return CaseContentService().addCaseContent(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def deleteTestContent(self):
-        return CaseContentService().deleteTestContent(json.loads(self.request.body))
+    def deleteTestContentByContentId(self):
+        return CaseContentService().deleteTestContentByContentId(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def deleteTestContentByCaseId(self):

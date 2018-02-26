@@ -46,7 +46,7 @@ class TestCaseService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def updateTestCase(self,args):
-        dataResult = self.testCaseDaoInterface.getCaseInfosById(args.get("caseId"))
+        dataResult = self.testCaseDaoInterface.getCaseInfosById(args)
         if dataResult.getSuccess() and len(dataResult.getMessage())>0:
             for key,value in dataResult.getMessage()[0].items():
                 if key not in args:

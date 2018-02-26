@@ -59,7 +59,26 @@ class InterfaceService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def updateInterfaceItem(self,args):
-        dataResult = self.interfaceDaoInterface.getInterfaceInfoById(args.get("apiId"))
+        if "params" not in args:
+            args.setdefault("params",None)
+        else:
+            params=json.dumps(args.get("params"))
+            args.pop("params")
+            args.setdefault("params",params)
+        if "failure_response" not in args:
+            args.setdefault("failure_response",None)
+        else:
+            failure_response=json.dumps(args.get("failure_response"))
+            args.pop("failure_response")
+            args.setdefault("failure_response",failure_response)
+        if "success_response" not in args:
+            args.setdefault("success_response",None)
+        else:
+            success_response=json.dumps(args.get("success_response"))
+            args.pop("success_response")
+            args.setdefault("success_response",success_response)
+        dataResult = self.interfaceDaoInterface.getInterfaceInfoById(args)
+        # logger.error(dataResult.__dict__)
         if dataResult.getSuccess() and len(dataResult.getMessage()) > 0:
             for key,value in dataResult.getMessage()[0].items():
                 if key not in args:

@@ -42,8 +42,8 @@ class CaseContentService(object):
         return self.caseContentDaoInterface.getContentInfosByCaseId(args)
 
     @AdminDecoratorServer.execImplDecorator()
-    def deleteTestContent(self,args):
-        return self.caseContentDaoInterface.deleteTestContent(args)
+    def deleteTestContentByContentId(self,args):
+        return self.caseContentDaoInterface.deleteTestContentByContentId(args)
 
     @AdminDecoratorServer.execImplDecorator()
     def deleteTestContentByCaseId(self,args):
@@ -60,3 +60,6 @@ class CaseContentService(object):
         logger.error("contentId [{}] is invalid".format(args.get("contentId")))
         dataResult.setMessage("contentId [{}] is invalid".format(args.get("contentId")))
         return dataResult
+
+    def getContentInfosByContentId(self,args):
+        return self.caseContentDaoInterface.getContentInfosByContentId(args)

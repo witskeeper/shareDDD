@@ -39,7 +39,7 @@ class TestSuiteService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def updateTestSuite(self,args):
-        dataResult = self.testSuiteDaoInterface.getSuiteInfoById(args.get("suiteId"))
+        dataResult = self.testSuiteDaoInterface.getSuiteInfoById(args)
         if dataResult.getSuccess() and len(dataResult.getMessage())>0:
             for key,value in dataResult.getMessage()[0].items():
                 if key not in args:
