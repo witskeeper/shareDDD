@@ -56,7 +56,8 @@ class GroupHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'addGroup' : lambda : self.addGroup(),
+                'addParentGroup' : lambda : self.addParentGroup(),
+                'addChildGroup' : lambda : self.addChildGroup(),
                 'deleteGroup':lambda :self.deleteGroup(),
                 'editGroup' : lambda :self.editGroup()
             }
@@ -79,8 +80,11 @@ class GroupHandler(tornado.web.RequestHandler):
         return GroupService().getGroupInfoByProjectId(projectId,type)
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def addGroup(self):
-        return GroupService().addGroup(json.loads(self.request.body))
+    def addParentGroup(self):
+        return GroupService().addParentGroup(json.loads(self.request.body))
+
+    def addChildGroup(self):
+        return GroupService().addChildGroup(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def deleteGroup(self):
@@ -88,3 +92,6 @@ class GroupHandler(tornado.web.RequestHandler):
 
     def editGroup(self):
         return GroupService().editGroup(json.loads(self.request.body))
+
+    def getGroupInfoByParentGroupId(self):
+        return GroupService().getGroupInfoByParentGroupId(self.request.body)

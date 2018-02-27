@@ -12,11 +12,17 @@ logger.write_to_file(SystemConfig.logPathPrefix+"GroupDao.log")
 
 class GroupDaoInterface:
 
-    def addGroup(self,args):
+    def addParentGroup(self,args):
         #实例化
         logger.info(inspect.stack()[0][3])
         sql = GroupSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate =DbBaseHelper(sql,args)
+        return daoOperate.write()
+
+    def addChildGroup(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = GroupSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
         return daoOperate.write()
 
     def getGroupInfoByProjectId(self,args):
@@ -44,3 +50,9 @@ class GroupDaoInterface:
         sql = GroupSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate = DbBaseHelper(sql,args)
         return daoOperate.write()
+
+    def getGroupInfoByParentGroupId(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = GroupSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
