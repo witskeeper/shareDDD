@@ -29,10 +29,10 @@ class CaseContentSQLMapper:
     def __setSQL(self):
         #WRITE SQL FOR API
         addCaseContentSQL="""
-        insert into casecontent (step_name,caseid,step,url,method,
-        format,request_params,timeout,type,sqlcontent) values (%(step_name)s,%(caseid)s,
-        %(step)s,%(url)s,%(method)s,%(format)s,%(request_params)s,%(timeout)s,
-        %(type)s,%(sqlcontent)s)
+        insert into casecontent (step_name,caseid,step,interfaceid,url,method,
+        format,request_params,timeout,type,sqlcontent) values (%(stepName)s,%(caseId)s,
+        %(step)s,%(interfaceId)s,%(url)s,%(method)s,%(format)s,%(requestParams)s,%(timeout)s,
+        %(type)s,%(sqlContent)s)
         """
         deleteTestContentByContentIdSQL="""
         delete from casecontent where id = %(contentId)s
@@ -41,9 +41,9 @@ class CaseContentSQLMapper:
         delete from casecontent where caseid = %(caseId)s
         """
         updateTestContentSQL="""
-        update casecontent set step_name=%(step_name)s,step=%(step)s,url=%(url),
-        method=%(method)s,format=%(format)s,request_params=%(request_params)s,type=%(type)s,
-        sqlcontent=%(sqlcontent)s where id = %(contentId)s
+        update casecontent set step_name=%(stepName)s,step=%(step)s,interfaceid=%(interfaceId)s,url=%(url)s,
+        method=%(method)s,format=%(format)s,request_params=%(requestParams)s,timeout=%(timeout)s,type=%(type)s,
+        sqlcontent=%(sqlContent)s where id = %(contentId)s
         """
         getContentInfosByCaseIdSQL="""
         select * from casecontent where caseid = %(caseId)s

@@ -50,6 +50,8 @@ CREATE TABLE `group_info` (
 `create_userid` int(11) NOT NULL,
 `type` tinyint(4) DEFAULT 0 COMMENT '0: api 1: case',
 `projectid` int(11) NOT NULL,
+`parent_groupid` int(11) DEFAULT 0,
+`ischild` tinyint(4) DEFAULT 0 COMMENT '0:not child 1:is child',
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)

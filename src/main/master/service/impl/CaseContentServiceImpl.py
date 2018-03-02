@@ -19,20 +19,26 @@ class CaseContentService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def addCaseContent(self,args):
-        if "interfaceid" not in args:
-            args.setdefault("interfaceid",None)
+        if "interfaceId" not in args:
+            args.setdefault("interfaceId",None)
+        if "url" not in args:
+            args.setdefault("url",None)
         if "method" not in args:
             args.setdefault("method",None)
         if "format" not in args:
             args.setdefault("format",None)
-        if "request_params" not in args:
-            args.setdefault("request_params",None)
+        if "requestParams" not in args:
+            args.setdefault("requestParams",None)
+        else:
+            request_params = json.dumps(args.get("requestParams"))
+            args.pop("requestParams")
+            args.setdefault("requestParams", request_params)
         if "timeout" not in args:
             args.setdefault("timeout",None)
         if "type" not in args:
             args.setdefault("type",None)
-        if "sqlcontent" not in args:
-            args.setdefault("sqlcontent", None)
+        if "sqlContent" not in args:
+            args.setdefault("sqlContent", None)
         return self.caseContentDaoInterface.addCaseContent(args)
 
     @AdminDecoratorServer.execImplDecorator()
@@ -43,6 +49,7 @@ class CaseContentService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def deleteTestContentByContentId(self,args):
+        logger.error(args)
         return self.caseContentDaoInterface.deleteTestContentByContentId(args)
 
     @AdminDecoratorServer.execImplDecorator()
@@ -51,7 +58,27 @@ class CaseContentService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def updateTestContent(self,args):
-        dataResult =self.caseContentDaoInterface.getContentInfosByContentId(args.get("contentId"))
+        if "interfaceId" not in args:
+            args.setdefault("interfaceId",None)
+        if "url" not in args:
+            args.setdefault("url",None)
+        if "method" not in args:
+            args.setdefault("method",None)
+        if "format" not in args:
+            args.setdefault("format",None)
+        if "requestParams" not in args:
+            args.setdefault("requestParams",None)
+        else:
+            request_params = json.dumps(args.get("requestParams"))
+            args.pop("requestParams")
+            args.setdefault("requestParams", request_params)
+        if "timeout" not in args:
+            args.setdefault("timeout",None)
+        if "type" not in args:
+            args.setdefault("type",None)
+        if "sqlContent" not in args:
+            args.setdefault("sqlContent", None)
+        dataResult =self.caseContentDaoInterface.getContentInfosByContentId(args)
         if dataResult.getSuccess() and len(dataResult.getMessage()) > 0:
             for key, value in dataResult.getMessage()[0].items():
                 if key not in args:
@@ -61,5 +88,7 @@ class CaseContentService(object):
         dataResult.setMessage("contentId [{}] is invalid".format(args.get("contentId")))
         return dataResult
 
-    def getContentInfosByContentId(self,args):
+    def getContentInfosByContentId(self,contentId):
+        args = {}
+        args.setdefault("contentId", contentId)
         return self.caseContentDaoInterface.getContentInfosByContentId(args)

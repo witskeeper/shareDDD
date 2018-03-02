@@ -45,4 +45,3 @@ class AssertSQLMapper:
         self.data.setdefault("updateAssert",updateAssertSQL)
         self.data.setdefault("getAssertInfosByContentId",getAssertInfosByContentIdSQL)
         self.data.setdefault("getAssertInfoById", getAssertInfoByIdSQL)
-

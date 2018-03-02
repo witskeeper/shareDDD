@@ -1087,3 +1087,114 @@ ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual
 2018-02-26 14:44:47,336 - dbBaseHelper - 17332 - ERROR - read - sql params [2] type is error,must be dict
 2018-02-26 14:47:46,232 - dbBaseHelper - 16852 - ERROR - read - sql params [2] type is error,must be dict
 2018-02-26 14:49:02,903 - dbBaseHelper - 3540 - ERROR - read - sql params [2] type is error,must be dict
+2018-03-02 11:47:14,168 - dbBaseHelper - 27716 - ERROR - write - write sql:
+        insert into casecontent (step_name,caseid,step,interfaceid,url,method,
+        format,request_params,timeout,type,sqlcontent) values (%(step_name)s,%(caseid)s,
+        %(step)s,%(interfaceid),%(url)s,%(method)s,%(format)s,%(request_params)s,%(timeout)s,
+        %(type)s,%(sqlcontent)s)
+         args:{u'interfaceid': 1, u'format': 0, 'url': None, 'sqlcontent': None, u'caseid': 1, u'step': 1, 'params': '{"stuinfoids": [1, 2, 3], "id": 1, "package": {"id": 1}}', u'step_name': u'\u6b65\u9aa41', u'timeout': 200, u'type': 0, u'method': 0} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+ValueError: unsupported format character ',' (0x2c) at index 200
+
+2018-03-02 11:52:26,608 - dbBaseHelper - 14200 - ERROR - write - write sql:
+        insert into casecontent (step_name,caseid,step,interfaceid,url,method,
+        format,request_params,timeout,type,sqlcontent) values (%(step_name)s,%(caseid)s,
+        %(step)s,%(interfaceid),%(url)s,%(method)s,%(format)s,%(request_params)s,%(timeout)s,
+        %(type)s,%(sqlcontent)s)
+         args:{u'interfaceid': 1, u'format': 0, 'url': None, 'sqlcontent': None, u'caseid': 1, u'step': 1, 'params': '{"stuinfoids": [1, 2, 3], "id": 1, "package": {"id": 1}}', u'step_name': u'\u6b65\u9aa41', u'timeout': 200, u'type': 0, u'method': 0} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+ValueError: unsupported format character ',' (0x2c) at index 200
+
+2018-03-02 14:09:26,825 - dbBaseHelper - 29680 - ERROR - write - write sql:
+        insert into casecontent (step_name,caseid,step,interfaceid,url,method,
+        format,request_params,timeout,type,sqlcontent) values (%(stepName)s,%(caseId)s,
+        %(step)s,%(interfaceId)s,%(url)s,%(method)s,%(format)s,%(requestParams)s,%(timeout)s,
+        %(type)s,%(sqlContent)s)
+         args:{u'requestParams': {u'stuinfoids': [1, 2, 3], u'id': 1, u'package': {u'id': 1}}, u'interfaceId': 1, 'request_params': None, u'format': 0, 'url': None, u'sqlcontent': u'', u'stepName': u'\u6b65\u9aa42', u'caseId': 1, 'interfaceid': None, u'step': 1, u'timeout': 200, u'type': 0, u'method': 0} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'sqlContent'
+
+2018-03-02 14:09:49,711 - dbBaseHelper - 29680 - ERROR - write - write sql:
+        insert into casecontent (step_name,caseid,step,interfaceid,url,method,
+        format,request_params,timeout,type,sqlcontent) values (%(stepName)s,%(caseId)s,
+        %(step)s,%(interfaceId)s,%(url)s,%(method)s,%(format)s,%(requestParams)s,%(timeout)s,
+        %(type)s,%(sqlContent)s)
+         args:{u'requestParams': {u'stuinfoids': [1, 2, 3], u'id': 1, u'package': {u'id': 1}}, u'interfaceId': 1, 'request_params': None, u'format': 0, 'url': None, u'sqlContent': u'', u'stepName': u'\u6b65\u9aa42', u'caseId': 1, 'interfaceid': None, u'step': 1, u'timeout': 200, 'sqlcontent': None, u'type': 0, u'method': 0} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ': '(1,2,3)', u'id': '1', u'package': {u'id': '1'}},200,\n        0,'')' at line 3")
+
+2018-03-02 14:10:35,401 - dbBaseHelper - 26192 - ERROR - write - write sql:
+        insert into casecontent (step_name,caseid,step,interfaceid,url,method,
+        format,request_params,timeout,type,sqlcontent) values (%(stepName)s,%(caseId)s,
+        %(step)s,%(interfaceId)s,%(url)s,%(method)s,%(format)s,%(requestParams)s,%(timeout)s,
+        %(type)s,%(sqlContent)s)
+         args:{u'requestParams': {u'stuinfoids': 1, u'id': 1, u'package': {u'id': 1}}, u'interfaceId': 1, 'request_params': None, u'format': 0, 'url': None, u'sqlContent': u'', u'stepName': u'\u6b65\u9aa42', u'caseId': 1, 'interfaceid': None, u'step': 1, u'timeout': 200, 'sqlcontent': None, u'type': 0, u'method': 0} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ': '1', u'id': '1', u'package': {u'id': '1'}},200,\n        0,'')' at line 3")
+
+2018-03-02 14:12:01,403 - dbBaseHelper - 28524 - ERROR - write - write sql:
+        insert into casecontent (step_name,caseid,step,interfaceid,url,method,
+        format,request_params,timeout,type,sqlcontent) values (%(stepName)s,%(caseId)s,
+        %(step)s,%(interfaceId)s,%(url)s,%(method)s,%(format)s,%(requestParams)s,%(timeout)s,
+        %(type)s,%(sqlContent)s)
+         args:{u'requestParams': {u'stuinfoids': [1, 2, 3], u'id': 1, u'package': {u'id': 1}}, u'interfaceId': 1, 'request_params': None, u'format': 0, 'url': None, u'sqlContent': u'', u'stepName': u'\u6b65\u9aa42', u'caseId': 1, 'interfaceid': None, u'step': 1, u'timeout': 200, 'sqlcontent': None, u'type': 0, u'method': 0} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ': '(1,2,3)', u'id': '1', u'package': {u'id': '1'}},200,\n        0,'')' at line 3")
+
+2018-03-02 14:14:14,013 - dbBaseHelper - 29628 - ERROR - write - write sql:
+        insert into casecontent (step_name,caseid,step,interfaceid,url,method,
+        format,request_params,timeout,type,sqlcontent) values (%(stepName)s,%(caseId)s,
+        %(step)s,%(interfaceId)s,%(url)s,%(method)s,%(format)s,%(requestParams)s,%(timeout)s,
+        %(type)s,%(sqlContent)s)
+         args:{u'requestParams': {u'stuinfoids': [1, 2, 3], u'id': 1, u'package': {u'id': 1}}, u'interfaceId': 1, 'request_params': None, u'format': 0, 'url': None, u'sqlContent': u'', u'stepName': u'\u6b65\u9aa42', u'caseId': 1, 'interfaceid': None, u'step': 1, u'timeout': 200, 'sqlcontent': None, u'type': 0, u'method': 0} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ': '(1,2,3)', u'id': '1', u'package': {u'id': '1'}},200,\n        0,'')' at line 3")
+
+2018-03-02 14:38:35,388 - dbBaseHelper - 28524 - ERROR - read - sql params [1] type is error,must be dict
+2018-03-02 14:39:13,799 - dbBaseHelper - 28524 - ERROR - read - sql params [4] type is error,must be dict
+2018-03-02 14:48:06,798 - dbBaseHelper - 12376 - ERROR - read - sql params [1] type is error,must be dict
+2018-03-02 14:48:23,348 - dbBaseHelper - 26948 - ERROR - read - sql params [1] type is error,must be dict
+2018-03-02 15:04:55,365 - dbBaseHelper - 28556 - ERROR - read - sql params [1] type is error,must be dict

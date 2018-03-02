@@ -58,7 +58,7 @@ class CaseContentHandler(tornado.web.RequestHandler):
         try:
             tasks = {
                 'addCaseContent' : lambda : self.addCaseContent(),
-                'deleteTestContent':lambda :self.deleteTestContentByContentId(),
+                'deleteTestContentByContentId':lambda :self.deleteTestContentByContentId(),
                 'deleteTestContentByCaseId': lambda: self.deleteTestContentByCaseId(),
                 'updateTestContent': lambda: self.updateTestContent()
             }
