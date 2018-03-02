@@ -105,6 +105,7 @@ CREATE TABLE `casecontent` (
 `caseid` int(11) NOT NULL,
 `step` int(11) NOT NULL,
 `interfaceid` int(11) DEFAULT NULL,
+`url` varchar(255) DEFAULT NULL,
 `method` tinyint(4) DEFAULT NULL COMMENT '0: GET 1: POST 2.PUT 3. DELETE',
 `format` tinyint(4) DEFAULT NULL COMMENT '0: form-data 1: json',
 `request_params` varchar(255) DEFAULT NULL,
