@@ -1198,3 +1198,78 @@ ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual
 2018-03-02 14:48:06,798 - dbBaseHelper - 12376 - ERROR - read - sql params [1] type is error,must be dict
 2018-03-02 14:48:23,348 - dbBaseHelper - 26948 - ERROR - read - sql params [1] type is error,must be dict
 2018-03-02 15:04:55,365 - dbBaseHelper - 28556 - ERROR - read - sql params [1] type is error,must be dict
+2018-03-05 21:09:15,835 - dbBaseHelper - 17772 - ERROR - write - write sql:
+        insert into assert (casecontentid,actual,expect,assert_type,sqlcontent) 
+        values (%(caseContentId)s,%(actual)s,%(expect)s,%(assertType)s,%(sqlContent)s)
+         args:{u'caseContentId': 1, u'assertType': 0, u'actual': u'false', u'expect': u'false', 'sqlcontent': None} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'sqlContent'
+
+2018-03-05 21:10:57,506 - dbBaseHelper - 27704 - ERROR - write - write sql:
+        insert into assert (casecontentid,actual,expect,assert_type,sqlcontent) 
+        values (%(caseContentId)s,%(actual)s,%(expect)s,%(assertType)s,%(sqlContent)s)
+         args:{u'caseContentId': 1, u'assertType': 0, u'actual': u'false', u'expect': u'false', 'sqlcontent': None} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'sqlContent'
+
+2018-03-05 21:13:36,875 - dbBaseHelper - 24208 - ERROR - write - write sql:
+        insert into assert (casecontentid,actual,expect,assert_type,sqlcontent) 
+        values (%(caseContentId)s,%(actual)s,%(expect)s,%(assertType)s,%(sqlContent)s)
+         args:{u'caseContentId': 1, u'assertType': 0, u'actual': u'false', u'expect': u'false', 'sqlcontent': None} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'sqlContent'
+
+2018-03-05 21:22:24,244 - dbBaseHelper - 20676 - ERROR - read - sql params [1] type is error,must be dict
+2018-03-05 21:24:15,717 - dbBaseHelper - 20676 - ERROR - read - sql params [2] type is error,must be dict
+2018-03-06 11:45:18,075 - dbBaseHelper - 22580 - ERROR - write - write sql:
+        update assert set actual=%(actual)s,expect=%(expect)s,assert_type=%(assertType)s,
+        sqlcontent=%(sqlContent)s where id =%(assertId)s
+         args:{u'actual': u'test9', 'sqlcontent': None, u'assertType': 1, u'assertId': 2, 'assert_type': u'0', u'expect': u'test9', 'casecontentid': 1L, 'id': 2L} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'sqlContent'
+
+2018-03-06 12:26:44,509 - dbBaseHelper - 14052 - ERROR - write - write sql:
+        insert into assert (casecontentid,actual,expect,assert_type,sqlcontent) 
+        values (%(caseContentId)s,%(actual)s,%(expect)s,%(assertType)s,%(sqlContent)s)
+         args:{u'caseContentId': 3, 'expect': None, u'sqlContent': u'select * from testsuite'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'actual'
+
+2018-03-06 18:55:01,351 - dbBaseHelper - 31528 - ERROR - write - write sql:
+        delete from project where id = %(projectId)s
+         args:{u'projectId': {u'create_username': u'', u'editting': False, u'name': u'\u548c\u8d5b\u8f66', u'_index': 5, u'gmt_modify': u'2018-03-06 18:48:28', u'edittingCell': {u'remarks': False, u'name': False}, u'gmt_create': u'2018-03-06 18:48:28', u'version': u'dasd', u'remarks': u'dasda', u'_rowKey': 6, u'create_userid': 0, u'id': 12}} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': "\'\'", u\'editting\': \'0\', u\'name\': "\'\\xe5\\x92\\x8c\\xe8\\xb5\\x9b\\xe8\\xbd\\xa6\'", u\'_\' at line 1')
+

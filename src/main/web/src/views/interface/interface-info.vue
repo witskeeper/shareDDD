@@ -15,15 +15,18 @@
             <Col span="18" class="padding-left-10">
                 <Card>
                     <div >
-                        <Table border :columns="lsitColumns" :data="list" @on-row-click="onRowClick"></Table>
+                        <Table border :columns="lsitColumns" :data="list" ></Table>
                     </div>
                 </Card>
             </Col>
         </Row>
     </div>
 </template>
+
 <script>
+    import axios  from 'axios';
     export default {
+        name: 'interface-info',
         data () {
             return {
                 groupData: [
@@ -89,7 +92,10 @@
                     size: 'small',
                 },
                 lsitColumns: [
-
+                    {
+                        title: '接口Id',
+                        key: 'id'
+                    },
                     {
                         title: '接口名称',
                         key: 'name'
@@ -141,8 +147,14 @@
                             ]);
                         }
                     }
-            ],
+                ],
                 list:[],
+                getInterfaceListData:{
+                    projectId:"",
+                    groupId:"",
+                    offset:"10",
+                    limit:"1"
+                }
             }
         },
         methods: {
@@ -219,32 +231,28 @@
                 const index = parent.children.indexOf(data);
                 parent.children.splice(index, 1);
             },
-            groupData () {
-                axios.get("http://localhost:8090/v1/group/getGroupInfoByProjectId").then((res)=>{
-                console.log(res)
-                if(res.data.success){
-                    this.list = res.data.message;
-                }else{
-                    this.$Message.error("失败")
-                }
-            })
-            },
+//            groupData () {
+//                axios.get("/v1/group/getGroupInfoByProjectId").then((res)=>{
+//                console.log(res)
+//                if(res.data.success){
+//                    this.list = res.data.message;
+//                }else{
+//                    this.$Message.error("获取数据失败")
+//                }
+//            })
+//            },
             getData () {
-                axios.get("http://localhost:8090/v1/interface/getInterfaceInfosByProject",this.getInterfaceListData).then((res)=>{
+                axios.get("/v1/interface/getInterfaceInfosByProject",this.getInterfaceListData).then((res)=>{
+                console.log(this.getInterfaceListData)
                 console.log(res)
                 if(res.data.success){
                     this.list = res.data.message;
                 }else{
-                    this.$Message.error("失败")
+                    this.$Message.error("获取数据失败")
                 }
             })
-            this.getInterfaceListData = {
-                projectId:"",
-                groupId:""
-            };
             },
             addInterface(index){
-
                 this.$router.push({path:"/interface/interface-edit",query:{interfaceId:""}})
             },
             onRowClick(rowData,index){

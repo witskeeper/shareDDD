@@ -39,9 +39,13 @@ export default {
         return {
             lsitColumns: [
                     {
+                        title: '项目ID',
+                        key: 'id'
+                    },
+                    {
                         title: '项目名称',
                         key: 'name',
-                        editable: true
+                        editable: true,
                     },
                     {
                         title: '项目描述',
@@ -77,7 +81,11 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.onRowClick(params.index)
+                                            let query = { id: params.row.id };
+                                            this.$router.push({
+                                                name: 'interface-info',
+                                                query: query
+                                            });
                                         }
                                     }
                                 }, '查看'),
@@ -88,7 +96,8 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.remove(params.index)
+                                            this.removeProjectData.projectId = params.row.id
+                                            this.removeProject()
                                         }
                                     }
                                 }, '删除')
@@ -106,16 +115,21 @@ export default {
             },
             removeProjectData:{
                 projectId:"",
+            },
+            editProjectData:{
+                projectId:"",
+                name:"",
+                remarks:""
             }
         };
     },
     methods: {
-        onRowClick(rowData,index){
-                console.log(rowData)
-                this.$router.push({path:"/interface/interface-info",query:{projectId:rowData.id}})
-        },
+//        onRowClick(rowData,index){
+//                console.log(rowData)
+//                this.$router.push({path:"/interface/interface-info",query:{projectId:rowData.id}})
+//        },
         getData () {
-                axios.get("http://localhost:8090/v1/project/getProjectList").then((res)=>{
+                axios.get("/v1/project/getProjectList").then((res)=>{
                 console.log(res)
                 if(res.data.success){
                     this.list = res.data.message;
@@ -126,13 +140,24 @@ export default {
             )
         },
         handleCellChange (val, index, key) {
+            this.editProjectData.projectId = val[index]["id"]
+            this.editProjectData.name = val[index]["name"]
+            this.editProjectData.remarks = val[index]["remarks"]
+            axios.post("/v1/project/editProject",this.editProjectData).then((res)=>{
+            // console.log(val,index,key)
+            if(res.data.success){
+                  this.$Message.success("成功");
+                  this.getData();
+
+            }else{
+                  this.$Message.error("失败")
+            }
+        }
+        )
             this.$Message.success('修改了第 ' + (index + 1) + ' 行列名为 ' + key + ' 的数据');
         },
-        handleChange (val, index) {
-            this.$Message.success('修改了第' + (index + 1) + '行数据');
-        },
         removeProject() {
-                axios.post("http://localhost:8090/v1/project/deleteProject",
+                axios.post("/v1/project/deleteProject",
                 this.removeProjectData).then((res)=>{
                 //console.log(res)
                 if(res.data.success){
@@ -202,7 +227,7 @@ export default {
             })
         },
         addProjectNet(){
-            axios.post("http://localhost:8090/v1/project/addProject",
+            axios.post("/v1/project/addProject",
             this.addProjectData
             ).then((res)=>{
                 //console.log(res)

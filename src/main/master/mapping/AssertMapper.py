@@ -24,14 +24,14 @@ class AssertSQLMapper:
         #WRITE SQL FOR API
         addAssertSQL="""
         insert into assert (casecontentid,actual,expect,assert_type,sqlcontent) 
-        values (%(casecontentid)s,%(actual)s,%(expect)s,%(assert_type)s,%(sqlcontent)s)
+        values (%(caseContentId)s,%(actual)s,%(expect)s,%(assertType)s,%(sqlContent)s)
         """
         deleteAssertSQL="""
         delete from assert where id = %(assertId)s
         """
         updateAssertSQL="""
-        update assert set actual=%(actual)s,expect=%(expect)s,assert_type=%(assert_type)s,
-        sqlcontent=%(sqlcontent)s where id =%(assertId)s
+        update assert set actual=%(actual)s,expect=%(expect)s,assert_type=%(assertType)s,
+        sqlcontent=%(sqlContent)s where id =%(assertId)s
         """
         getAssertInfosByContentIdSQL="""
         select * from assert where casecontentid = %(contentId)s
@@ -39,9 +39,13 @@ class AssertSQLMapper:
         getAssertInfoByIdSQL="""
         select * from assert where id = %(assertId)s
         """
+        deleteAssertByContentIdSQL = """
+        delete from assert where casecontentid = %(contentId)s
+        """
         #SET SQL FOR DAO
         self.data.setdefault("addAssert",addAssertSQL)
         self.data.setdefault("deleteAssert",deleteAssertSQL)
         self.data.setdefault("updateAssert",updateAssertSQL)
         self.data.setdefault("getAssertInfosByContentId",getAssertInfosByContentIdSQL)
         self.data.setdefault("getAssertInfoById", getAssertInfoByIdSQL)
+        self.data.setdefault("deleteAssertByContentId", deleteAssertByContentIdSQL)

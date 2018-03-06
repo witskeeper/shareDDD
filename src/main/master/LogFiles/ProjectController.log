@@ -120,3 +120,4 @@ KeyError: u'getProjectList'
     self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
 KeyError: u'editProject'
 
+2018-03-06 19:28:56,733 - ProjectController - 18696 - INFO - addProject - {"name":"dfawe","userName":"","userId":0,"version":"werawer","remarks":"erawerwear"}

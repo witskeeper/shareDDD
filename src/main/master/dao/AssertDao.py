@@ -41,3 +41,9 @@ class AssertDaoInterface:
         sql = AssertSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate =DbBaseHelper(sql,args)
         return daoOperate.read()
+
+    def deleteAssertByContentId(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = AssertSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.write()

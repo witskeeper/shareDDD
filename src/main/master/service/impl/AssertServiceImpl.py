@@ -21,8 +21,8 @@ class AssertService(object):
     def addAssert(self,args):
         if "expect" not in args:
             args.setdefault("expect",None)
-        if "sqlcontent" not in args:
-            args.setdefault("sqlcontent",None)
+        if "sqlContent" not in args:
+            args.setdefault("sqlContent",None)
         return self.assertDaoInterface.addAssert(args)
 
     @AdminDecoratorServer.execImplDecorator()
@@ -43,7 +43,7 @@ class AssertService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def updateAssert(self,args):
-        dataResult =self.assertDaoInterface.getAssertInfoById(args.get("assertId"))
+        dataResult =self.assertDaoInterface.getAssertInfoById(args)
         if dataResult.getSuccess() and len(dataResult.getMessage()) > 0:
             for key, value in dataResult.getMessage()[0].items():
                 if key not in args:
@@ -52,3 +52,6 @@ class AssertService(object):
         logger.error("assertId [{}] is invalid".format(args.get("assertId")))
         dataResult.setMessage("assertId [{}] is invalid".format(args.get("assertId")))
         return dataResult
+
+    def deleteAssertByContentId(self,args):
+        return self.assertDaoInterface.deleteAssertByContentId(args)

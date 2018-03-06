@@ -59,7 +59,8 @@ class AssertHandler(tornado.web.RequestHandler):
             tasks = {
                 'addAssert' : lambda : self.addAssert(),
                 'deleteAssert':lambda :self.deleteAssert(),
-                'updateAssert': lambda: self.updateAssert()
+                'updateAssert': lambda: self.updateAssert(),
+                'deleteAssertByContentId': lambda :self.deleteAssertByContentId()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -93,3 +94,6 @@ class AssertHandler(tornado.web.RequestHandler):
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def updateAssert(self):
         return AssertService().updateAssert(json.loads(self.request.body))
+
+    def deleteAssertByContentId(self):
+        return AssertService().deleteAssertByContentId(json.loads(self.request.body))
