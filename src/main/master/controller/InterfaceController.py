@@ -81,8 +81,8 @@ class InterfaceHandler(tornado.web.RequestHandler):
         return InterfaceService().addInterfaceItem(json.loads(self.request.body))
 
     def getInterfaceInfoById(self):
-        apiId = self.get_argument('apiId')
-        return InterfaceService().getInterfaceInfoById(apiId)
+        interfaceId = self.get_argument('interfaceId')
+        return InterfaceService().getInterfaceInfoById(interfaceId)
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def deleteInterfaceItem(self):

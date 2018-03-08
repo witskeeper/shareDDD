@@ -48,9 +48,9 @@ class InterfaceService(object):
         return self.interfaceDaoInterface.addInterfaceItem(args)
 
     @AdminDecoratorServer.execImplDecorator()
-    def getInterfaceInfoById(self,apiId):
+    def getInterfaceInfoById(self,interfaceId):
         args={}
-        args.setdefault("apiId",apiId)
+        args.setdefault("interfaceId",interfaceId)
         return self.interfaceDaoInterface.getInterfaceInfoById(args)
 
     @AdminDecoratorServer.execImplDecorator()
@@ -84,8 +84,8 @@ class InterfaceService(object):
                 if key not in args:
                     args.setdefault(key,value)
             return self.interfaceDaoInterface.updateInterfaceItem(args)
-        logger.error("apiId [{}] is invalid".format(args.get("apiId")))
-        dataResult.setMessage("apiId [{}] is invalid".format(args.get("apiId")))
+        logger.error("interfaceId [{}] is invalid".format(args.get("interfaceId")))
+        dataResult.setMessage("interfaceId [{}] is invalid".format(args.get("interfaceId")))
         return dataResult
 
     @AdminDecoratorServer.execImplDecorator()

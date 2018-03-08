@@ -1273,3 +1273,15 @@ KeyError: 'actual'
     raise errorclass, errorvalue
 ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \': "\'\'", u\'editting\': \'0\', u\'name\': "\'\\xe5\\x92\\x8c\\xe8\\xb5\\x9b\\xe8\\xbd\\xa6\'", u\'_\' at line 1')
 
+2018-03-08 15:10:26,490 - dbBaseHelper - 21724 - ERROR - read - select sql:
+        select * from interface where id = %(interfaceId)s
+         args:{'apiId': u'7'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 30, in read
+    ret = db.read(self.sql,self.args)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'interfaceId'
+
+2018-03-08 15:15:04,398 - dbBaseHelper - 31516 - ERROR - write - sql params [6] type is error,must be dict

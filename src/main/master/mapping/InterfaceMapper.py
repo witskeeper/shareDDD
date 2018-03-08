@@ -46,19 +46,19 @@ class InterfaceSQLMapper:
         updateInterfaceItemSQL="""
         update interface set name=%(name)s,url=%(url)s,update_userid=%(userId)s,interface_describe=%(describe)s,
         params=%(params)s,success_response=%(success_response)s,failure_response=%(failure_response)s,method=%(method)s,
-        format=%(format)s,response_type=%(response_type)s,status=%(status)s,remarks=%(remarks)s where id =%(apiId)s
+        format=%(format)s,response_type=%(response_type)s,status=%(status)s,remarks=%(remarks)s where id =%(interfaceId)s
         """
         deleteInterfaceItemSQL="""
-        delete from interface where id = %(apiId)s
+        delete from interface where id = %(interfaceId)s
         """
         getInterfaceInfoByIdSQL="""
-        select * from interface where id = %(apiId)s
+        select * from interface where id = %(interfaceId)s
         """
         enableInterfaceItemSQL="""
-        update interface set status= 0 where id=%(apiId)s
+        update interface set status= %(status)s where id=%(interfaceId)s
         """
         disableInterfaceItemSQL="""
-        update interface set status= 1 where id=%(apiId)s
+        update interface set status= 1 where id=%(interfaceId)s
         """
         getInterfaceInfosByProjectSQL="""
         select * from interface where projectid=%(projectId)s and groupid=%(groupId)s 

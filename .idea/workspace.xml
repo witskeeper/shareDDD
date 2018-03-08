@@ -2,17 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89aa7f38-1636-468d-b4af-2db860d82534" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/LogFiles/ProjectDao.log" afterPath="$PROJECT_DIR$/src/main/master/LogFiles/ProjectDao.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/LogFiles/dbBaseHelper.log" afterPath="$PROJECT_DIR$/src/main/master/LogFiles/dbBaseHelper.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/LogFiles/dbBaseHelper.log_warn" afterPath="$PROJECT_DIR$/src/main/master/LogFiles/dbBaseHelper.log_warn" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/controller/AssertController.py" afterPath="$PROJECT_DIR$/src/main/master/controller/AssertController.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/dao/AssertDao.py" afterPath="$PROJECT_DIR$/src/main/master/dao/AssertDao.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/mapping/AssertMapper.py" afterPath="$PROJECT_DIR$/src/main/master/mapping/AssertMapper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/service/impl/AssertServiceImpl.py" afterPath="$PROJECT_DIR$/src/main/master/service/impl/AssertServiceImpl.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/build/webpack.dev.config.js" afterPath="$PROJECT_DIR$/src/main/web/build/webpack.dev.config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/controller/InterfaceController.py" afterPath="$PROJECT_DIR$/src/main/master/controller/InterfaceController.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/mapping/InterfaceMapper.py" afterPath="$PROJECT_DIR$/src/main/master/mapping/InterfaceMapper.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/service/impl/InterfaceServiceImpl.py" afterPath="$PROJECT_DIR$/src/main/master/service/impl/InterfaceServiceImpl.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/src/views/interface/interface-edit.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/interface-edit.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/src/views/interface/interface-info.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/interface-info.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage.vue" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,20 +19,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="shareDDD" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="interface-manage.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="131" column="38" lean-forward="false" selection-start-line="131" selection-start-column="31" selection-end-line="131" selection-end-column="38" />
+            <state relative-caret-position="488">
+              <caret line="227" column="10" lean-forward="true" selection-start-line="175" selection-start-column="8" selection-end-line="227" selection-end-column="10" />
               <folding>
-                <element signature="e#0#8771#0" expanded="false" />
-                <element signature="e#0#8771#0" expanded="false" />
-                <element signature="e#0#8771#0" expanded="false" />
-                <element signature="e#0#8771#0" expanded="false" />
-                <element signature="e#0#8771#0" expanded="false" />
-                <element signature="e#0#8771#0" expanded="false" />
                 <element signature="e#0#8771#0" expanded="false" />
               </folding>
             </state>
@@ -45,46 +39,32 @@
       <file leaf-file-name="interface-info.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-info.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-399">
-              <caret line="155" column="29" lean-forward="true" selection-start-line="155" selection-start-column="29" selection-end-line="155" selection-end-column="29" />
+            <state relative-caret-position="341">
+              <caret line="232" column="8" lean-forward="true" selection-start-line="232" selection-start-column="8" selection-end-line="232" selection-end-column="8" />
               <folding>
-                <element signature="e#0#10250#0" expanded="false" />
-                <element signature="e#0#10250#0" expanded="false" />
-                <element signature="e#0#10250#0" expanded="false" />
-                <element signature="e#0#10250#0" expanded="false" />
-                <element signature="e#0#10250#0" expanded="false" />
-                <element signature="e#0#10250#0" expanded="false" />
-                <element signature="e#0#10250#0" expanded="false" />
+                <element signature="e#0#8865#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectController.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/master/controller/ProjectController.py">
+      <file leaf-file-name="interface-edit.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-edit.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="109" column="49" lean-forward="false" selection-start-line="109" selection-start-column="26" selection-end-line="109" selection-end-column="49" />
-              <folding />
+            <state relative-caret-position="243">
+              <caret line="18" column="35" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#7699#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectMapper.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/master/mapping/ProjectMapper.py">
+      <file leaf-file-name="GroupController.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/master/controller/GroupController.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="605">
-              <caret line="45" column="38" lean-forward="false" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InterfaceController.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/master/controller/InterfaceController.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="106" column="40" lean-forward="false" selection-start-line="106" selection-start-column="35" selection-end-line="106" selection-end-column="40" />
+            <state relative-caret-position="439">
+              <caret line="92" column="24" lean-forward="true" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -101,21 +81,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>handleEditOpenness</find>
-      <find>handleSaveOpenness</find>
-      <find>handleEditPublishTime</find>
-      <find>classificationList</find>
-      <find>handleSubmit</find>
-      <find>publishLoading</find>
-      <find>index</find>
-      <find>items</find>
       <find>ruleValidate</find>
       <find>handleAdd</find>
       <find>formValidate</find>
       <find>formDynamic</find>
       <find>interfaceStateList</find>
       <find>item</find>
-      <find>handlePublish</find>
       <find>tinymce</find>
       <find>rowData</find>
       <find>getInterfaceInfosByProject</find>
@@ -123,14 +94,23 @@
       <find>list</find>
       <find>onRowClick</find>
       <find>handleChange</find>
-      <find>handleCellChange</find>
       <find>handleDel</find>
-      <find>addProject</find>
       <find>canEditTable</find>
-      <find>removeProject</find>
       <find>getInterfaceListData</find>
       <find>lsitColumns</find>
+      <find>addInterface</find>
       <find>getData</find>
+      <find>groupData</find>
+      <find>renderContent</find>
+      <find>title</find>
+      <find>removeProject</find>
+      <find>handleCellChange</find>
+      <find>apiId</find>
+      <find>handlePublish</find>
+      <find>type</find>
+      <find>废弃</find>
+      <find>removeProjectData</find>
+      <find>addProject</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -139,7 +119,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/web/src/views/interface/project-document.vue" />
         <option value="$PROJECT_DIR$/src/main/master/mapping/ProjectMapper.py" />
         <option value="$PROJECT_DIR$/src/main/master/dao/ProjectDao.py" />
         <option value="$PROJECT_DIR$/src/main/master/service/impl/ProjectServiceImpl.py" />
@@ -148,11 +127,8 @@
         <option value="$PROJECT_DIR$/src/main/master/LogFiles/ProjectDao.log" />
         <option value="$PROJECT_DIR$/src/main/master/util/dbUtil/dbBaseHelper.py" />
         <option value="$PROJECT_DIR$/src/main/master/LogFiles/dbBaseHelper.log" />
-        <option value="$PROJECT_DIR$/src/main/master/mapping/InterfaceMapper.py" />
         <option value="$PROJECT_DIR$/src/main/master/LogFiles/InterfaceServiceImpl.log" />
         <option value="$PROJECT_DIR$/src/main/master/LogFiles/InterfaceDao.log" />
-        <option value="$PROJECT_DIR$/src/main/master/controller/InterfaceController.py" />
-        <option value="$PROJECT_DIR$/src/main/master/service/impl/InterfaceServiceImpl.py" />
         <option value="$PROJECT_DIR$/src/main/master/dao/InterfaceDao.py" />
         <option value="$PROJECT_DIR$/src/main/master/LogFiles/EnvironmentDao.log" />
         <option value="$PROJECT_DIR$/src/main/master/mapping/EnvironmentMapper.py" />
@@ -189,6 +165,10 @@
         <option value="$PROJECT_DIR$/src/main/web/src/router/router.js" />
         <option value="$PROJECT_DIR$/src/main/web/build/webpack.dev.config.js" />
         <option value="$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage.vue" />
+        <option value="$PROJECT_DIR$/src/main/master/controller/InterfaceController.py" />
+        <option value="$PROJECT_DIR$/src/main/master/service/impl/InterfaceServiceImpl.py" />
+        <option value="$PROJECT_DIR$/src/main/master/mapping/InterfaceMapper.py" />
+        <option value="$PROJECT_DIR$/src/main/web/src/views/interface/interface-edit.vue" />
         <option value="$PROJECT_DIR$/src/main/web/src/views/interface/interface-info.vue" />
       </list>
     </option>
@@ -392,7 +372,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="router" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -477,7 +461,8 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TestTBU_register" />
+    <property name="last_opened_file_path" value="C:/TestTBU_master" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -643,12 +628,12 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18710022" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16471216" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2109375" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20982143" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -699,30 +684,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/master/util/requestUtil/httpRequestUtil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="66" column="26" lean-forward="true" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/mapping/GroupMapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="683">
-          <caret line="55" column="57" lean-forward="false" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/controller/GroupController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="96" column="34" lean-forward="false" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/master/service/impl/GroupServiceImpl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="658">
@@ -755,26 +716,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/mapping/InterfaceMapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="43" column="103" lean-forward="false" selection-start-line="43" selection-start-column="103" selection-end-line="43" selection-end-column="103" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/master/LogFiles/dbBaseHelper.log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
           <caret line="797" column="0" lean-forward="false" selection-start-line="797" selection-start-column="0" selection-end-line="809" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/service/impl/InterfaceServiceImpl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="84" column="46" lean-forward="false" selection-start-line="84" selection-start-column="46" selection-end-line="84" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -1035,14 +980,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/router/router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/master/mapping/ProjectMapper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="605">
@@ -1059,30 +996,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/canEditTable.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6975">
-          <caret line="279" column="9" lean-forward="true" selection-start-line="279" selection-start-column="9" selection-end-line="279" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/controller/ProjectController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="109" column="49" lean-forward="false" selection-start-line="109" selection-start-column="26" selection-end-line="109" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/controller/InterfaceController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="106" column="40" lean-forward="false" selection-start-line="106" selection-start-column="35" selection-end-line="106" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/web/build/webpack.dev.config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="453">
@@ -1091,34 +1004,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/router/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="64" column="41" lean-forward="false" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/master/controller/ProjectController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/master/dao/InterfaceDao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="24" column="39" lean-forward="true" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/master/service/impl/InterfaceServiceImpl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-73">
+          <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/canEditTable.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5130">
+          <caret line="190" column="20" lean-forward="true" selection-start-line="190" selection-start-column="20" selection-end-line="190" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/master/mapping/InterfaceMapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="57" column="72" lean-forward="true" selection-start-line="57" selection-start-column="72" selection-end-line="57" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/master/controller/InterfaceController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="94" column="53" lean-forward="true" selection-start-line="94" selection-start-column="53" selection-end-line="94" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/master/controller/GroupController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="92" column="24" lean-forward="true" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="131" column="38" lean-forward="false" selection-start-line="131" selection-start-column="31" selection-end-line="131" selection-end-column="38" />
+        <state relative-caret-position="488">
+          <caret line="227" column="10" lean-forward="true" selection-start-line="175" selection-start-column="8" selection-end-line="227" selection-end-column="10" />
           <folding>
             <element signature="e#0#8771#0" expanded="false" />
-            <element signature="e#0#8771#0" expanded="false" />
-            <element signature="e#0#8771#0" expanded="false" />
-            <element signature="e#0#8771#0" expanded="false" />
-            <element signature="e#0#8771#0" expanded="false" />
-            <element signature="e#0#8771#0" expanded="false" />
-            <element signature="e#0#8771#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-edit.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="18" column="35" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#7699#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-info.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-399">
-          <caret line="155" column="29" lean-forward="true" selection-start-line="155" selection-start-column="29" selection-end-line="155" selection-end-column="29" />
+        <state relative-caret-position="341">
+          <caret line="232" column="8" lean-forward="true" selection-start-line="232" selection-start-column="8" selection-end-line="232" selection-end-column="8" />
           <folding>
-            <element signature="e#0#10250#0" expanded="false" />
-            <element signature="e#0#10250#0" expanded="false" />
-            <element signature="e#0#10250#0" expanded="false" />
-            <element signature="e#0#10250#0" expanded="false" />
-            <element signature="e#0#10250#0" expanded="false" />
-            <element signature="e#0#10250#0" expanded="false" />
-            <element signature="e#0#10250#0" expanded="false" />
+            <element signature="e#0#8865#0" expanded="false" />
           </folding>
         </state>
       </provider>

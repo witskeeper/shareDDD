@@ -17,33 +17,33 @@
                         </FormItem>
                         <FormItem label="Method" prop="method">
                             <Select v-model="formValidate.method" placeholder="Select interface method">
-                                <Option value="Get">Get</Option>
-                                <Option value="Post">Post</Option>
+                                <Option value=0>Get</Option>
+                                <Option value=1>Post</Option>
                             </Select>
                         </FormItem>
                         <FormItem label="Format" prop="format">
                             <RadioGroup v-model="formValidate.format">
-                                <Radio label="application/form-data">application/form-data</Radio>
-                                <Radio label="application/json">application/json</Radio>
+                                <Radio label=0>application/form-data</Radio>
+                                <Radio label=1>application/json</Radio>
                             </RadioGroup>
                         </FormItem>
-                        <FormItem label="Type" prop="type">
-                            <RadioGroup v-model="formValidate.type">
-                                <Radio label="json">json</Radio>
-                                <Radio label="view">view</Radio>
+                        <FormItem label="Type" prop="response_type">
+                            <RadioGroup v-model="formValidate.response_type">
+                                <Radio label=0>json</Radio>
+                                <Radio label=1>view</Radio>
                             </RadioGroup>
                         </FormItem>
                         <FormItem label="Params" prop="params">
                             <Input v-model="formValidate.params" type="textarea" :autosize="{minRows: 2,maxRows: 100}" placeholder="Request params..."></Input>
                         </FormItem>
-                        <FormItem label="Success" prop="success">
-                            <Input v-model="formValidate.success" type="textarea" :autosize="{minRows: 2,maxRows: 100}" placeholder="Success response..."></Input>
+                        <FormItem label="Success" prop="success_response">
+                            <Input v-model="formValidate.success_response" type="textarea" :autosize="{minRows: 2,maxRows: 100}" placeholder="Success response..."></Input>
                         </FormItem>
-                        <FormItem label="Failure" prop="failure">
-                            <Input v-model="formValidate.failure" type="textarea" :autosize="{minRows: 2,maxRows: 100}" placeholder="Failure response..."></Input>
+                        <FormItem label="Failure" prop="failure_response">
+                            <Input v-model="formValidate.failure_response" type="textarea" :autosize="{minRows: 2,maxRows: 100}" placeholder="Failure response..."></Input>
                         </FormItem>
-                        <FormItem label="Desc" prop="desc">
-                            <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 50}" placeholder="Enter your describe..."></Input>
+                        <FormItem label="Desc" prop="describe">
+                            <Input v-model="formValidate.describe" type="textarea" :autosize="{minRows: 2,maxRows: 50}" placeholder="Enter your describe..."></Input>
                         </FormItem>
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
@@ -60,13 +60,12 @@
                     </p>
                     <p class="margin-top-10">
                         <Icon type="android-time"></Icon>&nbsp;&nbsp;状&nbsp;&nbsp;&nbsp; 态：
-                        <Select size="small" style="width:90px" value="正常">
-                            <Option v-for="item in interfaceStateList" :value="item.value" :key="item.value">{{ item.value }}</Option>
+                        <Select v-model="interfaceStateList.status" placeholder="正常" style="width:150px;">
+                            <Option value=0>正常</Option>
+                            <Option value=1>弃用</Option>
                         </Select>
+                        <span class="publish-button"><Button @click="setStatus" style="width:90px;" type="primary">保存</Button></span>
                     </p>
-                    <Row class="margin-top-20">
-                        <span class="publish-button"><Button @click="handlePublish" style="width:90px;" type="primary">保存</Button></span>
-                    </Row>
                 </Card>
                 <div class="margin-top-10">
                     <Card>
@@ -83,21 +82,26 @@
 </template>
 
 <script>
+import axios  from 'axios';
 export default {
     name: 'interface-edit',
     data () {
         return {
-            interfaceStateList: [{value: '正常'}, {value: '废弃'}],
+            interfaceStateList: {status: ''},
             formValidate: {
                     name: '',
                     url: '',
                     method: '',
                     format: '',
-                    type: '',
+                    response_type: '',
                     params: '',
-                    success: '',
-                    failure:'',
-                    desc: ''
+                    success_response: '',
+                    failure_response:'',
+                    describe: '',
+                    create_userid:'',
+                    status:'',
+                    projectid:'',
+                    groupid:""
                 },
             ruleValidate: {
                 name: [
@@ -109,16 +113,16 @@ export default {
                 method: [
                         { required: true, message: 'The method cannot be empty', trigger: 'blur' }
                     ],
-                success: [
+                success_response: [
                         { required: true, message: 'The success cannot be empty', trigger: 'blur' }
                     ],
-                type: [
+                response_type: [
                         { required: true, message: 'Please select type', trigger: 'change' }
                     ],
                 format: [
                         { required: true, message: 'Please select format', trigger: 'change' }
                     ],
-                desc: [
+                describe: [
                         { required: true, message: 'Please enter a personal introduction', trigger: 'blur' },
                         { type: 'string', min: 10, message: 'Introduce no less than 10 words', trigger: 'blur' }
                     ]
@@ -126,13 +130,36 @@ export default {
         };
     },
     methods: {
-        handlePublish () {
-
+        getData(){
+            axios.get("/v1/interface/getInterfaceInfoById",{params:{interfaceId:this.$route.query.interfaceId}}
+                ).then((res)=>{
+                console.log(res)
+                console.log(this.interfaceId)
+                if(res.data.success){
+                    this.formValidate = res.data.message;
+                }else{
+                    this.$Message.error("获取数据失败")
+                }
+            }
+            )
+        },
+        setStatus () {
         },
         handleSubmit (name) {
             this.$refs[name].validate((valid) => {
                 if (valid) {
-                    this.$Message.success('Success!');
+                    this.formValidate.projectid=1
+                    this.formValidate.groupid=1
+                    axios.post("/v1/interface/addInterfaceItem",this.formValidate).then((res)=>{
+                        console.log(res)
+                        if(res.data.success){
+                            this.$Message.success("成功");
+                            this.$router.push({path:"/interface/interface-info",query:{id:1}});
+                        }else{
+                            this.$Message.error("失败")
+                        }
+                    }
+                    );
                 } else {
                     this.$Message.error('Fail!');
                 }
