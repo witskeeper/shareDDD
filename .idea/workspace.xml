@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89aa7f38-1636-468d-b4af-2db860d82534" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/LogFiles/ProjectDao.log" afterPath="$PROJECT_DIR$/src/main/master/LogFiles/ProjectDao.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/LogFiles/dbBaseHelper.log" afterPath="$PROJECT_DIR$/src/main/master/LogFiles/dbBaseHelper.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/LogFiles/dbBaseHelper.log_warn" afterPath="$PROJECT_DIR$/src/main/master/LogFiles/dbBaseHelper.log_warn" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/controller/InterfaceController.py" afterPath="$PROJECT_DIR$/src/main/master/controller/InterfaceController.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/mapping/InterfaceMapper.py" afterPath="$PROJECT_DIR$/src/main/master/mapping/InterfaceMapper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/service/impl/InterfaceServiceImpl.py" afterPath="$PROJECT_DIR$/src/main/master/service/impl/InterfaceServiceImpl.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/src/views/interface/interface-edit.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/interface-edit.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/master/service/impl/EnvironmentServiceImpl.py" afterPath="$PROJECT_DIR$/src/main/master/service/impl/EnvironmentServiceImpl.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/src/views/interface/interface-info.vue" afterPath="$PROJECT_DIR$/src/main/web/src/views/interface/interface-info.vue" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +26,8 @@
       <file leaf-file-name="interface-manage.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="227" column="10" lean-forward="true" selection-start-line="175" selection-start-column="8" selection-end-line="227" selection-end-column="10" />
+            <state relative-caret-position="434">
+              <caret line="98" column="44" lean-forward="true" selection-start-line="98" selection-start-column="44" selection-end-line="99" selection-end-column="64" />
               <folding>
                 <element signature="e#0#8771#0" expanded="false" />
               </folding>
@@ -36,13 +35,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="interface-info.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="interface-info.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-info.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="232" column="8" lean-forward="true" selection-start-line="232" selection-start-column="8" selection-end-line="232" selection-end-column="8" />
+            <state relative-caret-position="1809">
+              <caret line="230" column="10" lean-forward="true" selection-start-line="230" selection-start-column="10" selection-end-line="230" selection-end-column="10" />
               <folding>
-                <element signature="e#0#8865#0" expanded="false" />
+                <element signature="e#0#8858#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -51,8 +50,8 @@
       <file leaf-file-name="interface-edit.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-edit.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="18" column="35" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="35" />
+            <state relative-caret-position="3078">
+              <caret line="137" column="37" lean-forward="false" selection-start-line="137" selection-start-column="37" selection-end-line="137" selection-end-column="37" />
               <folding>
                 <element signature="e#0#7699#0" expanded="false" />
               </folding>
@@ -60,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GroupController.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/master/controller/GroupController.py">
+      <file leaf-file-name="environment-configuration.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="92" column="24" lean-forward="true" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
+            <state relative-caret-position="270">
+              <caret line="82" column="21" lean-forward="true" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -81,7 +80,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ruleValidate</find>
       <find>handleAdd</find>
       <find>formValidate</find>
       <find>formDynamic</find>
@@ -110,6 +108,7 @@
       <find>type</find>
       <find>废弃</find>
       <find>removeProjectData</find>
+      <find>addEnvironment</find>
       <find>addProject</find>
     </findStrings>
   </component>
@@ -119,7 +118,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/master/mapping/ProjectMapper.py" />
         <option value="$PROJECT_DIR$/src/main/master/dao/ProjectDao.py" />
         <option value="$PROJECT_DIR$/src/main/master/service/impl/ProjectServiceImpl.py" />
         <option value="$PROJECT_DIR$/src/main/master/LogFiles/ProjectController.log" />
@@ -133,7 +131,6 @@
         <option value="$PROJECT_DIR$/src/main/master/LogFiles/EnvironmentDao.log" />
         <option value="$PROJECT_DIR$/src/main/master/mapping/EnvironmentMapper.py" />
         <option value="$PROJECT_DIR$/src/main/master/dao/EnvironmentDao.py" />
-        <option value="$PROJECT_DIR$/src/main/master/service/impl/EnvironmentServiceImpl.py" />
         <option value="$PROJECT_DIR$/src/main/master/controller/EnvironmentController.py" />
         <option value="$PROJECT_DIR$/src/main/master/mapping/TestSuiteMapper.py" />
         <option value="$PROJECT_DIR$/src/main/master/dao/TestSuiteDao.py" />
@@ -155,7 +152,6 @@
         <option value="$PROJECT_DIR$/src/main/master/LogFiles/CaseContentController.log" />
         <option value="$PROJECT_DIR$/src/main/master/mapping/CaseContentMapper.py" />
         <option value="$PROJECT_DIR$/src/main/master/controller/CaseContentController.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/master/LogFiles/AssertDao.log" />
         <option value="$PROJECT_DIR$/src/main/master/LogFiles/AssertServiceImpl.log" />
         <option value="$PROJECT_DIR$/src/main/master/mapping/AssertMapper.py" />
@@ -169,7 +165,10 @@
         <option value="$PROJECT_DIR$/src/main/master/service/impl/InterfaceServiceImpl.py" />
         <option value="$PROJECT_DIR$/src/main/master/mapping/InterfaceMapper.py" />
         <option value="$PROJECT_DIR$/src/main/web/src/views/interface/interface-edit.vue" />
+        <option value="$PROJECT_DIR$/src/main/master/service/impl/EnvironmentServiceImpl.py" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/web/src/views/interface/interface-info.vue" />
+        <option value="$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.vue" />
       </list>
     </option>
   </component>
@@ -347,6 +346,40 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="interface" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareDDD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="environment" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -628,7 +661,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16471216" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20202559" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -684,54 +717,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/master/service/impl/GroupServiceImpl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="46" column="35" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/dao/GroupDao.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="53" column="35" lean-forward="false" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/controller/TestCaseController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="90" column="43" lean-forward="false" selection-start-line="90" selection-start-column="43" selection-end-line="90" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/mapping/TestCaseMapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="35" column="85" lean-forward="true" selection-start-line="35" selection-start-column="85" selection-end-line="35" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/LogFiles/dbBaseHelper.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="797" column="0" lean-forward="false" selection-start-line="797" selection-start-column="0" selection-end-line="809" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/master/LogFiles/CaseContentServiceImpl.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/master/dao/CaseContentDao.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -744,14 +729,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
           <caret line="20" column="66" lean-forward="false" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="107" column="32" lean-forward="true" selection-start-line="107" selection-start-column="32" selection-end-line="107" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -988,14 +965,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/testcase/test-collection/test-collection.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="100" lean-forward="false" selection-start-line="10" selection-start-column="74" selection-end-line="10" selection-end-column="100" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/web/build/webpack.dev.config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="453">
@@ -1068,20 +1037,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage.vue">
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/testcase/test-collection/test-collection.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="227" column="10" lean-forward="true" selection-start-line="175" selection-start-column="8" selection-end-line="227" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#8771#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="250">
+          <caret line="10" column="100" lean-forward="false" selection-start-line="10" selection-start-column="74" selection-end-line="10" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/testcase/test-collection/case-edit.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="14" column="32" lean-forward="true" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/testcase/test-collection/case-list.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="16" column="26" lean-forward="true" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="23" column="39" lean-forward="true" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/master/service/impl/EnvironmentServiceImpl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="22" column="32" lean-forward="false" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/master/controller/EnvironmentController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="82" column="42" lean-forward="false" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/master/mapping/EnvironmentMapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-edit.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="18" column="35" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="35" />
+        <state relative-caret-position="3078">
+          <caret line="137" column="37" lean-forward="false" selection-start-line="137" selection-start-column="37" selection-end-line="137" selection-end-column="37" />
           <folding>
             <element signature="e#0#7699#0" expanded="false" />
           </folding>
@@ -1090,11 +1105,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-info.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="232" column="8" lean-forward="true" selection-start-line="232" selection-start-column="8" selection-end-line="232" selection-end-column="8" />
+        <state relative-caret-position="1809">
+          <caret line="230" column="10" lean-forward="true" selection-start-line="230" selection-start-column="10" selection-end-line="230" selection-end-column="10" />
           <folding>
-            <element signature="e#0#8865#0" expanded="false" />
+            <element signature="e#0#8858#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/interface/interface-manage.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="98" column="44" lean-forward="true" selection-start-line="98" selection-start-column="44" selection-end-line="99" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#8771#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/src/views/environment/environment-configuration.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="82" column="21" lean-forward="true" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>

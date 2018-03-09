@@ -14,9 +14,9 @@ ALTER TABLE `user` ADD unique(`username`);
 CREATE TABLE `environment` (
 `id` int(11) NOT NULL auto_increment,
 `name` varchar(255) NOT NULL unique,
-`url` varchar(255) NOT NULL,
-`create_userid` int(11) NOT NULL,
-`create_username` varchar(255) NOT NULL,
+`url` varchar(255) default NULL,
+`create_userid` int(11) default NULL,
+`create_username` varchar(255) default NULL,
 `datatemplate` longtext default NULL,
 `dbname` varchar(255) DEFAULT NULL,
 `dbhostname` varchar(255) DEFAULT NULL,

@@ -6,14 +6,14 @@
     <div>
         <Row type="flex" class="height-100">
             <Col span="8">
-                <i-button type="success" @click="addProject" style="margin-top-10">添加环境</i-button>
+                <i-button type="success" @click="addEnvironment" style="margin-top-10">添加环境</i-button>
             </Col>
         </Row>
         <Row class="margin-top-10">
             <Col>
                 <Card>
                     <div>
-                        <Table border :columns="lsitColumns" :data="list" @on-row-click="onRowClick"></Table>
+                        <Table border :columns="lsitColumns" :data="list"></Table>
                     </div>
                 </Card>
             </Col>
@@ -58,7 +58,11 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.show(params.index)
+                                            let query = { id: params.row.id };
+                                            this.$router.push({
+                                                name: 'environmentId',
+                                                query: query
+                                            });
                                         }
                                     }
                                 }, '编辑'),
@@ -69,7 +73,8 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.remove(params.index)
+                                            this.removeEnvironmentData.Id = params.row.id
+                                            this.removeEnvironment()
                                         }
                                     }
                                 }, '删除')
@@ -78,20 +83,15 @@ export default {
                     }
             ],
             list:[],
-            addProjectData:{
+            addEnvironmentData:{
                     name:"",
-                    userName:"",
-                    userId:0
+                    userId:1
             }
         };
     },
     methods: {
-        onRowClick(rowData,index){
-                console.log(rowData)
-                this.$router.push({path:"/environment/environment-info",query:{environmentId:rowData.id}})
-        },
         getData () {
-                axios.get("http://localhost:8090/v1/project/getProjectList").then((res)=>{
+                axios.get("/v1/env/getEnvironmentInfos").then((res)=>{
                 console.log(res)
                 if(res.data.success){
                     this.list = res.data.message;
@@ -101,22 +101,22 @@ export default {
             }
             )
         },
-        addProject(){
+        addEnvironment(){
             this.$Modal.confirm({
                 onOk: () => {
-                       this.addProjectNet();
+                       this.addEnvironmentNet();
                     },
                     render: (h) => {
                     return h('div',[
                         h('Input', {
                             props: {
-                                value: this.addProjectData.name,
+                                value: this.addEnvironmentData.name,
                                 autofocus: true,
                                 placeholder: '环境名称'
                             },
                             on: {
                                 input: (val) => {
-                                    this.addProjectData.name = val;
+                                    this.addEnvironmentData.name = val;
                                 }
                             }
                         }),
@@ -124,11 +124,11 @@ export default {
                 }
             })
         },
-        addProjectNet(){
-            axios.post("http://localhost:8090/v1/project/addProject",
-            this.addProjectData
+        addEnvironmentNet(){
+            axios.post("/v1/env/addEnvironmentItem",
+            this.addEnvironmentData
             ).then((res)=>{
-                //console.log(res)
+                console.log(res)
                 if(res.data.success){
                     this.$Message.success("成功");
                     this.getData();
@@ -138,10 +138,9 @@ export default {
                 }
             }
             )
-            this.addProjectData = {
+            this.addEnvironmentData = {
                 name:"",
-                userName:"",
-                userId:0
+                userId:1
             };
         }
     },

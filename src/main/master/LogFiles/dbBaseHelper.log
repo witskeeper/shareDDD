@@ -1285,3 +1285,29 @@ ProgrammingError: (1064, 'You have an error in your SQL syntax; check the manual
 KeyError: 'interfaceId'
 
 2018-03-08 15:15:04,398 - dbBaseHelper - 31516 - ERROR - write - sql params [6] type is error,must be dict
+2018-03-09 17:58:27,707 - dbBaseHelper - 24528 - ERROR - write - write sql:
+        insert into environment (name,url,create_userid,datatemplate,dbname,dbhostname,dbport,dbusername,dbpasswd,gmt_create) 
+        values (%(name)s,%(url)s,%(userId)s,%(template)s,%(dbname)s,%(dbhostname)s,%(dbport)s,%(dbusername)s,%(dbpasswd)s,now())
+         args:{'dbusername': None, 'dbport': None, u'name': u'test', 'url': None, 'dbpasswd': None, 'template': None, 'dbname': None, 'dbhostname': None} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'userId'
+
+2018-03-09 17:58:49,517 - dbBaseHelper - 24528 - ERROR - write - write sql:
+        insert into environment (name,url,create_userid,datatemplate,dbname,dbhostname,dbport,dbusername,dbpasswd,gmt_create) 
+        values (%(name)s,%(url)s,%(userId)s,%(template)s,%(dbname)s,%(dbhostname)s,%(dbport)s,%(dbusername)s,%(dbpasswd)s,now())
+         args:{'dbusername': None, 'dbport': None, u'name': u'test', 'url': None, u'userId': 1, 'dbpasswd': None, 'template': None, 'dbname': None, 'dbhostname': None} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (1048, "Column 'url' cannot be null")
+

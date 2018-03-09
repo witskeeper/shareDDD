@@ -230,8 +230,8 @@ export default {
             })
         },
         addGroupNet(){
-        
-        }
+
+        },
         removeInterface(){
             axios.post("/v1/interface/deleteInterfaceItem",this.removeInterfaceData).then((res)=>{
                 console.log(this.removeInterfaceData)

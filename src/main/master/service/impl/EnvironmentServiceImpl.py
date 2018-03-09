@@ -19,6 +19,8 @@ class EnvironmentService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def addEnvironmentItem(self,args):
+        if "url" not in args:
+            args.setdefault("url",None)
         if "template" not in args:
             args.setdefault("template",None)
         else:
