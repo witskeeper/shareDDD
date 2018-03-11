@@ -60,7 +60,7 @@ export default {
                                         click: () => {
                                             let query = { id: params.row.id };
                                             this.$router.push({
-                                                name: 'environmentId',
+                                                name: 'environment-info',
                                                 query: query
                                             });
                                         }
@@ -73,7 +73,7 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.removeEnvironmentData.Id = params.row.id
+                                            this.removeEnvironmentData.envId = params.row.id
                                             this.removeEnvironment()
                                         }
                                     }
@@ -86,6 +86,9 @@ export default {
             addEnvironmentData:{
                     name:"",
                     userId:1
+            },
+            removeEnvironmentData:{
+                envId:""
             }
         };
     },
@@ -142,6 +145,21 @@ export default {
                 name:"",
                 userId:1
             };
+        },
+        removeEnvironment(){
+            axios.post("/v1/env/deleteEnvironmentItem",
+            this.removeEnvironmentData
+            ).then((res)=>{
+                console.log(res)
+                if(res.data.success){
+                    this.$Message.success("成功");
+                    this.getData();
+
+                }else{
+                    this.$Message.error("失败")
+                }
+            }
+            )
         }
     },
     created () {

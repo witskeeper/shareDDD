@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import axios  from 'axios';
 export default {
     name: 'environment-info',
     data () {
@@ -67,18 +68,12 @@ export default {
                     hostName:'',
                     port: '',
                     userName: '',
-                    passWord: ''
+                    passWord: '',
+                    envId:''
                 },
             ruleValidate: {
                 name: [
                         { required: true, message: 'The name cannot be empty', trigger: 'blur' }
-                    ],
-                url: [
-                        { required: true, message: 'The url cannot be empty', trigger: 'blur' }
-                    ],
-                data: [
-                        { required: true, message: 'Please enter the test data template', trigger: 'blur' },
-                        { type: 'string', min: 10, message: 'Introduce no less than 10 words', trigger: 'blur' }
                     ]
                 }
         };
@@ -87,9 +82,19 @@ export default {
         handleSubmit (name) {
             this.$refs[name].validate((valid) => {
                 if (valid) {
-                    this.$Message.success('Success!');
+                    this.formValidate.envId=this.$route.query.id
+                    axios.post("/v1/env/editEnvironmentItem",this.formValidate).then((res)=>{
+                        console.log(res)
+                        if(res.data.success){
+                            this.$Message.success("成功");
+                            this.$router.push({path:"/environment/environment-configuration"});
+                        }else{
+                            this.$Message.error("失败")
+                        }
+                    }
+                    );
                 } else {
-                    this.$Message.error('Fail!');
+                    this.$Message.error('失败!');
                 }
             })
         },

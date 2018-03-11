@@ -1311,3 +1311,28 @@ KeyError: 'userId'
     raise errorclass, errorvalue
 OperationalError: (1048, "Column 'url' cannot be null")
 
+2018-03-11 15:51:33,767 - dbBaseHelper - 6524 - ERROR - write - write sql:
+        insert into environment (name,url,create_userid,datatemplate,dbname,dbhostname,dbport,dbusername,dbpasswd,gmt_create) 
+        values (%(name)s,%(url)s,%(userId)s,%(template)s,%(dbname)s,%(dbhostname)s,%(dbport)s,%(dbusername)s,%(dbpasswd)s,now())
+         args:{'dbusername': None, 'dbport': None, u'name': u'envjsdie', 'url': None, u'userId': 1, 'dbpasswd': None, 'template': None, 'dbname': None, 'dbhostname': None} Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (1048, "Column 'url' cannot be null")
+
+2018-03-11 16:08:36,364 - dbBaseHelper - 6524 - ERROR - write - write sql:
+        delete from environment where id = %(envId)s
+         args:{u'Id': 7} Exception:Traceback (most recent call last):
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "c:\users\jessica\appdata\local\temp\easy_install-qvdkaj\MySQL_python-1.2.5-py2.7-win32.egg.tmp\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'envId'
+
