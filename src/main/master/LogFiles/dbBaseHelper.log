@@ -1336,3 +1336,63 @@ OperationalError: (1048, "Column 'url' cannot be null")
     for key, item in args.iteritems())
 KeyError: 'envId'
 
+2018-03-15 15:08:26,513 - dbBaseHelper - 20456 - ERROR - write - write sql:
+        insert into testsuite (name,testcaseids,create_userid,status,remarks,envid,gmt_create) 
+        values (%(name)s,%(caseIds)s,%(userId)s,%(status)s,%(remarks)s,%(envId)s,now())
+         args:{'remarks': None, 'status': None, u'userId': u'', u'name': u'test_pro4_ERP', 'testcaseids': None} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'caseIds'
+
+2018-03-15 15:08:45,394 - dbBaseHelper - 17940 - ERROR - write - write sql:
+        insert into testsuite (name,testcaseids,create_userid,status,remarks,envid,gmt_create) 
+        values (%(name)s,%(caseIds)s,%(userId)s,%(status)s,%(remarks)s,%(envId)s,now())
+         args:{'remarks': None, 'status': None, u'userId': u'', u'name': u'test_pro4_ERP', 'testcaseids': None} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'caseIds'
+
+2018-03-15 15:26:35,746 - dbBaseHelper - 17940 - ERROR - write - write sql:
+        update testsuite set name=%(name)s,update_userid=%(userId)s,testcaseids=%(caseIds)s,
+        status=%(status)s,remarks=%(remarks)s,envid=%(envId)s where id=%(suiteId)s
+         args:{'create_username': u'', 'status': 0, 'envid': 0L, u'name': u'test_pro4_ERP_dev', 'testcaseids': u'', 'gmt_modify': datetime.datetime(2018, 3, 15, 15, 19, 50), 'gmt_create': datetime.datetime(2018, 3, 15, 15, 19, 50), u'suiteId': 5, 'update_username': u'', 'remarks': u'', 'create_userid': 0L, 'id': 5L, 'update_userid': 0L} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'userId'
+
+2018-03-15 15:27:38,395 - dbBaseHelper - 15972 - ERROR - write - write sql:
+        update testsuite set name=%(name)s,update_userid=%(userId)s,testcaseids=%(caseIds)s,
+        status=%(status)s,remarks=%(remarks)s,envid=%(envId)s where id=%(suiteId)s
+         args:{'create_username': u'', 'status': 0, 'envid': 0L, u'name': u'test_pro4_ERP_dev', u'userId': u'', 'testcaseids': u'', 'gmt_modify': datetime.datetime(2018, 3, 15, 15, 19, 50), 'gmt_create': datetime.datetime(2018, 3, 15, 15, 19, 50), u'suiteId': 5, 'update_username': u'', 'remarks': u'', 'create_userid': 0L, 'id': 5L, 'update_userid': 0L} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'caseIds'
+
+2018-03-15 15:28:13,410 - dbBaseHelper - 20316 - ERROR - write - write sql:
+        update testsuite set name=%(name)s,update_userid=%(userId)s,testcaseids=%(caseIds)s,
+        status=%(status)s,remarks=%(remarks)s,envid=%(envId)s where id=%(suiteId)s
+         args:{'create_username': u'', 'status': 0, 'envid': 0L, u'name': u'test_pro4_ERP_dev', 'remarks': u'', u'userId': u'', 'testcaseids': u'', 'gmt_modify': datetime.datetime(2018, 3, 15, 15, 19, 50), 'gmt_create': datetime.datetime(2018, 3, 15, 15, 19, 50), u'suiteId': 5, u'caseIds': u'', 'update_username': u'', 'create_userid': 0L, 'id': 5L, 'update_userid': 0L} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'envId'
+
