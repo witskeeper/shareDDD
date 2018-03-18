@@ -187,6 +187,8 @@ export default {
             })
         },
         addTestSuiteNet(){
+            this.addTestSuiteData.userId=1,
+            this.addTestSuiteData.status=1,
             axios.post("/v1/suite/addTestSuite",
             this.addTestSuiteData
             ).then((res)=>{

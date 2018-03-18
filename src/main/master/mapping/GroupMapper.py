@@ -45,7 +45,6 @@ class GroupSQLMapper:
         getGroupInfoByParentGroupIdSQL="""
         select * from group_info where projectid = %(projectId)s and type = %(type)s and parent_groupid = %(parentGroupId)s
         """
-
         #SET SQL FOR DAO
         self.data.setdefault("addParentGroup",addParentGroupSQL)
         self.data.setdefault("addChildGroup", addChildGroupSQL)

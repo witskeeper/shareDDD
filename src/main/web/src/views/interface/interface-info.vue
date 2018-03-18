@@ -13,7 +13,7 @@
         <Row class="margin-top-20">
             <Col span="6">
                 <Card>
-                    <Tree :data="groupData" style="width:260px"></Tree>
+                    <Tree :data="groupData" :render="renderContent" style="width:260px"></Tree>
                 </Card>
             </Col>
             <Col span="18" class="padding-left-10">
@@ -32,7 +32,6 @@
 import axios  from 'axios';
 export default {
     name: 'interface-manage',
-
     data () {
         return {
             lsitColumns: [
@@ -97,7 +96,7 @@ export default {
                     }
                 }
             ],
-            list:[],
+            list: [],
             groupData: [
                 {
                     title: '项目名称',
@@ -136,25 +135,21 @@ export default {
                                         width: '40px'
                                     },
                                     on: {
-                                        click: () => { this.addGroup() }
+                                        click: () => { this.addGroup(data) }
                                     }
                                 })
                             ])
                         ]);
                     },
                     children: [
-                        {
-                            title: '父分组',
-                            expand: true,
-                            children: [
-                                {
-                                    title: '子分组'
-                                }
-                            ]
-                        }
-                    ]
+                    ],
+                    groupId: 0
                 }
             ],
+            buttonProps: {
+                type: 'ghost',
+                size: 'small'
+            },
             removeInterfaceData:{
                 interfaceId:""
             },
@@ -169,20 +164,24 @@ export default {
             axios.get("/v1/interface/getInterfaceInfosByProject",{params:{projectId:this.$route.query.id,groupId:1,offset:0,limit:10}}
                 ).then((res)=>{
                 console.log(res)
-                console.log(this.projectId)
+                console.log(this.$route.query.id)
                 if(res.data.success){
                     this.list = res.data.message;
                 }else{
-                    this.$Message.error("获取数据失败")
+                    this.$Message.error("获取数据失败");
                 }
             }
             )
         },
         getGroupData () {
             axios.get("/v1/group/getGroupInfoByProjectId",{params:{projectId:this.$route.query.id,type:0}}).then((res)=>{
-                console.log(res)
+                console.log(res);
                 if(res.data.success){
-                    this.groupData = res.data.message;
+                    const that =this;
+                    res.data.message.forEach(function(item){
+                        console.log(item);
+                        that.groupData.push(item);
+                    });
                 }else{
                     this.$Message.error("获取数据失败")
                 }
@@ -191,25 +190,19 @@ export default {
         addInterface(){
             this.$router.push({path:"/interface/interface-edit",query:{interfaceId:""}})
         },
-        addGroup(){
+        addGroup(data){
+            alert(JSON.stringify(data));
             this.$Modal.confirm({
                 onOk: () => {
-                       this.addGroupNet();
+                       data["name"]=this.addGroupData.name;
+                       data["userId"]=1;
+                       data["type"]="0";
+                       data["parentGroupId"]=data["groupId"];
+                       data["isChild"]=1;
+                       this.addGroupNet(data);
                     },
                     render: (h) => {
                     return h('div',[
-                        h('Input', {
-                            props: {
-                                value: this.addGroupData.parent_groupid,
-                                autofocus: true,
-                                placeholder: '父分组'
-                            },
-                            on: {
-                                input: (val) => {
-                                    this.addGroupData.parent_groupid = val;
-                                }
-                            }
-                        }),
                         h('Input', {
                             props: {
                                 value: this.addGroupData.name,
@@ -227,10 +220,95 @@ export default {
                         })
                     ])
                 }
-            })
+            });
         },
-        addGroupNet(){
+        removeGroup(root,node,data){
+            alert(JSON.stringify(root));
+            alert(JSON.stringify(node));
+            axios.post("/v1/group/deleteGroup",data).then((res)=>{
+                console.log(data);
+                console.log(res);
+                if(res.data.success){
+                    this.$Message.success("删除成功");
+                    const parentKey = root.find(el => el === node).parent;
+                    const parent = root.find(el => el.nodeKey === parentKey).node;
+                    const index = parent.children.indexOf(data);
+                    parent.children.splice(index, 1);
+                    this.getGroupData();
+                }else{
+                    this.$Message.error("删除数据失败");
+                }
+            });
+        },
+        renderContent (h, { root, node, data }) {
+            return h('span', {
+                    style: {
+                        display: 'inline-block',
+                        width: '100%'
+                    }
+                }, [
+                    h('span', [
+                        h('Icon', {
+                            props: {
+                                type: 'ios-paper-outline'
+                            },
+                            style: {
+                                marginRight: '8px'
+                            }
+                        }),
+                        h('span', data.name)
+                    ]),
+                    h('span', {
+                        style: {
+                            display: 'inline-block',
+                            float: 'right',
+                            marginRight: '32px'
+                        }
+                    }, [
+                        h('Button', {
+                            props: Object.assign({}, this.buttonProps, {
+                                icon: 'ios-plus-empty'
+                            }),
+                            style: {
+                                marginRight: '8px'
+                            },
+                            on: {
+                                click: () => { this.addGroup(data) }
+                            }
+                        }),
+                        h('Button', {
+                            props: Object.assign({}, this.buttonProps, {
+                                icon: 'ios-minus-empty'
+                            }),
+                            on: {
+                                click: () => { this.removeGroup(root, node, data) }
+                            }
+                        })
+                    ])
+                ]);
+            },
+        addGroupNet(data){
+            alert(JSON.stringify(data));
+            data["projectId"]=this.$route.query.id;
+            axios.post("/v1/group/addChildGroup",data).then((res)=>{
+                console.log(data);
+                console.log(res)
+                if(res.data.success){
+                    this.$Message.success("添加成功");
+                    const children = data.children || [];
+                    alert(JSON.stringify(res.data.message));
+                    children.push({
+                       title: res.data.message.name,
+                       expand: true,
+                       groupId: res.data.message.id
 
+                    });
+                    this.$set(data, 'children', children);
+                    this.getData();
+                }else{
+                    this.$Message.error("添加数据失败");
+                }
+            })
         },
         removeInterface(){
             axios.post("/v1/interface/deleteInterfaceItem",this.removeInterfaceData).then((res)=>{
@@ -247,6 +325,8 @@ export default {
     },
     created () {
         this.getData();
+        this.getGroupData();
+
     },
 };
 </script>

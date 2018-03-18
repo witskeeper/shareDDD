@@ -27,7 +27,19 @@ class GroupService(object):
 
     def addChildGroup(self, args):
         logger.error("args={0}".format(args))
+        if 'ischild' not in args:
+            args.setdefault("ischild",None)
+        if 'parent_groupid' not in args:
+            args.setdefault("parent_groupid", None)
+        if "children" in args:
+            args.pop("children")
         dataResult = self.GroupDaoInterface.addChildGroup(args)
+        if dataResult.getSuccess():
+            dataResult = self.GroupDaoInterface.getGroupInfoByName(args)
+            if dataResult.getSuccess() and len(dataResult.getMessage())>0:
+                dataResult.setMessage(dataResult.getMessage()[0])
+            else:
+                dataResult.setSuccess(False)
         return dataResult
 
     def editGroup(self,args):
@@ -35,10 +47,40 @@ class GroupService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def getGroupInfoByProjectId(self,projectId,type=0):
+        treeResult = DataResult()
+        trees =[]
         args={}
         args.setdefault("projectId",projectId)
         args.setdefault("type", type)
-        return self.GroupDaoInterface.getGroupInfoByProjectId(args)
+        args.setdefault("parentGroupId",0)
+        #先查根结点
+        dataResult = self.GroupDaoInterface.getGroupInfoByParentGroupId(args)
+        if dataResult.getSuccess():
+            for item in dataResult.getMessage():
+                data={}
+                data["children"]=[]
+                data["name"]=item["name"]
+                data["expand"]=True
+                data["parentGroupId"]=item["parent_groupid"]
+                data["groupId"]=item["id"]
+                #查找子节点
+                args.pop("parentGroupId")
+                args.setdefault("parentGroupId",item["id"])
+                sonNodes = self.GroupDaoInterface.getGroupInfoByParentGroupId(args)
+                if sonNodes.getSuccess():
+                    for sonItem in sonNodes.getMessage():
+                        sonData={}
+                        sonData["children"] = []
+                        sonData["name"] = sonItem["name"]
+                        sonData["expand"] = True
+                        sonData["parentGroupId"] = sonItem["parent_groupid"]
+                        sonData["groupId"] = sonItem["id"]
+                        data["children"].append(sonItem)
+                trees.append(data)
+        treeResult.setMessage(trees)
+        treeResult.setSuccess(True)
+        return treeResult
+
 
     @AdminDecoratorServer.execImplDecorator()
     def deleteGroup(self,args):
