@@ -24,14 +24,13 @@
                 </Card>
             </Col>
         </Row>
-
     </div>
 </template>
 
 <script>
 import axios  from 'axios';
 export default {
-    name: 'interface-manage',
+    name: 'interface-info',
     data () {
         return {
             lsitColumns: [
@@ -72,7 +71,7 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        let query = {interfaceId: params.row.id}
+                                        let query = {projectId:this.$route.query.id,interfaceId: params.row.id}
                                         this.$router.push({
                                             name:'interface-edit',
                                             query:query
@@ -99,7 +98,7 @@ export default {
             list: [],
             groupData: [
                 {
-                    title: '项目名称',
+                    title: '分组名称',
                     expand: true,
                     render: (h, { root, node, data }) => {
                         return h('span', {
@@ -188,7 +187,7 @@ export default {
             })
         },
         addInterface(){
-            this.$router.push({path:"/interface/interface-edit",query:{interfaceId:""}})
+            this.$router.push({path:"/interface/interface-edit",query:{projectId:this.$route.query.id,interfaceId:""}})
         },
         addGroup(data){
             alert(JSON.stringify(data));

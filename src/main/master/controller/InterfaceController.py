@@ -61,7 +61,8 @@ class InterfaceHandler(tornado.web.RequestHandler):
                 'deleteInterfaceItem':lambda :self.deleteInterfaceItem(),
                 'updateInterfaceItem': lambda : self.updateInterfaceItem(),
                 'enableInterfaceItem': lambda: self.enableInterfaceItem(),
-                'disableInterfaceItem': lambda: self.disableInterfaceItem()
+                'disableInterfaceItem': lambda: self.disableInterfaceItem(),
+                'setInterfaceGroup': lambda :self.setInterfaceGroup(),
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -106,3 +107,6 @@ class InterfaceHandler(tornado.web.RequestHandler):
         offset = self.get_argument('offset')
         limit = self.get_argument('limit')
         return InterfaceService().getInterfaceInfosByProject(projectId,groupId,offset,limit)
+
+    def setInterfaceGroup(self):
+        return InterfaceService().setInterfaceGroup(json.loads(self.request.body))

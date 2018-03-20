@@ -105,3 +105,5 @@ class InterfaceService(object):
         args.setdefault("limit", int(limit))
         return self.interfaceDaoInterface.getInterfaceInfosByProject(args)
 
+    def setInterfaceGroup(self,args):
+        return self.interfaceDaoInterface.setInterfaceGroup(args)

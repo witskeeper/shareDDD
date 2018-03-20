@@ -35,7 +35,8 @@ class GroupHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'getGroupInfoByProjectId' : lambda : self.getGroupInfoByProjectId()
+                'getGroupInfoByProjectId' : lambda : self.getGroupInfoByProjectId(),
+                'getGroupByProjectId' : lambda :self.getGroupByProjectId()
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -95,3 +96,8 @@ class GroupHandler(tornado.web.RequestHandler):
 
     def getGroupInfoByParentGroupId(self):
         return GroupService().getGroupInfoByParentGroupId(self.request.body)
+
+    def getGroupByProjectId(self):
+        projectId = self.get_argument('projectId')
+        type = self.get_argument('type')
+        return GroupService().getGroupByProjectId(projectId, type)

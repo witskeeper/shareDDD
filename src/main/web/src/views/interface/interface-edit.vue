@@ -71,9 +71,19 @@
                     <Card>
                         <p slot="title">
                             <Icon type="navicon-round"></Icon>
+                            选择分组
+                        </p>
+                        <p type="card">
+                            <Tree :data="groupList" @on-check-change="setInterfaceInGroup" show-checkbox ref="tree"></Tree>
+                        </p>
+                    </Card>
+                </div>
+                <div class="margin-top-10">
+                    <Card>
+                        <p slot="title">
+                            <Icon type="compose"></Icon>
                             修改记录
                         </p>
-
                     </Card>
                 </div>
             </Col>
@@ -89,20 +99,20 @@ export default {
         return {
             interfaceStateList: {status: ''},
             formValidate: {
-                    name: '',
-                    url: '',
-                    method: '',
-                    format: '',
-                    response_type: '',
-                    params: '',
-                    success_response: '',
-                    failure_response:'',
-                    describe: '',
-                    create_userid:'',
-                    status:'',
-                    projectid:'',
-                    groupid:""
-                },
+                name: '',
+                url: '',
+                method: '',
+                format: '',
+                response_type: '',
+                params: '',
+                success_response: '',
+                failure_response:'',
+                describe: '',
+                create_userid:'',
+                status:'',
+                projectid:'',
+                groupid:""
+            },
             ruleValidate: {
                 name: [
                         { required: true, message: 'The name cannot be empty', trigger: 'blur' }
@@ -126,7 +136,31 @@ export default {
                         { required: true, message: 'Please enter a personal introduction', trigger: 'blur' },
                         { type: 'string', min: 10, message: 'Introduce no less than 10 words', trigger: 'blur' }
                     ]
-                }
+                },
+            groupList:[],
+            setStatusData:{
+                interfaceId:'',
+                status:''
+            },
+            setGroupData:{
+                interfaceId:'',
+                groupId:''
+            },
+            placeholderData:{
+                name: '',
+                url: '',
+                method: '',
+                format: '',
+                response_type: '',
+                params: '',
+                success_response: '',
+                failure_response:'',
+                describe: '',
+                create_userid:'',
+                status:'',
+                projectid:'',
+                groupid:""
+            }
         };
     },
     methods: {
@@ -136,19 +170,44 @@ export default {
                 console.log(res)
                 console.log(this.interfaceId)
                 if(res.data.success){
-                    this.formValidate = res.data.message;
+                    this.placeholderData = res.data.message;
                 }else{
                     this.$Message.error("获取数据失败")
                 }
             }
             )
         },
-        setStatus () {
+        getGroupList(){
+            axios.get("/v1/group/getGroupByProjectId",{params:{projectId:this.$route.query.projectId,type:0}}).then((res)=>{
+                console.log(res);
+                if(res.data.success){
+                    const that =this;
+                    res.data.message.forEach(function(item){
+                        console.log(item);
+                        that.groupList.push(item);
+                    });
+                }else{
+                    this.$Message.error("获取数据失败")
+                }
+            })
+        },
+        setStatus(){
+            this.setStatusData.status=this.interfaceStateList.status
+            this.setStatusData.interfaceId=this.$route.query.interfaceId
+            axios.post("/v1/interface/enableInterfaceItem",this.setStatusData).then((res)=>{
+                console.log(res);
+                if(res.data.success){
+                    console.log(data)
+                    this.$Message.success("设置成功");
+                }else{
+                    this.$Message.error("设置失败")
+                }
+            })
         },
         handleSubmit (name) {
             this.$refs[name].validate((valid) => {
                 if (valid) {
-                    this.formValidate.projectid=1
+                    this.formValidate.projectid=this.$route.query.projectId
                     this.formValidate.groupid=1
                     axios.post("/v1/interface/addInterfaceItem",this.formValidate).then((res)=>{
                         console.log(res)
@@ -167,7 +226,25 @@ export default {
         },
         handleReset (name) {
             this.$refs[name].resetFields();
+        },
+        setInterfaceInGroup(){
+            console.log(this.$refs.tree.getCheckedNodes())
+            const groupCheckedData=this.$refs.tree.getCheckedNodes()
+            this.setGroupData.groupId=this.$refs.tree.getCheckedNodes()[0].groupId
+            this.setGroupData.interfaceId=this.$route.query.interfaceId
+            axios.post("/v1/interface/setInterfaceGroup",this.setGroupData).then((res)=>{
+                console.log(res);
+                if(res.data.success){
+                    this.$Message.success("设置成功");
+                }else{
+                    this.$Message.error("设置失败")
+                }
+            })
         }
+    },
+    created () {
+        this.getData();
+        this.getGroupList();
     },
 };
 </script>

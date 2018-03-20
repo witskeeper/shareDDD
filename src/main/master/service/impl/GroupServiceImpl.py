@@ -75,7 +75,7 @@ class GroupService(object):
                         sonData["expand"] = True
                         sonData["parentGroupId"] = sonItem["parent_groupid"]
                         sonData["groupId"] = sonItem["id"]
-                        data["children"].append(sonItem)
+                        data["children"].append(sonData)
                 trees.append(data)
         treeResult.setMessage(trees)
         treeResult.setSuccess(True)
@@ -88,3 +88,38 @@ class GroupService(object):
 
     def getGroupInfoByParentGroupId(self,args):
         return self.GroupDaoInterface.getGroupInfoByParentGroupId(args)
+
+    def getGroupByProjectId(self,projectId,type):
+        treeResult = DataResult()
+        trees =[]
+        args={}
+        args.setdefault("projectId",projectId)
+        args.setdefault("type", type)
+        args.setdefault("parentGroupId",0)
+        #先查根结点
+        dataResult = self.GroupDaoInterface.getGroupInfoByParentGroupId(args)
+        if dataResult.getSuccess():
+            for item in dataResult.getMessage():
+                data={}
+                data["children"]=[]
+                data["title"]=item["name"]
+                data["expand"]=True
+                data["parentGroupId"]=item["parent_groupid"]
+                data["groupId"]=item["id"]
+                #查找子节点
+                args.pop("parentGroupId")
+                args.setdefault("parentGroupId",item["id"])
+                sonNodes = self.GroupDaoInterface.getGroupInfoByParentGroupId(args)
+                if sonNodes.getSuccess():
+                    for sonItem in sonNodes.getMessage():
+                        sonData={}
+                        sonData["children"] = []
+                        sonData["title"] = sonItem["name"]
+                        sonData["expand"] = True
+                        sonData["parentGroupId"] = sonItem["parent_groupid"]
+                        sonData["groupId"] = sonItem["id"]
+                        data["children"].append(sonData)
+                trees.append(data)
+        treeResult.setMessage(trees)
+        treeResult.setSuccess(True)
+        return treeResult

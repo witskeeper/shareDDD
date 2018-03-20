@@ -25,7 +25,7 @@
                             <Button type="primary" @click="selectInterface" >select Interface </Button>
                         </FormItem>
                         <FormItem label="Url">
-                            <Row>
+                            <Row :gutter="8">
                                 <Col span="2">
                                     <FormItem prop="method">
                                         <Select v-model="formValidate.method" placeholder="Get">
@@ -126,31 +126,8 @@
                         </Select>
                     </p>
                     <p class="margin-top-10">
-                        <Icon type="eye"></Icon>&nbsp;&nbsp;公开度：&nbsp;<b>{{ Openness }}</b>
-                        <Button v-show="!editOpenness" size="small" @click="handleEditOpenness" type="text">修改</Button>
-                        <transition name="openness-con">
-                            <div v-show="editOpenness">
-                                <RadioGroup v-model="currentOpenness" vertical>
-                                    <Radio label="公开">
-                                        公开
-                                        <Checkbox v-show="currentOpenness === '公开'" v-model="topArticle">在首页置顶这篇文章</Checkbox>
-                                    </Radio>
-                                    <Radio label="密码">
-                                        密码
-                                        <Input v-show="currentOpenness === '密码'" style="width:120px" size="small" placeholder="请输入密码"/>
-                                    </Radio>
-                                    <Radio label="私密"></Radio>
-                                </RadioGroup>
-                                <div>
-                                    <Button type="primary" @click="handleSaveOpenness">确认</Button>
-                                    <Button type="ghost" @click="cancelEditOpenness">取消</Button>
-                                </div>
-                            </div>
-                        </transition>
-                    </p>
-                    <p class="margin-top-10">
                         <Icon type="ios-calendar-outline"></Icon>&nbsp;&nbsp;
-                        <span v-if="publishTimeType === 'immediately'">立即发布</span><span v-else>定时：{{ publishTime }}</span>
+                        <span v-if="publishTimeType === 'immediately'">选择环境</span><span v-else>定时：{{ publishTime }}</span>
                         <Button v-show="!editPublishTime" size="small" @click="handleEditPublishTime" type="text">修改</Button>
                         <transition name="publish-time">
                             <div v-show="editPublishTime" class="publish-time-picker-con">
@@ -237,10 +214,7 @@ export default {
     data () {
         return {
             interfaceStateList: [{value: '正常'}, {value: '禁用'}],
-            editOpenness: false,
             Openness: '公开',
-            currentOpenness: '公开',
-            topArticle: false,
             publishTime: '',
             publishTimeType: 'immediately',
             editPublishTime: false, // 是否正在编辑发布时间
@@ -298,17 +272,7 @@ export default {
         };
     },
     methods: {
-        handleEditOpenness () {
-            this.editOpenness = !this.editOpenness;
-        },
-        handleSaveOpenness () {
-            this.Openness = this.currentOpenness;
-            this.editOpenness = false;
-        },
-        cancelEditOpenness () {
-            this.currentOpenness = this.Openness;
-            this.editOpenness = false;
-        },
+
         handleEditPublishTime () {
             this.editPublishTime = !this.editPublishTime;
         },

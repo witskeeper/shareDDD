@@ -59,3 +59,9 @@ class InterfaceDaoInterface:
         sql = InterfaceSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate = DbBaseHelper(sql, args)
         return daoOperate.write()
+
+    def setInterfaceGroup(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = InterfaceSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.write()

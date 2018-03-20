@@ -64,6 +64,10 @@ class InterfaceSQLMapper:
         select * from interface where projectid=%(projectId)s and groupid=%(groupId)s 
         order by id desc limit %(offset)s,%(limit)s
         """
+        setInterfaceGroupSQL="""
+        update interface set groupid=%(groupId)s where id = %(interfaceId)s
+        """
+
         #SET SQL FOR DAO
         self.data.setdefault("addInterfaceItem",addInterfaceItemSQL)
         self.data.setdefault("deleteInterfaceItem",deleteInterfaceItemSQL)
@@ -72,5 +76,4 @@ class InterfaceSQLMapper:
         self.data.setdefault("enableInterfaceItem", enableInterfaceItemSQL)
         self.data.setdefault("disableInterfaceItem", disableInterfaceItemSQL)
         self.data.setdefault("getInterfaceInfosByProject", getInterfaceInfosByProjectSQL)
-
-
+        self.data.setdefault("setInterfaceGroup",setInterfaceGroupSQL)
