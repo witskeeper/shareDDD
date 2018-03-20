@@ -39,9 +39,9 @@ class InterfaceSQLMapper:
         #WRITE SQL FOR API
         addInterfaceItemSQL="""
         insert into interface (name,url,create_userid,interface_describe,params,success_response,failure_response,
-        method,format,response_type,status,remarks,projectid,groupid,gmt_create) 
+        method,format,response_type,status,remarks,projectid,groupid,gmt_create,create_username) 
         values (%(name)s,%(url)s,%(create_userid)s,%(describe)s,%(params)s,%(success_response)s,%(failure_response)s,
-        %(method)s,%(format)s,%(response_type)s,%(status)s,%(remarks)s,%(projectid)s,%(groupid)s,now())
+        %(method)s,%(format)s,%(response_type)s,%(status)s,%(remarks)s,%(projectid)s,%(groupid)s,now(),%(create_username)s)
         """
         updateInterfaceItemSQL="""
         update interface set name=%(name)s,url=%(url)s,update_userid=%(userId)s,interface_describe=%(describe)s,

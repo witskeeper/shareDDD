@@ -23,14 +23,14 @@
                         </FormItem>
                         <FormItem label="Format" prop="format">
                             <RadioGroup v-model="formValidate.format">
-                                <Radio label=0>application/form-data</Radio>
-                                <Radio label=1>application/json</Radio>
+                                <Radio label="0">application/form-data</Radio>
+                                <Radio label="1">application/json</Radio>
                             </RadioGroup>
                         </FormItem>
                         <FormItem label="Type" prop="response_type">
                             <RadioGroup v-model="formValidate.response_type">
-                                <Radio label=0>json</Radio>
-                                <Radio label=1>view</Radio>
+                                <Radio label="0">json</Radio>
+                                <Radio label="1">view</Radio>
                             </RadioGroup>
                         </FormItem>
                         <FormItem label="Params" prop="params">
@@ -60,11 +60,10 @@
                     </p>
                     <p class="margin-top-10">
                         <Icon type="android-time"></Icon>&nbsp;&nbsp;状&nbsp;&nbsp;&nbsp; 态：
-                        <Select v-model="interfaceStateList.status" placeholder="正常" style="width:150px;">
+                        <Select v-model="formValidate.status" placeholder="正常" style="width:150px;">
                             <Option value=0>正常</Option>
                             <Option value=1>弃用</Option>
                         </Select>
-                        <span class="publish-button"><Button @click="setStatus" style="width:90px;" type="primary">保存</Button></span>
                     </p>
                 </Card>
                 <div class="margin-top-10">
@@ -108,8 +107,8 @@ export default {
                 success_response: '',
                 failure_response:'',
                 describe: '',
-                create_userid:'',
-                status:'',
+                create_userid:1,
+                status: 0,
                 projectid:'',
                 groupid:""
             },
@@ -138,10 +137,6 @@ export default {
                     ]
                 },
             groupList:[],
-            setStatusData:{
-                interfaceId:'',
-                status:''
-            },
             setGroupData:{
                 interfaceId:'',
                 groupId:''
@@ -156,7 +151,7 @@ export default {
                 success_response: '',
                 failure_response:'',
                 describe: '',
-                create_userid:'',
+                create_userid:1,
                 status:'',
                 projectid:'',
                 groupid:""
@@ -191,24 +186,14 @@ export default {
                 }
             })
         },
-        setStatus(){
-            this.setStatusData.status=this.interfaceStateList.status
-            this.setStatusData.interfaceId=this.$route.query.interfaceId
-            axios.post("/v1/interface/enableInterfaceItem",this.setStatusData).then((res)=>{
-                console.log(res);
-                if(res.data.success){
-                    console.log(data)
-                    this.$Message.success("设置成功");
-                }else{
-                    this.$Message.error("设置失败")
-                }
-            })
-        },
         handleSubmit (name) {
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     this.formValidate.projectid=this.$route.query.projectId
-                    this.formValidate.groupid=1
+                    if(this.formValidate.groupid ==""){
+                       this.$Message.error("请选择分组")
+                       return
+                    }
                     axios.post("/v1/interface/addInterfaceItem",this.formValidate).then((res)=>{
                         console.log(res)
                         if(res.data.success){
@@ -230,16 +215,7 @@ export default {
         setInterfaceInGroup(){
             console.log(this.$refs.tree.getCheckedNodes())
             const groupCheckedData=this.$refs.tree.getCheckedNodes()
-            this.setGroupData.groupId=this.$refs.tree.getCheckedNodes()[0].groupId
-            this.setGroupData.interfaceId=this.$route.query.interfaceId
-            axios.post("/v1/interface/setInterfaceGroup",this.setGroupData).then((res)=>{
-                console.log(res);
-                if(res.data.success){
-                    this.$Message.success("设置成功");
-                }else{
-                    this.$Message.error("设置失败")
-                }
-            })
+            this.formValidate.groupid = this.$refs.tree.getCheckedNodes()[0].groupId
         }
     },
     created () {
