@@ -13,7 +13,7 @@
         <Row class="margin-top-20">
             <Col span="6">
                 <Card>
-                    <Tree :data="groupData" :render="renderContent" style="width:260px"></Tree>
+                    <Tree :data="groupData" show-checkbox :render="renderContent" style="width:260px" @on-check-change="getInterfaceInfosByGroupId" ref="tree"></Tree>
                 </Card>
             </Col>
             <Col span="18" class="padding-left-10">
@@ -100,6 +100,7 @@ export default {
                 {
                     title: '分组名称',
                     expand: true,
+                    checked: true,
                     render: (h, { root, node, data }) => {
                         return h('span', {
                             style: {
@@ -159,12 +160,13 @@ export default {
         };
     },
     methods: {
-        getData () {
-            axios.get("/v1/interface/getInterfaceInfosByProject",{params:{projectId:this.$route.query.id,groupId:1,offset:0,limit:10}}
+        getData (group_id) {
+            axios.get("/v1/interface/getInterfaceInfosByProject",{params:{projectId:this.$route.query.id,groupId: group_id,offset:0,limit:10}}
                 ).then((res)=>{
                 console.log(res)
                 console.log(this.$route.query.id)
                 if(res.data.success){
+                    this.list = []
                     this.list = res.data.message;
                 }else{
                     this.$Message.error("获取数据失败");
@@ -303,7 +305,6 @@ export default {
 
                     });
                     this.$set(data, 'children', children);
-                    this.getData();
                 }else{
                     this.$Message.error("添加数据失败");
                 }
@@ -315,15 +316,19 @@ export default {
                 console.log(res)
                 if(res.data.success){
                     this.$Message.success("删除成功");
-                    this.getData();
                 }else{
                     this.$Message.error("删除数据失败")
                 }
             })
+        },
+        getInterfaceInfosByGroupId(){
+            const groupCheckedData=this.$refs.tree.getCheckedNodes()
+            const testData= groupCheckedData[groupCheckedData.length-1]
+            alert(JSON.stringify(testData))
+            this.getData(testData["groupId"])
         }
     },
     created () {
-        this.getData();
         this.getGroupData();
 
     },

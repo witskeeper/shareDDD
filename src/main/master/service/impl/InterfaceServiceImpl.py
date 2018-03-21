@@ -45,6 +45,7 @@ class InterfaceService(object):
             args.setdefault("remarks",None)
         # logger.error(args.get("params"))
         # logger.error(type(args.get("success_response")))
+        args.setdefault("create_username","jessica")
         return self.interfaceDaoInterface.addInterfaceItem(args)
 
     @AdminDecoratorServer.execImplDecorator()
