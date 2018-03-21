@@ -36,7 +36,8 @@ class EnvironmentHandler(tornado.web.RequestHandler):
         try:
             tasks = {
                 'getEnvironmentInfoById' : lambda : self.getEnvironmentInfoById(),
-                'getEnvironmentInfos' : lambda : self.getEnvironmentInfos()
+                'getEnvironmentInfos' : lambda : self.getEnvironmentInfos(),
+                'getEnvironmentInfoByUserId': lambda :self.getEnvironmentInfoByUserId()
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -91,3 +92,7 @@ class EnvironmentHandler(tornado.web.RequestHandler):
 
     def getEnvironmentInfos(self):
         return EnvironmentService().getEnvironmentInfos()
+
+    def getEnvironmentInfoByUserId(self):
+        useId = self.get_argument('userId')
+        return EnvironmentService().getEnvironmentInfosByUserId(useId)

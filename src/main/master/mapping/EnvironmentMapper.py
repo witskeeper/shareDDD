@@ -51,10 +51,15 @@ class EnvironmentSQLMapper:
         select * from environment
         """
 
+        getEnvironmentInfosByUserIdSQL="""
+        select * from environment where create_userid=%(userId)s
+        """
+
         #SET SQL FOR DAO
         self.data.setdefault("addEnvironmentItem",addEnvironmentItemSQL)
         self.data.setdefault("deleteEnvironmentItem",deleteEnvironmentItemSQL)
         self.data.setdefault("editEnvironmentItem",editEnvironmentItemSQL)
         self.data.setdefault("getEnvironmentInfoById",getEnvironmentInfoByIdSQL)
         self.data.setdefault("getEnvironmentInfos", getEnvironmentInfosSQL)
+        self.data.setdefault("getEnvironmentInfosByUserId",getEnvironmentInfosByUserIdSQL)
 

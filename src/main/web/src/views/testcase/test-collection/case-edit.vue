@@ -171,14 +171,7 @@ export default {
         return {
             caseStateList: {status: ''},
             articleTagSelected: [], // 文章选中的标签
-            articleTagList: [
-                {value: 'vue'},
-                {value: 'iview'},
-                {value: 'ES6'},
-                {value: 'webpack'},
-                {value: 'babel'},
-                {value: 'eslint'}
-            ], // 所有标签列表
+            articleTagList:[], // 所有标签列表
 
 
             index: 1,
@@ -234,8 +227,7 @@ export default {
                 }else{
                     this.$Message.error("获取数据失败")
                 }
-            }
-            )
+            });
         },
         getGroupList(){
             axios.get("/v1/group/getGroupByProjectId",{params:{projectId:this.$route.query.projectId,type:1}}).then((res)=>{
@@ -252,6 +244,20 @@ export default {
             })
         },
         getEnv(){
+            axios.get("/v1/env/getEnvironmentInfoByUserId",{params:{userId:1}}
+                ).then((res)=>{
+                console.log(res)
+                if(res.data.success){
+                    const that = this
+                    res.data.message.forEach(function(item){
+                        const tmpJson ={}
+                        tmpJson["value"]=item["name"]
+                        that.articleTagList.push(tmpJson);
+                    });
+                }else{
+                    this.$Message.error("获取数据失败")
+                }
+            });
         },
         setCaseInGroup(){
         },
@@ -282,6 +288,7 @@ export default {
     },
     created () {
         this.getData();
+        this.getEnv();
         this.getGroupList();
     },
 };

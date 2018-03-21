@@ -64,6 +64,12 @@ class EnvironmentService(object):
         return self.EnvironmentDaoInterface.getEnvironmentInfoById(args)
 
     @AdminDecoratorServer.execImplDecorator()
+    def getEnvironmentInfosByUserId(self,userId):
+        args={}
+        args.setdefault("userId",userId)
+        return self.EnvironmentDaoInterface.getEnvironmentInfosByUserId(args)
+
+    @AdminDecoratorServer.execImplDecorator()
     def deleteEnvironmentItem(self,args):
         return self.EnvironmentDaoInterface.deleteEnvironmentItem(args)
 

@@ -15,23 +15,23 @@
                         <FormItem label="前置URL" prop="url">
                             <Input v-model="formValidate.url" placeholder="Enter url"></Input>
                         </FormItem>
-                        <FormItem label="数据模板" prop="data">
-                            <Input v-model="formValidate.data" type="textarea" :autosize="{minRows: 2,maxRows: 100}" placeholder="Data template..."></Input>
+                        <FormItem label="数据模板" prop="template">
+                            <Input v-model="formValidate.template" type="textarea" :autosize="{minRows: 2,maxRows: 100}" placeholder="Data template..."></Input>
                         </FormItem>
-                        <FormItem label="DB名称" prop="DBname">
-                            <Input v-model="formValidate.DBname" placeholder="DataBase name..."></Input>
+                        <FormItem label="DB名称" prop="dbname">
+                            <Input v-model="formValidate.dbname" placeholder="DataBase name..."></Input>
                         </FormItem>
-                        <FormItem label="HostName" prop="hostName">
-                            <Input v-model="formValidate.hostName" placeholder="DataBase hostName..."></Input>
+                        <FormItem label="HostName" prop="dbhostname">
+                            <Input v-model="formValidate.dbhostname" placeholder="DataBase hostName..."></Input>
                         </FormItem>
-                        <FormItem label="Port" prop="port">
-                            <Input v-model="formValidate.port" placeholder="DataBase port..."></Input>
+                        <FormItem label="Port" prop="dbport">
+                            <Input v-model="formValidate.dbport" placeholder="DataBase port..."></Input>
                         </FormItem>
-                        <FormItem label="UserName" prop="userName">
-                            <Input v-model="formValidate.desc" placeholder="DataBase userName..."></Input>
+                        <FormItem label="UserName" prop="dbusername">
+                            <Input v-model="formValidate.dbusername" placeholder="DataBase userName..."></Input>
                         </FormItem>
-                        <FormItem label="PassWord" prop="passWord">
-                            <Input v-model="formValidate.passWord" placeholder="DataBase passWord..."></Input>
+                        <FormItem label="PassWord" prop="dbpasswd">
+                            <Input v-model="formValidate.dbpasswd" placeholder="DataBase passWord..."></Input>
                         </FormItem>
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
@@ -63,12 +63,12 @@ export default {
             formValidate: {
                     name: '',
                     url: '',
-                    data: '',
-                    DBname: '',
-                    hostName:'',
-                    port: '',
-                    userName: '',
-                    passWord: '',
+                    template: '',
+                    dbname: '',
+                    dbhostname:'',
+                    dbport: '',
+                    dbusername: '',
+                    dbpasswd: '',
                     envId:''
                 },
             ruleValidate: {
@@ -100,7 +100,31 @@ export default {
         },
         handleReset (name) {
             this.$refs[name].resetFields();
+        },
+        getEnvironmentInfoById(){
+            axios.get("/v1/env/getEnvironmentInfoById",{params:{envId:this.$route.query.id}}).then((res)=>{
+                console.log(res);
+                if(res.data.success){
+                    const envInfo = res.data.message[0]
+                    this.formValidate.name= envInfo["name"]
+                    this.formValidate.url= envInfo["url"]
+                    this.formValidate.template= envInfo["datatemplate"]
+                    this.formValidate.dbname= envInfo["dbname"]
+                    this.formValidate.dbhostname= envInfo["dbhostname"]
+                    this.formValidate.dbport= envInfo["dbport"]
+                    this.formValidate.dbusername= envInfo["dbusername"]
+                    this.formValidate.dbpasswd= envInfo["dbpasswd"]
+                    this.formValidate.envId= envInfo["id"]
+
+                }else{
+                    this.$Message.error("获取环境详情失败")
+                }
+            });
         }
+    },
+    created () {
+        this.getEnvironmentInfoById();
+
     },
 };
 </script>

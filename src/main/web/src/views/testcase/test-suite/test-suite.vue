@@ -127,8 +127,7 @@ export default {
                 }else{
                     this.$Message.error("获取数据失败")
                 }
-            }
-            )
+            });
         },
         handleCellChange (val, index, key) {
             this.editTestSuiteData.suiteId = val[index]["id"]
