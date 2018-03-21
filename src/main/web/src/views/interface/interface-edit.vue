@@ -140,21 +140,6 @@ export default {
             setGroupData:{
                 interfaceId:'',
                 groupId:''
-            },
-            placeholderData:{
-                name: '',
-                url: '',
-                method: '',
-                format: '',
-                response_type: '',
-                params: '',
-                success_response: '',
-                failure_response:'',
-                describe: '',
-                create_userid:1,
-                status:'',
-                projectid:'',
-                groupid:""
             }
         };
     },
@@ -163,9 +148,18 @@ export default {
             axios.get("/v1/interface/getInterfaceInfoById",{params:{interfaceId:this.$route.query.interfaceId}}
                 ).then((res)=>{
                 console.log(res)
-                console.log(this.interfaceId)
                 if(res.data.success){
-                    this.placeholderData = res.data.message;
+                    this.formValidate.name = res.data.message[0].name;
+                    this.formValidate.url = res.data.message[0].url;
+                    this.formValidate.method = res.data.message[0].method;
+                    this.formValidate.format = res.data.message[0].format;
+                    this.formValidate.response_type = res.data.message[0].response_type;
+                    this.formValidate.params = res.data.message[0].params;
+                    this.formValidate.success_response = res.data.message[0].success_response;
+                    this.formValidate.failure_response = res.data.message[0].failure_response;
+                    this.formValidate.describe = res.data.message[0].interface_describe;
+                    this.formValidate.status = res.data.message[0].status;
+                    this.formValidate.groupid = res.data.message[0].groupid;
                 }else{
                     this.$Message.error("获取数据失败")
                 }

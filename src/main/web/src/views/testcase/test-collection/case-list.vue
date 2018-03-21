@@ -13,7 +13,7 @@
         <Row class="margin-top-20">
             <Col span="6">
                 <Card>
-                    <Tree :data="groupData" :render="renderContent" style="width:260px"></Tree>
+                    <Tree :data="groupData" show-checkbox :render="renderContent" @on-check-change="getCaseByGroupId" style="width:260px" ref="tree"></Tree>
                 </Card>
             </Col>
             <Col span="18" class="padding-left-10">
@@ -96,6 +96,7 @@ export default {
                 {
                     title: '分组名称',
                     expand: true,
+                    checked: true,
                     render: (h, { root, node, data }) => {
                         return h('span', {
                             style: {
@@ -155,8 +156,8 @@ export default {
         };
     },
     methods: {
-        getData () {
-            axios.get("/v1/case/getCaseInfosByCondition",{params:{projectId:this.$route.query.projectId,groupId:1,offset:0,limit:10}}
+        getData (group_id) {
+            axios.get("/v1/case/getCaseInfosByCondition",{params:{projectId:this.$route.query.projectId,groupId:group_id,offset:0,limit:10}}
                 ).then((res)=>{
                 console.log(res)
                 console.log(this.$route.query.projectId)
@@ -181,6 +182,12 @@ export default {
                     this.$Message.error("获取数据失败")
                 }
             })
+        },
+        getCaseByGroupId(){
+            const groupCheckedData=this.$refs.tree.getCheckedNodes()
+            const testData= groupCheckedData[groupCheckedData.length-1]
+            alert(JSON.stringify(testData))
+            this.getData(testData["groupId"])
         },
         addInterface(){
             this.$router.push({path:"/testcase/test-collection/case-edit",query:{projectId:this.$route.query.projectId,caseId:""}})
@@ -318,7 +325,6 @@ export default {
         }
     },
     created () {
-        this.getData();
         this.getGroupData();
 
     },
