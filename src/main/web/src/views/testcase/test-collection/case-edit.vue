@@ -17,22 +17,22 @@
                         </FormItem>
 
                         <FormItem
-                                v-for="(itemStep, indexStep) in formValidate.itemsStep"
+                                v-for="(itemStep, indexStep) in formValidate.items"
                                 v-if="itemStep.statusStep"
                                 :key="indexStep"
                                 :label="'Step ' + itemStep.indexStep"
-                                :prop="'itemsStep.' + indexStep + '.valueStep'"
+                                :prop="'items.' + indexStep + '.value'"
                                 >
                             <Row>
                                 <Col span="18">
-                                    <Input type="text" v-model="itemStep.valueStep" placeholder="Enter something..."></Input>
+                                    <Input type="text" v-model="itemStep.value" placeholder="Enter something..."></Input>
                                 </Col>
                                 <Col span="4" offset="1">
                                     <Button type="ghost" @click="handleRemoveStep(indexStep)">Delete</Button>
                                 </Col>
                             </Row>
                             <FormItem label="Type" prop="type">
-                                <RadioGroup v-model="formValidate.type">
+                                <RadioGroup v-model="itemStep.type">
                                     <Radio label="0">API</Radio>
                                     <Radio label="1">SQL</Radio>
                                 </RadioGroup>
@@ -41,7 +41,7 @@
                                 <Row :gutter="8">
                                     <Col span="2">
                                         <FormItem prop="method">
-                                            <Select v-model="formValidate.method" placeholder="Get">
+                                            <Select v-model="itemStep.method" placeholder="Get">
                                                 <Option value="Get">Get</Option>
                                                 <Option value="Post">Post</Option>
                                             </Select>
@@ -49,7 +49,7 @@
                                     </Col>
                                     <Col span="11">
                                         <FormItem prop="path">
-                                            <Input v-model="formValidate.path" placeholder="Enter Request path"></Input>
+                                            <Input v-model="itemStep.path" placeholder="Enter Request path"></Input>
                                         </FormItem>
                                     </Col>
                                     <Col span="5">
@@ -60,17 +60,17 @@
                                 </Row>
                             </FormItem>
                             <FormItem label="Header" prop="header">
-                                <Input v-model="formValidate.header" type="textarea" :autosize="{minRows: 1,maxRows: 10}"></Input>
+                                <Input v-model="itemStep.header" type="textarea" :autosize="{minRows: 1,maxRows: 10}"></Input>
                             </FormItem>
                             <FormItem label="Params" prop="params">
-                                <Input v-model="formValidate.params" type="textarea" :autosize="{minRows: 2,maxRows: 100}"></Input>
+                                <Input v-model="itemStep.params" type="textarea" :autosize="{minRows: 2,maxRows: 100}"></Input>
                             </FormItem>
                             <FormItem
-                                    v-for="(item, index) in formValidate.items"
+                                    v-for="(item, index) in itemStep.itemsSteps"
                                     v-if="item.status"
                                     :key="index"
                                     :label="'Assert ' + item.index"
-                                    :prop="'items.' + index + '.actual'"
+                                    :prop="'itemStep.itemsSteps.' + index + '.actual'"
                                     :rules="{required: true, message: 'Assert ' + item.index +' can not be empty', trigger: 'blur'}">
                                 <Row :gutter="10">
                                     <Col span="8">
@@ -97,7 +97,7 @@
                             <FormItem>
                                 <Row>
                                     <Col span="12">
-                                        <Button type="dashed" long @click="handleAdd" icon="plus-round">Add Assert</Button>
+                                        <Button type="dashed" long @click="handleAdd(indexStep)" icon="plus-round">Add Assert</Button>
                                     </Col>
                                 </Row>
                             </FormItem>
@@ -173,38 +173,35 @@ export default {
     name: 'artical-publish',
     data () {
         return {
-            caseStateList: {status: ''},
             envSelected: [], // 选中的环境
             envList:[], // 所有环境列表
-
-
-            index: 1,
             indexStep: 1,
-
             formValidate: {
                     desc: '',
                     name: '',
-                    type:'',
-                    method: '',
-                    path: '',
-                    header: '',
-                    params: '',
+                    status: '',
                     items: [
                         {
-                            actual: '',
-                            expect: '',
-                            rules: '',
-                            index: 1,
-                            status: 1
+                            type:'',
+                            method: '',
+                            path: '',
+                            header: '',
+                            params: '',
+                            statusStep:1,
+                            indexStep: 1,
+                            value:'',
+                            assertIndex: 1,
+                            itemsSteps: [
+                                {
+                                    status: '',
+                                    index: 1,
+                                    actual:'',
+                                    rules:'',
+                                    expect:''
+                                }
+                            ]
                         }
                     ],
-                    itemsStep: [
-                        {
-                            valueStep: '',
-                            indexStep: 1,
-                            statusStep: 1
-                        }
-                    ]
                 },
             ruleValidate: {
                 name: [
@@ -271,11 +268,11 @@ export default {
         handleCase(){
         },
 
-        handleAdd () {
-            this.index++;
-            this.formValidate.items.push({
+        handleAdd (indexStep) {
+            alert(this.formValidate.items[indexStep].assertIndex)
+            this.formValidate.items[indexStep].itemsSteps.push({
                 value: '',
-                index: this.index,
+                index: this.formValidate.items[indexStep].assertIndex++,
                 status: 1
             });
         },
@@ -285,10 +282,20 @@ export default {
 
         handleAddStep () {
                 this.indexStep++;
-                this.formValidate.itemsStep.push({
-                    valueStep: '',
+                this.formValidate.items.push({
+                    value: '',
                     indexStep: this.indexStep,
-                    statusStep: 1
+                    statusStep: 1,
+                    assertIndex:1,
+                    itemsSteps: [
+                                {
+                                    status: '',
+                                    index: 1,
+                                    actual:'',
+                                    rules:'',
+                                    expect:''
+                                }
+                            ]
                 });
             },
         handleRemoveStep (indexStep) {
@@ -301,6 +308,7 @@ export default {
         handleSubmit (name) {
             this.$refs[name].validate((valid) => {
                 if (valid) {
+                    alert(JSON.stringify(this.formValidate));
                     this.$Message.success('Success!');
                 } else {
                     this.$Message.error('Fail!');
