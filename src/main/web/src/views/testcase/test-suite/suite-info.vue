@@ -4,12 +4,12 @@
 
 <template>
     <div>
-        <Col span="6">
+        <Col span="5">
             <Card>
                 <Tree :data="groupList" @on-check-change="setInterfaceInGroup" show-checkbox ref="tree" style="width:260px"></Tree>
             </Card>
         </Col>
-        <Col span="18" class="padding-left-10">
+        <Col span="14" class="padding-left-10">
             <Card>
                 <div>
                     <Transfer
@@ -17,7 +17,7 @@
                         :target-keys="targetKeys3"
                         :list-style="listStyle"
                         :render-format="render3"
-                        :operations="['To left','To right']"
+                        :operations="['添加到套件','从套件中移除']"
                         filterable
 
                         @on-change="handleChange3">
@@ -26,6 +26,24 @@
                         </div>
                     </Transfer>
                 </div>
+            </Card>
+        </Col>
+        <Col span="5" class="padding-left-10">
+            <Card>
+                <p slot="title">
+                    <Icon type="ios-pricetags-outline"></Icon>
+                    选择执行环境
+                </p>
+                <Row>
+                    <Col span="18">
+                        <Select v-model="envSelected" @on-change="handleSelectEnv" placeholder="请选择调试环境，不可为空">
+                            <Option v-for="item in envList" :value="item.value" :key="item.value">{{ item.value }}</Option>
+                        </Select>
+                    </Col>
+                    <Col span="6" class="padding-left-10">
+                        <Button  @click="handleCase" long type="ghost">执行用例</Button>
+                    </Col>
+                </Row>
             </Card>
         </Col>
     </div>
@@ -42,6 +60,8 @@ import axios  from 'axios';
                     width: '300px',
                     height: '800px'
                 },
+                envSelected: [], // 选中的环境
+                envList:[], // 所有环境列表
             }
         },
         methods: {
@@ -58,6 +78,8 @@ import axios  from 'axios';
                         this.$Message.error("获取数据失败")
                     }
                 })
+            },
+            getCase(){
             },
             getMockData () {
                 let mockData = [];
@@ -87,10 +109,32 @@ import axios  from 'axios';
                 this.targetKeys3 = this.getTargetKeys();
             },
             setInterfaceInGroup(){
+            },
+            getEnv(){
+                axios.get("/v1/env/getEnvironmentInfoByUserId",{params:{userId:1}}
+                    ).then((res)=>{
+                    console.log(res)
+                    if(res.data.success){
+                        const that = this
+                        res.data.message.forEach(function(item){
+                            const tmpJson ={}
+                            tmpJson["value"]=item["name"]
+                            that.envList.push(tmpJson);
+                        });
+                    }else{
+                        this.$Message.error("获取数据失败")
+                    }
+                });
+            },
+            handleSelectEnv () {
+                localStorage.envsList = JSON.stringify(this.envSelected);
+            },
+            handleCase(){
             }
         },
         created () {
             this.getGroupList();
+            this.getEnv();
         },
     }
 </script>

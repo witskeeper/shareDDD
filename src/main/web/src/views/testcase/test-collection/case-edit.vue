@@ -15,99 +15,103 @@
                         <FormItem label="Name" prop="name">
                             <Input v-model="formValidate.name" placeholder="Enter case name"></Input>
                         </FormItem>
-                        <FormItem label="Type" prop="type">
-                            <RadioGroup v-model="formValidate.type">
-                                <Radio label="0">API</Radio>
-                                <Radio label="1">SQL</Radio>
-                            </RadioGroup>
-                        </FormItem>
-                        <FormItem label="Url">
-                            <Row :gutter="8">
-                                <Col span="2">
-                                    <FormItem prop="method">
-                                        <Select v-model="formValidate.method" placeholder="Get">
-                                            <Option value="Get">Get</Option>
-                                            <Option value="Post">Post</Option>
-                                        </Select>
-                                    </FormItem>
-                                </Col>
-                                <Col span="11">
-                                    <FormItem prop="path">
-                                        <Input v-model="formValidate.path" placeholder="Enter Request path"></Input>
-                                    </FormItem>
-                                </Col>
-                                <Col span="5">
-                                    <FormItem>
-                                        <Button type="primary" @click="selectInterface" >select Interface </Button>
-                                    </FormItem>
-                                </Col>
-                            </Row>
-                        </FormItem>
-                        <FormItem label="Header" prop="header">
-                            <Input v-model="formValidate.header" type="textarea" :autosize="{minRows: 1,maxRows: 10}"></Input>
-                        </FormItem>
-                        <FormItem label="Params" prop="params">
-                            <Input v-model="formValidate.params" type="textarea" :autosize="{minRows: 2,maxRows: 100}"></Input>
-                        </FormItem>
+
                         <FormItem
-                                v-for="(item, index) in formValidate.items"
-                                v-if="item.status"
-                                :key="index"
-                                :label="'Assert ' + item.index"
-                                :prop="'items.' + index + '.actual'"
-                                :rules="{required: true, message: 'Assert ' + item.index +' can not be empty', trigger: 'blur'}">
-                            <Row :gutter="10">
-                                <Col span="8">
-                                    <Input type="text" v-model="item.actual" placeholder="Enter actual..."></Input>
-                                </Col>
-                                <Col span="2">
-                                    <FormItem prop="rules">
-                                        <Select v-model="item.rules" placeholder="=">
-                                            <Option value="=">=</Option>
-                                            <Option value="!=">!=</Option>
-                                            <Option value="<"><</Option>
-                                            <Option value=">">></Option>
-                                        </Select>
-                                    </FormItem>
-                                </Col>
-                                <Col span="8">
-                                    <Input type="text" v-model="item.expect" placeholder="Enter expect..."></Input>
-                                </Col>
-                                <Col span="2" offset="1">
-                                    <Button type="ghost" @click="handleRemove(index)">Delete</Button>
-                                </Col>
-                            </Row>
-                        </FormItem>
-                        <FormItem>
-                            <Row>
-                                <Col span="12">
-                                    <Button type="dashed" long @click="handleAdd" icon="plus-round">Add Assert</Button>
-                                </Col>
-                            </Row>
-                        </FormItem>
-                        <FormItem
-                                v-for="(itemPre, indexPre) in formValidate.itemsPre"
-                                v-if="itemPre.statusPre"
-                                :key="indexPre"
-                                :label="'PreStep ' + itemPre.indexPre"
-                                :prop="'itemsPre.' + indexPre + '.valuePre'"
-                                :rules="{required: true, message: 'Item ' + itemPre.indexPre +' can not be empty', trigger: 'blur'}">
+                                v-for="(itemStep, indexStep) in formValidate.itemsStep"
+                                v-if="itemStep.statusStep"
+                                :key="indexStep"
+                                :label="'Step ' + itemStep.indexStep"
+                                :prop="'itemsStep.' + indexStep + '.valueStep'"
+                                >
                             <Row>
                                 <Col span="18">
-                                    <Input type="text" v-model="itemPre.valuePre" placeholder="Enter something..."></Input>
+                                    <Input type="text" v-model="itemStep.valueStep" placeholder="Enter something..."></Input>
                                 </Col>
                                 <Col span="4" offset="1">
-                                    <Button type="ghost" @click="handleRemovePre(indexPre)">Delete</Button>
+                                    <Button type="ghost" @click="handleRemoveStep(indexStep)">Delete</Button>
                                 </Col>
                             </Row>
+                            <FormItem label="Type" prop="type">
+                                <RadioGroup v-model="formValidate.type">
+                                    <Radio label="0">API</Radio>
+                                    <Radio label="1">SQL</Radio>
+                                </RadioGroup>
+                            </FormItem>
+                            <FormItem label="Url">
+                                <Row :gutter="8">
+                                    <Col span="2">
+                                        <FormItem prop="method">
+                                            <Select v-model="formValidate.method" placeholder="Get">
+                                                <Option value="Get">Get</Option>
+                                                <Option value="Post">Post</Option>
+                                            </Select>
+                                        </FormItem>
+                                    </Col>
+                                    <Col span="11">
+                                        <FormItem prop="path">
+                                            <Input v-model="formValidate.path" placeholder="Enter Request path"></Input>
+                                        </FormItem>
+                                    </Col>
+                                    <Col span="5">
+                                        <FormItem>
+                                            <Button type="primary" @click="selectInterface" >select Interface </Button>
+                                        </FormItem>
+                                    </Col>
+                                </Row>
+                            </FormItem>
+                            <FormItem label="Header" prop="header">
+                                <Input v-model="formValidate.header" type="textarea" :autosize="{minRows: 1,maxRows: 10}"></Input>
+                            </FormItem>
+                            <FormItem label="Params" prop="params">
+                                <Input v-model="formValidate.params" type="textarea" :autosize="{minRows: 2,maxRows: 100}"></Input>
+                            </FormItem>
+                            <FormItem
+                                    v-for="(item, index) in formValidate.items"
+                                    v-if="item.status"
+                                    :key="index"
+                                    :label="'Assert ' + item.index"
+                                    :prop="'items.' + index + '.actual'"
+                                    :rules="{required: true, message: 'Assert ' + item.index +' can not be empty', trigger: 'blur'}">
+                                <Row :gutter="10">
+                                    <Col span="8">
+                                        <Input type="text" v-model="item.actual" placeholder="Enter actual..."></Input>
+                                    </Col>
+                                    <Col span="2">
+                                        <FormItem prop="rules">
+                                            <Select v-model="item.rules" placeholder="=">
+                                                <Option value="=">=</Option>
+                                                <Option value="!=">!=</Option>
+                                                <Option value="<"><</Option>
+                                                <Option value=">">></Option>
+                                            </Select>
+                                        </FormItem>
+                                    </Col>
+                                    <Col span="8">
+                                        <Input type="text" v-model="item.expect" placeholder="Enter expect..."></Input>
+                                    </Col>
+                                    <Col span="2" offset="1">
+                                        <Button type="ghost" @click="handleRemove(index)">Delete</Button>
+                                    </Col>
+                                </Row>
+                            </FormItem>
+                            <FormItem>
+                                <Row>
+                                    <Col span="12">
+                                        <Button type="dashed" long @click="handleAdd" icon="plus-round">Add Assert</Button>
+                                    </Col>
+                                </Row>
+                            </FormItem>
+
                         </FormItem>
+
                         <FormItem>
                             <Row>
                                 <Col span="12">
-                                    <Button type="dashed" long @click="handleAddPre" icon="plus-round">Add PreStep</Button>
+                                    <Button type="dashed" long @click="handleAddStep" icon="plus-round">Add Step</Button>
                                 </Col>
                             </Row>
                         </FormItem>
+
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
                             <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
@@ -148,8 +152,8 @@
                         </p>
                         <Row>
                             <Col span="18">
-                                <Select v-model="articleTagSelected" @on-change="handleSelectTag" placeholder="请选择调试环境，可为空">
-                                    <Option v-for="item in articleTagList" :value="item.value" :key="item.value">{{ item.value }}</Option>
+                                <Select v-model="envSelected" @on-change="handleSelectEnv" placeholder="请选择调试环境，可为空">
+                                    <Option v-for="item in envList" :value="item.value" :key="item.value">{{ item.value }}</Option>
                                 </Select>
                             </Col>
                             <Col span="6" class="padding-left-10">
@@ -170,12 +174,12 @@ export default {
     data () {
         return {
             caseStateList: {status: ''},
-            articleTagSelected: [], // 文章选中的标签
-            articleTagList:[], // 所有标签列表
+            envSelected: [], // 选中的环境
+            envList:[], // 所有环境列表
 
 
             index: 1,
-            indexPre: 1,
+            indexStep: 1,
 
             formValidate: {
                     desc: '',
@@ -194,11 +198,11 @@ export default {
                             status: 1
                         }
                     ],
-                    itemsPre: [
+                    itemsStep: [
                         {
-                            valuePre: '',
-                            indexPre: 1,
-                            statusPre: 1
+                            valueStep: '',
+                            indexStep: 1,
+                            statusStep: 1
                         }
                     ]
                 },
@@ -215,6 +219,9 @@ export default {
                     ],
                 },
             groupList:[],
+            selectInterfaceData:{
+                name:''
+            }
         };
     },
     methods: {
@@ -252,7 +259,7 @@ export default {
                     res.data.message.forEach(function(item){
                         const tmpJson ={}
                         tmpJson["value"]=item["name"]
-                        that.articleTagList.push(tmpJson);
+                        that.envList.push(tmpJson);
                     });
                 }else{
                     this.$Message.error("获取数据失败")
@@ -263,12 +270,32 @@ export default {
         },
         handleCase(){
         },
-        handleAdd(){
+
+        handleAdd () {
+            this.index++;
+            this.formValidate.items.push({
+                value: '',
+                index: this.index,
+                status: 1
+            });
         },
-        handleAddPre(){
+        handleRemove (index) {
+            this.formValidate.items[index].status = 0;
         },
-        handleSelectTag () {
-            localStorage.tagsList = JSON.stringify(this.articleTagSelected); // 本地存储文章标签列表
+
+        handleAddStep () {
+                this.indexStep++;
+                this.formValidate.itemsStep.push({
+                    valueStep: '',
+                    indexStep: this.indexStep,
+                    statusStep: 1
+                });
+            },
+        handleRemoveStep (indexStep) {
+                this.formValidate.itemsStep[indexStep].statusStep = 0;
+            },
+        handleSelectEnv () {
+            localStorage.tagsList = JSON.stringify(this.envSelected);
         },
 
         handleSubmit (name) {
@@ -284,7 +311,30 @@ export default {
             this.$refs[name].resetFields();
         },
         selectInterface(){
-        }
+//            this.$Modal.confirm({
+//                onOk: () => {
+//                       this.selectInterfaceNet();
+//                    },
+//                    render: (h) => {
+//                    return h('div',[
+//                        h('Input', {
+//                            props: {
+//                                value: this.selectInterfaceData.name,
+//                                autofocus: true,
+//                                placeholder: '接口名称'
+//                            },
+//                            on: {
+//                                input: (val) => {
+//                                    this.selectInterfaceData.name = val;
+//                                }
+//                            }
+//                        }),
+//                    ])
+//                }
+//            })
+        },
+        selectInterfaceNet(){
+        },
     },
     created () {
         this.getData();
