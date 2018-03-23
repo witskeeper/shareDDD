@@ -14,7 +14,7 @@
             <Col>
                 <!-- <Card> -->
                     <div class="edittable-table-height-con">
-                        <Table border :columns="listColumn" :data="list"></Table>
+                        <Table border :columns="listColumns" :data="list"></Table>
                     </div>
                 <!-- </Card> -->
             </Col>
@@ -28,7 +28,7 @@ export default {
     name: 'enviroment-db',
     data () {
         return {
-            listColumn: [
+            listColumns: [
 
                     {
                         title: '数据库名',
@@ -61,6 +61,31 @@ export default {
                         align: 'center',
                         render: (h, params) => {
                             return h('div', [
+                                // h('Button', {
+                                //     props: {
+                                //         type: 'primary',
+                                //         size: 'small'
+                                //     },
+                                //     style: {
+                                //         marginRight: '5px'
+                                //     },
+                                //     on: {
+                                //         click: () => {
+                                //             this.getDatabaseInfoByIdNet(params.row.id)                                           
+                                //         }
+                                //     }
+                                // }, '编辑'),
+                                // h('Button', {
+                                //     props: {
+                                //         type: 'error',
+                                //         size: 'small'
+                                //     },
+                                //     on: {
+                                //         click: () => {
+                                //             this.deleteDatabaseNet(params.row.id)
+                                //         }
+                                //     }
+                                // }, '删除'),
                                 h('Button', {
                                     props: {
                                         type: 'primary',
@@ -71,7 +96,7 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.$router.push({path:"/environment/environment-db-info",query:{id:params.row.id}})                                        
+                                            this.getDatabaseInfoByIdNet(params.row.id)                                           
                                         }
                                     }
                                 }, '编辑'),
@@ -85,7 +110,7 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.SynchronizeDatabase(params.row.id)
+                                            this.deleteDatabaseNet(params.row.id)
                                         }
                                     }
                                 }, '同步'),
@@ -94,26 +119,12 @@ export default {
                                         type: 'info',
                                         size: 'small'
                                     },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.$router.push({path:"/docs/dbdoc-list-info",query:{id:params.row.id}})
-                                        }
-                                    }
-                                }, '查看文档'),
-                                h('Button', {
-                                    props: {
-                                        type: 'error',
-                                        size: 'small'
-                                    },
                                     on: {
                                         click: () => {
                                             this.deleteDatabaseNet(params.row.id)
                                         }
                                     }
-                                }, '删除')
+                                }, '查看文档')
                             ]);
                         }
                     }
@@ -152,32 +163,8 @@ export default {
             };
         },
         getData () {
-            console.log(1)
-            axios.all([this.getDatabaseList(), this.getDatabaseList1()])
-            .then(axios.spread(function (acct, perms) {
-                // Both requests are now complete
-                console.log(3)
-                console.log(acct)
-                console.log(perms)
-                console.log(4)
-            }));
-            console.log(2)
-            // this.getDatabaseList()
-        },
-        getDatabaseList() {
-            return axios.get("/v1/database/getDatabaseList").then((res)=>{
-                if(res.data.success){
-                    this.list = res.data.message;
-                    return res
-                }else{
-                    this.$Message.error("失败")
-                }
-            }
-            )
-        },
-
-        getDatabaseList1() {
-            axios.get("/v1/database/getDatabaseList").then((res)=>{
+                axios.get("/v1/database/getDatabaseList").then((res)=>{
+                console.log(res)
                 if(res.data.success){
                     this.list = res.data.message;
                 }else{
@@ -186,7 +173,6 @@ export default {
             }
             )
         },
-
         addDatabase(){
             this.initDatabaseDataModel()
             this.$Modal.confirm({
@@ -361,71 +347,107 @@ export default {
             )
         },
         editDatabase(){
-
-        },
-        SynchronizeDatabase(index) {
-            axios.get("/v1/table/isInitSynchronize",
-            {"params":{"id": index}}
-            ).then((res)=>{
-                if(res.data.success){
-                    this.$Message.success("成功");
-                    const tableCount = res.data.message[0]["tableCount"]
-                    if(tableCount == 0) {
-                        this.initSynchronizeDatabaseNet(index)
-                    } else {
-                        this.SynchronizeDatabaseNet(index)
-                    }
-                }else{
-                    this.$Message.error("失败")
+            this.$Modal.confirm({
+                onOk: () => {
+                       console.log(this.databaseDataModel)
+                       this.editDatabaseNet();
+                    },
+                    render: (h) => {
+                    console.log(this.databaseDataModel)
+                    return h('div',[
+                        h('Input', {
+                            props: {
+                                value: this.databaseDataModel.name,
+                                autofocus: true,
+                                placeholder: '数据库名'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.databaseDataModel.name = val;
+                                }
+                            }
+                        }),
+                        h('Input', {
+                            props: {
+                                value: this.databaseDataModel.host,
+                                autofocus: false,
+                                placeholder: '主机名'
+                            },
+                            style: {
+                                marginTop: '8px'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.databaseDataModel.host = val;
+                                }
+                            }
+                        }),
+                        h('Input', {
+                            props: {
+                                value: this.databaseDataModel.port,
+                                autofocus: false,
+                                placeholder: '端口号'
+                            },
+                            style: {
+                                marginTop: '8px'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.databaseDataModel.port = val;
+                                }
+                            }
+                        }),
+                        h('Input', {
+                            props: {
+                                value: this.databaseDataModel.username,
+                                autofocus: false,
+                                placeholder: '用户名'
+                            },
+                            style: {
+                                marginTop: '8px'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.databaseDataModel.username = val;
+                                }
+                            }
+                        }),
+                        h('Input', {
+                            props: {
+                                value: this.databaseDataModel.password,
+                                autofocus: false,
+                                placeholder: '密码'
+                            },
+                            style: {
+                                marginTop: '8px'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.databaseDataModel.password = val;
+                                }
+                            }
+                        }),
+                        h('Input', {
+                            props: {
+                                value: this.databaseDataModel.schemaName,
+                                autofocus: false,
+                                placeholder: '数据库'
+                            },
+                            style: {
+                                marginTop: '8px'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.databaseDataModel.schemaName = val;
+                                }
+                            }
+                        }),
+                    ])
                 }
-            }
-            )
-        },
-
-        initSynchronizeDatabaseNet(index){
-            axios.post("/v1/table/initSynchronizeDatabase",
-            {"id":index}
-            ).then((res)=>{
-                if(res.data.success){
-                    this.$Message.success("成功");
-                }else{
-                    this.$Message.error("失败")
-                }
-            }
-            )
-        },
-        SynchronizeDatabaseNet(index){
-            axios.post("/v1/table/SynchronizeDatabase",
-            {"id":index}
-            ).then((res)=>{
-                if(res.data.success){
-                    this.$Message.success("成功");
-                }else{
-                    this.$Message.error("失败")
-                }
-            }
-            )
-        },
-        deleteDatabaseNet(index){
-            axios.post("/v1/database/deleteDatabase",
-            {"id": index}
-            ).then((res)=>{
-                if(res.data.success){
-                    this.$Message.success("成功");
-                    this.getData();
-                    // this.list.splice(index,1);
-
-                }else{
-                    this.$Message.error("失败")
-                }
-            }
-            )
+            })
         },
     },
     
-    // mounted() {
-    //     this.getData();
-    // },
     created () {
         this.getData();
     }

@@ -194,8 +194,95 @@ CREATE TABLE `session_manage` (
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+# add
+CREATE TABLE `databaseManage` (
+`id` int(11) NOT NULL auto_increment,
+`name` varchar(255) NOT NULL,
+`host` varchar(255) NOT NULL,
+`port` int(4) default 0 NOT NULL,
+`username` varchar(32) NOT NULL,
+`password` varchar(128) NOT NULL,
+`schemaName` varchar(32) NOT NULL,
+`businessUnit` TINYINT(4) default 0 NOT NULL,
+`productUnit` TINYINT(4) default 0 NOT NULL,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `tableGroup` (
+`id` int(11) NOT NULL auto_increment,
+`DBId` int(11) default 0 NOT NULL,
+`name` varchar(64) NOT NULL,
+`isDefault` TINYINT(4) default 0 NOT NULL,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `tableGroupRelation` (
+`id` int(11) NOT NULL auto_increment,
+`tableId` int(11) default 0 NOT NULL,
+`groupId` int(11) default 0 NOT NULL,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `databaseManage` (
+`id` int(11) NOT NULL auto_increment,
+`name` varchar(255) NOT NULL,
+`host` varchar(255) NOT NULL,
+`port` int(4) default 0 NOT NULL,
+`username` varchar(32) NOT NULL,
+`password` varchar(128) NOT NULL,
+`schemaName` varchar(32) NOT NULL,
+`businessUnit` TINYINT(4) default 0 NOT NULL,
+`productUnit` TINYINT(4) default 0 NOT NULL,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tableGroup` (
+`id` int(11) NOT NULL auto_increment,
+`DBId` int(11) default 0 NOT NULL,
+`name` varchar(64) NOT NULL,
+`isDefault` TINYINT(4) default 0 NOT NULL,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tableGroupRelation` (
+`id` int(11) NOT NULL auto_increment,
+`tableId` int(11) default 0 NOT NULL,
+`groupId` int(11) default 0 NOT NULL,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `DBTable` (
+`id` int(11) NOT NULL auto_increment,
+`DBId` int(11) default 0 NOT NULL,
+`cName` varchar(255) NOT NULL,
+`eName` varchar(255) NOT NULL,
+`remark` varchar(1024) NOT NULL,
+`is_discarded` TINYINT(4)  NOT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `DBColumn` (
+`id` int(11) NOT NULL auto_increment,
+`tableId` int(11) default 0 NOT NULL,
+`cName` varchar(255) NOT NULL,
+`eName` varchar(255) NOT NULL,
+`type` varchar(32) NOT NULL,
+`remark` varchar(1024)  NOT NULL,
+`is_discarded` TINYINT(4)  NOT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `dataRoute` (
+`id` int(11) NOT NULL auto_increment,
+`tableId` int(11) default 0 NOT NULL,
+`route` varchar(512) NOT NULL,
+`type` TINYINT(4) NOT NULL COMMENT '0 input, 1 output',
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 

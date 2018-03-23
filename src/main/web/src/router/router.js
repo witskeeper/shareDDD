@@ -62,7 +62,9 @@ export const otherRouter = {
         { path: 'shopping', title: '购物详情', name: 'shopping', component: resolve => { require(['@/views/advanced-router/component/shopping-info.vue'], resolve); } }, // 用于展示带参路由
         { path: 'message', title: '消息中心', name: 'message_index', component: resolve => { require(['@/views/message/message.vue'], resolve); } },
         { path: 'interface/interface-info', title: '项目详情', name: 'interface-info', component: resolve => { require(['@/views/interface/interface-info.vue'], resolve); } },
-        { path: 'interface/interface-edit', title: '编辑接口', name: 'interface-edit', component: resolve => { require(['@/views/interface/interface-edit.vue'], resolve); } }
+        { path: 'interface/interface-edit', title: '编辑接口', name: 'interface-edit', component: resolve => { require(['@/views/interface/interface-edit.vue'], resolve); } },
+        { path: 'docs/dbdoc-list-info', title: '文档详情', name: 'dbdoc-list-info', component: resolve => { require(['@/views/docs/dbdoc-list-info.vue'], resolve); } },
+        { path: 'environment/environment-db-info', title: '数据库详情', name: 'environment-db-info', component: resolve => { require(['@/views/environment/environment-db-info.vue'], resolve); } },
     ]
 };
 
@@ -263,6 +265,52 @@ export const appRouter = [
                 name: 'user-authority',
                 icon: 'gear-a',
                 component: resolve => { require(['@/views/user/user-authority.vue'], resolve); }
+            }
+        ]
+    },
+    {
+        path: '/docs',
+        icon: 'android-contact',
+        name: 'doc',
+        title: '文档管理',
+        component: Main,
+        children: [
+            {
+                path: 'dbdoc-list',
+                title: '数据库文档',
+                name: 'dbdoc-list',
+                icon: 'android-people',
+                component: resolve => { require(['@/views/docs/dbdoc-list.vue'], resolve); }
+            },
+            {
+                path: 'logic-list',
+                title: '业务文档',
+                name: 'logic-list',
+                icon: 'android-people',
+                component: resolve => { require(['@/views/docs/logic-list.vue'], resolve); }
+            }
+        ]
+    },
+    {
+        path: '/business',
+        icon: 'android-contact',
+        name: 'business',
+        title: '事业线管理',
+        component: Main,
+        children: [
+            {
+                path: 'business-product',
+                title: '产品管理',
+                name: 'business-product',
+                icon: 'android-people',
+                component: resolve => { require(['@/views/business/business-product.vue'], resolve); }
+            },
+            {
+                path: 'business-project',
+                title: '项目管理',
+                name: 'business-project',
+                icon: 'android-people',
+                component: resolve => { require(['@/views/business/business-project.vue'], resolve); }
             }
         ]
     }

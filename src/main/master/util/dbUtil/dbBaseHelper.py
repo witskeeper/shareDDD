@@ -5,6 +5,7 @@ from src.main.master.util.logUtil.log import Log
 from src.main.master.common.constants import SystemConfig
 import traceback
 
+
 #set log
 logger = Log('dbBaseHelper')
 logger.write_to_file(SystemConfig.logPathPrefix+"dbBaseHelper.log")
@@ -19,8 +20,8 @@ class DbBaseHelper(object):
         self.is_execute_many=is_execute_many
 
     #针对select操作
-    def read(self):
-        db = Connection(autocommit=False)
+    def read(self, **kwargs):
+        db = Connection(autocommit=False, **kwargs)
         try:
             if self.args is not None and not isinstance(self.args,dict):
                 logger.error("sql params [{0}] type is error,must be dict".format(self.args))
@@ -50,13 +51,14 @@ class DbBaseHelper(object):
                     self.data.setMessage("sql params type is error,must be list")
                     self.data.setSuccess(False)
                     return self.data
-            if self.args is not None and not isinstance(self.args,dict):
+            elif self.args is not None and not isinstance(self.args,dict):
                 logger.error("sql params [{0}] type is error,must be dict".format(self.args))
                 self.data.setMessage("sql params type is error,must be dict")
                 self.data.setSuccess(False)
                 return self.data
-            db.write(self.sql,self.args,self.is_execute_many)
+            ret = db.write(self.sql,self.args,self.is_execute_many)
             db.commit()
+            self.data.setMessage(ret)
             self.data.setSuccess(True)
             return self.data
         except Exception, e:
