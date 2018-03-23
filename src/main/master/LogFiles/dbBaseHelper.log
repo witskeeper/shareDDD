@@ -1407,3 +1407,15 @@ KeyError: 'envId'
     for key, item in args.iteritems())
 KeyError: 'projectId'
 
+2018-03-23 17:06:03,167 - dbBaseHelper - 24836 - ERROR - write - write sql:
+        update testsuite set name=%(name)s,update_userid=%(userId)s,testcaseids=%(caseIds)s,
+        status=%(status)s,remarks=%(remarks)s,envid=%(envId)s,projectid=%(projectId)s where id=%(suiteId)s
+         args:{u'status': u'', 'create_username': u'', u'envId': u'', u'name': u'test_pro10_erp_test_test', 'update_username': u'', 'projectid': 1L, u'userId': u'', 'testcaseids': u'', 'gmt_modify': datetime.datetime(2018, 3, 23, 17, 5, 46), 'gmt_create': datetime.datetime(2018, 3, 23, 17, 5, 46), 'envid': 0L, u'suiteId': 6, u'caseIds': u'', u'remarks': u'', 'create_userid': 1L, 'id': 6L, 'update_userid': 0L} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 58, in write
+    db.write(self.sql,self.args,self.is_execute_many)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 54, in write
+    ret = c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 185, in execute
+    for key, item in args.iteritems())
+KeyError: 'projectId'
+

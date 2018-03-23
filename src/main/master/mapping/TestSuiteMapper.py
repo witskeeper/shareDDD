@@ -31,12 +31,12 @@ class TestSuiteSQLMapper:
     def __setSQL(self):
         #WRITE SQL FOR API
         addTestSuiteSQL="""
-        insert into testsuite (name,testcaseids,create_userid,status,remarks,envid,gmt_create) 
-        values (%(name)s,%(caseIds)s,%(userId)s,%(status)s,%(remarks)s,%(envId)s,now())
+        insert into testsuite (name,testcaseids,create_userid,status,remarks,envid,projectid,gmt_create) 
+        values (%(name)s,%(caseIds)s,%(userId)s,%(status)s,%(remarks)s,%(envId)s,%(projectId)s,now())
         """
         updateTestSuiteSQL="""
         update testsuite set name=%(name)s,update_userid=%(userId)s,testcaseids=%(caseIds)s,
-        status=%(status)s,remarks=%(remarks)s,envid=%(envId)s where id=%(suiteId)s
+        status=%(status)s,remarks=%(remarks)s,envid=%(envId)s,projectid=%(projectId)s where id=%(suiteId)s
         """
         deleteTestSuiteSQL="""
         delete from testsuite where id = %(suiteId)s
@@ -47,6 +47,9 @@ class TestSuiteSQLMapper:
         getSuiteListSQL="""
         select * from testsuite
         """
+        editTestSuiteNameSQL="""
+        update testsuite set name=%(name)s where id=%(suiteId)s
+        """
 
         #SET SQL FOR DAO
         self.data.setdefault("addTestSuite",addTestSuiteSQL)
@@ -54,3 +57,4 @@ class TestSuiteSQLMapper:
         self.data.setdefault("deleteTestSuite", deleteTestSuiteSQL)
         self.data.setdefault("getSuiteInfoById", getSuiteInfoByIdSQL)
         self.data.setdefault("getSuiteList",getSuiteListSQL)
+        self.data.setdefault("editTestSuiteName", editTestSuiteNameSQL)

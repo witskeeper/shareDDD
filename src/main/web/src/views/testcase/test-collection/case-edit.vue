@@ -17,11 +17,11 @@
                         </FormItem>
 
                         <FormItem
-                                v-for="(itemStep, indexStep) in formValidate.items"
+                                v-for="(itemStep, indexStep) in formValidate.itemsStep"
                                 v-if="itemStep.statusStep"
                                 :key="indexStep"
                                 :label="'Step ' + itemStep.indexStep"
-                                :prop="'items.' + indexStep + '.value'"
+                                :prop="'itemsStep.' + indexStep + '.value'"
                                 >
                             <Row>
                                 <Col span="18">
@@ -65,20 +65,23 @@
                             <FormItem label="Params" prop="params">
                                 <Input v-model="itemStep.params" type="textarea" :autosize="{minRows: 2,maxRows: 100}"></Input>
                             </FormItem>
+                            <FormItem label="SQL" prop="sql">
+                                <Input v-model="itemStep.sql" type="textarea" :autosize="{minRows: 2,maxRows: 100}"></Input>
+                            </FormItem>
                             <FormItem
-                                    v-for="(item, index) in itemStep.itemsSteps"
-                                    v-if="item.status"
+                                    v-for="(itemAssert, index) in itemStep.itemsAsserts"
+                                    v-if="itemAssert.statusAssert"
                                     :key="index"
-                                    :label="'Assert ' + item.index"
-                                    :prop="'itemStep.itemsSteps.' + index + '.actual'"
-                                    :rules="{required: true, message: 'Assert ' + item.index +' can not be empty', trigger: 'blur'}">
+                                    :label="'Assert ' + itemAssert.index"
+                                    :prop="'itemStep.itemsAsserts.' + index + '.actual'"
+                                    >
                                 <Row :gutter="10">
                                     <Col span="8">
-                                        <Input type="text" v-model="item.actual" placeholder="Enter actual..."></Input>
+                                        <Input type="text" v-model="itemAssert.actual" placeholder="Enter actual..."></Input>
                                     </Col>
                                     <Col span="2">
                                         <FormItem prop="rules">
-                                            <Select v-model="item.rules" placeholder="=">
+                                            <Select v-model="itemAssert.rules" placeholder="=">
                                                 <Option value="=">=</Option>
                                                 <Option value="!=">!=</Option>
                                                 <Option value="<"><</Option>
@@ -87,7 +90,7 @@
                                         </FormItem>
                                     </Col>
                                     <Col span="8">
-                                        <Input type="text" v-model="item.expect" placeholder="Enter expect..."></Input>
+                                        <Input type="text" v-model="itemAssert.expect" placeholder="Enter expect..."></Input>
                                     </Col>
                                     <Col span="2" offset="1">
                                         <Button type="ghost" @click="handleRemove(index)">Delete</Button>
@@ -170,7 +173,7 @@
 <script>
 import axios  from 'axios';
 export default {
-    name: 'artical-publish',
+    name: 'case-edit',
     data () {
         return {
             envSelected: [], // 选中的环境
@@ -179,21 +182,21 @@ export default {
             formValidate: {
                     desc: '',
                     name: '',
-                    status: '',
-                    items: [
+                    itemsStep: [
                         {
                             type:'',
                             method: '',
                             path: '',
                             header: '',
                             params: '',
+                            sql:'',
                             statusStep:1,
                             indexStep: 1,
                             value:'',
                             assertIndex: 1,
-                            itemsSteps: [
+                            itemsAsserts: [
                                 {
-                                    status: '',
+                                    statusAssert:'',
                                     index: 1,
                                     actual:'',
                                     rules:'',
@@ -267,40 +270,39 @@ export default {
         },
         handleCase(){
         },
-
-        handleAdd (indexStep) {
-            alert(this.formValidate.items[indexStep].assertIndex)
-            this.formValidate.items[indexStep].itemsSteps.push({
+        handleAddStep () {
+            this.indexStep++;
+            this.formValidate.itemsStep.push({
                 value: '',
-                index: this.formValidate.items[indexStep].assertIndex++,
-                status: 1
+                indexStep: this.indexStep,
+                statusStep: 1,
+                assertIndex:1,
+                itemsAsserts: [
+                            {
+                                statusAssert: '',
+                                index: 1,
+                                actual:'',
+                                rules:'',
+                                expect:''
+                            }
+                        ]
+            });
+        },
+        handleRemoveStep (indexStep) {
+            this.formValidate.itemsStep[indexStep].statusStep = 0;
+        },
+        handleAdd (indexStep) {
+            alert(this.formValidate.itemsStep[indexStep].assertIndex)
+            this.formValidate.itemsStep[indexStep].itemsAsserts.push({
+                value: '',
+                index: this.formValidate.itemsStep[indexStep].assertIndex++,
+                statusAssert: 1
             });
         },
         handleRemove (index) {
-            this.formValidate.items[index].status = 0;
+            this.formValidate.itemsStep[indexStep].itemsAsserts[index].statusAssert = 0;
         },
 
-        handleAddStep () {
-                this.indexStep++;
-                this.formValidate.items.push({
-                    value: '',
-                    indexStep: this.indexStep,
-                    statusStep: 1,
-                    assertIndex:1,
-                    itemsSteps: [
-                                {
-                                    status: '',
-                                    index: 1,
-                                    actual:'',
-                                    rules:'',
-                                    expect:''
-                                }
-                            ]
-                });
-            },
-        handleRemoveStep (indexStep) {
-                this.formValidate.itemsStep[indexStep].statusStep = 0;
-            },
         handleSelectEnv () {
             localStorage.tagsList = JSON.stringify(this.envSelected);
         },

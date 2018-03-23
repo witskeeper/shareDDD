@@ -19,7 +19,7 @@
 <script>
 import axios  from 'axios';
 export default {
-    name: 'interface-manage',
+    name: 'case-collection',
     data () {
         return {
             lsitColumns: [

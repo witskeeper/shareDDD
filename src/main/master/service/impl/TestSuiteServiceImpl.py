@@ -51,3 +51,6 @@ class TestSuiteService(object):
 
     def getSuiteList(self):
         return self.testSuiteDaoInterface.getSuiteList()
+
+    def editTestSuiteName(self,args):
+        return self.testSuiteDaoInterface.editTestSuiteName(args)

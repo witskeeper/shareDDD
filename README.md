@@ -135,7 +135,8 @@ CREATE TABLE `testsuite` (
 `update_username` varchar(255) NOT NULL,
 `status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
 `remarks` varchar(255) DEFAULT NULL,
-`envid` int(11) NOT NULL,
+`envid` int(11) DEFAULT NULL,
+`projectid` int(11) DEFAULT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)

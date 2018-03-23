@@ -4,7 +4,7 @@
 
 <template>
     <div>
-        <Col span="5">
+        <Col span="4">
             <Card>
                 <Tree :data="groupList" @on-check-change="setInterfaceInGroup" show-checkbox ref="tree" style="width:260px"></Tree>
             </Card>
@@ -13,7 +13,7 @@
             <Card>
                 <div>
                     <Transfer
-                        :data="data3"
+                        :data="caseData"
                         :target-keys="targetKeys3"
                         :list-style="listStyle"
                         :render-format="render3"
@@ -21,14 +21,12 @@
                         filterable
 
                         @on-change="handleChange3">
-                        <div :style="{float: 'right', margin: '5px'}">
-                            <Button type="ghost" size="small" @click="reloadMockData">Refresh</Button>
-                        </div>
+
                     </Transfer>
                 </div>
             </Card>
         </Col>
-        <Col span="5" class="padding-left-10">
+        <Col span="6" class="padding-left-10">
             <Card>
                 <p slot="title">
                     <Icon type="ios-pricetags-outline"></Icon>
@@ -54,10 +52,10 @@ import axios  from 'axios';
         data () {
             return {
                 groupList:[],
-                data3: this.getMockData(),
+                caseData: [],
                 targetKeys3: this.getTargetKeys(),
                 listStyle: {
-                    width: '300px',
+                    width: '350px',
                     height: '800px'
                 },
                 envSelected: [], // 选中的环境
@@ -66,7 +64,7 @@ import axios  from 'axios';
         },
         methods: {
             getGroupList(){
-                axios.get("/v1/group/getGroupByProjectId",{params:{projectId:1,type:1}}).then((res)=>{
+                axios.get("/v1/group/getGroupByProjectId",{params:{projectId:this.$route.query.projectId,type:1}}).then((res)=>{
                     console.log(res);
                     if(res.data.success){
                         const that =this;
@@ -79,7 +77,24 @@ import axios  from 'axios';
                     }
                 })
             },
-            getCase(){
+            getCaseData(group_id){
+                axios.get("/v1/case/getCaseInfosByCondition",{params:{projectId:this.$route.query.projectId,groupId:group_id,offset:0,limit:10}}).then((res)=>{
+                    console.log(res);
+                    if(res.data.success){
+                        this.$Message.success("获取数据成功")
+                        let caseData=[];
+                        for (let i = 1; i <= res.data.message.length; i++) {
+                            caseData.push({
+                                key: res.data.message[i-1].id,
+                                label: res.data.message[i-1].name,
+                                disabled: 0
+                            });
+                        }
+                        return caseData;
+                    }else{
+                        this.$Message.error("获取数据失败")
+                    }
+                })
             },
             getMockData () {
                 let mockData = [];
@@ -87,7 +102,6 @@ import axios  from 'axios';
                     mockData.push({
                         key: i.toString(),
                         label: 'Content ' + i,
-                        description: 'The desc of content  ' + i,
                         disabled: Math.random() * 3 < 1
                     });
                 }
@@ -102,13 +116,13 @@ import axios  from 'axios';
                 this.targetKeys3 = newTargetKeys;
             },
             render3 (item) {
-                return item.label + ' - ' + item.description;
-            },
-            reloadMockData () {
-                this.data3 = this.getMockData();
-                this.targetKeys3 = this.getTargetKeys();
+                return item.label;
             },
             setInterfaceInGroup(){
+                const groupCheckedData=this.$refs.tree.getCheckedNodes()
+                const testData= groupCheckedData[groupCheckedData.length-1]
+                alert(JSON.stringify(testData))
+                this.getCaseData(testData["groupId"])
             },
             getEnv(){
                 axios.get("/v1/env/getEnvironmentInfoByUserId",{params:{userId:1}}
@@ -135,6 +149,7 @@ import axios  from 'axios';
         created () {
             this.getGroupList();
             this.getEnv();
+
         },
     }
 </script>

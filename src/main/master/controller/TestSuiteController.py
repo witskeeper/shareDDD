@@ -59,7 +59,8 @@ class TestSuiteHandler(tornado.web.RequestHandler):
             tasks = {
                 'addTestSuite' : lambda : self.addTestSuite(),
                 'deleteTestSuite':lambda :self.deleteTestSuite(),
-                'updateTestSuite': lambda : self.updateTestSuite()
+                'updateTestSuite': lambda : self.updateTestSuite(),
+                'editTestSuiteName' : lambda :self.editTestSuiteName()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -92,3 +93,6 @@ class TestSuiteHandler(tornado.web.RequestHandler):
 
     def getSuiteList(self):
         return TestSuiteService().getSuiteList()
+
+    def editTestSuiteName(self):
+        return TestSuiteService().editTestSuiteName(json.loads(self.request.body))

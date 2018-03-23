@@ -47,8 +47,8 @@ export default {
                         editable: true,
                     },
                     {
-                        title: '编辑时间',
-                        key: 'gmt_modify'
+                        title: '对应项目ID',
+                        key: 'projectid'
                     },
                     {
                         title: '创建人',
@@ -71,7 +71,7 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            let query = { suiteId: params.row.id };
+                                            let query = { projectId:params.row.projectid,suiteId: params.row.id };
                                             this.$router.push({
                                                 name: 'suite-info',
                                                 query: query
@@ -102,19 +102,16 @@ export default {
                 userId:"",
                 status:"",
                 remarks:"",
-                envId:""
+                envId:"",
+                projectId:""
             },
             removeTestSuiteData:{
                 suiteId:"",
             },
             editTestSuiteData:{
                 suiteId:"",
-                userId:"",
                 name:"",
-                caseIds:"",
-                status:"",
-                remarks:"",
-                envId:""
+
             }
         };
     },
@@ -132,7 +129,7 @@ export default {
         handleCellChange (val, index, key) {
             this.editTestSuiteData.suiteId = val[index]["id"]
             this.editTestSuiteData.name = val[index]["name"]
-            axios.post("/v1/suite/updateTestSuite",this.editTestSuiteData).then((res)=>{
+            axios.post("/v1/suite/editTestSuiteName",this.editTestSuiteData).then((res)=>{
             // console.log(val,index,key)
             if(res.data.success){
                   this.$Message.success("成功");
@@ -180,6 +177,21 @@ export default {
                                     this.addTestSuiteData.name = val;
                                 }
                             }
+                        }),
+                        h('Input', {
+                            props: {
+                                value: this.addTestSuiteData.projectId,
+                                autofocus: true,
+                                placeholder: '对应项目ID'
+                            },
+                            style: {
+                                marginTop: '8px'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.addTestSuiteData.projectId = val;
+                                }
+                            }
                         })
                     ])
                 }
@@ -207,7 +219,8 @@ export default {
                 userId:"",
                 status:"",
                 remarks:"",
-                envId:""
+                envId:"",
+                projectId:""
             };
         }
     },
