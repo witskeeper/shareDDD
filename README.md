@@ -93,7 +93,6 @@ CREATE TABLE `testcase` (
 `remarks` varchar(255) DEFAULT NULL,
 `projectid` int(11) NOT NULL,
 `groupid` int(11) NOT NULL,
-`envid` int(11) NOT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)
@@ -112,6 +111,7 @@ CREATE TABLE `casecontent` (
 `timeout` int(11) DEFAULT NULL,
 `type` tinyint(4) default 0 COMMENT '0: api 1: sql',
 `sqlcontent` varchar(255) DEFAULT NULL,
+`response_type` tinyint(4) DEFAULT '0' COMMENT '0: json 1: view',
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -121,7 +121,6 @@ CREATE TABLE `assert` (
 `actual` varchar(255) NOT NULL,
 `expect` varchar(255) DEFAULT NULL,
 `assert_type` varchar(255) NOT NULL COMMENT '0: equal 1: not equal 2: contain 3:not contain ',
-`sqlcontent` varchar(255) DEFAULT NULL,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

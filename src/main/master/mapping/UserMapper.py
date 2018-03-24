@@ -37,8 +37,12 @@ class UserSQLMapper:
         getUserInfoByIdSQL="""
         select username,passwd,remarks,status from user where id = %(userId)s
         """
+        deleteUserInfoByNameSQL="""
+        delete from user where username = %(userName)s
+        """
         #SET SQL FOR DAO
         self.data.setdefault("addUser",addUserSQL)
         self.data.setdefault("getUserInfo", getUserInfoSQL)
         self.data.setdefault("deleteUser", deleteUserInfoSQL)
         self.data.setdefault("getUserInfoById", getUserInfoByIdSQL)
+        self.data.setdefault("deleteUserInfoByName",deleteUserInfoByNameSQL)

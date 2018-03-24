@@ -46,7 +46,7 @@ class CaseContentSQLMapper:
         sqlcontent=%(sqlContent)s where id = %(contentId)s
         """
         getContentInfosByCaseIdSQL="""
-        select * from casecontent where caseid = %(caseId)s
+        select * from casecontent where caseid = %(caseId)s order by step 
         """
         getContentInfosByContentIdSQL="""
         select * from casecontent where id = %(contentId)s

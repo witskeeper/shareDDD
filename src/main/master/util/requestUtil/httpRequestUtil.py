@@ -44,9 +44,9 @@ class RequestBase(object):
 
     def route(self):
         if self.method=="GET":
-            return self.get()
+            return self.getByCase()
         elif self.method=="POST":
-            return self.post()
+            return self.postByCase()
         else:
             logger.error("Request method [{0}] not support".format(self.method))
             self.dataResult.setSuccess(False)
@@ -135,6 +135,28 @@ class RequestBase(object):
         #r = s.get(url,data=data,headers=headers)
         r = s.get(url, data=data)
         return r.cookies.values()
+
+    @AdminDecoratorServer.execImplDecorator()
+    def getByCase(self):
+        dataResult = DataResult()
+        headers ={}
+        if self.format is not None:
+            headers["contentType"]=self.format
+        r = requests.Session().get(self.url,params=self.params,headers=headers,verify=False)
+        dataResult.setMessage(r.text)
+        dataResult.setSuccess(True)
+        return dataResult
+
+    @AdminDecoratorServer.execImplDecorator()
+    def postByCase(self):
+        dataResult = DataResult()
+        headers ={}
+        if self.format is not None:
+            headers["contentType"]=self.format
+        r = requests.Session().post(self.url,params=self.params,headers=headers,verify=False)
+        dataResult.setMessage(r.text)
+        dataResult.setSuccess(True)
+        return dataResult
 
 if __name__=="__main__":
     s= requests.Session()

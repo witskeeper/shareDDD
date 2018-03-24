@@ -52,3 +52,10 @@ class TestCaseDaoInterface:
         sql = TestCaseSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate =DbBaseHelper(sql,args)
         return daoOperate.read()
+
+    def getCaseDetailInfoById(self,args):
+        #实例化
+        logger.info(inspect.stack()[0][3])
+        sql = TestCaseSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate =DbBaseHelper(sql,args)
+        return daoOperate.read()

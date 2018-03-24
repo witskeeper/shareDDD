@@ -19,6 +19,8 @@ class UserService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def addUser(self,args):
+        logger.error(args)
+        logger.error(type(args))
         return self.userDaoInterface.addUser(args)
 
     @AdminDecoratorServer.execImplDecorator()
@@ -37,5 +39,9 @@ class UserService(object):
         args={}
         #此处的user_name必须与sql定义中参数一致，即 %(user_name)s
         args.setdefault("userId",id)
-        return self.userDaoInterface.getUserInfo(args)
+        return self.userDaoInterface.getUserInfoById(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def deleteUserInfoByName(self,args):
+        return self.userDaoInterface.deleteUserInfoByName(args)
 

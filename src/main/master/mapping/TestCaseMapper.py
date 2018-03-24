@@ -52,6 +52,12 @@ class TestCaseSQLMapper:
         getInitCaseInfoByIdsSQL="""
         select * from testcase where id in (%(caseIds)s) where name="init" limit 1
         """
+        getCaseDetailInfoByIdSQL="""
+        select testcase.*,casecontent.id as contentId,casecontent.step_name,casecontent.step,casecontent.interfaceid,casecontent.url,casecontent.method,
+        casecontent.format,casecontent.request_params,casecontent.type,casecontent.sqlcontent,casecontent.response_type,
+        assert.actual,assert.expect,assert.assert_type,assert.casecontentid from testcase left join casecontent on testcase.id = casecontent.caseid 
+        left join assert on assert.casecontentid = casecontent.id where testcase.id = %(caseId)s
+        """
         #SET SQL FOR DAO
         self.data.setdefault("addTestCase",addTestCaseSQL)
         self.data.setdefault("deleteTestCase",deleteTestCaseSQL)
@@ -59,4 +65,5 @@ class TestCaseSQLMapper:
         self.data.setdefault("getCaseInfosByCondition", getCaseInfosByConditionSQL)
         self.data.setdefault("getCaseInfosById", getCaseInfosByIdSQL)
         self.data.setdefault("getInitCaseInfoByIds", getInitCaseInfoByIdsSQL)
+        self.data.setdefault("getCaseDetailInfoById",getCaseDetailInfoByIdSQL)
 

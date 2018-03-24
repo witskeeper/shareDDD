@@ -35,7 +35,8 @@ class UserHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'get_user_info_by_user_name' : lambda : self.get_user_info_by_user_name()
+                'get_user_info_by_user_name' : lambda : self.get_user_info_by_user_name(),
+                'get_user_info_by_user_id' : lambda :self.get_user_info_by_user_id()
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -57,7 +58,8 @@ class UserHandler(tornado.web.RequestHandler):
         try:
             tasks = {
                 'add_user_info' : lambda : self.add_user_info(),
-                'delete_user_info':lambda :self.delete_user_info()
+                'delete_user_info':lambda :self.delete_user_info(),
+                'deleteUserInfoByName':lambda :self.deleteUserInfoByName()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -78,7 +80,11 @@ class UserHandler(tornado.web.RequestHandler):
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def add_user_info(self):
+        logger.error(self.request.body)
+        if isinstance(self.request.body,dict):
+            logger.error("JJJJJJJJJJJ")
         data = json.loads(self.request.body)
+        logger.error("JJJJJJJJJJJasssss")
         #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
         if "remarks" not in  data:
             data.setdefault("remarks",None)
@@ -91,3 +97,7 @@ class UserHandler(tornado.web.RequestHandler):
     def get_user_info_by_user_id(self):
         userId = self.get_argument('userId')
         return UserService().getUserInfoById(userId)
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def deleteUserInfoByName(self):
+        return UserService().deleteUserInfoByName(json.loads(self.request.body))

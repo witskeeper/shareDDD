@@ -51,7 +51,7 @@ module.exports = merge(webpackBaseConfig, {
         historyApiFallback: true,
         hot: true,
         inline: true,
-        host: '',
+        host: '192.168.0.124',
 	    stats: { colors: true },
         proxy: {
             //匹配代理的url

@@ -307,3 +307,38 @@ class TaskCenterService(object):
     @AdminDecoratorServer.execImplDecorator()
     def execTask(self,args):
         pass
+
+    @AdminDecoratorServer.execImplDecorator()
+    def startTaskBySingleCase(self,args):
+        message=[]
+        contents = CaseContentDaoInterface().getContentInfosByCaseId(args)
+        if contents.getSuccess():
+            for content in contents.getMessage():
+                if int(content["method"]) == 0:
+                    method = "GET"
+                else:
+                    method= "POST"
+                if int(content["format"]) ==0:
+                    format ="application/x-www-form-urlencoded"
+                else:
+                    format="application/json"
+                if content["request_params"] is None or content["request_params"] =="":
+                    params={}
+                else:
+                    params = json.loads(content["request_params"])
+                logger.error(content["url"])
+                logger.error(method)
+                logger.error(format)
+                logger.error(params)
+                requestUtil = RequestBase(url=content["url"], method=method, format=format,params=params)
+                response = requestUtil.route()
+                logger.error(response.getMessage())
+                logger.error(response.getSuccess())
+                tmpArgs={}
+                tmpArgs[content["step_name"]]= response.getMessage()
+                message.append(tmpArgs)
+            logger.error(message)
+            contents.setSuccess(True)
+            contents.setMessage(message)
+        return contents
+

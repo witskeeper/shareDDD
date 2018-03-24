@@ -10,6 +10,7 @@ from src.main.master.common.constants import SystemConfig
 from src.main.master.util.logUtil.log import Log
 from src.main.master.entity.DataResult import DataResult
 from src.main.master.service.impl.TestCaseServiceImpl import TestCaseService
+from src.main.master.service.impl.TaskCenterServiceImpl import TaskCenterService
 from src.main.master.util.jsonUtil.JsonUtil import CJsonEncoder
 from src.main.master.core.AdminDecorator import AdminDecoratorServer
 
@@ -59,7 +60,8 @@ class TestCaseHandler(tornado.web.RequestHandler):
             tasks = {
                 'addTestCase' : lambda : self.addTestCase(),
                 'deleteTestCase':lambda :self.deleteTestCase(),
-                'updateTestCase': lambda : self.updateTestCase()
+                'updateTestCase': lambda : self.updateTestCase(),
+                'startTaskBySingleCase': lambda :self.startTaskBySingleCase()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -96,3 +98,7 @@ class TestCaseHandler(tornado.web.RequestHandler):
         offset = self.get_argument('offset')
         limit = self.get_argument('limit')
         return TestCaseService().getCaseInfosByCondition(projectId,groupId,offset,limit)
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def startTaskBySingleCase(self):
+        return TaskCenterService().startTaskBySingleCase(json.loads(self.request.body))
