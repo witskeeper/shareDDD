@@ -66,7 +66,7 @@ export const otherRouter = {
         { path: 'testcase/test-collection/case-list', title: '用例列表', name: 'case-list', component: resolve => { require(['@/views/testcase/test-collection/case-list.vue'], resolve); } },
         { path: 'testcase/test-collection/case-edit', title: '用例编辑', name: 'case-edit', component: resolve => { require(['@/views/testcase/test-collection/case-edit.vue'], resolve); } },
         { path: 'testcase/test-suite/suite-info', title: '套件详情', name: 'suite-info', component: resolve => { require(['@/views/testcase/test-suite/suite-info.vue'], resolve); } },
-        { path: 'environment/environment-info', title: '环境详情', name: 'environment-info', component: resolve => { require(['@/views/environment/environment-info.vue'], resolve); } }
+        { path: 'environment/environment-info', title: '环境详情', name: 'environment-info', component: resolve => { require(['@/views/environment/environment-info.vue'], resolve); } },
         { path: 'docs/dbdoc-list-info', title: '文档详情', name: 'dbdoc-list-info', component: resolve => { require(['@/views/docs/dbdoc-list-info.vue'], resolve); } },
         { path: 'environment/environment-db-info', title: '数据库详情', name: 'environment-db-info', component: resolve => { require(['@/views/environment/environment-db-info.vue'], resolve); } },
     ]
