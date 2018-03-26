@@ -67,6 +67,8 @@ export const otherRouter = {
         { path: 'testcase/test-collection/case-edit', title: '用例编辑', name: 'case-edit', component: resolve => { require(['@/views/testcase/test-collection/case-edit.vue'], resolve); } },
         { path: 'testcase/test-suite/suite-info', title: '套件详情', name: 'suite-info', component: resolve => { require(['@/views/testcase/test-suite/suite-info.vue'], resolve); } },
         { path: 'environment/environment-info', title: '环境详情', name: 'environment-info', component: resolve => { require(['@/views/environment/environment-info.vue'], resolve); } }
+        { path: 'docs/dbdoc-list-info', title: '文档详情', name: 'dbdoc-list-info', component: resolve => { require(['@/views/docs/dbdoc-list-info.vue'], resolve); } },
+        { path: 'environment/environment-db-info', title: '数据库详情', name: 'environment-db-info', component: resolve => { require(['@/views/environment/environment-db-info.vue'], resolve); } },
     ]
 };
 
@@ -269,7 +271,31 @@ export const appRouter = [
                 component: resolve => { require(['@/views/user/user-authority.vue'], resolve); }
             }
         ]
-    }
+    },
+    //预留，别删
+    // {
+    //     path: '/business',
+    //     icon: 'android-contact',
+    //     name: 'business',
+    //     title: '事业线管理',
+    //     component: Main,
+    //     children: [
+    //         {
+    //             path: 'business-product',
+    //             title: '产品管理',
+    //             name: 'business-product',
+    //             icon: 'android-people',
+    //             component: resolve => { require(['@/views/business/business-product.vue'], resolve); }
+    //         },
+    //         {
+    //             path: 'business-project',
+    //             title: '项目管理',
+    //             name: 'business-project',
+    //             icon: 'android-people',
+    //             component: resolve => { require(['@/views/business/business-project.vue'], resolve); }
+    //         }
+    //     ]
+    // }
 ];
 
 // 所有上面定义的路由都要写在下面的routers里

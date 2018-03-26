@@ -11,7 +11,7 @@ logger = Log('dbBaseUtil')
 logger.write_to_file(SystemConfig.logPathPrefix +"dbBaseUtil.log")
 
 #set
-dbinfo ={'host':DbConfig.host,'user':DbConfig.user,'passwd':DbConfig.passwd,'db':DbConfig.db}
+dbinfo ={'host':DbConfig.host,'user':DbConfig.user,'passwd':DbConfig.passwd,'db':DbConfig.db,'port' :DbConfig.port}
 
 class Connection(object):
     """
@@ -52,8 +52,12 @@ class Connection(object):
         try:
             if not is_execute_many:
                 ret = c.execute(sql, args)
+                # 增加返回的id
+                # todo 考虑并发的情况
+                ret = self._conn.insert_id()
             else:
                 ret = c.executemany(sql, args)
+                ret = self._conn.insert_id()
             if self.autocommit:
                 self._conn.commit()
             return ret

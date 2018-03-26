@@ -99,6 +99,7 @@
                 return this.$store.state.app.menuList;
             },
             pageTagsList () {
+                console.log(this.$store.state.app)
                 return this.$store.state.app.pageOpenedList; // 打开的页面的页面对象
             },
             currentPath () {
