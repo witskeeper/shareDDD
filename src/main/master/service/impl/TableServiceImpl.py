@@ -199,7 +199,7 @@ class TableService(object):
             tableDict["eName"] = db_table
             tableDict["remark"] = ""
             tableDict["is_discarded"] = 0
-            logTableList.append(db_table)
+            logTableList.append(db_table.encode('utf-8'))
             result_table = interface_table.addTable(tableDict).getSuccess()
             insertColumnList = []
             args = {}
