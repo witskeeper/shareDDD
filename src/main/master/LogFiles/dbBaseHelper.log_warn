@@ -1416,3 +1416,35 @@ KeyError: 'projectId'
     for key, item in args.iteritems())
 KeyError: 'projectId'
 
+2018-03-26 15:27:12,680 - dbBaseHelper - 5672 - ERROR - read - select sql:
+        select testcase.*,casecontent.id as contentId,casecontent.step_name,casecontent.step,casecontent.interfaceid,casecontent.url,casecontent.method,
+        casecontent.format,casecontent.request_params,casecontent.type,casecontent.sqlcontent,casecontent.response_type,
+        assert.actual,assert.expect,assert.assert_type,assert.casecontentid from testcase left join casecontent on testcase.id = casecontent.caseid 
+        left join assert on assert.casecontentid = casecontent.id where testcase.id = %(caseId)s
+         args:{'caseId': u'4'} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 30, in read
+    ret = db.read(self.sql,self.args)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (1054, "Unknown column 'casecontent.response_type' in 'field list'")
+
+2018-03-26 15:27:24,020 - dbBaseHelper - 5660 - ERROR - read - select sql:
+        select testcase.*,casecontent.id as contentId,casecontent.step_name,casecontent.step,casecontent.interfaceid,casecontent.url,casecontent.method,
+        casecontent.format,casecontent.request_params,casecontent.type,casecontent.sqlcontent,casecontent.response_type,
+        assert.actual,assert.expect,assert.assert_type,assert.casecontentid from testcase left join casecontent on testcase.id = casecontent.caseid 
+        left join assert on assert.casecontentid = casecontent.id where testcase.id = %(caseId)s
+         args:{'caseId': u''} Exception:Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseHelper.py", line 30, in read
+    ret = db.read(self.sql,self.args)
+  File "C:\Python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\util\dbUtil\dbBaseUtil.py", line 39, in read
+    c.execute(sql, args)
+  File "C:\Python27\lib\site-packages\MySQLdb\cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\Python27\lib\site-packages\MySQLdb\connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (1054, "Unknown column 'casecontent.response_type' in 'field list'")
+

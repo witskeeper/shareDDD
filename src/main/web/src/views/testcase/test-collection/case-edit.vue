@@ -302,7 +302,7 @@ export default {
         },
         handleCase(){
             if(this.$route.query.caseId == ""){
-                this.$Message.error('暂时不能发起调试接，我的娟宝宝');
+                this.$Message.error('暂时不能发起调试接，请先保存用例');
                 return ;
             }
             const data={}
@@ -367,7 +367,7 @@ export default {
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     if(this.$route.query.caseId != ""){
-                        this.$Message.error('暂时没有编辑接口，我的娟宝宝');
+                        this.$Message.error('暂时没有编辑接口');
                         return ;
                     }
                     const data= this.formValidate;
@@ -376,7 +376,7 @@ export default {
                     data["userId"]=1
                     data["userName"]="jessica"
                     if(this.selectedGroupId ==0){
-                        this.$Message.error('请选择分组，我的娟宝宝');
+                        this.$Message.error('请选择分组');
                         return ;
                     }
                     data["groupId"]=this.selectedGroupId
