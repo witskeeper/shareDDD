@@ -37,11 +37,6 @@ export const page500 = {
     component: resolve => { require(['@/views/error-page/500.vue'], resolve); }
 };
 
-export const preview = {
-    path: '/preview',
-    name: 'preview',
-    component: resolve => { require(['@/views/form/article-publish/preview.vue'], resolve); }
-};
 
 export const locking = {
     path: '/locking',
@@ -58,8 +53,6 @@ export const otherRouter = {
     children: [
         { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: resolve => { require(['@/views/home/home.vue'], resolve); } },
         { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['@/views/own-space/own-space.vue'], resolve); } },
-        { path: 'order/:order_id', title: '订单详情', name: 'order-info', component: resolve => { require(['@/views/advanced-router/component/order-info.vue'], resolve); } }, // 用于展示动态路由
-        { path: 'shopping', title: '购物详情', name: 'shopping', component: resolve => { require(['@/views/advanced-router/component/shopping-info.vue'], resolve); } }, // 用于展示带参路由
         { path: 'message', title: '消息中心', name: 'message_index', component: resolve => { require(['@/views/message/message.vue'], resolve); } },
         { path: 'interface/interface-info', title: '项目详情', name: 'interface-info', component: resolve => { require(['@/views/interface/interface-info.vue'], resolve); } },
         { path: 'interface/interface-edit', title: '编辑接口', name: 'interface-edit', component: resolve => { require(['@/views/interface/interface-edit.vue'], resolve); } },
@@ -302,7 +295,6 @@ export const appRouter = [
 export const routers = [
     loginRouter,
     otherRouter,
-    preview,
     locking,
     ...appRouter,
     page500,
