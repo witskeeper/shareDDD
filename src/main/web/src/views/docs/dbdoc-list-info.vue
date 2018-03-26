@@ -10,7 +10,6 @@
             
             <Col span="18">
                 <div>
-                    <!-- <Select v-model="searchSelect" multiple filterable remote :remote-method="remoteMethod2" :loading="loading2"> -->
                     <Select v-model="searchInput" placeholder="搜索表名(user) / 表字段(user.id)" 
                      filterable remote :remote-method="remoteSearch" :loading="selectIsLoading" clearable @on-change="selectChange">
                         <Option v-for="item in searchList" :value="item.id" :key="item.uid">{{item.eName}}</Option>
@@ -131,13 +130,6 @@ export default {
           key: "is_discarded",
           editable: true
         }
-        // {
-        //     title: '操作',
-        //     align: 'center',
-        //     width: 200,
-        //     key: 'handle',
-        //     handle: ['edit', 'delete']
-        // }
       ],
       listData: [],
       tableDataModel: {
@@ -191,31 +183,22 @@ export default {
             this.treeTableName = this.groupRelation.groupInfo[0].children[0].title;
             this.getColumnListByTableNameNet(this.treeTableName);
             this.getTableInfoByNameNet(this.treeTableName);
-            console.log(this.groupRelation)
-            // var id = this.groupRelation.groupInfo[0].children[0].id;
-            // this.getColumnListByTableIdNet(id);
-            // this.getTableInfoByIdNet(id);
           } else {
             this.$Message.error("失败");
           }
         });
     },
     getTreeTableInfo(selectedArray) {
-      console.log(selectedArray[0].title);
-      const isHasChildren = selectedArray[0].children;
-      var id = 0
+      let isHasChildren = selectedArray[0].children;
+      let id = 0
       // todo 根节点不要选中且没有事件
       if (Array.isArray(isHasChildren)) {
         selectedArray[0].selected = false;
       } else {
-        // this.treeTableName = selectedArray[0].title;
         id = selectedArray[0].tableId;
-        console.log(selectedArray[0])
         this.getColumnListByTableIdNet(id);
         this.getTableInfoByIdNet(id);
       }
-    //   this.getColumnListByTableNameNet(this.treeTableName);
-    //   this.getTableInfoByNameNet(this.treeTableName);
     },
     getColumnListByTableNameNet(tableName) {
       axios
@@ -281,9 +264,6 @@ export default {
       } else if (key === "remark") {
         this.editColumnRemarkByIdNet(val[index][key], val[index]["id"], key);
       }
-      this.$Message.success(
-        "修改了第 " + (index + 1) + " 行列名为 " + key + " 的数据"
-      );
     },
     editColumnRemarkByIdNet(val, index, key) {
       axios
@@ -294,7 +274,7 @@ export default {
         })
         .then(res => {
           if (res.data.success) {
-            this.$Message.success("成功");
+            this.$Message.success("编辑成功");
           } else {
             this.$Message.error("失败");
           }
@@ -309,17 +289,16 @@ export default {
         })
         .then(res => {
           if (res.data.success) {
-            this.$Message.success("成功");
+            this.$Message.success("编辑成功");
           } else {
             this.$Message.error("失败");
           }
         });
     },
     editTableByNameNet() {
-      console.log("a");
       axios.post("/v1/table/editTableByName", this.tableDataModel).then(res => {
         if (res.data.success) {
-          this.$Message.success("成功");
+          this.$Message.success("编辑成功");
         } else {
           this.$Message.error("失败");
         }
@@ -358,7 +337,7 @@ export default {
         this.selectIsLoading = true;
         axios.post("/v1/table/getSearchByTableColumn", content).then(res => {
           if (res.data.success) {
-            this.$Message.success("成功");
+            // this.$Message.success("成功");
             this.searchList = res.data.message;
             this.selectIsLoading = false;
           } else {
@@ -370,7 +349,7 @@ export default {
         this.selectIsLoading = true;
         axios.post("/v1/table/getSearchByTable", content).then(res => {
           if (res.data.success) {
-             this.$Message.success("成功");
+            //  this.$Message.success("成功");
             this.searchList = res.data.message;
             this.selectIsLoading = false;
           } else {
@@ -382,7 +361,7 @@ export default {
         this.selectIsLoading = true;
         axios.post("/v1/table/getSearchByColumn", content).then(res => {
             if (res.data.success) {
-                this.$Message.success("成功");
+                // this.$Message.success("成功");
                 this.searchList = res.data.message;
                 this.selectIsLoading = false;
             } else {
@@ -401,58 +380,16 @@ export default {
         
     },
     changeTreeSelected(id) {
-
-this.groupRelation.groupInfo.forEach(grops =>{
-  grops.children.forEach(item =>{
-    if(item.id==id){
-      this.$set(item,'selected',true);
-    }else{
-      this.$set(item,'selected',false);
+      this.groupRelation.groupInfo.forEach(grops =>{
+        grops.children.forEach(item =>{
+          if(item.id==id){
+            this.$set(item,'selected',true);
+          }else{
+            this.$set(item,'selected',false);
+          }
+        })
+      })
     }
-  })
-})
-
-        // var groups = this.groupRelation.groupInfo
-        // var res = groups.map(item => {
-        //     var flag = false
-        //     var inTree = item.children
-        //     inTree.map(inItem => {
-        //         // 判断选中节点
-        //         if(inItem.tableId == id) {
-        //             inItem.selected = true
-        //             // 展开选中节点的根目录
-        //             flag = true
-        //         }else {
-        //             inItem.selected = false
-        //         }
-        //         return inTree
-        //     })
-        //     if(flag) {
-        //         item.expand = true
-        //     }
-        //     // 要不要折叠之前的节点
-        //     return item
-        // });
-        // // console.log("bbb")
-        // this.groupRelation.groupInfo = res
-
-// debugger
-      // this.groupRelation.groupInfo.forEach(item1 =>{
-      //   debugger
-      //   console.log(item1)
-      //   item1.children[0].selected=false;
-      //   item1.children[1].selected=true;
-      // })
-
-
-    }
-  },
-  mounted() {
-    // this.changeTreeSelected()
-    // this.groupRelationList = this.groupRelation.groupRelationList
-    // this.listData = getTreeTableInfo
-    // this.getColumnListByTableNameNet(this.treeTableName)
-    // this.getTableInfoByNameNet(this.treeTableName)
   },
   created() {
     this.getData();

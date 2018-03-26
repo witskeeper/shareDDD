@@ -32,6 +32,15 @@
 # `type` TINYINT(4) NOT NULL COMMENT '0 input, 1 output',
 # PRIMARY KEY(`id`)
 # ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+#
+# CREATE TABLE `DBLog` (
+# `id` int(11) NOT NULL auto_increment,
+# `DBId` int(11) default 0 NOT NULL,
+# `content` TEXT NOT NULL,
+# `userId` int(11) default 0 NOT NULL,
+# `gmt_create` datetime DEFAULT NULL,
+# PRIMARY KEY(`id`)
+# ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 class TableSQLMapper:
 
@@ -166,6 +175,17 @@ class TableSQLMapper:
          where DBId=%(DBId)s and c.ename like %(cname)s;
         """
 
+        addDBLogSQL = """
+        insert into dblog (DBId,content,userId,gmt_create) 
+        values (%(DBId)s,%(content)s,%(userId)s,now())
+        """
+
+        getDBLogListSQL = """
+        select concat(if(username is NULL,"自动",username),"在",dl.gmt_create,content) as content from dblog dl
+          left join user u on u.id = dl.userId
+          where DBId = %(DBId)s order by dl.gmt_create desc
+        """
+
 
         #SET SQL FOR DAO
         self.data.setdefault("addTable",addTableSQL)
@@ -200,6 +220,9 @@ class TableSQLMapper:
         self.data.setdefault("getSearchByTable", getSearchByTableSQL)
         self.data.setdefault("getSearchByTableColumn", getSearchByTableColumnSQL)
         self.data.setdefault("getSearchByColumn", getSearchByColumnSQL)
+
+        self.data.setdefault("addDBLog", addDBLogSQL)
+        self.data.setdefault("getDBLogList", getDBLogListSQL)
 
 
 

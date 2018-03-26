@@ -7,7 +7,6 @@ from src.main.master.common.constants import SystemConfig
 from src.main.master.mapping.DatabaseMapper import DatabaseSQLMapper
 
 #set log
-# todo inspect.stack()[0][3]指的是什么
 logger = Log('DatabaseDao')
 logger.write_to_file(SystemConfig.logPathPrefix+"DatabaseDao.log")
 

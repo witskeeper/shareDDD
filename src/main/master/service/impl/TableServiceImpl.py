@@ -116,6 +116,7 @@ class TableService(object):
             insertTableList = []
             insertColumnList = []
             insertGroupList = []
+            logTableList = []
             for i in tables:
                 db_table = i["TABLE_NAME"]
                 tableDict = {}
@@ -125,6 +126,7 @@ class TableService(object):
                 tableDict["remark"] = ""
                 tableDict["is_discarded"] = 0
                 insertTableList.append(tableDict)
+                logTableList.append(db_table)
             result_table = interface_table.addTable(insertTableList, True).getSuccess()
 
             args = {}
@@ -157,7 +159,10 @@ class TableService(object):
                         columnDict["is_discarded"] = 0
                         insertColumnList.append(columnDict)
 
-                return interface_table.addColumn(insertColumnList, True)
+                interface_table.addColumn(insertColumnList, True)
+
+                # 输出log记录信息都是表
+                return self.addDBLog(DBId, logTableList)
 
             else:
                 return result_table
@@ -165,7 +170,7 @@ class TableService(object):
             return count_info
 
     @AdminDecoratorServer.execImplDecorator()
-    def SynchronizeDatabase(self, args):
+    def synchronizeDatabase(self, args):
         # 后续同步，比较表差和字段差
         interface_table = self.TableDaoInterface
         interface_db = self.DatabaseDaoInterface
@@ -185,6 +190,7 @@ class TableService(object):
         # 获取需要比较表字段的数据表，排除上面差集的数据表
         tables_compare = set(tables_src_list) -  tables_diff
         # 增加表
+        logTableList = []
         for i in tables_diff:
             db_table = i
             tableDict = {}
@@ -193,6 +199,7 @@ class TableService(object):
             tableDict["eName"] = db_table
             tableDict["remark"] = ""
             tableDict["is_discarded"] = 0
+            logTableList.append(db_table)
             result_table = interface_table.addTable(tableDict).getSuccess()
             insertColumnList = []
             args = {}
@@ -213,7 +220,6 @@ class TableService(object):
             # 调用和报错
             interface_db.addTableGroupRelation(relationDict)
 
-
             if result_table:
                 args = {}
                 args.setdefault("DBId", DBId)
@@ -233,12 +239,17 @@ class TableService(object):
                     columnDict["cName"] = ""
                     columnDict["eName"] = j["COLUMN_NAME"]
                     columnDict["type"] = j["COLUMN_TYPE"]
-                    columnDict["remark"] = j["COLUMN_COMMENT"]
+                    remark = j["COLUMN_COMMENT"]
+                    if remark == "":
+                        columnDict["remark"] = "-"
+                    else:
+                        columnDict["remark"] = remark
                     columnDict["is_discarded"] = 0
                     insertColumnList.append(columnDict)
                 interface_table.addColumn(insertColumnList, True)
 
         # 比较表，根据缺少的字段，增加字段
+        logColumnList = []
         for i in tables_compare:
             args = {}
             args.setdefault("DBId", DBId)
@@ -267,11 +278,21 @@ class TableService(object):
                 columnDict["cName"] = ""
                 columnDict["eName"] = column_info[0]["COLUMN_NAME"]
                 columnDict["type"] = column_info[0]["COLUMN_TYPE"]
-                columnDict["remark"] = column_info[0]["COLUMN_COMMENT"]
+                remark = column_info[0]["COLUMN_COMMENT"]
+                if remark == "":
+                    columnDict["remark"] = "-"
+                else:
+                    columnDict["remark"] = remark
                 columnDict["is_discarded"] = 0
+                logColumnName = "{}.{}".format(db_table, columnDict["eName"])
+                logColumnList.append(logColumnName)
                 interface_table.addColumn(columnDict)
 
-        return interface_db.getDatabaseInfoById({"id": DBId})
+        interface_db.getDatabaseInfoById({"id": DBId})
+
+        # 增加log信息
+        return self.addDBLog(DBId, logTableList+logColumnList)
+
 
     @AdminDecoratorServer.execImplDecorator()
     def initSynchronizeTable(self, schemaName, tableName):
@@ -357,3 +378,20 @@ class TableService(object):
         args.setdefault("cname", '%{}%'.format(content["content"][1:]))
         logger.info(args)
         return self.TableDaoInterface.getSearchByColumn(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def addDBLog(self, DBId, content, userId=0):
+        # todo 默认无用户
+        args = {}
+        args.setdefault("userId", userId)
+        args.setdefault("DBId", DBId)
+        concat_content = "添加了{}".format("、".join(content))
+        args.setdefault("content", concat_content)
+        logger.info(args)
+        return self.TableDaoInterface.addDBLog(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def getDBLogList(self, DBId):
+        args = {}
+        args.setdefault("DBId", DBId)
+        return self.TableDaoInterface.getDBLogList(args)

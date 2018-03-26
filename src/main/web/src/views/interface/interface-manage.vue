@@ -103,7 +103,7 @@ export default {
                 this.$router.push({path:"/interface/interface-info",query:{projectId:rowData.id}})
         },
         getData () {
-                axios.get("http://localhost:8090/v1/project/getProjectList").then((res)=>{
+                axios.get("/v1/project/getProjectList").then((res)=>{
                 console.log(res)
                 if(res.data.success){
                     this.list = res.data.message;
@@ -167,7 +167,7 @@ export default {
             })
         },
         addProjectNet(){
-            axios.post("http://localhost:8090/v1/project/addProject",
+            axios.post("/v1/project/addProject",
             this.addProjectData
             ).then((res)=>{
                 //console.log(res)

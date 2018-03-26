@@ -10,7 +10,6 @@ from src.main.master.core.AdminDecorator import AdminDecoratorServer
 from src.main.master.service.impl.TableServiceImpl import TableService
 
 #set log
-# todo 为什么list的参数args要用字典
 logger = Log('DatabaseServiceImpl')
 logger.write_to_file(SystemConfig.logPathPrefix+"DatabaseServiceImpl.log")
 
@@ -23,7 +22,6 @@ class DatabaseService(object):
 
     @AdminDecoratorServer.execImplDecorator()
     def addDatabase(self,args):
-        # todo 如果表新建成功，但是分组没有加，怎么办
         result = self.DatabaseDaoInterface.addDatabase(args)
         # 添加默认表分组
         DBId = result.getMessage()
@@ -125,15 +123,11 @@ class DatabaseService(object):
         index = 0
         for key, group in handleRet:
             groupDict = {}
-            # todo 先转为list
+            #  先转为list
             group=list(group)
             groupDict.setdefault("title", group[0]["name"])
             logger.info(group)
-            # groupDict.setdefault("disabled", True)
             groupDict.setdefault("children", [{"title":l["eName"],"id":l["id"],"tableId":l["tableId"]} for l in group])
-            # groupDict.setdefault("title", list(group)[0]["name"])
-            # logger.info(group)
-            # groupDict.setdefault("children", [{"title": l["eName"]} for l in list(group)])
             # 用于设置默认展开
             if index == 0:
                 groupDict.setdefault("expand", True)

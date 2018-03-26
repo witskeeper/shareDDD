@@ -46,10 +46,11 @@ export default {
                         title: '用户名',
                         key: 'username'
                     },
-                    {
-                        title: '密码',
-                        key: 'password'
-                    },
+                    //不暴露在外面
+                    // {
+                    //     title: '密码',
+                    //     key: 'password'
+                    // },
                     {
                         title: '数据库',
                         key: 'schemaName'
@@ -85,7 +86,7 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.SynchronizeDatabase(params.row.id)
+                                            this.synchronizeDatabase(params.row.id)
                                         }
                                     }
                                 }, '同步'),
@@ -127,16 +128,13 @@ export default {
                     username: "",
                     password: "",
                     schemaName: "",
+                    // todo 从当前用户的数据读，先写死了
                     businessUnit: 2,
                     productUnit: 1,
             },
         };
     },
     methods: {
-        // onRowClick(rowData,index){
-        //         console.log(rowData)
-        //         this.$router.push({path:"/interface/interface-info",query:{projectId:rowData.id}})
-        // },
         initDatabaseDataModel() {
             this.databaseDataModel = {
                 id: 0,
@@ -152,17 +150,7 @@ export default {
             };
         },
         getData () {
-            console.log(1)
-            axios.all([this.getDatabaseList(), this.getDatabaseList1()])
-            .then(axios.spread(function (acct, perms) {
-                // Both requests are now complete
-                console.log(3)
-                console.log(acct)
-                console.log(perms)
-                console.log(4)
-            }));
-            console.log(2)
-            // this.getDatabaseList()
+            this.getDatabaseList()
         },
         getDatabaseList() {
             return axios.get("/v1/database/getDatabaseList").then((res)=>{
@@ -175,18 +163,6 @@ export default {
             }
             )
         },
-
-        getDatabaseList1() {
-            axios.get("/v1/database/getDatabaseList").then((res)=>{
-                if(res.data.success){
-                    this.list = res.data.message;
-                }else{
-                    this.$Message.error("失败")
-                }
-            }
-            )
-        },
-
         addDatabase(){
             this.initDatabaseDataModel()
             this.$Modal.confirm({
@@ -282,6 +258,7 @@ export default {
                                 }
                             }
                         }),
+                        // todo 从model先读默认值
                         // h('Select', {
                         //     props: {
                         //         value: this.databaseDataModel.businessUnit,
@@ -322,8 +299,6 @@ export default {
                 if(res.data.success){
                     this.$Message.success("成功");
                     this.getData();
-                    // this.list.splice(index,1);
-
                 }else{
                     this.$Message.error("失败")
                 }
@@ -337,8 +312,6 @@ export default {
                 if(res.data.success){
                     this.$Message.success("成功");
                     this.getData();
-                    // this.list.splice(index,1);
-
                 }else{
                     this.$Message.error("失败")
                 }
@@ -363,17 +336,17 @@ export default {
         editDatabase(){
 
         },
-        SynchronizeDatabase(index) {
+        synchronizeDatabase(index) {
             axios.get("/v1/table/isInitSynchronize",
             {"params":{"id": index}}
             ).then((res)=>{
                 if(res.data.success){
-                    this.$Message.success("成功");
-                    const tableCount = res.data.message[0]["tableCount"]
+                    // this.$Message.success("成功");
+                    let tableCount = res.data.message[0]["tableCount"]
                     if(tableCount == 0) {
                         this.initSynchronizeDatabaseNet(index)
                     } else {
-                        this.SynchronizeDatabaseNet(index)
+                        this.synchronizeDatabaseNet(index)
                     }
                 }else{
                     this.$Message.error("失败")
@@ -394,8 +367,8 @@ export default {
             }
             )
         },
-        SynchronizeDatabaseNet(index){
-            axios.post("/v1/table/SynchronizeDatabase",
+        synchronizeDatabaseNet(index){
+            axios.post("/v1/table/synchronizeDatabase",
             {"id":index}
             ).then((res)=>{
                 if(res.data.success){
@@ -413,8 +386,6 @@ export default {
                 if(res.data.success){
                     this.$Message.success("成功");
                     this.getData();
-                    // this.list.splice(index,1);
-
                 }else{
                     this.$Message.error("失败")
                 }
@@ -422,10 +393,6 @@ export default {
             )
         },
     },
-    
-    // mounted() {
-    //     this.getData();
-    // },
     created () {
         this.getData();
     }

@@ -284,6 +284,15 @@ CREATE TABLE `dataRoute` (
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `DBLog` (
+`id` int(11) NOT NULL auto_increment,
+`DBId` int(11) default 0 NOT NULL,
+`content` TEXT NOT NULL,
+`userId` int(11) default 0 NOT NULL,
+`gmt_create` datetime DEFAULT NULL,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 
 
 

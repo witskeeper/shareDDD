@@ -52,6 +52,7 @@ class TableHandler(tornado.web.RequestHandler):
                 'isInitSynchronize': lambda: self.isInitSynchronize(),
                 'getDataRouteInfoById': lambda: self.getDataRouteInfoById(),
                 'getDataRouteList': lambda: self.getDataRouteList(),
+                'getDBLogList': lambda: self.getDBLogList(),
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -83,7 +84,7 @@ class TableHandler(tornado.web.RequestHandler):
                 'deleteColumn': lambda: self.deleteColumn(),
                 'editColumn': lambda: self.editColumn(),
                 'initSynchronizeDatabase': lambda: self.initSynchronizeDatabase(),
-                'SynchronizeDatabase': lambda: self.SynchronizeDatabase(),
+                'synchronizeDatabase': lambda: self.synchronizeDatabase(),
                 'initSynchronizeTable': lambda: self.initSynchronizeTable(),
                 'initSynchronizeColumn': lambda: self.initSynchronizeColumn(),
                 'addDataRoute': lambda: self.addDataRoute(),
@@ -112,7 +113,6 @@ class TableHandler(tornado.web.RequestHandler):
     def addTable(self):
         logger.info(self.request.body)
         data = json.loads(self.request.body)
-        #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
         return TableService().addTable(data)
 
     def getTableInfoById(self):
@@ -150,7 +150,6 @@ class TableHandler(tornado.web.RequestHandler):
     def addColumn(self):
         logger.info(self.request.body)
         data = json.loads(self.request.body)
-        # 数据库该字段可为空,入参没有时,需要补充key,否则访问sql
         return TableService().addColumn(data)
 
     def getColumnInfoById(self):
@@ -194,9 +193,9 @@ class TableHandler(tornado.web.RequestHandler):
         return TableService().initSynchronizeDatabase(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def SynchronizeDatabase(self):
+    def synchronizeDatabase(self):
         logger.info(self.request.body)
-        return TableService().SynchronizeDatabase(json.loads(self.request.body))
+        return TableService().synchronizeDatabase(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def initSynchronizeTable(self):
@@ -212,7 +211,6 @@ class TableHandler(tornado.web.RequestHandler):
     def addDataRoute(self):
         logger.info(self.request.body)
         data = json.loads(self.request.body)
-        # 数据库该字段可为空,入参没有时,需要补充key,否则访问sql
         return TableService().addDataRoute(data)
 
     def getDataRouteInfoById(self):
@@ -246,4 +244,8 @@ class TableHandler(tornado.web.RequestHandler):
     def getSearchByColumn(self):
         logger.info(self.request.body)
         return TableService().getSearchByColumn(json.loads(self.request.body))
+
+    def getDBLogList(self):
+        DBId = self.get_argument("id")
+        return TableService().getDBLogList(DBId)
 

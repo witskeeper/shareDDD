@@ -19,7 +19,6 @@
                                             <Icon type="grid"></Icon>
                                             数据库
                                         </p>
-                                        文档详情还差搜索
                                         <p class="margin-bottom-10">数据库名：
                                             <label v-if="editIsHide">{{databaseDataModel.name}}</label>
                                             <Input  v-if="!editIsHide" v-model="databaseDataModel.name" style="width: 300px" ></Input>
@@ -56,6 +55,17 @@
                                         <p slot="title">
                                             <Icon type="document"></Icon>
                                             变动记录
+                                            <div class="edittable-table-height-con">
+                                                <!-- <Table border :columns="logListColumn" :data="loglist" show-header=false></Table> -->
+                                                <ul>
+                                                    
+                                                    <li v-for="log in loglist" class="margin-bottom-10">
+                                                        <Icon type="arrow-right-b"></Icon>
+                                                        {{log.content}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            
                                         </p>
                                     </Card>
                                 </Col>
@@ -87,21 +97,6 @@
                 </div>
             </Col>
         </Row>
-                <!-- @on-ok="ok"
-        @on-cancel="cancel" -->
-        <!-- <div @click="aa">11</div> -->
-        <!-- <Modal
-        v-model="modal1"
-        title="Common Modal dialog box title"
-
-        >
-        <RadioGroup v-model="phone">
-        <Radio v-for="(item,index) in list" :key="index" label="item.name">
-            <span>{{item.name}}</span>
-        </Radio>
-    </RadioGroup>
-
-    </Modal> -->
 
     <Modal v-model="setGroupModal" title="设置分组" @on-ok="setGroup">
         <Select v-model="selectValue" style="width:200px">
@@ -122,21 +117,19 @@ export default {
     data () {
         return {
             treeTableName: "",
+            logListColumn: [
+                    {
+                        title: '信息',
+                        key: 'content'
+                    },
+            ],
             listColumn: [
 
                     {
                         title: '组名',
-                        // width: 120,
                         key: 'name',
                         editable: true,
                     },
-                    // {
-                    //     title: '操作',
-                    //     align: 'center',
-                    //     // width: 200,
-                    //     key: 'handle',
-                    //     handle: ['delete']
-                    // }
                     {
                         title: '操作',
                         key: 'id',
@@ -188,22 +181,37 @@ export default {
             editIsHide: true,
             selectValue:"",
             setGroupModal: false,
+            loglist: []
         };
     },
     methods: {
         getData() {
-            console.log(this.$route)
+            // console.log(this.$route)
             this.DBId = this.$route.query.id
             this.getDatabaseInfoByIdNet()
             this.getTableGroupListNet()
             this.getTableGroupRelationListNet()
+            this.getDBLogListByDBIdNet()
+        },
+        getDBLogListByDBIdNet() {
+            axios.get("/v1/table/getDBLogList",
+            {"params":{"id": this.DBId}}
+            ).then((res)=>{
+                if(res.data.success){
+                    // this.$Message.success("成功");
+                    this.loglist = res.data.message
+                }else{
+                    this.$Message.error("失败")
+                }
+            }
+            )
         },
         getDatabaseInfoByIdNet() {
             axios.get("/v1/database/getDatabaseInfoById",
             {"params":{"id": this.DBId}}
             ).then((res)=>{
                 if(res.data.success){
-                    this.$Message.success("成功");
+                    // this.$Message.success("成功");
                     this.databaseDataModel=res.data.message[0]
                 }else{
                     this.$Message.error("失败")
@@ -216,7 +224,7 @@ export default {
             {"params":{"id": this.DBId}}
             ).then((res)=>{
                 if(res.data.success){
-                    this.$Message.success("成功");
+                    // this.$Message.success("成功");
                     this.listData=res.data.message
                 }else{
                     this.$Message.error("失败")
@@ -230,6 +238,7 @@ export default {
                 {"params":{"id": this.DBId}}
             ).then((res)=>{
                 if(res.data.success){
+                    // this.$Message.success("成功");
                     this.groupRelation = res.data.message;
                     this.treeTableName = this.groupRelation.groupInfo[0].children[0].title
                 }else{
@@ -242,7 +251,7 @@ export default {
             this.databaseDataModel
             ).then((res)=>{
                 if(res.data.success){
-                    this.$Message.success("成功");
+                    this.$Message.success("编辑成功");
                     this.getDatabaseInfoByIdNet()
                 }else{
                     this.$Message.error("失败")
@@ -258,7 +267,6 @@ export default {
             this.editIsHide = !this.editIsHide
         },
         handleCellChange(val, index, key) {
-            console.log(val)
             this.groupDataModel.DBId = val[index]["DBId"]
             this.groupDataModel.name = val[index]["name"]
             this.groupDataModel.id = val[index]["id"]
@@ -269,7 +277,7 @@ export default {
             this.groupDataModel
             ).then((res)=>{
                 if(res.data.success){
-                    this.$Message.success("成功");
+                    this.$Message.success("编辑成功");
                     this.getTableGroupListNet()
                 }else{
                     this.$Message.error("失败")
@@ -278,8 +286,8 @@ export default {
             )
         },
         handleDel(val, index) {
-            console.log(val)
-            console.log(index)
+            // console.log(val)
+            // console.log(index)
 
         },
         addGroup() {
@@ -313,7 +321,7 @@ export default {
             this.groupDataModel
             ).then((res)=>{
                 if(res.data.success){
-                    this.$Message.success("成功");
+                    this.$Message.success("新建成功");
                     this.getTableGroupListNet()
                 }else{
                     this.$Message.error("失败")
@@ -329,15 +337,12 @@ export default {
                     isDefault: 0
             }
         },
-        deleteGroup(val) {
-            console.log(val)
-        },
         deleteGroupNet(index, isDefault, DBId) {
             axios.post("/v1/database/deleteTableGroup",
             {"id": index, "isDefault": isDefault, "DBId": DBId}
             ).then((res)=>{
                 if(res.data.success){
-                    this.$Message.success("成功");
+                    this.$Message.success("删除成功");
                     this.getTableGroupListNet()
                 }else{
                     this.$Message.error("失败")
@@ -350,9 +355,8 @@ export default {
         },
         setGroup() {
             this.setGroupModal = false
-            const groups = this.$refs.tree.getCheckedNodes()
-            console.log(groups)
-            var tables = []
+            let groups = this.$refs.tree.getCheckedNodes()
+            let tables = []
             for(var i=0;i<groups.length;i++) {
                 if(groups[i].children === undefined) {
                     tables.push((groups[i].id).toString())
@@ -366,7 +370,7 @@ export default {
             {"tables": tables, "DBId": this.DBId, "groupId": groupId}
             ).then((res)=>{
                 if(res.data.success){
-                    this.$Message.success("成功");
+                    this.$Message.success("编辑成功");
                     this.getTableGroupRelationListNet()
                 }else{
                     this.$Message.error("失败")
@@ -383,287 +387,4 @@ export default {
         this.getData();
     }
 };
-
-// import tinymce from 'tinymce';
-// export default {
-//     name: 'artical-publish',
-//     data () {
-//         return {
-//             articleTitle: '',
-//             articleError: '',
-//             showLink: false,
-//             fixedLink: '',
-//             articlePath: '',
-//             articlePathHasEdited: false,
-//             editLink: false,
-//             editPathButtonType: 'ghost',
-//             editPathButtonText: '编辑',
-//             articleStateList: [{value: '草稿'}, {value: '等待复审'}],
-//             editOpenness: false,
-//             Openness: '公开',
-//             currentOpenness: '公开',
-//             topArticle: false,
-//             publishTime: '',
-//             publishTimeType: 'immediately',
-//             editPublishTime: false, // 是否正在编辑发布时间
-//             articleTagSelected: [], // 文章选中的标签
-//             articleTagList: [], // 所有标签列表
-//             classificationList: [],
-//             classificationSelected: [], // 在所有分类目录中选中的目录数组
-//             offenUsedClass: [],
-//             offenUsedClassSelected: [], // 常用目录选中的目录
-//             classificationFinalSelected: [], // 最后实际选择的目录
-//             publishLoading: false,
-//             addingNewTag: false, // 添加新标签
-//             newTagName: '' // 新建标签名
-//         };
-//     },
-//     methods: {
-//         handleArticletitleBlur () {
-//             if (this.articleTitle.length !== 0) {
-//                 // this.articleError = '';
-//                 localStorage.articleTitle = this.articleTitle; // 本地存储文章标题
-//                 if (!this.articlePathHasEdited) {
-//                     let date = new Date();
-//                     let year = date.getFullYear();
-//                     let month = date.getMonth() + 1;
-//                     let day = date.getDate();
-//                     this.fixedLink = window.location.host + '/' + year + '/' + month + '/' + day + '/';
-//                     this.articlePath = this.articleTitle;
-//                     this.articlePathHasEdited = true;
-//                     this.showLink = true;
-//                 }
-//             } else {
-//                 // this.articleError = '文章标题不可为空哦';
-//                 this.$Message.error('文章标题不可为空哦');
-//             }
-//         },
-//         editArticlePath () {
-//             this.editLink = !this.editLink;
-//             this.editPathButtonType = this.editPathButtonType === 'ghost' ? 'success' : 'ghost';
-//             this.editPathButtonText = this.editPathButtonText === '编辑' ? '完成' : '编辑';
-//         },
-//         handleEditOpenness () {
-//             this.editOpenness = !this.editOpenness;
-//         },
-//         handleSaveOpenness () {
-//             this.Openness = this.currentOpenness;
-//             this.editOpenness = false;
-//         },
-//         cancelEditOpenness () {
-//             this.currentOpenness = this.Openness;
-//             this.editOpenness = false;
-//         },
-//         handleEditPublishTime () {
-//             this.editPublishTime = !this.editPublishTime;
-//         },
-//         handleSavePublishTime () {
-//             this.publishTimeType = 'timing';
-//             this.editPublishTime = false;
-//         },
-//         cancelEditPublishTime () {
-//             this.publishTimeType = 'immediately';
-//             this.editPublishTime = false;
-//         },
-//         setPublishTime (datetime) {
-//             this.publishTime = datetime;
-//         },
-//         setClassificationInAll (selectedArray) {
-//             this.classificationFinalSelected = selectedArray.map(item => {
-//                 return item.title;
-//             });
-//             localStorage.classificationSelected = JSON.stringify(this.classificationFinalSelected); // 本地存储所选目录列表
-//         },
-//         setClassificationInOffen (selectedArray) {
-//             this.classificationFinalSelected = selectedArray;
-//         },
-//         handleAddNewTag () {
-//             this.addingNewTag = !this.addingNewTag;
-//         },
-//         createNewTag () {
-//             if (this.newTagName.length !== 0) {
-//                 this.articleTagList.push({value: this.newTagName});
-//                 this.addingNewTag = false;
-//                 setTimeout(() => {
-//                     this.newTagName = '';
-//                 }, 200);
-//             } else {
-//                 this.$Message.error('请输入标签名');
-//             }
-//         },
-//         cancelCreateNewTag () {
-//             this.newTagName = '';
-//             this.addingNewTag = false;
-//         },
-//         canPublish () {
-//             if (this.articleTitle.length === 0) {
-//                 this.$Message.error('请输入文章标题');
-//                 return false;
-//             } else {
-//                 return true;
-//             }
-//         },
-//         handlePreview () {
-//             if (this.canPublish()) {
-//                 if (this.publishTimeType === 'immediately') {
-//                     let date = new Date();
-//                     let year = date.getFullYear();
-//                     let month = date.getMonth() + 1;
-//                     let day = date.getDate();
-//                     let hour = date.getHours();
-//                     let minute = date.getMinutes();
-//                     let second = date.getSeconds();
-//                     localStorage.publishTime = year + ' 年 ' + month + ' 月 ' + day + ' 日 -- ' + hour + ' : ' + minute + ' : ' + second;
-//                 } else {
-//                     localStorage.publishTime = this.publishTime; // 本地存储发布时间
-//                 }
-//                 localStorage.content = tinymce.activeEditor.getContent();
-//                 this.$router.push({
-//                     name: 'preview'
-//                 });
-//             }
-//         },
-//         handleSaveDraft () {
-//             if (!this.canPublish()) {
-//                 //
-//             }
-//         },
-//         handlePublish () {
-//             if (this.canPublish()) {
-//                 this.publishLoading = true;
-//                 setTimeout(() => {
-//                     this.publishLoading = false;
-//                     this.$Notice.success({
-//                         title: '保存成功',
-//                         desc: '文章《' + this.articleTitle + '》保存成功'
-//                     });
-//                 }, 1000);
-//             }
-//         },
-//         handleSelectTag () {
-//             localStorage.tagsList = JSON.stringify(this.articleTagSelected); // 本地存储文章标签列表
-//         }
-//     },
-//     computed: {
-//         completeUrl () {
-//             let finalUrl = this.fixedLink + this.articlePath;
-//             localStorage.finalUrl = finalUrl; // 本地存储完整文章路径
-//             return finalUrl;
-//         }
-//     },
-//     mounted () {
-//         this.articleTagList = [
-//             {value: 'vue'},
-//             {value: 'iview'},
-//             {value: 'ES6'},
-//             {value: 'webpack'},
-//             {value: 'babel'},
-//             {value: 'eslint'}
-//         ];
-//         this.classificationList = [
-//             {
-//                 title: 'Vue实例',
-//                 expand: true,
-//                 children: [
-//                     {
-//                         title: '数据与方法',
-//                         expand: true
-//                     },
-//                     {
-//                         title: '生命周期',
-//                         expand: true
-//                     }
-//                 ]
-//             },
-//             {
-//                 title: 'Class与Style绑定',
-//                 expand: true,
-//                 children: [
-//                     {
-//                         title: '绑定HTML class',
-//                         expand: true,
-//                         children: [
-//                             {
-//                                 title: '对象语法',
-//                                 expand: true
-//                             },
-//                             {
-//                                 title: '数组语法',
-//                                 expand: true
-//                             },
-//                             {
-//                                 title: '用在组件上',
-//                                 expand: true
-//                             }
-//                         ]
-//                     },
-//                     {
-//                         title: '生命周期',
-//                         expand: true
-//                     }
-//                 ]
-//             },
-//             {
-//                 title: '模板语法',
-//                 expand: true,
-//                 children: [
-//                     {
-//                         title: '插值',
-//                         expand: true
-//                     },
-//                     {
-//                         title: '指令',
-//                         expand: true
-//                     },
-//                     {
-//                         title: '缩写',
-//                         expand: true
-//                     }
-//                 ]
-//             }
-//         ];
-//         this.offenUsedClass = [
-//             {
-//                 title: 'vue实例'
-//             },
-//             {
-//                 title: '生命周期'
-//             },
-//             {
-//                 title: '模板语法'
-//             },
-//             {
-//                 title: '插值'
-//             },
-//             {
-//                 title: '缩写'
-//             }
-//         ];
-//         tinymce.init({
-//             selector: '#articleEditor',
-//             branding: false,
-//             elementpath: false,
-//             height: 600,
-//             language: 'zh_CN.GB2312',
-//             menubar: 'edit insert view format table tools',
-//             theme: 'modern',
-//             plugins: [
-//                 'advlist autolink lists link image charmap print preview hr anchor pagebreak imagetools',
-//                 'searchreplace visualblocks visualchars code fullscreen fullpage',
-//                 'insertdatetime media nonbreaking save table contextmenu directionality',
-//                 'emoticons paste textcolor colorpicker textpattern imagetools codesample'
-//             ],
-//             toolbar1: ' newnote print fullscreen preview | undo redo | insert | styleselect | forecolor backcolor bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image emoticons media codesample',
-//             autosave_interval: '20s',
-//             image_advtab: true,
-//             table_default_styles: {
-//                 width: '100%',
-//                 borderCollapse: 'collapse'
-//             }
-//         });
-//     },
-//     destroyed () {
-//         tinymce.get('articleEditor').destroy();
-//     }
-// };
 </script>

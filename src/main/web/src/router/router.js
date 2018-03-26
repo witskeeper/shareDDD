@@ -268,52 +268,30 @@ export const appRouter = [
             }
         ]
     },
-    {
-        path: '/docs',
-        icon: 'android-contact',
-        name: 'doc',
-        title: '文档管理',
-        component: Main,
-        children: [
-            {
-                path: 'dbdoc-list',
-                title: '数据库文档',
-                name: 'dbdoc-list',
-                icon: 'android-people',
-                component: resolve => { require(['@/views/docs/dbdoc-list.vue'], resolve); }
-            },
-            {
-                path: 'logic-list',
-                title: '业务文档',
-                name: 'logic-list',
-                icon: 'android-people',
-                component: resolve => { require(['@/views/docs/logic-list.vue'], resolve); }
-            }
-        ]
-    },
-    {
-        path: '/business',
-        icon: 'android-contact',
-        name: 'business',
-        title: '事业线管理',
-        component: Main,
-        children: [
-            {
-                path: 'business-product',
-                title: '产品管理',
-                name: 'business-product',
-                icon: 'android-people',
-                component: resolve => { require(['@/views/business/business-product.vue'], resolve); }
-            },
-            {
-                path: 'business-project',
-                title: '项目管理',
-                name: 'business-project',
-                icon: 'android-people',
-                component: resolve => { require(['@/views/business/business-project.vue'], resolve); }
-            }
-        ]
-    }
+    //预留，别删
+    // {
+    //     path: '/business',
+    //     icon: 'android-contact',
+    //     name: 'business',
+    //     title: '事业线管理',
+    //     component: Main,
+    //     children: [
+    //         {
+    //             path: 'business-product',
+    //             title: '产品管理',
+    //             name: 'business-product',
+    //             icon: 'android-people',
+    //             component: resolve => { require(['@/views/business/business-product.vue'], resolve); }
+    //         },
+    //         {
+    //             path: 'business-project',
+    //             title: '项目管理',
+    //             name: 'business-project',
+    //             icon: 'android-people',
+    //             component: resolve => { require(['@/views/business/business-project.vue'], resolve); }
+    //         }
+    //     ]
+    // }
 ];
 
 // 所有上面定义的路由都要写在下面的routers里

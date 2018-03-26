@@ -40,7 +40,6 @@ class DatabaseSQLMapper:
 
     #define: function name=sql string
     #为了安全性，设置为私有方法
-    # todo %()s是什么用
     def __setSQL(self):
         #WRITE SQL FOR API
         addDatabaseSQL="""
