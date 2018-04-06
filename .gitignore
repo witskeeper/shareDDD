@@ -1,0 +1,8 @@
+**/.cache/
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+LogFiles/
+src/main/web/node_modules/
+src/main/master/LogFiles/
