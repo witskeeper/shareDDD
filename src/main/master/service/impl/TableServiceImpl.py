@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import json
+import json, itertools
 import traceback
 from src.main.master.common.constants import SystemConfig
 from src.main.master.util.logUtil.log import Log
@@ -73,7 +73,19 @@ class TableService(object):
     def getColumnListByTableId(self, TableId):
         args = {}
         args.setdefault("tableId", TableId)
-        return self.TableDaoInterface.getColumnListByTableId(args)
+        result = self.TableDaoInterface.getColumnListByTableId(args)
+        message = []
+        for row in result.getMessage():
+            links = row["links"]
+            if links is None:
+                row["links"] = []
+            else:
+                link_str = links.split('|')
+                link_json = [json.loads(l) for l in link_str]
+                row["links"] =link_json
+            message.append(row)
+        result.setMessage(message)
+        return result
 
     @AdminDecoratorServer.execImplDecorator()
     def getColumnListByTableName(self, args):
@@ -155,7 +167,11 @@ class TableService(object):
                         columnDict["cName"] = ""
                         columnDict["eName"] = j["COLUMN_NAME"]
                         columnDict["type"] = j["COLUMN_TYPE"]
-                        columnDict["remark"] = j["COLUMN_COMMENT"]
+                        remark = j["COLUMN_COMMENT"]
+                        if remark == "":
+                            columnDict["remark"] = "-"
+                        else:
+                            columnDict["remark"] = remark
                         columnDict["is_discarded"] = 0
                         insertColumnList.append(columnDict)
 
@@ -326,31 +342,6 @@ class TableService(object):
         return self.TableDaoInterface.getSynchronizeColumn(args, kwargs)
 
     @AdminDecoratorServer.execImplDecorator()
-    def addDataRoute(self, args):
-        return self.TableDaoInterface.addDataRoute(args)
-
-    @AdminDecoratorServer.execImplDecorator()
-    def deleteDataRoute(self, args):
-        return self.TableDaoInterface.deleteDataRoute(args)
-
-    @AdminDecoratorServer.execImplDecorator()
-    def getDataRouteInfoById(self, dataRouteId):
-        args = {}
-        args.setdefault("id", dataRouteId)
-        return self.TableDaoInterface.getDataRouteInfoById(args)
-
-    @AdminDecoratorServer.execImplDecorator()
-    def getDataRouteList(self, tableId):
-        # todo businessUnit=2
-        args = {}
-        args.setdefault("tableId", tableId)
-        return self.TableDaoInterface.getDataRouteList(args)
-
-    @AdminDecoratorServer.execImplDecorator()
-    def editDataRoute(self, args):
-        return self.TableDaoInterface.editDataRoute(args)
-
-    @AdminDecoratorServer.execImplDecorator()
     def getSearchByTable(self, args):
         content = args
         args = {}
@@ -395,3 +386,62 @@ class TableService(object):
         args = {}
         args.setdefault("DBId", DBId)
         return self.TableDaoInterface.getDBLogList(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def addColumnLink(self, args):
+        return self.TableDaoInterface.addColumnLink(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def getLinkTableList(self, DBId):
+        args = {}
+        args.setdefault("DBId", DBId)
+        return self.TableDaoInterface.getLinkTableList(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def getLinkColumnList(self, tableId):
+        args = {}
+        args.setdefault("tableId", tableId)
+        return self.TableDaoInterface.getLinkColumnList(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def getTableListByTableName(self, content):
+        args = {}
+        args.setdefault("DBId", content["id"])
+        args.setdefault("eName", '%{}%'.format(content["content"]))
+        return self.TableDaoInterface.getTableListByTableName(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def getColumnListByColName(self, content):
+        args = {}
+        args.setdefault("tableId", content["id"])
+        args.setdefault("eName", '%{}%'.format(content["content"]))
+        return self.TableDaoInterface.getColumnListByColName(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def addTableRoute(self, args):
+        return self.TableDaoInterface.addTableRoute(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def addDataNode(self, args):
+        return self.TableDaoInterface.addDataNode(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def addDataRoute(self, args):
+        return self.TableDaoInterface.addDataRoute(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def getTableRouteList(self, table_id):
+        args = {}
+        args.setdefault("table_id", table_id)
+        result = self.TableDaoInterface.getTableRouteList(args)
+        route = result.getMessage()
+        message = []
+        route_group = itertools.groupby(route, key=lambda x: x["route_id"])
+        for key,value in route_group:
+            s = {}
+            s.setdefault("key", key)
+            s.setdefault("route", list(value))
+            logger.info(s)
+            message.append(s)
+        result.setMessage(message)
+        return result

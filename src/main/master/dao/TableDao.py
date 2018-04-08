@@ -145,37 +145,6 @@ class TableDaoInterface:
         daoOperate = DbBaseHelper()
         return daoOperate.read()
 
-    def addDataRoute(self,args):
-        #实例化
-        logger.info(inspect.stack()[0][3])
-        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate =DbBaseHelper(sql,args)
-        return daoOperate.write()
-
-    def deleteDataRoute(self,args):
-        logger.info(inspect.stack()[0][3])
-        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate = DbBaseHelper(sql, args)
-        return daoOperate.write()
-
-    def getDataRouteInfoById(self,args):
-        logger.info(inspect.stack()[0][3])
-        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate = DbBaseHelper(sql, args)
-        return daoOperate.read()
-
-    def getDataRouteList(self,args):
-        logger.info(inspect.stack()[0][3])
-        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate = DbBaseHelper(sql, args)
-        return daoOperate.read()
-
-    def editDataRoute(self,args):
-        logger.info(inspect.stack()[0][3])
-        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate = DbBaseHelper(sql, args)
-        return daoOperate.write()
-
     def getSearchByTable(self,args):
         logger.info(inspect.stack()[0][3])
         sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
@@ -201,6 +170,66 @@ class TableDaoInterface:
         return daoOperate.write()
 
     def getDBLogList(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def addColumnLink(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.write()
+
+    def getDBLogList(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def getLinkTableList(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def getLinkColumnList(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def getTableListByTableName(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def getColumnListByColName(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def addTableRoute(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate =DbBaseHelper(sql,args)
+        return daoOperate.write()
+
+    def addDataNode(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate =DbBaseHelper(sql,args)
+        return daoOperate.write()
+
+    def addDataRoute(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate =DbBaseHelper(sql,args)
+        return daoOperate.write()
+
+    def getTableRouteList(self,args):
         logger.info(inspect.stack()[0][3])
         sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate = DbBaseHelper(sql, args)

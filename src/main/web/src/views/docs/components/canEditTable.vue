@@ -246,6 +246,36 @@ export default {
                         }
                     };
                 }
+                if (item.showlink) {
+                    item.render = (h, param) => {
+                        let currentRow = this.thisTableData[param.index];
+                        let his = currentRow[item.key]
+                        console.log(his)
+                        return h('ul', his.map((hi) => {
+                            console.log(hi.key, hi.val)
+                            return h('li',[
+                                h('Button', {
+                                    props: {
+                                    type: 'text',
+                                    size: 'small'
+                                },
+                                on: {
+                                    click: (event) => {
+                                        // let argu = { id: 21 };
+                                        // vm.$router.push({
+                                        //     path: "/docs/dbdoc-list-info",
+                                        //     query: argu
+                                        // });
+                                        vm.$emit('on-cell-link', vm.handleBackdata(vm.thisTableData), param.index, param.column.key,hi.key);
+                                    }
+                                }
+                        }, hi.val)])
+                        }))
+                    }
+                }
+
+                
+
                 if (item.handle) {
                     item.render = (h, param) => {
                         let currentRowData = this.thisTableData[param.index];

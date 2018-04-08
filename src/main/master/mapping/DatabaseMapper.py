@@ -97,7 +97,7 @@ class DatabaseSQLMapper:
         """
 
         getTableGroupRelationListSQL = """
-        select tgr.*,tg.*,t.eName from tablegrouprelation tgr join tablegroup tg 
+        select tgr.*,tg.*,t.eName,t.cName from tablegrouprelation tgr join tablegroup tg 
          on tgr.groupId = tg.id join dbtable t on t.id = tgr.tableId
          where tg.DBId = %(DBId)s 
         """

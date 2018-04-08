@@ -48,10 +48,10 @@ class DatabaseService(object):
         return self.DatabaseDaoInterface.getDatabaseInfoById(args)
 
     @AdminDecoratorServer.execImplDecorator()
-    def getDatabaseList(self):
+    def getDatabaseList(self, businessUnit):
         # todo businessUnit=2
         args = {}
-        args.setdefault("businessUnit", 2)
+        args.setdefault("businessUnit", businessUnit)
         return self.DatabaseDaoInterface.getDatabaseList(args)
 
     @AdminDecoratorServer.execImplDecorator()
@@ -127,7 +127,7 @@ class DatabaseService(object):
             group=list(group)
             groupDict.setdefault("title", group[0]["name"])
             logger.info(group)
-            groupDict.setdefault("children", [{"title":l["eName"],"id":l["id"],"tableId":l["tableId"]} for l in group])
+            groupDict.setdefault("children", [{"title":l["eName"]+"("+l["cName"]+")","id":l["id"],"tableId":l["tableId"]} for l in group])
             # 用于设置默认展开
             if index == 0:
                 groupDict.setdefault("expand", True)

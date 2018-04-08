@@ -153,10 +153,12 @@ export default {
             this.getDatabaseList()
         },
         getDatabaseList() {
-            return axios.get("/v1/database/getDatabaseList").then((res)=>{
+            // todo id写死了
+            return axios.get("/v1/database/getDatabaseList",
+            {"params":{"id": 2}}).then((res)=>{
                 if(res.data.success){
                     this.list = res.data.message;
-                    return res
+                    // return res
                 }else{
                     this.$Message.error("失败")
                 }

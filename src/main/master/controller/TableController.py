@@ -53,6 +53,9 @@ class TableHandler(tornado.web.RequestHandler):
                 'getDataRouteInfoById': lambda: self.getDataRouteInfoById(),
                 'getDataRouteList': lambda: self.getDataRouteList(),
                 'getDBLogList': lambda: self.getDBLogList(),
+                'getLinkTableList': lambda: self.getLinkTableList(),
+                'getLinkColumnList': lambda: self.getLinkColumnList(),
+                'getTableRouteList': lambda: self.getTableRouteList(),
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -87,14 +90,17 @@ class TableHandler(tornado.web.RequestHandler):
                 'synchronizeDatabase': lambda: self.synchronizeDatabase(),
                 'initSynchronizeTable': lambda: self.initSynchronizeTable(),
                 'initSynchronizeColumn': lambda: self.initSynchronizeColumn(),
-                'addDataRoute': lambda: self.addDataRoute(),
-                'deleteDataRoute': lambda: self.deleteDataRoute(),
-                'editDataRoute': lambda: self.editDataRoute(),
                 'editColumnRemarkById': lambda: self.editColumnRemarkById(),
                 'editColumnDiscardById': lambda: self.editColumnDiscardById(),
                 'getSearchByTable': lambda: self.getSearchByTable(),
                 'getSearchByTableColumn': lambda: self.getSearchByTableColumn(),
                 'getSearchByColumn': lambda: self.getSearchByColumn(),
+                'addColumnLink': lambda: self.addColumnLink(),
+                'getTableListByTableName': lambda: self.getTableListByTableName(),
+                'getColumnListByColName': lambda: self.getColumnListByColName(),
+                'addTableRoute': lambda: self.addTableRoute(),
+                'addDataNode': lambda: self.addDataNode(),
+                'addDataRoute': lambda: self.addDataRoute(),
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -208,29 +214,6 @@ class TableHandler(tornado.web.RequestHandler):
         return TableService().initSynchronizeColumn(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def addDataRoute(self):
-        logger.info(self.request.body)
-        data = json.loads(self.request.body)
-        return TableService().addDataRoute(data)
-
-    def getDataRouteInfoById(self):
-        dataRouteId = self.get_argument("id")
-        return TableService().getDataRouteInfoById(dataRouteId)
-
-    def getDataRouteList(self):
-        tableId = self.get_argument("id")
-        return TableService().getDataRouteList(tableId)
-
-    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def deleteDataRoute(self):
-        return TableService().deleteDataRoute(json.loads(self.request.body))
-
-    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def editDataRoute(self):
-        logger.info(self.request.body)
-        return TableService().editDataRoute(json.loads(self.request.body))
-
-    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def getSearchByTable(self):
         logger.info(self.request.body)
         return TableService().getSearchByTable(json.loads(self.request.body))
@@ -248,4 +231,46 @@ class TableHandler(tornado.web.RequestHandler):
     def getDBLogList(self):
         DBId = self.get_argument("id")
         return TableService().getDBLogList(DBId)
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def addColumnLink(self):
+        data = json.loads(self.request.body)
+        return TableService().addColumnLink(data)
+
+    def getLinkTableList(self):
+        DBId = self.get_argument("id")
+        return TableService().getLinkTableList(DBId)
+
+    def getLinkColumnList(self):
+        tableId = self.get_argument("id")
+        return TableService().getLinkColumnList(tableId)
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def getTableListByTableName(self):
+        data = json.loads(self.request.body)
+        return TableService().getTableListByTableName(data)
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def getColumnListByColName(self):
+        data = json.loads(self.request.body)
+        return TableService().getColumnListByColName(data)
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def addTableRoute(self):
+        data = json.loads(self.request.body)
+        return TableService().addTableRoute(data)
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def addDataNode(self):
+        data = json.loads(self.request.body)
+        return TableService().addDataNode(data)
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def addDataRoute(self):
+        data = json.loads(self.request.body)
+        return TableService().addDataRoute(data)
+
+    def getTableRouteList(self):
+        table_id = self.get_argument("id")
+        return TableService().getTableRouteList(table_id)
 
