@@ -22,7 +22,7 @@
                             <Input v-model="userForm.name" ></Input>
                         </div>
                     </FormItem>
-                    <FormItem label="用户手机：" prop="cellphone" >
+                    <FormItem label="用户邮箱：" prop="cellphone" >
                         <div style="display:inline-block;width:204px;">
                             <Input v-model="userForm.cellphone" @on-keydown="hasChangePhone"></Input>
                         </div>
@@ -39,10 +39,10 @@
                             </div>
                         </div>
                     </FormItem>
-                    <FormItem label="公司：">
+                    <FormItem label="事业部：">
                         <span>{{ userForm.company }}</span>
                     </FormItem>
-                    <FormItem label="部门：">
+                    <FormItem label="职位：">
                         <span>{{ userForm.department }}</span>
                     </FormItem>
                     <FormItem label="登录密码：">

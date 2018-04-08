@@ -74,7 +74,7 @@
                             :end-val="count.createUser"
                             iconType="android-person-add"
                             color="#2d8cf0"
-                            intro-text="今日新增用户"
+                            intro-text="用户数"
                         ></infor-card>
                     </Col>
                     <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
@@ -84,7 +84,7 @@
                             iconType="ios-eye"
                             color="#64d572"
                             :iconSize="50"
-                            intro-text="今日浏览量"
+                            intro-text="项目数"
                         ></infor-card>
                     </Col>
                     <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
@@ -93,7 +93,7 @@
                             :end-val="count.collection"
                             iconType="upload"
                             color="#ffd572"
-                            intro-text="今日数据采集量"
+                            intro-text="今日项目访问量"
                         ></infor-card>
                     </Col>
                     <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
@@ -102,7 +102,7 @@
                             :end-val="count.transfer"
                             iconType="shuffle"
                             color="#f25e43"
-                            intro-text="今日服务调用量"
+                            intro-text="今日用例访问量"
                         ></infor-card>
                     </Col>
                 </Row>
@@ -110,67 +110,16 @@
                     <Card :padding="0">
                         <p slot="title" class="card-title">
                             <Icon type="map"></Icon>
-                            今日服务调用地理分布
+                            最新动态
                         </p>
                         <div class="map-con">
-                            <Col span="10">
+                            <Col >
                                 <map-data-table :cityData="cityData" height="281" :style-obj="{margin: '12px 0 0 11px'}"></map-data-table>
-                            </Col>
-                            <Col span="14" class="map-incon">
-                                <Row type="flex" justify="center" align="middle">
-                                    <home-map :city-data="cityData"></home-map>
-                                </Row>
                             </Col>
                         </div>
                     </Card>
                 </Row>
             </Col>
-        </Row>
-        <Row :gutter="10" class="margin-top-10">
-            <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
-                <Card>
-                    <p slot="title" class="card-title">
-                        <Icon type="android-map"></Icon>
-                        上周每日来访量统计
-                    </p>
-                    <div class="data-source-row">
-                        <visite-volume></visite-volume>
-                    </div>
-                </Card>
-            </Col>
-            <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
-                <Card>
-                    <p slot="title" class="card-title">
-                        <Icon type="ios-pulse-strong"></Icon>
-                        数据来源统计
-                    </p>
-                    <div class="data-source-row">
-                        <data-source-pie></data-source-pie>
-                    </div>
-                </Card>
-            </Col>
-            <Col :md="24" :lg="8">
-                <Card>
-                    <p slot="title" class="card-title">
-                        <Icon type="android-wifi"></Icon>
-                        各类用户服务调用变化统计
-                    </p>
-                    <div class="data-source-row">
-                        <user-flow></user-flow>
-                    </div>
-                </Card>
-            </Col>
-        </Row>
-        <Row class="margin-top-10">
-            <Card>
-                <p slot="title" class="card-title">
-                    <Icon type="ios-shuffle-strong"></Icon>
-                    上周每日服务调用量(万)
-                </p>
-                <div class="line-chart-con">
-                    <service-requests></service-requests>
-                </div>
-            </Card>
         </Row>
     </div>
 </template>
