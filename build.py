@@ -12,13 +12,13 @@ def removeInvalidFiles():
     sysstr = platform.system()
     if(sysstr =="Windows"):
         print ("Call Windows tasks")
-	return os.system("""rmdir /S /Q src.egg-info && rmdir /S /Q build && rmdir /S /Q dist""")
+        return os.system("""rmdir /S /Q src.egg-info && rmdir /S /Q build && rmdir /S /Q dist""")
     elif(sysstr == "Linux"):
         print ("Call Linux tasks")
-	return os.system("""rm -rf src.egg-info && rm -rf build && rm -rf dist""")
+        return os.system("""rm -rf src.egg-info && rm -rf build && rm -rf dist""")
     else:
         print ("Other System tasks")
-    	return os.system("""rm -rf src.egg-info && rm -rf build && rm -rf dist""")
+        return os.system("""rm -rf src.egg-info && rm -rf build && rm -rf dist""")
 
 if __name__=="__main__":
     result = setSystemPath()

@@ -19,6 +19,12 @@ from src.main.master.controller.ProductController import ProductHandler
 from src.main.master.controller.TableController import TableHandler
 
 def start_server():
+
+    tornado.options.parse_command_line()
+    settings = {
+        "cookie_secret": "bZJc2sWbQLKos6GkHn/VB9oXwQt8S0R0kRvJ5/xJ89E=",
+        "login_url": "/login"
+    }
     
     app = tornado.web.Application(handlers=[
               #route
@@ -35,7 +41,7 @@ def start_server():
               (r"/v1/database/(.*)", DatabaseHandler),
               (r"/v1/product/(.*)", ProductHandler),
               (r"/v1/table/(.*)", TableHandler),
-              ])
+              ],**settings)
 
     http_server = tornado.httpserver.HTTPServer(app,xheaders=True)
     http_server.listen(SystemConfig.httpPost)

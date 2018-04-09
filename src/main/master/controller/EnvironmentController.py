@@ -93,6 +93,9 @@ class EnvironmentHandler(tornado.web.RequestHandler):
     def getEnvironmentInfos(self):
         return EnvironmentService().getEnvironmentInfos()
 
+    @tornado.web.authenticated
     def getEnvironmentInfoByUserId(self):
-        useId = self.get_argument('userId')
+        #useId = self.get_argument('userId')
+        useId = self.get_secure_cookie("userId")
+        logger.error("userId=" + useId)
         return EnvironmentService().getEnvironmentInfosByUserId(useId)

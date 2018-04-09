@@ -34,12 +34,17 @@ class UserHandler(tornado.web.RequestHandler):
     def execute_get(self,APIName):
         dataResult = DataResult()
         try:
-            tasks = {
-                'get_user_info_by_user_name' : lambda : self.get_user_info_by_user_name(),
-                'get_user_info_by_user_id' : lambda :self.get_user_info_by_user_id()
-                # lambda alias
-            }
-            self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
+            if not self.current_user:
+                dataResult.setSuccess(False)
+                dataResult.setMessage("目前处于未登录状态，请登录")
+                self.write(json.dumps(dataResult.__dict__, cls=CJsonEncoder))
+            else:
+                tasks = {
+                    'get_user_info_by_user_name' : lambda : self.get_user_info_by_user_name(),
+                    'get_user_info_by_user_id' : lambda :self.get_user_info_by_user_id()
+                    # lambda alias
+                }
+                self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
             logger.error(traceback.format_exc())
             dataResult.setMessage(traceback.format_exc())
@@ -74,6 +79,7 @@ class UserHandler(tornado.web.RequestHandler):
             except:
                 pass
 
+    @tornado.web.authenticated
     def get_user_info_by_user_name(self):
         userName = self.get_argument('userName')
         return UserService().getUserInfo(userName)
@@ -81,14 +87,14 @@ class UserHandler(tornado.web.RequestHandler):
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def add_user_info(self):
         logger.error(self.request.body)
-        if isinstance(self.request.body,dict):
-            logger.error("JJJJJJJJJJJ")
         data = json.loads(self.request.body)
-        logger.error("JJJJJJJJJJJasssss")
         #数据库该字段可为空,入参没有时,需要补充key,否则访问sql
         if "remarks" not in  data:
             data.setdefault("remarks",None)
-        return UserService().addUser(data)
+        dataResult = UserService().addUser(data)
+        self.set_secure_cookie("userName",str(data["userName"]),version=1)
+        self.set_secure_cookie("userId",str(dataResult.getMessage()),version=1)
+        return dataResult
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def delete_user_info(self):
