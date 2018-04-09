@@ -130,3 +130,19 @@ MissingArgumentError: HTTP 400: Bad Request (Missing argument userName)
     raise TypeError(repr(o) + " is not JSON serializable")
 TypeError: datetime.datetime(2017, 12, 24, 21, 24, 23) is not JSON serializable
 
+2018-04-09 14:36:34,760 - UserController - 5640 - ERROR - add_user_info - {
+"userName":"test_user1",
+"userPasswd":"123456",
+"remarks":""
+}
+2018-04-09 14:36:34,760 - UserController - 5640 - ERROR - add_user_info - JJJJJJJJJJJasssss
+2018-04-09 14:53:48,859 - UserController - 5640 - ERROR - add_user_info - {"userName":"testtesttest","userPasswd":"12345"}
+2018-04-09 14:53:48,859 - UserController - 5640 - ERROR - add_user_info - JJJJJJJJJJJasssss
+2018-04-09 14:54:58,454 - UserController - 15816 - ERROR - add_user_info - {"userName":"test_user3","userPasswd":"123456"}
+2018-04-09 14:54:58,456 - UserController - 15816 - ERROR - add_user_info - JJJJJJJJJJJasssss
+2018-04-09 15:00:35,835 - UserController - 5640 - ERROR - add_user_info - {"userName":"test_user4","userPasswd":"123456"}
+2018-04-09 15:00:35,835 - UserController - 5640 - ERROR - add_user_info - JJJJJJJJJJJasssss
+2018-04-09 15:03:10,881 - UserController - 14968 - ERROR - add_user_info - {"userName":"testuseruser","userPasswd":"123456"}
+2018-04-09 15:03:10,882 - UserController - 14968 - ERROR - add_user_info - JJJJJJJJJJJasssss
+2018-04-09 15:29:19,161 - UserController - 15816 - ERROR - add_user_info - {"userName":"1234567","userPasswd":"1234567"}
+2018-04-09 15:29:19,161 - UserController - 15816 - ERROR - add_user_info - JJJJJJJJJJJasssss

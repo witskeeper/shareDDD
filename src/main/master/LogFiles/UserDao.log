@@ -21,3 +21,9 @@
 2018-01-22 14:31:07,829 - UserDao - 7452 - INFO - addUser - addUser
 2018-01-22 14:31:59,532 - UserDao - 7452 - INFO - addUser - addUser
 2018-01-22 14:32:07,640 - UserDao - 6476 - INFO - addUser - addUser
+2018-04-09 14:36:34,763 - UserDao - 5640 - INFO - addUser - addUser
+2018-04-09 14:53:48,861 - UserDao - 5640 - INFO - addUser - addUser
+2018-04-09 14:54:58,457 - UserDao - 15816 - INFO - addUser - addUser
+2018-04-09 15:00:35,836 - UserDao - 5640 - INFO - addUser - addUser
+2018-04-09 15:03:10,885 - UserDao - 14968 - INFO - addUser - addUser
+2018-04-09 15:29:19,164 - UserDao - 15816 - INFO - addUser - addUser

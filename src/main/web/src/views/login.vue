@@ -3,54 +3,89 @@
 </style>
 
 <template>
-    <div class="login" @keydown.enter="handleSubmit">
+    <div class="login">
         <div class="login-con">
-            <Card :bordered="false">
-                <p slot="title">
-                    <Icon type="log-in"></Icon>
-                    欢迎登录
-                </p>
-                <div class="form-con">
-                    <Form ref="loginForm" :model="form" :rules="rules">
-                        <FormItem prop="userName">
-                            <Input v-model="form.userName" placeholder="请输入用户名">
-                                <span slot="prepend">
-                                    <Icon :size="16" type="person"></Icon>
-                                </span>
-                            </Input>
-                        </FormItem>
-                        <FormItem prop="password">
-                            <Input type="password" v-model="form.password" placeholder="请输入密码">
-                                <span slot="prepend">
-                                    <Icon :size="14" type="locked"></Icon>
-                                </span>
-                            </Input>
-                        </FormItem>
-                        <FormItem>
-                            <Button @click="handleSubmit" type="primary" long>登录</Button>
-                        </FormItem>
-                    </Form>
-                    <p class="login-tip">记住密码,暂不支持修改</p>
-                </div>
-            </Card>
+            <Tabs type="card">
+                <TabPane label="登录" icon="log-in">
+                    <div class="form-con">
+                        <Form ref="loginForm" :model="form" :rules="rules">
+                            <FormItem prop="userName">
+                                <Input v-model="form.userName" placeholder="请输入用户名">
+                                    <span slot="prepend">
+                                        <Icon :size="16" type="person"></Icon>
+                                    </span>
+                                </Input>
+                            </FormItem>
+                            <FormItem prop="password">
+                                <Input type="password" v-model="form.password" placeholder="请输入密码">
+                                    <span slot="prepend">
+                                        <Icon :size="14" type="locked"></Icon>
+                                    </span>
+                                </Input>
+                            </FormItem>
+                            <FormItem>
+                                <Button @click="handleSubmit" type="primary" long>登录</Button>
+                            </FormItem>
+                        </Form>
+                        <p class="login-tip">记住密码,暂不支持修改</p>
+                    </div>
+                </TabPane>
+                <TabPane label="注册" icon="ionic">
+                    <div class="form-con">
+                        <Form ref="registerForm" :model="registerForm" :rules="registerRules">
+                            <FormItem prop="userName">
+                                <Input v-model="registerForm.userName" placeholder="请输入用户名">
+                                    <span slot="prepend">
+                                        <Icon :size="16" type="person"></Icon>
+                                    </span>
+                                </Input>
+                            </FormItem>
+                            <FormItem prop="userPasswd">
+                                <Input type="password" v-model="registerForm.userPasswd" placeholder="请输入密码">
+                                    <span slot="prepend">
+                                        <Icon :size="14" type="locked"></Icon>
+                                    </span>
+                                </Input>
+                            </FormItem>
+                            <FormItem>
+                                <Button @click="handleRegister" type="primary" long>注册</Button>
+                            </FormItem>
+                        </Form>
+                        <p class="login-tip">记住密码,暂不支持修改</p>
+                    </div>
+                </TabPane>
+            </Tabs>
         </div>
     </div>
 </template>
 
 <script>
 import Cookies from 'js-cookie';
+import axios  from 'axios';
 export default {
     data () {
         return {
             form: {
-                userName: 'iview_admin',
+                userName: '',
                 password: ''
+            },
+            registerForm:{
+                userName: '',
+                userPasswd: ''
             },
             rules: {
                 userName: [
                     { required: true, message: '账号不能为空', trigger: 'blur' }
                 ],
                 password: [
+                    { required: true, message: '密码不能为空', trigger: 'blur' }
+                ]
+            },
+            registerRules:{
+                userName: [
+                    { required: true, message: '账号不能为空', trigger: 'blur' }
+                ],
+                userPasswd: [
                     { required: true, message: '密码不能为空', trigger: 'blur' }
                 ]
             }
@@ -71,6 +106,22 @@ export default {
                     this.$router.push({
                         name: 'home_index'
                     });
+                }
+            });
+        },
+        handleRegister(){
+            axios.post("/v1/user/add_user_info",this.registerForm
+            ).then((res)=>{
+                //console.log(res)
+                if(res.data.success){
+                    Cookies.set('user', this.registerForm.userName);
+                    Cookies.set('password', this.registerForm.userPasswd);
+                    Cookies.set('access', 0);
+                    this.$router.push({
+                        name: 'home_index'
+                    });
+                }else{
+                    this.$Message.error("失败")
                 }
             });
         }
