@@ -13,10 +13,10 @@ class LoginSQLMapper:
     #为了安全性，设置为私有方法
     def __setSQL(self):
         #WRITE SQL FOR API
-        addUserSQL="""
-        insert into user (username,passwd,remarks,gmt_create) values (%(userName)s,%(userPasswd)s,%(remarks)s,now())
+        getUserInfoSQL="""
+        select * from user where username=%(userName)s
         """
 
         #SET SQL FOR DAO
-        self.data.setdefault("addUser",addUserSQL)
+        self.data.setdefault("getUserInfo",getUserInfoSQL)
 

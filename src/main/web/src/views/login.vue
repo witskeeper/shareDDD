@@ -16,8 +16,8 @@
                                     </span>
                                 </Input>
                             </FormItem>
-                            <FormItem prop="password">
-                                <Input type="password" v-model="form.password" placeholder="请输入密码">
+                            <FormItem prop="passWord">
+                                <Input type="password" v-model="form.passWord" placeholder="请输入密码">
                                     <span slot="prepend">
                                         <Icon :size="14" type="locked"></Icon>
                                     </span>
@@ -67,7 +67,7 @@ export default {
         return {
             form: {
                 userName: '',
-                password: ''
+                passWord: ''
             },
             registerForm:{
                 userName: '',
@@ -77,7 +77,7 @@ export default {
                 userName: [
                     { required: true, message: '账号不能为空', trigger: 'blur' }
                 ],
-                password: [
+                passWord: [
                     { required: true, message: '密码不能为空', trigger: 'blur' }
                 ]
             },
@@ -92,13 +92,13 @@ export default {
         };
     },
     methods: {
-        handleSubmit () {
-            this.$refs.loginForm.validate((valid) => {
-                if (valid) {
-                    //Cookies.set('user', this.form.userName);
-                    //Cookies.set('password', this.form.password);
-                    this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
-                    if (this.form.userName === 'iview_admin') {
+        handleSubmit(){
+            axios.post("/v1/login/auth_login",this.form
+            ).then((res)=>{
+                console.log(res)
+                if(res.data.success){
+                    Cookies.set('user', this.form.userName);
+                    if (this.form.userName === 'admin') {
                         Cookies.set('access', 0);
                     } else {
                         Cookies.set('access', 1);
@@ -106,17 +106,18 @@ export default {
                     this.$router.push({
                         name: 'home_index'
                     });
+                }else{
+                    this.$Message.error("失败")
                 }
             });
         },
         handleRegister(){
             axios.post("/v1/user/add_user_info",this.registerForm
             ).then((res)=>{
-                //console.log(res)
+                console.log(res)
                 if(res.data.success){
-                    //Cookies.set('user', this.registerForm.userName);
-                    //Cookies.set('password', this.registerForm.userPasswd);
-                    //Cookies.set('access', 0);
+                    Cookies.set('user', this.registerForm.userName);
+                    Cookies.set('access', 1);
                     this.$router.push({
                         name: 'home_index'
                     });

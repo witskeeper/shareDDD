@@ -18,7 +18,5 @@ class LoginService(object):
         self.LoginDaoInterface = LoginDaoInterface()
 
     @AdminDecoratorServer.execImplDecorator()
-    def addUser(self,args):
-        logger.error(args)
-        logger.error(type(args))
-        return self.LoginDaoInterface.addUser(args)
+    def getUserInfo(self,args):
+        return self.LoginDaoInterface.getUserInfo(args)

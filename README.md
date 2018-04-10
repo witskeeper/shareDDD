@@ -296,3 +296,10 @@ CREATE TABLE `DBLog` (
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `authority` (
+`id` int(11) NOT NULL auto_increment,
+`powerId` int(11) default 0 NOT NULL,
+`businessId` int(11) default 0 NOT NULL,
+`userId` int(11) default 0 NOT NULL,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

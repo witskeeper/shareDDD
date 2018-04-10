@@ -17,6 +17,7 @@ from src.main.master.controller.TestCaseInstanceController import TestCaseInstan
 from src.main.master.controller.DatabaseController import DatabaseHandler
 from src.main.master.controller.ProductController import ProductHandler
 from src.main.master.controller.TableController import TableHandler
+from src.main.master.controller.LoginController import LoginHandler
 
 def start_server():
 
@@ -41,6 +42,7 @@ def start_server():
               (r"/v1/database/(.*)", DatabaseHandler),
               (r"/v1/product/(.*)", ProductHandler),
               (r"/v1/table/(.*)", TableHandler),
+              (r"/v1/login/(.*)", LoginHandler),
               ],**settings)
 
     http_server = tornado.httpserver.HTTPServer(app,xheaders=True)

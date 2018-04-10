@@ -3,6 +3,8 @@
 .idea/
 __pycache__/
 *.pyc
+*.log_warn
+*.log
 LogFiles/
 src/main/web/node_modules/
 src/main/master/LogFiles/
