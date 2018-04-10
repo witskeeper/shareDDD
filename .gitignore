@@ -8,3 +8,4 @@ __pycache__/
 LogFiles/
 src/main/web/node_modules/
 src/main/master/LogFiles/
+/src/main/master/LogFiles
