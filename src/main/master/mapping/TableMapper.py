@@ -115,6 +115,11 @@ class TableSQLMapper:
         gmt_modify=now() where DBId=%(DBId)s and eName=%(eName)s
         """
 
+        editTableCommentByIdSQL = """
+        update dbtable set cName=%(cName)s,
+        gmt_modify=now() where id=%(id)s
+        """
+
         discardTableByNameSQL = """
         update dbtable set is_discarded=1,
         gmt_modify=now() where DBId=%(DBId)s and eName=%(eName)s
@@ -133,7 +138,7 @@ class TableSQLMapper:
         """
 
         getColumnListByTableIdSQL = """
-        select dc.*,group_concat(concat('{"key":',cl.link_table_id,',"val":"',dm.name,'.',dt.eName,'.',dc2.eName,'"}') separator '|') links from dbcolumn dc 
+        select dc.*,group_concat(concat('{"db":',dt.DBId,',"key":',cl.link_table_id,',"val":"',dm.name,'.',dt.eName,'.',dc2.eName,'"}') separator '|') links from dbcolumn dc 
           left join column_link cl on cl.src_column_id = dc.id
           left join dbcolumn dc2 on dc2.id = cl.link_column_id
           left join dbtable dt on dt.id = cl.link_table_id
@@ -156,6 +161,10 @@ class TableSQLMapper:
         update dbcolumn set remark=%(val)s, gmt_modify=now() where id=%(id)s
         """
 
+        editColumnTypeByIdSQL = """
+        update dbcolumn set type=%(val)s, gmt_modify=now() where id=%(id)s
+        """
+
         editColumnDiscardByIdSQL = """
         update dbcolumn set is_discarded=%(val)s, gmt_modify=now() where id=%(id)s
         """
@@ -165,7 +174,7 @@ class TableSQLMapper:
         """
 
         getSynchronizeDatabaseSQL = """
-        SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = %(schemaName)s;
+        SELECT TABLE_NAME,TABLE_COMMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = %(schemaName)s;
         """
 
         getSynchronizeTableSQL = """
@@ -176,6 +185,11 @@ class TableSQLMapper:
         getSynchronizeColumnSQL = """
         SELECT COLUMN_NAME, COLUMN_TYPE, COLUMN_COMMENT from information_schema.columns 
         where TABLE_SCHEMA = %(schemaName)s and TABLE_NAME = %(tableName)s and COLUMN_NAME = %(columnName)s
+        """
+
+        getTableCommentSQL = """
+        SELECT TABLE_NAME,TABLE_COMMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = %(schemaName)s
+         and TABLE_NAME = %(tableName)s;
         """
 
         addTableRouteSQL="""
@@ -210,6 +224,11 @@ class TableSQLMapper:
          where DBId=%(DBId)s and c.ename like %(cname)s;
         """
 
+        getSearchByColumnRemarkSQL = """
+        SELECT c.id as uid, t.id,concat(t.eName,'.',c.eName,'  #',left(c.remark,15),'...') as eName from dbtable t join dbcolumn c on t.id = c.tableId 
+         where DBId=%(DBId)s and c.remark like %(remark)s;
+        """
+
         addDBLogSQL = """
         insert into dblog (DBId,content,userId,gmt_create) 
         values (%(DBId)s,%(content)s,%(userId)s,now())
@@ -232,12 +251,12 @@ class TableSQLMapper:
         """
 
         getLinkTableListSQL = """
-        SELECT dt.id, dt.eName from column_link cl join DBTable dt on dt.id = cl.link_table_id 
+        SELECT distinct dt.id, dt.eName from column_link cl join DBTable dt on dt.id = cl.link_table_id 
         and dt.DBId = %(DBId)s;
         """
 
         getLinkColumnListSQL = """
-        SELECT dc.id, dc.eName from column_link cl join DBColumn dc on dc.id = cl.link_column_id 
+        SELECT distinct dc.id, dc.eName from column_link cl join DBColumn dc on dc.id = cl.link_column_id 
         and dc.tableId = %(tableId)s;
         """
 
@@ -252,6 +271,7 @@ class TableSQLMapper:
         """
 
 
+
         #SET SQL FOR DAO
         self.data.setdefault("addTable",addTableSQL)
         self.data.setdefault("deleteTable",deleteTableSQL)
@@ -260,6 +280,7 @@ class TableSQLMapper:
         self.data.setdefault("getTableList", getTableListSQL)
         self.data.setdefault("editTable", editTableSQL)
         self.data.setdefault("editTableByName", editTableByNameSQL)
+        self.data.setdefault("editTableCommentById", editTableCommentByIdSQL)
         self.data.setdefault("discardTableByName", discardTableByNameSQL)
 
         self.data.setdefault("addColumn", addColumnSQL)
@@ -269,18 +290,19 @@ class TableSQLMapper:
         self.data.setdefault("getColumnListByTableName", getColumnListByTableNameSQL)
         self.data.setdefault("editColumn", editColumnSQL)
         self.data.setdefault("editColumnRemarkById", editColumnRemarkByIdSQL)
+        self.data.setdefault("editColumnTypeById", editColumnTypeByIdSQL)
         self.data.setdefault("editColumnDiscardById", editColumnDiscardByIdSQL)
 
         self.data.setdefault("isInitSynchronize", isInitSynchronizeSQL)
         self.data.setdefault("getSynchronizeDatabase", getSynchronizeDatabaseSQL)
         self.data.setdefault("getSynchronizeTable", getSynchronizeTableSQL)
         self.data.setdefault("getSynchronizeColumn", getSynchronizeColumnSQL)
-
-
+        self.data.setdefault("getTableComment", getTableCommentSQL)
 
         self.data.setdefault("getSearchByTable", getSearchByTableSQL)
         self.data.setdefault("getSearchByTableColumn", getSearchByTableColumnSQL)
         self.data.setdefault("getSearchByColumn", getSearchByColumnSQL)
+        self.data.setdefault("getSearchByColumnRemark", getSearchByColumnRemarkSQL)
 
         self.data.setdefault("addDBLog", addDBLogSQL)
         self.data.setdefault("getDBLogList", getDBLogListSQL)

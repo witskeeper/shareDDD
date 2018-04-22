@@ -55,6 +55,12 @@ class TableDaoInterface:
         daoOperate = DbBaseHelper(sql, args)
         return daoOperate.write()
 
+    def editTableCommentById(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.write()
+
     def discardTableByName(self,args):
         logger.info(inspect.stack()[0][3])
         sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
@@ -97,10 +103,16 @@ class TableDaoInterface:
         daoOperate = DbBaseHelper(sql, args)
         return daoOperate.write()
 
-    def editColumnRemarkById(self,args):
+    def editColumnRemarkById(self,args, is_execute_many):
         logger.info(inspect.stack()[0][3])
         sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate = DbBaseHelper(sql, args)
+        daoOperate = DbBaseHelper(sql, args, is_execute_many)
+        return daoOperate.write()
+
+    def editColumnTypeById(self,args, is_execute_many):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args, is_execute_many)
         return daoOperate.write()
 
     def editColumnDiscardById(self,args):
@@ -133,6 +145,12 @@ class TableDaoInterface:
         daoOperate = DbBaseHelper(sql, args)
         return daoOperate.read(**kwargs)
 
+    def getTableComment(self, args, **kwargs):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read(**kwargs)
+
     def initSynchronizeDatabase(self, args):
         #  todo 没有sql
         logger.info(inspect.stack()[0][3])
@@ -158,6 +176,12 @@ class TableDaoInterface:
         return daoOperate.read()
 
     def getSearchByColumn(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def getSearchByColumnRemark(self,args):
         logger.info(inspect.stack()[0][3])
         sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate = DbBaseHelper(sql, args)

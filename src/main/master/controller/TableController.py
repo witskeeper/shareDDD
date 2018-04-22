@@ -95,12 +95,14 @@ class TableHandler(tornado.web.RequestHandler):
                 'getSearchByTable': lambda: self.getSearchByTable(),
                 'getSearchByTableColumn': lambda: self.getSearchByTableColumn(),
                 'getSearchByColumn': lambda: self.getSearchByColumn(),
+                'getSearchByColumnRemark': lambda: self.getSearchByColumnRemark(),
                 'addColumnLink': lambda: self.addColumnLink(),
                 'getTableListByTableName': lambda: self.getTableListByTableName(),
                 'getColumnListByColName': lambda: self.getColumnListByColName(),
                 'addTableRoute': lambda: self.addTableRoute(),
                 'addDataNode': lambda: self.addDataNode(),
                 'addDataRoute': lambda: self.addDataRoute(),
+                'updateComment': lambda: self.updateComment(),
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -117,7 +119,7 @@ class TableHandler(tornado.web.RequestHandler):
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def addTable(self):
-        logger.info(self.request.body)
+        # logger.info(self.request.body)
         data = json.loads(self.request.body)
         return TableService().addTable(data)
 
@@ -149,12 +151,10 @@ class TableHandler(tornado.web.RequestHandler):
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def discardTableByName(self):
-        logger.info(self.request.body)
         return TableService().discardTableByName(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def addColumn(self):
-        logger.info(self.request.body)
         data = json.loads(self.request.body)
         return TableService().addColumn(data)
 
@@ -176,17 +176,14 @@ class TableHandler(tornado.web.RequestHandler):
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def editColumnRemarkById(self):
-        logger.info(self.request.body)
         return TableService().editColumnRemarkById(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def editColumnDiscardById(self):
-        logger.info(self.request.body)
         return TableService().editColumnDiscardById(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def editColumn(self):
-        logger.info(self.request.body)
         return TableService().editColumn(json.loads(self.request.body))
 
     def isInitSynchronize(self):
@@ -195,38 +192,35 @@ class TableHandler(tornado.web.RequestHandler):
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def initSynchronizeDatabase(self):
-        logger.info(self.request.body)
         return TableService().initSynchronizeDatabase(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def synchronizeDatabase(self):
-        logger.info(self.request.body)
         return TableService().synchronizeDatabase(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def initSynchronizeTable(self):
-        logger.info(self.request.body)
         return TableService().initSynchronizeTable(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def initSynchronizeColumn(self):
-        logger.info(self.request.body)
         return TableService().initSynchronizeColumn(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def getSearchByTable(self):
-        logger.info(self.request.body)
         return TableService().getSearchByTable(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def getSearchByTableColumn(self):
-        logger.info(self.request.body)
         return TableService().getSearchByTableColumn(json.loads(self.request.body))
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def getSearchByColumn(self):
-        logger.info(self.request.body)
         return TableService().getSearchByColumn(json.loads(self.request.body))
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def getSearchByColumnRemark(self):
+        return TableService().getSearchByColumnRemark(json.loads(self.request.body))
 
     def getDBLogList(self):
         DBId = self.get_argument("id")
@@ -273,4 +267,9 @@ class TableHandler(tornado.web.RequestHandler):
     def getTableRouteList(self):
         table_id = self.get_argument("id")
         return TableService().getTableRouteList(table_id)
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def updateComment(self):
+        data = json.loads(self.request.body)
+        return TableService().updateComment(data)
 

@@ -266,7 +266,7 @@ export default {
                                         //     path: "/docs/dbdoc-list-info",
                                         //     query: argu
                                         // });
-                                        vm.$emit('on-cell-link', vm.handleBackdata(vm.thisTableData), param.index, param.column.key,hi.key);
+                                        vm.$emit('on-cell-link', vm.handleBackdata(vm.thisTableData), param.index, param.column.key,hi.key,hi.db);
                                     }
                                 }
                         }, hi.val)])

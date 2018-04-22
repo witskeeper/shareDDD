@@ -96,8 +96,12 @@ class TableService(object):
         return self.TableDaoInterface.editColumn(args)
 
     @AdminDecoratorServer.execImplDecorator()
-    def editColumnRemarkById(self, args):
-        return self.TableDaoInterface.editColumnRemarkById(args)
+    def editColumnRemarkById(self, args, is_execute_many=False):
+        return self.TableDaoInterface.editColumnRemarkById(args, is_execute_many)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def editColumnTypeById(self, args, is_execute_many=False):
+        return self.TableDaoInterface.editColumnTypeById(args, is_execute_many)
 
     @AdminDecoratorServer.execImplDecorator()
     def editColumnDiscardById(self, args):
@@ -133,7 +137,7 @@ class TableService(object):
                 db_table = i["TABLE_NAME"]
                 tableDict = {}
                 tableDict["DBId"] = DBId
-                tableDict["cName"] = ""
+                tableDict["cName"] = i["TABLE_COMMENT"]
                 tableDict["eName"] = db_table
                 tableDict["remark"] = ""
                 tableDict["is_discarded"] = 0
@@ -168,10 +172,7 @@ class TableService(object):
                         columnDict["eName"] = j["COLUMN_NAME"]
                         columnDict["type"] = j["COLUMN_TYPE"]
                         remark = j["COLUMN_COMMENT"]
-                        if remark == "":
-                            columnDict["remark"] = "-"
-                        else:
-                            columnDict["remark"] = remark
+                        columnDict["remark"] = remark
                         columnDict["is_discarded"] = 0
                         insertColumnList.append(columnDict)
 
@@ -203,15 +204,17 @@ class TableService(object):
         tables_dest_list = [i["eName"] for i in tables_dest]
         # 获取源数据库和目标数据库的差集，用于增加整表
         tables_diff = set(tables_src_list) - set(tables_dest_list)
+        tables_diff_list = list(tables_diff)
+        tables_diff_dict = [i for i in tables_src if tables_diff_list.count(i["TABLE_NAME"]) > 0 ]
         # 获取需要比较表字段的数据表，排除上面差集的数据表
         tables_compare = set(tables_src_list) -  tables_diff
         # 增加表
         logTableList = []
-        for i in tables_diff:
-            db_table = i
+        for i in tables_diff_dict:
+            db_table = i["TABLE_NAME"]
             tableDict = {}
             tableDict["DBId"] = DBId
-            tableDict["cName"] = ""
+            tableDict["cName"] = i["TABLE_COMMENT"]
             tableDict["eName"] = db_table
             tableDict["remark"] = ""
             tableDict["is_discarded"] = 0
@@ -256,10 +259,7 @@ class TableService(object):
                     columnDict["eName"] = j["COLUMN_NAME"]
                     columnDict["type"] = j["COLUMN_TYPE"]
                     remark = j["COLUMN_COMMENT"]
-                    if remark == "":
-                        columnDict["remark"] = "-"
-                    else:
-                        columnDict["remark"] = remark
+                    columnDict["remark"] = remark
                     columnDict["is_discarded"] = 0
                     insertColumnList.append(columnDict)
                 interface_table.addColumn(insertColumnList, True)
@@ -288,17 +288,13 @@ class TableService(object):
                 args.setdefault("tableName", db_table)
                 args.setdefault("columnName", j)
                 column_info = interface_table.getSynchronizeColumn(args, **db_src).getMessage()
-                print(column_info)
                 columnDict = {}
                 columnDict["tableId"] = tableId
                 columnDict["cName"] = ""
                 columnDict["eName"] = column_info[0]["COLUMN_NAME"]
                 columnDict["type"] = column_info[0]["COLUMN_TYPE"]
                 remark = column_info[0]["COLUMN_COMMENT"]
-                if remark == "":
-                    columnDict["remark"] = "-"
-                else:
-                    columnDict["remark"] = remark
+                columnDict["remark"] = remark
                 columnDict["is_discarded"] = 0
                 logColumnName = "{}.{}".format(db_table, columnDict["eName"])
                 logColumnList.append(logColumnName)
@@ -371,12 +367,28 @@ class TableService(object):
         return self.TableDaoInterface.getSearchByColumn(args)
 
     @AdminDecoratorServer.execImplDecorator()
-    def addDBLog(self, DBId, content, userId=0):
+    def getSearchByColumnRemark(self, args):
+        logger.info(args)
+        content = args
+        args = {}
+        args.setdefault("DBId", content["DBId"])
+        args.setdefault("remark", '%{}%'.format((content["content"].encode('utf-8'))[1:]))
+        logger.info(args)
+        return self.TableDaoInterface.getSearchByColumnRemark(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def addDBLog(self, DBId, content, userId=0, type=0):
         # todo 默认无用户
         args = {}
         args.setdefault("userId", userId)
         args.setdefault("DBId", DBId)
-        concat_content = "添加了{}".format("、".join(content))
+        if type == 0:
+            content = [c.encode('utf8') for c in content]
+            concat_content = "添加了{}".format("、".join(content))
+        elif type == 1:
+            # content = [c.encode('utf8') for c in content]
+            concat_content = "更新了{}".format("、".join(content))
+
         args.setdefault("content", concat_content)
         logger.info(args)
         return self.TableDaoInterface.addDBLog(args)
@@ -445,3 +457,111 @@ class TableService(object):
             message.append(s)
         result.setMessage(message)
         return result
+
+    @AdminDecoratorServer.execImplDecorator()
+    def updateComment(self, args):
+        result = DataResult()
+        result.setSuccess(True)
+        user_id = 0
+        table_id = args["id"]
+        db_id = args["DBId"]
+        # 获取表信息
+        table_info = (self.getTableInfoById(table_id)).getMessage()
+        table_e_name = table_info[0]["eName"]
+        table_c_name = table_info[0]["cName"]
+        # 获取原库的表信息
+        table_info_src = (self.getTableComment(db_id, table_e_name)).getMessage()
+        table_c_name_src = table_info_src[0]["TABLE_COMMENT"]
+        flag_table = False
+        table_content = []
+        # 对比表信息
+        if table_c_name != table_c_name_src:
+            flag_table = True
+            content = "表{}的【中文名】从 [{}] 变成 [{}]".format(table_e_name.encode("utf8"), table_c_name.encode("utf8"), table_c_name_src.encode("utf8"))
+            table_content.append(content)
+        if flag_table:
+            self.editTableCommentById(table_id, table_c_name_src)
+            self.addDBLog(db_id, table_content, user_id, 1)
+        # 对比字段信息
+        # getSynchronizeTable
+        c_args = {}
+        c_args.setdefault("eName", table_e_name)
+        c_args.setdefault("DBId", db_id)
+        # 获取表字段信息
+        column_info = (self.getColumnListByTableName(c_args)).getMessage()
+         # 获取原库的表字段信息
+        db_src = self.getDBSrcInfo(db_id)
+        interface_table = self.TableDaoInterface
+        cs_args = {}
+        cs_args.setdefault("schemaName", db_src["db"])
+        cs_args.setdefault("tableName", table_e_name)
+        column_info_src = interface_table.getSynchronizeTable(cs_args, **db_src).getMessage()
+        column_info = [{"name":i["eName"],"type":i["type"],"remark":i["remark"],"id":i["id"]} for i in column_info]
+        column_info_src = [{"name":i["COLUMN_NAME"],"type":i["COLUMN_TYPE"],"remark":i["COLUMN_COMMENT"]}
+                           for i in column_info_src]
+        column_info = sorted(column_info, key=lambda x:x["name"])
+        column_info_src = sorted(column_info_src, key=lambda x:x["name"])
+        flag_column = False
+        column_content = []
+        update_column_type = []
+        update_column_remark = []
+        if len(column_info) == len(column_info_src):
+            flag_column = True
+        else:
+            result.setSuccess(False)
+            result.setMessage("当前表的字段数和源库中不一致，请先同步表信息")
+        if flag_column:
+            for x,y in zip(column_info,column_info_src):
+                one_flag = False
+                if x["name"] == y["name"]:
+                    one_flag = True
+                if one_flag:
+                    if x["type"] != y["type"]:
+                        args_type = {}
+                        args_type.setdefault("id", x["id"])
+                        args_type.setdefault("val", y["type"])
+                        update_column_type.append(args_type)
+                        content = "字段{}.{}的【类型】从 [{}] 变成 [{}]".format(table_e_name.encode("utf8"), x["name"].encode("utf8"),
+                                                               x["type"].encode("utf8"),y["type"].encode("utf8"))
+                        column_content.append(content)
+                    if x["remark"] != y["remark"]:
+                        args_remark = {}
+                        args_remark.setdefault("id", x["id"])
+                        args_remark.setdefault("val", y["remark"])
+                        update_column_remark.append(args_remark)
+                        content = "字段{}.{}的【备注】从 [{}] 变成 [{}]".format(table_e_name.encode("utf8"), x["name"].encode("utf8"),
+                                                               x["remark"].encode("utf8"), y["remark"].encode("utf8"))
+                        column_content.append(content)
+        if flag_column:
+            self.editColumnTypeById(update_column_type, True)
+            self.editColumnRemarkById(update_column_remark, True)
+            if len(column_content) > 0:
+                self.addDBLog(db_id, column_content, user_id, 1)
+
+        return result
+
+    @AdminDecoratorServer.execImplDecorator()
+    def getTableComment(self, db_id, table_name):
+        db_src = self.getDBSrcInfo(db_id)
+        db_schema = db_src["db"]
+
+        args = {}
+        args.setdefault("schemaName", db_schema)
+        args.setdefault("tableName", table_name)
+
+        return self.TableDaoInterface.getTableComment(args, **db_src)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def editTableCommentById(self, id, table_c_name):
+        args = {}
+        args.setdefault("id", id)
+        args.setdefault("cName", table_c_name)
+        return self.TableDaoInterface.editTableCommentById(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def getDBSrcInfo(self, db_id):
+        interface_db = self.DatabaseDaoInterface
+        db_info = interface_db.getDatabaseInfoById({"id": db_id}).getMessage()
+        db_src = {'host': db_info[0]["host"], 'user': db_info[0]["username"], 'passwd': db_info[0]["password"],
+                  'db': db_info[0]["schemaName"], 'port': db_info[0]["port"]}
+        return db_src

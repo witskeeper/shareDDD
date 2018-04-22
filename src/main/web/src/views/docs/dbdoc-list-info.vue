@@ -11,21 +11,22 @@
             
             <Col span="18">
                 <div class="margin-top-10">
-                    <Select v-model="searchInput" placeholder="搜索表名(user) / 表字段(user.id) / 字段(.id)" 
+                    <Select v-model="searchInput" placeholder="搜索表名(user) / 表字段(user.id) / 字段(.id) / 字段备注(#内容)" 
                      filterable remote :remote-method="remoteSearch" :loading="selectIsLoading" clearable @on-change="selectChange">
                         <Option v-for="item in searchList" :value="item.id" :key="item.uid">{{item.eName}}</Option>
                     </Select>
                 </div>
                 <div class="margin-top-10">
-                    <div style="font-size:25px">  {{tableDataModel.eName}}（<span v-if="cNameEditIsHide">{{tableDataModel.cName}}</span>
-                    <Input  v-if="!cNameEditIsHide" v-model="tableDataModel.cName" icon="checkmark" 
+                    <div style="font-size:25px">  {{tableDataModel.eName}}（<span v-if="cNameEditIsHide">{{tableDataModel.cName}}</span>）
+                    <!-- <Input  v-if="!cNameEditIsHide" v-model="tableDataModel.cName" icon="checkmark" 
                     style="width: 200px" @on-click="editTableCNameByName"></Input>）
                         <Button  v-if="cNameEditIsHide" type="ghost" shape="circle" icon="edit"  size="small" 
-                        @click="ChangeEditTableShow"></Button>
+                        @click="ChangeEditTableShow"></Button> -->
                         <Button type="success" @click="setCloumnLink"  size="small" >增加外键/数据关系</Button>
+                        <Button type="warning" @click="updateComment"  size="small" >更新表信息</Button>
                     </div>
                 </div>
-                <div class="margin-top-10">
+                <!-- <div class="margin-top-10">
                 <Collapse v-model="collapseStatus" accordion >
                   <Panel name="1">
                       数据流
@@ -46,7 +47,7 @@
                       </div>
                   </Panel>
                 </Collapse>
-                </div>
+                </div> -->
                 <div class="margin-top-10">    
                     <Input v-model="tableDataModel.remark" type="textarea" :autosize="{minRows: 2,maxRows: 5}" 
                     placeholder="备注" @on-blur="editTableByNameNet"></Input>
@@ -125,6 +126,7 @@ export default {
   },
   data() {
     return {
+        tableId: 0,
         selectSrcColumn: "",
         selectLinkType: "",
         linkDBList: [],
@@ -151,11 +153,11 @@ export default {
             {
             title: "备注",
             key: "remark",
-            editable: true
+            editable: false
             },
             {
             title: "外键/数据关系",
-            width: 170,
+            width: 250,
             key: "links",
             showlink: true
             },
@@ -205,7 +207,7 @@ export default {
         is_discarded: 0
       };
     },
-    initcolumnLinkModel() {
+    initColumnLinkModel() {
         this.columnLinkModel = {
             src_column_id: 0,
             src_table_id: 0,
@@ -213,15 +215,20 @@ export default {
             link_column_id: 0,
             link_table_id: 0,
         };
+        this.selectLinkTable = ""
+        this.selectLinkColumn = ""
+        this.selectLinkDB = ""
+        this.selectSrcColumn = ""
+        this.selectLinkType = ""
     },
     getData() {
       // console.log(this.$route)
       this.DBId = this.$route.query.id;
       this.isSearch=0;
-      this.getTableGroupRelationListNet();
-           setInterval(()=>{
-              this.isSearch++;
-          },500);
+      this.getTableGroupRelationListInitNet(this.DBId);
+          //  setInterval(()=>{
+          //     this.isSearch++;
+          // },500);
     },
     getTableRouteListtNet(table_id) {
       axios
@@ -237,25 +244,46 @@ export default {
           }
         });
     },
-    getTableGroupRelationListNet() {
+    getTableGroupRelationListInitNet(db_id) {
       axios
         .get("/v1/database/getTableGroupRelationList", {
-          params: { id: this.DBId }
+          params: { id: db_id }
         })
         .then(res => {
           if (res.data.success) {
             // debugger
             this.groupRelation = res.data.message;
             let tableId = this.groupRelation.groupInfo[0].children[0].tableId;
-            this.getColumnListByTableIdNet(tableId);
-            this.getTableInfoByIdNet(tableId)
-            // this.routeList = this.getTableRouteListtNet(tableId)
-            this.getTableRouteListtNet(tableId)
+            this.tableId = tableId
+            this.initTableinfo(tableId)
             console.log(this.routeList)
           } else {
             this.$Message.error("失败");
           }
         });
+    },
+    getTableGroupRelationListNet(db_id) {
+        let table_id = this.tableId
+      axios
+        .get("/v1/database/getTableGroupRelationList", {
+          params: { id: db_id }
+        })
+        .then(res => {
+          if (res.data.success) {
+            // debugger
+            this.groupRelation = res.data.message;
+            this.initTableinfo(table_id)
+          } else {
+            this.$Message.error("失败");
+          }
+        });
+    },
+    initTableinfo(table_id) {
+        this.getColumnListByTableIdNet(table_id);
+        this.getTableInfoByIdNet(table_id)
+        // this.routeList = this.getTableRouteListtNet(tableId)
+        this.getTableRouteListtNet(table_id)
+        this.changeTreeSelected(table_id)
     },
     getTreeTableInfo(selectedArray) {
       let isHasChildren = selectedArray[0].children;
@@ -265,6 +293,7 @@ export default {
         selectedArray[0].selected = false;
       } else {
         id = selectedArray[0].tableId;
+        this.tableId = id
         this.getColumnListByTableIdNet(id);
         this.getTableInfoByIdNet(id);
       }
@@ -335,12 +364,9 @@ export default {
         this.editColumnRemarkByIdNet(val[index][key], val[index]["id"], key);
       }
     },
-    handleLinkGo(val, index, key, id) {
-      console.log(id)
-      this.getColumnListByTableIdNet(id)
-      this.getTableInfoByIdNet(id)
-      this.changeTreeSelected(id)
-
+    handleLinkGo(val, index, key, table_id, db_id) {
+        this.tableId = table_id
+        this.getTableGroupRelationListNet(db_id)
     },
     editColumnRemarkByIdNet(val, index, key) {
       axios
@@ -389,54 +415,74 @@ export default {
       this.cNameEditIsHide = !this.cNameEditIsHide;
     },
     remoteSearch(query) {
-      if(this.isSearch%3!=0){
-        return;
-      }
-      var index = query.indexOf(".");
+      // if(this.isSearch%3!=0){
+      //   return;
+      // }
+
       var content = { DBId: this.DBId, content: query };
-      if(content != "") {
-        if (index > 0) {
-          // table.column
-          this.getSearchList(0, content);
-        } else if (index == -1) {
-          // table
-          this.getSearchList(1, content);
-        } else if (index == 0) {
-          // .column
-          this.getSearchList(2, content);
+
+      var cindex = query.indexOf("#");
+      if(cindex == 0) {
+          this.getSearchList(3, content);
+      } else {
+
+        var index = query.indexOf(".");
+        
+        if(content != "") {
+            if (index > 0) {
+            // table.column
+            this.getSearchList(0, content);
+            } else if (index == -1) {
+            // table
+            this.getSearchList(1, content);
+            } else if (index == 0) {
+            // .column
+            this.getSearchList(2, content);
+            }
         }
       }
-      
     },
     getSearchList(searchType, content) {
-      if (searchType == 0) {
-        // table.column
-        this.selectIsLoading = true;
-        axios.post("/v1/table/getSearchByTableColumn", content).then(res => {
-          if (res.data.success) {
-            // this.$Message.success("成功");
-            this.searchList = res.data.message;
-            this.selectIsLoading = false;
-          } else {
-            this.$Message.error("失败");
-          }
+        if (searchType == 0) {
+            // table.column
+            this.selectIsLoading = true;
+            axios.post("/v1/table/getSearchByTableColumn", content).then(res => {
+                if (res.data.success) {
+                    // this.$Message.success("成功");
+                    this.searchList = res.data.message;
+                    this.selectIsLoading = false;
+                } else {
+                    this.$Message.error("失败");
+                }
+            });
+        } else if (searchType == 1) {
+            // table
+            this.selectIsLoading = true;
+            axios.post("/v1/table/getSearchByTable", content).then(res => {
+            if (res.data.success) {
+                //  this.$Message.success("成功");
+                this.searchList = res.data.message;
+                this.selectIsLoading = false;
+            } else {
+                this.$Message.error("失败");
+            }
         });
-      } else if (searchType == 1) {
-        // table
-        this.selectIsLoading = true;
-        axios.post("/v1/table/getSearchByTable", content).then(res => {
-          if (res.data.success) {
-            //  this.$Message.success("成功");
-            this.searchList = res.data.message;
-            this.selectIsLoading = false;
-          } else {
-            this.$Message.error("失败");
-          }
-        });
-      } else if (searchType == 2) {
-        // .column
-        this.selectIsLoading = true;
-        axios.post("/v1/table/getSearchByColumn", content).then(res => {
+        } else if (searchType == 2) {
+            // .column
+            this.selectIsLoading = true;
+            axios.post("/v1/table/getSearchByColumn", content).then(res => {
+                if (res.data.success) {
+                    // this.$Message.success("成功");
+                    this.searchList = res.data.message;
+                    this.selectIsLoading = false;
+                } else {
+                    this.$Message.error("失败");
+                }
+            });
+        } else if (searchType == 3) {
+            // #字段备注
+            this.selectIsLoading = true;
+            axios.post("/v1/table/getSearchByColumnRemark", content).then(res => {
             if (res.data.success) {
                 // this.$Message.success("成功");
                 this.searchList = res.data.message;
@@ -452,14 +498,16 @@ export default {
         if(id > 0) {
           this.getColumnListByTableIdNet(id);
           this.getTableInfoByIdNet(id);
-          this.changeTreeSelected(id)
+          this.changeTreeSelected(id);
+          this.tableId = id
         }
         
     },
     changeTreeSelected(id) {
       this.groupRelation.groupInfo.forEach(grops =>{
         grops.children.forEach(item =>{
-          if(item.id==id){
+            console.log(item)
+          if(item.tableId==id){
             this.$set(item,'selected',true);
           }else{
             this.$set(item,'selected',false);
@@ -476,24 +524,22 @@ export default {
       this.addColumnLinkNet()
     },
     addColumnLinkNet() {
+        let DBId = this.selectLinkDB
+        let tableId = this.selectLinkTable
         axios.post("/v1/table/addColumnLink",
             this.columnLinkModel
             ).then((res)=>{
                 if(res.data.success){
                     this.$Message.success("成功");
-                    this.getData();
-
+                    // 为什么this.selectLinkDB没用 作用域不一样
+                    this.getTableGroupRelationListNet(DBId)
                 }else{
                     this.$Message.error("失败")
                 }
             }
             )
+            
             this.initColumnLinkModel()
-            this.selectLinkTable = ""
-            this.selectLinkColumn = ""
-            this.selectLinkDB = ""
-            this.selectSrcColumn = ""
-            this.selectLinkType = ""
     },
     setCloumnLink() {
         this.setLinkModal = true
@@ -578,6 +624,21 @@ export default {
           }
         });
     },
+    updateComment() {
+        // console.log(this.tableId)
+        let db_id = this.DBId
+        let table_id = this.tableId
+        axios.post("/v1/table/updateComment", {
+          id: table_id, DBId : db_id
+        }).then(res => {
+          if (res.data.success) {
+            // this.$Message.success("成功");
+            this.getTableGroupRelationListNet(db_id)  
+          } else {
+            this.$Message.error("失败");
+          }
+        });
+    }
   },
   created() {
     this.getData();
