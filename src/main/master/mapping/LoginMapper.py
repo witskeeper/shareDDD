@@ -14,7 +14,7 @@ class LoginSQLMapper:
     def __setSQL(self):
         #WRITE SQL FOR API
         getUserInfoSQL="""
-        select * from user where username=%(userName)s
+        select * from user where username=%(userName)s and passwd=%(passWord)s and status=0 limit 1
         """
 
         #SET SQL FOR DAO

@@ -55,7 +55,7 @@ class LoginHandler(tornado.web.RequestHandler):
         dataResult = DataResult()
         try:
             tasks = {
-                'get_current_user' : lambda : self.get_current_user(),
+                'auth_logout' : lambda : self.auth_logout(),
                 'auth_login' : lambda : self.auth_login(),
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -72,31 +72,20 @@ class LoginHandler(tornado.web.RequestHandler):
                 pass
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
-    def get_current_user(self):
-        userName = self.get_argument('userName')
-        userId=self.get_secure_cookie(userName)
-        if not userId:
-            return None
-        return
-
-    def any_author_exists(self):
-        return bool
-
     def auth_login(self):
         data = json.loads(self.request.body)
         dataResult = LoginService().getUserInfo(data)
-        if  dataResult.getMessage()[0]["username"] is None:
-            return
-        logger.error(data["passWord"])
-        logger.error(type(data["passWord"]))
-        if data["passWord"] == dataResult.getMessage()[0]["passwd"]:
+        if dataResult.getSuccess() and len(dataResult.getMessage()) > 0:
             self.set_secure_cookie("userName", str(dataResult.getMessage()[0]["username"]),version=1)
             self.set_secure_cookie("userId", str(dataResult.getMessage()[0]["id"]), version=1)
-        else:
-            return "密码错误"
-        return
+            dataResult.setMessage("Login success")
+            return dataResult
+        dataResult.setMessage("userName or passWord is invaild")
+        dataResult.setSuccess(False)
+        return dataResult
 
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def auth_logout(self):
         data = json.loads(self.request.body)
         self.clear_cookie(data["userName"])
-        return
+        return DataResult()
