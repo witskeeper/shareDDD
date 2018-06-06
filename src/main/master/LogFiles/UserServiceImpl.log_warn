@@ -1,7 +1,2 @@
-2017-12-24 20:53:22,082 - UserServiceImpl - 7400 - ERROR - getUserInfo - Traceback (most recent call last):
-  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\service\impl\UserServiceImpl.py", line 36, in getUserInfo
-    return self.userDaoInterface.getUserInfo(args)
-  File "C:\python27\lib\site-packages\src-0.0.1-py2.7.egg\src\main\master\dao\UserDao.py", line 14, in getUserInfo
-    daoOperate =DaoOperate(self.__name__,args)
-AttributeError: UserDaoInterface instance has no attribute '__name__'
-
+2018-06-06 16:30:26,216 - UserServiceImpl - 14620 - ERROR - addUser - {'userName': 'dgdfgh', 'userPasswd': '123456', 'remarks': None}
+2018-06-06 16:30:26,217 - UserServiceImpl - 14620 - ERROR - addUser - <class 'dict'>
