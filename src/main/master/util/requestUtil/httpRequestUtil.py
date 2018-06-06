@@ -123,9 +123,9 @@ class RequestBase(object):
     def init(self,s):
         url =self.test + "apiBusiness/MerchantBusiness/InitCurrentUser"
         data={"token":"9dd3e3fd4cf042adc0652527d04f297c","phone":"18201115228"}
-        print url
+        print(url)
         r = s.get(url,params=data)
-        print r.headers
+        print(r.headers)
         return r.cookies.values()[0]
 
     def getSchool(self,s,session=""):
@@ -163,5 +163,5 @@ if __name__=="__main__":
     req = RequestBase("","","","","")
     #r= s.get("http://localhost:8090/v1/interface/getInterfaceInfoById?apiId=1")
     #print req.init(s)
-    print req.getSchool(s)
+    print(req.getSchool(s))
 

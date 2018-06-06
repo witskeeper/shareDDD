@@ -129,7 +129,7 @@ class TaskCenterService(object):
                         taskGlobalStatus = "Success"
                         result.setSuccess(True)
                         return result
-        except Exception,err:
+        except Exception as err:
             logger.error("Exception:{0}".format(traceback.format_exc()))
             return result
         finally:
@@ -180,7 +180,7 @@ class TaskCenterService(object):
                     response,obj = requestUtil.route()
                     try:
                         response = json.loads(response)
-                    except Exception, e:
+                    except Exception as e:
                         logger.warn("return result is not json:{0} Exception:{1}".format(response,e))
                 #request sql
                 elif content.get("type")==1:

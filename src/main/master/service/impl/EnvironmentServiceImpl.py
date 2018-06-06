@@ -84,7 +84,7 @@ class EnvironmentService(object):
                     datatemplate = json.dumps(json.loads(args.get("template")))
                     args.pop("template")
                     args.setdefault("template", datatemplate)
-                except Exception,err:
+                except Exception as err:
                     logger.error(traceback.format_exc())
                     dataResult = DataResult()
                     dataResult.setMessage("template param [{0}]is invalid, must be dict".format(args.get("template")))

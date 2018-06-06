@@ -31,7 +31,7 @@ class DbBaseHelper(object):
             self.data.setMessage(list(ret))
             self.data.setSuccess(True)
             return self.data
-        except Exception, e:
+        except Exception as e:
             logger.error("select sql:{0} args:{1} Exception:{2}".format(self.sql,self.args,traceback.format_exc()))
             self.data.setSuccess(False)
             self.data.setMessage(traceback.format_exc())
@@ -60,7 +60,7 @@ class DbBaseHelper(object):
             self.data.setMessage(ret)
             self.data.setSuccess(True)
             return self.data
-        except Exception, e:
+        except Exception as e:
             logger.error("write sql:{0} args:{1} Exception:{2}".format(self.sql,self.args,traceback.format_exc()))
             self.data.setSuccess(False)
             self.data.setMessage(traceback.format_exc())
@@ -74,7 +74,7 @@ class DbBaseHelper(object):
         try:
             ret = db.read(sql)
             return list(ret)
-        except Exception, e:
+        except Exception as e:
             logger.error("execReadOnlySQL Exception:sql{0}  reason:{1}".format(sql,traceback.format_exc()))
             return []
         finally:
