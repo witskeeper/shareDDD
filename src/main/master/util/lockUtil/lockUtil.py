@@ -8,9 +8,9 @@ class Lock(object):
         self._invoke_task_lock = threading.Condition()
 
     def getLock(self):
-        print "get Lock"
+        print ("get Lock")
         self._invoke_task_lock.acquire()
 
     def unLock(self):
-        print "release Lock"
+        print ("release Lock")
         self._invoke_task_lock.release()

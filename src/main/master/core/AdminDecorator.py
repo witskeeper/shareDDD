@@ -21,7 +21,7 @@ class AdminDecoratorServer(object):
             def __deco(*args,**kwargs):
                 try:
                     return func(*args,**kwargs)
-                except Exception,err:
+                except Exception as e:
                     dataResult = DataResult()
                     logger.error(traceback.format_exc())
                     dataResult.setMessage(traceback.format_exc())
@@ -49,7 +49,7 @@ class AdminDecoratorServer(object):
                         dataResult.setMessage("Request IP [{0}]without a white list，to be intercepted".format(remote_ip))
                         return dataResult
                     return func(*args,**kwargs)
-                except Exception,err:
+                except Exception as e:
                     logger.error(traceback.format_exc())
                     dataResult.setMessage(traceback.format_exc())
                     dataResult.setSuccess(False)

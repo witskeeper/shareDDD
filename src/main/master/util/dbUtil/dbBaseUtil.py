@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import MySQLdb
-import MySQLdb.cursors
+import pymysql
+import pymysql.cursors
 from src.main.master.common.constants import DbConfig,SystemConfig
 from src.main.master.util.logUtil.log import Log
 
@@ -71,7 +71,7 @@ class Connection(object):
         self._conn = self._get_connection(**kwargs)
 
     def _get_connection(self,**kwargs):
-        return MySQLdb.connect(cursorclass=MySQLdb.cursors.DictCursor, charset = 'utf8', **kwargs)
+        return pymysql.connect(cursorclass=pymysql.cursors.DictCursor, charset = 'utf8', **kwargs)
 
     def commit(self):
         if getattr(self, '_conn', None) is not None:

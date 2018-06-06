@@ -81,6 +81,7 @@ class UserHandler(tornado.web.RequestHandler):
 
     @tornado.web.authenticated
     def get_user_info_by_user_name(self):
+        logger.error(self.request.body)
         userName = self.get_argument('userName')
         return UserService().getUserInfo(userName)
 
