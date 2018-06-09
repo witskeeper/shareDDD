@@ -110,6 +110,14 @@ class DatabaseSQLMapper:
         update tablegrouprelation set groupId=%(defaultId)s where groupId=%(groupId)s 
         """
 
+        deleteTableGroupByDBSQL = """
+        DELETE FROM tableGroup where DBId = %(id)s; 
+        """
+
+        deleteTableGroupRelationByDBSQL = """
+        DELETE FROM tableGroupRelation where tableId in (SELECT id from dbtable where DBId = %(id)s); 
+        """
+
         #SET SQL FOR DAO
         self.data.setdefault("addDatabase",addDatabaseSQL)
         self.data.setdefault("deleteDatabase",deleteDatabaseSQL)
@@ -129,5 +137,8 @@ class DatabaseSQLMapper:
         self.data.setdefault("getTableGroupRelationList", getTableGroupRelationListSQL)
         self.data.setdefault("updateTableGroupRelation", updateTableGroupRelationSQL)
         self.data.setdefault("updateTableGroupRelationByGroupId", updateTableGroupRelationByGroupIdSQL)
+
+        self.data.setdefault("deleteTableGroupByDB", deleteTableGroupByDBSQL)
+        self.data.setdefault("deleteTableGroupRelationByDB", deleteTableGroupRelationByDBSQL)
 
 

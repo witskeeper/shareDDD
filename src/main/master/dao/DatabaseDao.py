@@ -111,4 +111,14 @@ class DatabaseDaoInterface:
         daoOperate = DbBaseHelper(sql, args)
         return daoOperate.write()
 
+    def deleteTableGroupByDB(self, args):
+        sql = DatabaseSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.write()
+
+    def deleteTableGroupRelationByDB(self, args):
+        sql = DatabaseSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.write()
+
 

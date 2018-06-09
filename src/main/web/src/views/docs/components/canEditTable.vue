@@ -307,7 +307,12 @@ export default {
                 delete item.saving;
             });
             return clonedData;
-        }
+        },
+        // exportCsv(filename){
+        //     this.$refs.refs.exportCsv({
+        //                 filename: filename || 'The original data'
+        //             })
+        // }
     },
     watch: {
         value (data) {

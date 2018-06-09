@@ -138,14 +138,29 @@ class TableSQLMapper:
         """
 
         getColumnListByTableIdSQL = """
-        select dc.*,group_concat(concat('{"db":',dt.DBId,',"key":',cl.link_table_id,',"val":"',dm.name,'.',dt.eName,'.',dc2.eName,'"}') separator '|') links from dbcolumn dc 
+        select t.*,group_concat(concat('{"key":',t.tid,',"val":"',t.dcName,'.',t.teName,'.',t.ceName,'"}') separator '|') links from (
+          select dc.*,cl.link_table_id 'tid',dm.name 'dcName',dt.eName 'teName',dc.eName 'ceName' from dbcolumn dc
           left join column_link cl on cl.src_column_id = dc.id
           left join dbcolumn dc2 on dc2.id = cl.link_column_id
           left join dbtable dt on dt.id = cl.link_table_id
-          left join databasemanage dm on dm.id = dt.DBId
-          where dc.tableId = %(tableId)s
-          GROUP BY dc.id
+          left join databasemanage dm on dm.id = dt.DBId where dc.tableId = %(tableId)s
+        UNION
+          select dc.*,cl.src_table_id 'tid',dm.name 'dcName',dt.eName 'teName',dc.eName 'ceName' from dbcolumn dc
+          left join column_link cl on cl.link_column_id = dc.id
+          left join dbcolumn dc2 on dc2.id = cl.src_column_id
+          left join dbtable dt on dt.id = cl.src_table_id
+          left join databasemanage dm on dm.id = dt.DBId where dc.tableId = %(tableId)s) as t
+        GROUP BY t.id;
         """
+
+        # select dc.*,group_concat(concat('{"db":',dt.DBId,',"key":',cl.link_table_id,',"val":"',dm.name,'.',dt.eName,'.',dc2.eName,'"}') separator '|') links from dbcolumn dc 
+        #   left join column_link cl on cl.src_column_id = dc.id
+        #   left join dbcolumn dc2 on dc2.id = cl.link_column_id
+        #   left join dbtable dt on dt.id = cl.link_table_id
+        #   left join databasemanage dm on dm.id = dt.DBId
+        #   where dc.tableId = %(tableId)s
+        #   GROUP BY dc.id
+
 
         getColumnListByTableNameSQL = """
         select dc.* from dbcolumn dc join dbtable dt on dc.tableId = dt.id 
@@ -270,6 +285,13 @@ class TableSQLMapper:
         dc.tableId = %(tableId)s and dc.eName like %(eName)s;
         """
 
+        deleteColumnSQL = """
+        DELETE FROM dbcolumn where tableId in (SELECT id from dbtable where DBId = %(id)s); 
+        """
+
+        deleteTableSQL = """
+        DELETE FROM dbtable where DBId = %(id)s; 
+        """
 
 
         #SET SQL FOR DAO
@@ -317,6 +339,9 @@ class TableSQLMapper:
         self.data.setdefault("addDataNode", addDataNodeSQL)
         self.data.setdefault("addDataRoute", addDataRouteSQL)
         self.data.setdefault("getTableRouteList", getTableRouteListSQL)
+
+        self.data.setdefault("deleteColumn", deleteColumnSQL)
+        self.data.setdefault("deleteTable", deleteTableSQL)
 
 
 

@@ -9,7 +9,7 @@
         <Row>
             <!-- <Card> -->
             
-            <Col span="18">
+            <Col span="16">
                 <div class="margin-top-10">
                     <Select v-model="searchInput" placeholder="搜索表名(user) / 表字段(user.id) / 字段(.id) / 字段备注(#内容)" 
                      filterable remote :remote-method="remoteSearch" :loading="selectIsLoading" clearable @on-change="selectChange">
@@ -24,10 +24,12 @@
                         @click="ChangeEditTableShow"></Button> -->
                         <Button type="success" @click="setCloumnLink"  size="small" >增加外键/数据关系</Button>
                         <Button type="warning" @click="updateComment"  size="small" >更新表信息</Button>
+                        <Button type="primary" size="small" @click="exportData(1, tableDataModel.eName)"><Icon type="ios-download-outline"></Icon> 导出</Button>
+                        <!-- <Table :columns="columns8" :data="data7" size="small" ref="table"></Table> -->
                     </div>
                 </div>
-                <!-- <div class="margin-top-10">
-                <Collapse v-model="collapseStatus" accordion >
+                <div class="margin-top-10">
+                <!-- <Collapse v-model="collapseStatus" accordion >
                   <Panel name="1">
                       数据流
                       <div slot="content">
@@ -46,8 +48,8 @@
                         <p>sandkey:http://echarts.baidu.com/examples/editor.html?c=sankey-energy</p>
                       </div>
                   </Panel>
-                </Collapse>
-                </div> -->
+                </Collapse> -->
+                </div>
                 <div class="margin-top-10">    
                     <Input v-model="tableDataModel.remark" type="textarea" :autosize="{minRows: 2,maxRows: 5}" 
                     placeholder="备注" @on-blur="editTableByNameNet"></Input>
@@ -56,11 +58,11 @@
                 <div class="edittable-table-height-con margin-top-10">
                     <can-edit-table border :columns-list="listColumn" v-model="listData"
                     :hover-show="true" :edit-incell="true" @on-cell-change="handleCellChange" 
-                    @on-cell-link="handleLinkGo" ></can-edit-table>
+                    @on-cell-link="handleLinkGo" :ref="'table1'"></can-edit-table>
                 </div>
                 
             </Col>
-            <Col span="6" class="padding-left-10">
+            <Col span="8" class="padding-left-10">
                 <div class="">
                     <Card>
                         <p slot="title">
@@ -146,11 +148,6 @@ export default {
             key: "eName"
             },
             {
-            title: "类型",
-            width: 120,
-            key: "type"
-            },
-            {
             title: "备注",
             key: "remark",
             editable: false
@@ -160,6 +157,11 @@ export default {
             width: 250,
             key: "links",
             showlink: true
+            },
+            {
+            title: "类型",
+            width: 140,
+            key: "type"
             },
             {
             title: "废弃",
@@ -230,7 +232,7 @@ export default {
           //     this.isSearch++;
           // },500);
     },
-    getTableRouteListtNet(table_id) {
+    getTableRouteListNet(table_id) {
       axios
         .get("/v1/table/getTableRouteList", {
           params: { id: table_id }
@@ -281,8 +283,9 @@ export default {
     initTableinfo(table_id) {
         this.getColumnListByTableIdNet(table_id);
         this.getTableInfoByIdNet(table_id)
-        // this.routeList = this.getTableRouteListtNet(tableId)
-        this.getTableRouteListtNet(table_id)
+        // this.routeList = this.getTableRouteListNet(tableId)
+        // 暂时注释
+        // this.getTableRouteListNet(table_id)
         this.changeTreeSelected(table_id)
     },
     getTreeTableInfo(selectedArray) {
@@ -638,10 +641,37 @@ export default {
             this.$Message.error("失败");
           }
         });
-    }
+    },
+    exportData (type, filename) {
+      console.log(this.$refs)
+                if (type === 1) {
+                    this.$refs.table1.$children[0].exportCsv({
+                        filename: filename,
+                        // columns: this.listColumn.filter((col, index) => index = 1),
+                    });
+                } 
+                // else if (type === 2) {
+                //     this.$refs.table.exportCsv({
+                //         filename: 'Sorting and filtering data',
+                //         original: false
+                //     });
+                // } else if (type === 3) {
+                //     this.$refs.table.exportCsv({
+                //         filename: 'Custom data',
+                //         columns: this.columns8.filter((col, index) => index < 4),
+                //         data: this.data7.filter((data, index) => index < 4)
+                //     });
+                // }
+            }      
   },
   created() {
-    this.getData();
-  }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+    vm.getData();
+    
+  })
+    // next()
+},
 };
 </script>

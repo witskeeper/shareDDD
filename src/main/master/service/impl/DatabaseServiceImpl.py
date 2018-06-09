@@ -35,10 +35,11 @@ class DatabaseService(object):
     @AdminDecoratorServer.execImplDecorator()
     def deleteDatabase(self,args):
         # todo 删除关联关系
-        # self.deleteTableGroup()
-        # self.deleteTableGroupRelation()
-        # self.TableService.deleteTable()
-        # self.TableService.deleteColumn()
+
+        self.TableService.deleteColumn(args)
+        self.deleteTableGroupRelationByDB(args)
+        self.deleteTableGroupByDB(args)
+        self.TableService.deleteTable(args)
         return self.DatabaseDaoInterface.deleteDatabase(args)
 
     @AdminDecoratorServer.execImplDecorator()
@@ -159,3 +160,11 @@ class DatabaseService(object):
         args.setdefault("defaultId", defaultId)
         logger.info(args)
         return self.DatabaseDaoInterface.updateTableGroupRelationByGroupId(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def deleteTableGroupByDB(self, args):
+        return self.DatabaseDaoInterface.deleteTableGroupByDB(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def deleteTableGroupRelationByDB(self, args):
+        return self.DatabaseDaoInterface.deleteTableGroupRelationByDB(args)
