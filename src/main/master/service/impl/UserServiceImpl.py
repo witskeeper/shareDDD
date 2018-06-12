@@ -45,3 +45,7 @@ class UserService(object):
     def deleteUserInfoByName(self,args):
         return self.userDaoInterface.deleteUserInfoByName(args)
 
+    @AdminDecoratorServer.execImplDecorator()
+    def get_sys_user_list(self):
+        args = {}
+        return self.userDaoInterface.get_sys_user_list()

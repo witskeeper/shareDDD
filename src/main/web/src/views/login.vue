@@ -92,6 +92,12 @@ export default {
         };
     },
     methods: {
+        exemptLogin(){
+            axios.post("http://192.168.50.29:8080/user/GetDingTalkUserDetail?unionid=qmw1vdymxeX0CiPUXj6yyfgiEiE",this.form
+            ).then((res)=>{
+                console.log(res)
+            });
+        },
         handleSubmit(){
             axios.post("/v1/login/auth_login",this.form
             ).then((res)=>{
@@ -126,6 +132,8 @@ export default {
                 }
             });
         }
+    },
+    created () {
     }
 };
 </script>

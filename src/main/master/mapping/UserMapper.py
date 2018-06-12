@@ -40,9 +40,30 @@ class UserSQLMapper:
         deleteUserInfoByNameSQL="""
         delete from user where username = %(userName)s
         """
+        addSysUserSQL = """
+                insert into user_sys (username,mobile,userid,unionid,openid,department_id,roles,gmt_create) values (%(userName)s,%(mobile)s,%(userid)s,(unionid)s,%(openid)s,%(department_id)s,%(roles)s,now())
+                """
+        getSysUserListSQL = """
+                select id,username,department_id,roles from user_sys where status = 0
+                """
+        deleteSysUserInfoSQL = """
+                delete from user_sys where id = %(Id)s
+                """
+        getSysUserInfoByNameSQL = """
+                select username,mobile,userid,department_id,roles,status from user_sys where username = %(userName)s
+                """
+        deleteSysUserInfoByNameSQL = """
+                delete from user_sys where username = %(userName)s
+                """
+
         #SET SQL FOR DAO
         self.data.setdefault("addUser",addUserSQL)
         self.data.setdefault("getUserInfo", getUserInfoSQL)
         self.data.setdefault("deleteUser", deleteUserInfoSQL)
         self.data.setdefault("getUserInfoById", getUserInfoByIdSQL)
         self.data.setdefault("deleteUserInfoByName",deleteUserInfoByNameSQL)
+        self.data.setdefault("addSysUser", addSysUserSQL)
+        self.data.setdefault("getSysUserList", getSysUserListSQL)
+        self.data.setdefault("deleteSysUser", deleteSysUserInfoSQL)
+        self.data.setdefault("getSysUserInfoByName", getSysUserInfoByNameSQL)
+        self.data.setdefault("deleteSysUserInfoByName", deleteSysUserInfoByNameSQL)

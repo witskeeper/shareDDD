@@ -33,18 +33,27 @@ class UserHandler(tornado.web.RequestHandler):
     @run_on_executor
     def execute_get(self,APIName):
         dataResult = DataResult()
+        # try:
+        #     if not self.current_user:
+        #         dataResult.setSuccess(False)
+        #         dataResult.setMessage("目前处于未登录状态，请登录")
+        #         self.write(json.dumps(dataResult.__dict__, cls=CJsonEncoder))
+        #     else:
+        #         tasks = {
+        #             'get_user_info_by_user_name' : lambda : self.get_user_info_by_user_name(),
+        #             'get_user_info_by_user_id' : lambda :self.get_user_info_by_user_id(),
+        #             'get_sys_user_list' : lambda :self.get_sys_user_list()
+        #             # lambda alias
+        #         }
+        #         self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         try:
-            if not self.current_user:
-                dataResult.setSuccess(False)
-                dataResult.setMessage("目前处于未登录状态，请登录")
-                self.write(json.dumps(dataResult.__dict__, cls=CJsonEncoder))
-            else:
-                tasks = {
-                    'get_user_info_by_user_name' : lambda : self.get_user_info_by_user_name(),
-                    'get_user_info_by_user_id' : lambda :self.get_user_info_by_user_id()
-                    # lambda alias
-                }
-                self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
+            tasks = {
+                'get_user_info_by_user_name' : lambda : self.get_user_info_by_user_name(),
+                'get_user_info_by_user_id' : lambda :self.get_user_info_by_user_id(),
+                'get_sys_user_list' : lambda :self.get_sys_user_list()
+                # lambda alias
+            }
+            self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
             logger.error(traceback.format_exc())
             dataResult.setMessage(traceback.format_exc())
@@ -108,3 +117,7 @@ class UserHandler(tornado.web.RequestHandler):
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def deleteUserInfoByName(self):
         return UserService().deleteUserInfoByName(json.loads(self.request.body))
+
+    def get_sys_user_list(self):
+        logger.error(self.request.body)
+        return UserService().get_sys_user_list()

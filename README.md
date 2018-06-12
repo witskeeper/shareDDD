@@ -303,3 +303,21 @@ CREATE TABLE `authority` (
 `userId` int(11) default 0 NOT NULL,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user_sys` (
+`id` int(11) NOT NULL auto_increment,
+`username` varchar(255) NOT NULL,
+`mobile` varchar(20) NOT NULL unique,
+`userid` varchar(255) NOT NULL,
+`unionid` varchar(255) NOT NULL,
+`openid` varchar(255) NOT NULL,
+`department_id` int(11) default NULL,
+`roles` varchar(255) NOT NULL,
+`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
+`remarks` varchar(255) default NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `user_sys` ADD unique(`username`);

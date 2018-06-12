@@ -255,13 +255,6 @@ export const appRouter = [
                 name: 'user-list',
                 icon: 'android-people',
                 component: resolve => { require(['@/views/user/user-list.vue'], resolve); }
-            },
-            {
-                path: 'user-authority',
-                title: '权限设置',
-                name: 'user-authority',
-                icon: 'gear-a',
-                component: resolve => { require(['@/views/user/user-authority.vue'], resolve); }
             }
         ]
     },
