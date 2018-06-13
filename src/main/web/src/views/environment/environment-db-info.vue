@@ -55,7 +55,7 @@
                                         <p slot="title">
                                             <Icon type="document"></Icon>
                                             变动记录
-                                            <div class="edittable-table-height-con">
+                                            <div>
                                                 <!-- <Table border :columns="logListColumn" :data="loglist" show-header=false></Table> -->
                                                 <ul>
                                                     
@@ -383,8 +383,14 @@ export default {
     mounted () {
         // this.getData();
     },
-    created () {
-        this.getData();
-    }
+    // created () {
+    //     this.getData();
+    // },
+    beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.getData();
+    
+    })
+  },
 };
 </script>
