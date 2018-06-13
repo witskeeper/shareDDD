@@ -50,7 +50,8 @@ class UserHandler(tornado.web.RequestHandler):
             tasks = {
                 'get_user_info_by_user_name' : lambda : self.get_user_info_by_user_name(),
                 'get_user_info_by_user_id' : lambda :self.get_user_info_by_user_id(),
-                'get_sys_user_list' : lambda :self.get_sys_user_list()
+                'getSysUserList' : lambda :self.getSysUserList(),
+                'getSysUserInfoByName' : lambda :self.getSysUserInfoByName()
                 # lambda alias
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
@@ -73,7 +74,8 @@ class UserHandler(tornado.web.RequestHandler):
             tasks = {
                 'add_user_info' : lambda : self.add_user_info(),
                 'delete_user_info':lambda :self.delete_user_info(),
-                'deleteUserInfoByName':lambda :self.deleteUserInfoByName()
+                'deleteUserInfoByName':lambda :self.deleteUserInfoByName(),
+                'addSysUser' : lambda : self.addSysUser()
             }
             self.write(json.dumps(tasks[APIName]().__dict__,cls=CJsonEncoder))
         except:
@@ -118,6 +120,20 @@ class UserHandler(tornado.web.RequestHandler):
     def deleteUserInfoByName(self):
         return UserService().deleteUserInfoByName(json.loads(self.request.body))
 
-    def get_sys_user_list(self):
+    def getSysUserList(self):
         logger.error(self.request.body)
-        return UserService().get_sys_user_list()
+        return UserService().getSysUserList()
+
+    def getSysUserInfoByName(self):
+        logger.error(self.request.body)
+        userName = self.get_argument('userName')
+        return UserService().getSysUserInfoByName(userName)
+
+    @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
+    def addSysUser(self):
+        logger.error(self.request.body)
+        data = json.loads(self.request.body)
+        dataResult = UserService().addSysUser(data)
+        self.set_secure_cookie("userName", str(data["userName"]), version=1)
+        self.set_secure_cookie("userId", str(dataResult.getMessage()), version=1)
+        return dataResult

@@ -39,11 +39,11 @@ export default {
                 },
                 {
                     title: '部门',
-                    key: 'department'
+                    key: 'department_id'
                 },
                 {
                     title: '角色',
-                    key: 'role'
+                    key: 'roles'
                 },
                 {
                     title: '操作',
@@ -62,51 +62,36 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.show(params.index)
+                                        this.getSysUserInfo(params.index)
                                     }
                                 }
                             }, '详情'),
-                            h('Button', {
-                                props: {
-                                    type: 'error',
-                                    size: 'small'
-                                },
-                                on: {
-                                    click: () => {
-                                        this.remove(params.index)
-                                    }
-                                }
-                            }, '删除')
+//                            h('Button', {
+//                                props: {
+//                                    type: 'error',
+//                                    size: 'small'
+//                                },
+//                                on: {
+//                                    click: () => {
+//                                        this.remove(params.index)
+//                                    }
+//                                }
+//                            }, '删除')
                         ]);
                     }
                 }
             ],
-            list: [
-                {
-                    username: 'John Brown',
-                    department: 18,
-                    role: 'New York No. 1 Lake Park'
-                }
-            ]
+            list: [],
+            userInfo:[]
         };
     },
     methods: {
-        show (index) {
-            this.$Modal.info({
-                title: 'User Info',
-
-                content: `Name：${this.list[index].username}<br>Age：${this.list[index].department}<br>Address：${this.list[index].role}`
-            })
-        },
-        remove (index) {
-            this.list.splice(index, 1);
-        },
-        getData (group_id) {
-            axios.get("/v1/case/getCaseInfosByCondition",{params:{projectId:this.$route.query.projectId,groupId:group_id,offset:0,limit:10}}
+        getData () {
+            axios.get("/v1/user/getSysUserList"
                 ).then((res)=>{
                 console.log(res)
-                console.log(this.$route.query.projectId)
                 if(res.data.success){
+                    this.list=[]
                     this.list = res.data.message;
                 }else{
                     this.$Message.error("获取数据失败");
@@ -114,27 +99,32 @@ export default {
             }
             )
         },
-        removeGroup(root,node,data){
-            alert(JSON.stringify(root));
-            alert(JSON.stringify(node));
-            axios.post("/v1/group/deleteGroup",data).then((res)=>{
-                console.log(data);
-                console.log(res);
+        getSysUserInfo(index){
+            axios.get("/v1/user/getSysUserInfoByName",{params:{userName:this.list[index].username}}
+                ).then((res)=>{
+                console.log(res)
                 if(res.data.success){
-                    this.$Message.success("删除成功");
-                    const parentKey = root.find(el => el === node).parent;
-                    const parent = root.find(el => el.nodeKey === parentKey).node;
-                    const index = parent.children.indexOf(data);
-                    parent.children.splice(index, 1);
-                    this.getGroupData();
+                    this.userInfo=[]
+                    this.userInfo = res.data.message;
+                    this.show()
                 }else{
-                    this.$Message.error("删除数据失败");
+                    this.$Message.error("获取数据失败");
                 }
-            });
-        }
+            }
+            )
+        },
+        show () {
+            this.$Modal.info({
+                title: 'User Info',
+                content: `姓名：${this.userInfo[0].username}<br>部门：${this.userInfo[0].department_id}<br>角色：${this.userInfo[0].roles}<br>手机：${this.userInfo[0].mobile}<br>状态:${this.userInfo[0].status}`
+            })
+        },
+//        remove (index) {
+//            this.list.splice(index, 1);
+//        },
     },
     created () {
-
+        this.getData()
     },
 }
 </script>

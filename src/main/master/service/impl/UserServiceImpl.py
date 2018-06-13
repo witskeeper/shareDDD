@@ -46,6 +46,16 @@ class UserService(object):
         return self.userDaoInterface.deleteUserInfoByName(args)
 
     @AdminDecoratorServer.execImplDecorator()
-    def get_sys_user_list(self):
+    def getSysUserList(self):
+        return self.userDaoInterface.getSysUserList()
+
+    def getSysUserInfoByName(self,userName):
         args = {}
-        return self.userDaoInterface.get_sys_user_list()
+        args.setdefault("userName",userName)
+        return self.userDaoInterface.getSysUserInfoByName(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def addSysUser(self, args):
+        logger.error(args)
+        logger.error(type(args))
+        return self.userDaoInterface.addSysUser(args)

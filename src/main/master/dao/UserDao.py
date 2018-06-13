@@ -52,18 +52,12 @@ class UserDaoInterface:
         daoOperate =DbBaseHelper(sql,args)
         return daoOperate.write()
 
-    def get_sys_user_list(self):
+    def getSysUserList(self):
         #实例化
         logger.info(inspect.stack()[0][3])
         sql = UserSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate =DbBaseHelper(sql)
         return daoOperate.read()
-
-    def deleteSysUser(self,args):
-        logger.info(inspect.stack()[0][3])
-        sql = UserSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate = DbBaseHelper(sql, args)
-        return daoOperate.write()
 
     def getSysUserInfoByName(self,args):
         #实例化

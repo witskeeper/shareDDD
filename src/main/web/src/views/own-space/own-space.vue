@@ -22,7 +22,7 @@
                             <Input v-model="userForm.name" ></Input>
                         </div>
                     </FormItem>
-                    <FormItem label="用户邮箱：" prop="cellphone" >
+                    <FormItem label="联系方式：" prop="cellphone" >
                         <div style="display:inline-block;width:204px;">
                             <Input v-model="userForm.cellphone" @on-keydown="hasChangePhone"></Input>
                         </div>
