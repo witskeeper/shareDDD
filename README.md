@@ -226,34 +226,6 @@ CREATE TABLE `tableGroupRelation` (
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `databaseManage` (
-`id` int(11) NOT NULL auto_increment,
-`name` varchar(255) NOT NULL,
-`host` varchar(255) NOT NULL,
-`port` int(4) default 0 NOT NULL,
-`username` varchar(32) NOT NULL,
-`password` varchar(128) NOT NULL,
-`schemaName` varchar(32) NOT NULL,
-`businessUnit` TINYINT(4) default 0 NOT NULL,
-`productUnit` TINYINT(4) default 0 NOT NULL,
-PRIMARY KEY(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE `tableGroup` (
-`id` int(11) NOT NULL auto_increment,
-`DBId` int(11) default 0 NOT NULL,
-`name` varchar(64) NOT NULL,
-`isDefault` TINYINT(4) default 0 NOT NULL,
-PRIMARY KEY(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE `tableGroupRelation` (
-`id` int(11) NOT NULL auto_increment,
-`tableId` int(11) default 0 NOT NULL,
-`groupId` int(11) default 0 NOT NULL,
-PRIMARY KEY(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
 CREATE TABLE `DBTable` (
 `id` int(11) NOT NULL auto_increment,
 `DBId` int(11) default 0 NOT NULL,
@@ -321,6 +293,7 @@ PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 ALTER TABLE `user_sys` ADD unique(`username`);
+
 # db二期新加
  CREATE TABLE `column_link` (
 `id` int(11) NOT NULL auto_increment,
@@ -332,6 +305,7 @@ ALTER TABLE `user_sys` ADD unique(`username`);
 `gmt_create`  timestamp default CURRENT_TIMESTAMP  COMMENT '创建时间',
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 CREATE TABLE `table_route` (
 `id` int(11) NOT NULL auto_increment,
 `route_id` int(11) default 0 NOT NULL  COMMENT '数据流Id',
@@ -340,6 +314,7 @@ CREATE TABLE `table_route` (
 `gmt_create`  timestamp default CURRENT_TIMESTAMP  COMMENT '创建时间',
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 CREATE TABLE `data_node` (
 `id` int(11) NOT NULL auto_increment,
 `data_module` varchar(255)  COMMENT '节点模块',
@@ -349,6 +324,7 @@ CREATE TABLE `data_node` (
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 INSERT INTO dba.data_node (data_module, data_operation, node_built_in, gmt_create) VALUES ('ERP', '输入流', 1, '2018-04-07 20:49:31');
+
 CREATE TABLE `data_route` (
 `id` int(11) NOT NULL auto_increment,
 `table_id` int(11) default 0 NOT NULL  COMMENT '数据流关联表Id',
