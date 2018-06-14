@@ -321,3 +321,37 @@ PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 ALTER TABLE `user_sys` ADD unique(`username`);
+# db二期新加
+ CREATE TABLE `column_link` (
+`id` int(11) NOT NULL auto_increment,
+`src_column_id` int(11) default 0 NOT NULL COMMENT '数据源字段Id',
+`src_table_id` int(11) default 0 NOT NULL COMMENT '数据源表Id',
+`relation_type`TINYINT(4) NOT NULL COMMENT '关系类型：0 外键关系, 1 数据关系',
+`link_column_id` int(11) default 0 NOT NULL COMMENT '关联字段Id',
+`link_table_id` int(11) default 0 NOT NULL COMMENT '关联表Id',
+`gmt_create`  timestamp default CURRENT_TIMESTAMP  COMMENT '创建时间',
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+CREATE TABLE `table_route` (
+`id` int(11) NOT NULL auto_increment,
+`route_id` int(11) default 0 NOT NULL  COMMENT '数据流Id',
+`node_id` int(11) default 0 NOT NULL  COMMENT '数据节点Id',
+`node_order` int(11) default 0 NOT NULL  COMMENT '数据节点顺序',
+`gmt_create`  timestamp default CURRENT_TIMESTAMP  COMMENT '创建时间',
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+CREATE TABLE `data_node` (
+`id` int(11) NOT NULL auto_increment,
+`data_module` varchar(255)  COMMENT '节点模块',
+`data_operation` varchar(255)  COMMENT '节点操作',
+`node_built_in` TINYINT(4) default 0 NOT NULL  COMMENT '数据节点内置： 0 不内置，1 内置',
+`gmt_create`  timestamp default CURRENT_TIMESTAMP  COMMENT '创建时间',
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+INSERT INTO dba.data_node (data_module, data_operation, node_built_in, gmt_create) VALUES ('ERP', '输入流', 1, '2018-04-07 20:49:31');
+CREATE TABLE `data_route` (
+`id` int(11) NOT NULL auto_increment,
+`table_id` int(11) default 0 NOT NULL  COMMENT '数据流关联表Id',
+`gmt_create`  timestamp default CURRENT_TIMESTAMP  COMMENT '创建时间',
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

@@ -106,9 +106,8 @@ class DatabaseHandler(tornado.web.RequestHandler):
 
     def getDatabaseList(self):
         # todo 后面传了bu的Id
-        # businessUnit = self.get_argument("businessUnit")
-        # return DatabaseService().getDatabaseList(businessUnit)
-        return DatabaseService().getDatabaseList()
+        businessUnit = self.get_argument("id")
+        return DatabaseService().getDatabaseList(businessUnit)
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def deleteDatabase(self):

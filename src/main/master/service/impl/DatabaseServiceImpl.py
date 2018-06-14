@@ -35,10 +35,11 @@ class DatabaseService(object):
     @AdminDecoratorServer.execImplDecorator()
     def deleteDatabase(self,args):
         # todo 删除关联关系
-        # self.deleteTableGroup()
-        # self.deleteTableGroupRelation()
-        # self.TableService.deleteTable()
-        # self.TableService.deleteColumn()
+
+        self.TableService.deleteColumn(args)
+        self.deleteTableGroupRelationByDB(args)
+        self.deleteTableGroupByDB(args)
+        self.TableService.deleteTable(args)
         return self.DatabaseDaoInterface.deleteDatabase(args)
 
     @AdminDecoratorServer.execImplDecorator()
@@ -48,10 +49,10 @@ class DatabaseService(object):
         return self.DatabaseDaoInterface.getDatabaseInfoById(args)
 
     @AdminDecoratorServer.execImplDecorator()
-    def getDatabaseList(self):
+    def getDatabaseList(self, businessUnit):
         # todo businessUnit=2
         args = {}
-        args.setdefault("businessUnit", 2)
+        args.setdefault("businessUnit", businessUnit)
         return self.DatabaseDaoInterface.getDatabaseList(args)
 
     @AdminDecoratorServer.execImplDecorator()
@@ -127,7 +128,7 @@ class DatabaseService(object):
             group=list(group)
             groupDict.setdefault("title", group[0]["name"])
             logger.info(group)
-            groupDict.setdefault("children", [{"title":l["eName"],"id":l["id"],"tableId":l["tableId"]} for l in group])
+            groupDict.setdefault("children", [{"title":l["eName"]+"("+l["cName"]+")","id":l["id"],"tableId":l["tableId"]} for l in group])
             # 用于设置默认展开
             if index == 0:
                 groupDict.setdefault("expand", True)
@@ -159,3 +160,11 @@ class DatabaseService(object):
         args.setdefault("defaultId", defaultId)
         logger.info(args)
         return self.DatabaseDaoInterface.updateTableGroupRelationByGroupId(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def deleteTableGroupByDB(self, args):
+        return self.DatabaseDaoInterface.deleteTableGroupByDB(args)
+
+    @AdminDecoratorServer.execImplDecorator()
+    def deleteTableGroupRelationByDB(self, args):
+        return self.DatabaseDaoInterface.deleteTableGroupRelationByDB(args)

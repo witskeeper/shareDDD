@@ -55,6 +55,12 @@ class TableDaoInterface:
         daoOperate = DbBaseHelper(sql, args)
         return daoOperate.write()
 
+    def editTableCommentById(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.write()
+
     def discardTableByName(self,args):
         logger.info(inspect.stack()[0][3])
         sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
@@ -97,10 +103,16 @@ class TableDaoInterface:
         daoOperate = DbBaseHelper(sql, args)
         return daoOperate.write()
 
-    def editColumnRemarkById(self,args):
+    def editColumnRemarkById(self,args, is_execute_many):
         logger.info(inspect.stack()[0][3])
         sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate = DbBaseHelper(sql, args)
+        daoOperate = DbBaseHelper(sql, args, is_execute_many)
+        return daoOperate.write()
+
+    def editColumnTypeById(self,args, is_execute_many):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args, is_execute_many)
         return daoOperate.write()
 
     def editColumnDiscardById(self,args):
@@ -133,6 +145,12 @@ class TableDaoInterface:
         daoOperate = DbBaseHelper(sql, args)
         return daoOperate.read(**kwargs)
 
+    def getTableComment(self, args, **kwargs):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read(**kwargs)
+
     def initSynchronizeDatabase(self, args):
         #  todo 没有sql
         logger.info(inspect.stack()[0][3])
@@ -144,37 +162,6 @@ class TableDaoInterface:
         logger.info(inspect.stack()[0][3])
         daoOperate = DbBaseHelper()
         return daoOperate.read()
-
-    def addDataRoute(self,args):
-        #实例化
-        logger.info(inspect.stack()[0][3])
-        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate =DbBaseHelper(sql,args)
-        return daoOperate.write()
-
-    def deleteDataRoute(self,args):
-        logger.info(inspect.stack()[0][3])
-        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate = DbBaseHelper(sql, args)
-        return daoOperate.write()
-
-    def getDataRouteInfoById(self,args):
-        logger.info(inspect.stack()[0][3])
-        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate = DbBaseHelper(sql, args)
-        return daoOperate.read()
-
-    def getDataRouteList(self,args):
-        logger.info(inspect.stack()[0][3])
-        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate = DbBaseHelper(sql, args)
-        return daoOperate.read()
-
-    def editDataRoute(self,args):
-        logger.info(inspect.stack()[0][3])
-        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
-        daoOperate = DbBaseHelper(sql, args)
-        return daoOperate.write()
 
     def getSearchByTable(self,args):
         logger.info(inspect.stack()[0][3])
@@ -194,6 +181,12 @@ class TableDaoInterface:
         daoOperate = DbBaseHelper(sql, args)
         return daoOperate.read()
 
+    def getSearchByColumnRemark(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
     def addDBLog(self,args):
         logger.info(inspect.stack()[0][3])
         sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
@@ -201,6 +194,66 @@ class TableDaoInterface:
         return daoOperate.write()
 
     def getDBLogList(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def addColumnLink(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.write()
+
+    def getDBLogList(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def getLinkTableList(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def getLinkColumnList(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def getTableListByTableName(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def getColumnListByColName(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate = DbBaseHelper(sql, args)
+        return daoOperate.read()
+
+    def addTableRoute(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate =DbBaseHelper(sql,args)
+        return daoOperate.write()
+
+    def addDataNode(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate =DbBaseHelper(sql,args)
+        return daoOperate.write()
+
+    def addDataRoute(self,args):
+        logger.info(inspect.stack()[0][3])
+        sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
+        daoOperate =DbBaseHelper(sql,args)
+        return daoOperate.write()
+
+    def getTableRouteList(self,args):
         logger.info(inspect.stack()[0][3])
         sql = TableSQLMapper().getSQL(inspect.stack()[0][3])
         daoOperate = DbBaseHelper(sql, args)

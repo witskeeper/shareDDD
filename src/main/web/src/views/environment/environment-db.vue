@@ -29,9 +29,75 @@ export default {
     data () {
         return {
             listColumn: [
-
                     {
-                        title: '数据库名',
+                        title: '操作',
+                        key: 'id',
+                        width: 250,
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.deleteDatabaseNet(params.row.id)
+                                        }
+                                    }
+                                }, '删除'),
+                                h('Button', {
+                                    props: {
+                                        type: 'warning',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.synchronizeDatabase(params.row.id)
+                                        }
+                                    }
+                                }, '同步'),
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.$router.push({path:"/environment/environment-db-info",query:{id:params.row.id}})                                        
+                                        }
+                                    }
+                                }, '编辑'),
+                                h('Button', {
+                                    props: {
+                                        type: 'info',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.$router.push({path:"/docs/dbdoc-list-info",query:{id:params.row.id}})
+                                        }
+                                    }
+                                }, '查看文档'),
+                                
+                            ]);
+                        }
+                    },
+                    {
+                        title: '连接名',
                         key: 'name'
                     },
                     {
@@ -52,79 +118,17 @@ export default {
                     //     key: 'password'
                     // },
                     {
-                        title: '数据库',
+                        title: '实例名(scheam)',
                         key: 'schemaName'
                     },
-                    {
-                        title: '操作',
-                        key: 'id',
-                        width: 250,
-                        align: 'center',
-                        render: (h, params) => {
-                            return h('div', [
-                                h('Button', {
-                                    props: {
-                                        type: 'primary',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.$router.push({path:"/environment/environment-db-info",query:{id:params.row.id}})                                        
-                                        }
-                                    }
-                                }, '编辑'),
-                                h('Button', {
-                                    props: {
-                                        type: 'warning',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.synchronizeDatabase(params.row.id)
-                                        }
-                                    }
-                                }, '同步'),
-                                h('Button', {
-                                    props: {
-                                        type: 'info',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.$router.push({path:"/docs/dbdoc-list-info",query:{id:params.row.id}})
-                                        }
-                                    }
-                                }, '查看文档'),
-                                h('Button', {
-                                    props: {
-                                        type: 'error',
-                                        size: 'small'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.deleteDatabaseNet(params.row.id)
-                                        }
-                                    }
-                                }, '删除')
-                            ]);
-                        }
-                    }
+                    
             ],
             list:[],
             databaseDataModel:{
                     id: 0,
                     name: "",
                     host: "",
-                    port: 3306,
+                    port: 3309,
                     username: "",
                     password: "",
                     schemaName: "",
@@ -140,7 +144,7 @@ export default {
                 id: 0,
                 name: "",
                 host: "",
-                port: 3306,
+                port: 3309,
                 username: "",
                 password: "",
                 schemaName: "",
@@ -153,10 +157,12 @@ export default {
             this.getDatabaseList()
         },
         getDatabaseList() {
-            return axios.get("/v1/database/getDatabaseList").then((res)=>{
+            // todo id写死了
+            return axios.get("/v1/database/getDatabaseList",
+            {"params":{"id": 2}}).then((res)=>{
                 if(res.data.success){
                     this.list = res.data.message;
-                    return res
+                    // return res
                 }else{
                     this.$Message.error("失败")
                 }
@@ -175,7 +181,7 @@ export default {
                             props: {
                                 value: this.databaseDataModel.name,
                                 autofocus: true,
-                                placeholder: '数据库名'
+                                placeholder: '自定义连接名'
                             },
                             on: {
                                 input: (val) => {
@@ -247,7 +253,7 @@ export default {
                             props: {
                                 value: this.databaseDataModel.schemaName,
                                 autofocus: false,
-                                placeholder: '数据库'
+                                placeholder: '实例名(scheam)'
                             },
                             style: {
                                 marginTop: '8px'

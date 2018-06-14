@@ -1,6 +1,7 @@
 <style lang="less">
 @import "../../styles/common.less";
 @import "./components/table.less";
+@import "./dbdoc-list-info.less";
 </style>
 
 <template>
@@ -8,19 +9,46 @@
         <Row>
             <!-- <Card> -->
             
-            <Col span="18">
-                <div>
-                    <Select v-model="searchInput" placeholder="搜索表名(user) / 表字段(user.id)" 
+            <Col span="16">
+                <div class="margin-top-10">
+                    <Select v-model="searchInput" placeholder="搜索表名(user) / 表字段(user.id) / 字段(.id) / 字段备注(#内容)" 
                      filterable remote :remote-method="remoteSearch" :loading="selectIsLoading" clearable @on-change="selectChange">
                         <Option v-for="item in searchList" :value="item.id" :key="item.uid">{{item.eName}}</Option>
                     </Select>
                 </div>
-                <div>
-                    <div style="font-size:25px">  {{tableDataModel.eName}}（<span v-if="cNameEditIsHide">{{tableDataModel.cName}}</span>
-                    <Input  v-if="!cNameEditIsHide" v-model="tableDataModel.cName" icon="checkmark" 
+                <div class="margin-top-10">
+                    <div style="font-size:25px">  {{tableDataModel.eName}}（<span v-if="cNameEditIsHide">{{tableDataModel.cName}}</span>）
+                    <!-- <Input  v-if="!cNameEditIsHide" v-model="tableDataModel.cName" icon="checkmark" 
                     style="width: 200px" @on-click="editTableCNameByName"></Input>）
                         <Button  v-if="cNameEditIsHide" type="ghost" shape="circle" icon="edit"  size="small" 
-                        @click="ChangeEditTableShow"></Button></div>
+                        @click="ChangeEditTableShow"></Button> -->
+                        <Button type="success" @click="setCloumnLink"  size="small" >增加外键/数据关系</Button>
+                        <Button type="warning" @click="updateComment"  size="small" >更新表信息</Button>
+                        <Button type="primary" size="small" @click="exportData(1, tableDataModel.eName)"><Icon type="ios-download-outline"></Icon> 导出</Button>
+                        <!-- <Table :columns="columns8" :data="data7" size="small" ref="table"></Table> -->
+                    </div>
+                </div>
+                <div class="margin-top-10">
+                <!-- <Collapse v-model="collapseStatus" accordion >
+                  <Panel name="1">
+                      数据流
+                      <div slot="content">
+                        <Timeline v-for="item in routeList">
+                            <TimelineItem v-for="r in item.route"  color="green">
+                              <p class="time">{{r.data_operation}}</p>
+                              <p class="content">{{r.data_module}}</p>
+                            </TimelineItem>
+                        </Timeline>
+                      </div>
+                  </Panel>
+                  <Panel name="2">
+                      外键/数据关系
+                      <div slot="content">
+                        <p>tree：http://echarts.baidu.com/examples/editor.html?c=tree-legend</p>
+                        <p>sandkey:http://echarts.baidu.com/examples/editor.html?c=sankey-energy</p>
+                      </div>
+                  </Panel>
+                </Collapse> -->
                 </div>
                 <div class="margin-top-10">    
                     <Input v-model="tableDataModel.remark" type="textarea" :autosize="{minRows: 2,maxRows: 5}" 
@@ -29,42 +57,12 @@
                 
                 <div class="edittable-table-height-con margin-top-10">
                     <can-edit-table border :columns-list="listColumn" v-model="listData"
-                    :hover-show="true" :edit-incell="true" @on-cell-change="handleCellChange" ></can-edit-table>
+                    :hover-show="true" :edit-incell="true" @on-cell-change="handleCellChange" 
+                    @on-cell-link="handleLinkGo" :ref="'table1'"></can-edit-table>
                 </div>
                 
             </Col>
-            <Col span="6" class="padding-left-10">
-            <!-- <div class="margin-top-10">
-                    <Card>
-                        <p slot="title">
-                            <Icon type="ios-pricetags-outline"></Icon>
-                            标签
-                        </p>
-                        <Row>
-                            <Col span="18">
-                                <Select v-model="articleTagSelected" multiple @on-change="handleSelectTag" placeholder="请选择文章标签">
-                                    <Option v-for="item in articleTagList" :value="item.value" :key="item.value">{{ item.value }}</Option>
-                                </Select>
-                            </Col>
-                            <Col span="6" class="padding-left-10">
-                                <Button v-show="!addingNewTag" @click="handleAddNewTag" long type="ghost">新建</Button>
-                            </Col>
-                        </Row>
-                        <transition name="add-new-tag">
-                            <div v-show="addingNewTag" class="add-new-tag-con">
-                                <Col span="14">
-                                    <Input v-model="newTagName" placeholder="请输入标签名" />                                
-                                </Col>
-                                <Col span="5" class="padding-left-10">
-                                    <Button @click="createNewTag" long type="primary">确定</Button>
-                                </Col>
-                                <Col span="5" class="padding-left-10">
-                                    <Button @click="cancelCreateNewTag" long type="ghost">取消</Button>
-                                </Col>
-                            </div>
-                        </transition>
-                    </Card>
-                </div> -->
+            <Col span="8" class="padding-left-10">
                 <div class="">
                     <Card>
                         <p slot="title">
@@ -72,27 +70,51 @@
                             【{{groupRelation.dbName}}】文档目录
                         </p>
                         <Tree ref="tree" :data="groupRelation.groupInfo" @on-select-change="getTreeTableInfo"></Tree>
-                        <!-- <Tabs type="card"> -->
-                            <!-- <TabPane label="所有分类目录">
-                                <div class="classification-con">
-                                    <Tree :data="classificationList" @on-check-change="setClassificationInAll" show-checkbox></Tree>
-                                </div>
-                            </TabPane> -->
-                            <!-- <TabPane label="常用目录">
-                                <div class="classification-con">
-                                    <CheckboxGroup v-model="offenUsedClassSelected" @on-change="setClassificationInOffen">
-                                        <p v-for="item in offenUsedClass" :key="item.title">
-                                            <Checkbox :label="item.title">{{ item.title }}</Checkbox>
-                                        </p>
-                                    </CheckboxGroup>
-                                </div>
-                            </TabPane> -->
                     </Card>
                 </div>
                 
             </Col>
         <!-- </Card> -->
         </Row>
+    <Modal v-model="setLinkModal" title="增加外键/数据关系" @on-ok="addColumnLink">
+        <!-- todo 枚举值先写死了 -->
+        <div class="margin-top-10">
+          关系类型
+          <Select v-model="selectLinkType" style="width:200px">
+              <!-- <Option v-for="item in listData" :value="item.id" :key="item.id">{{ item.name }}</Option> -->
+              <Option :value="0" :key="0">外键关系</Option>
+              <Option :value="1" :key="1">数据关系</Option>
+          </Select>
+        </div>
+        <div class="margin-top-10">
+          源字段
+          <Select v-model="selectSrcColumn" style="width:200px">
+              <Option v-for="item in listData" :value="item.id" :key="item.id">{{ item.eName }}</Option>
+          </Select>
+        </div>
+        <div class="margin-top-10">
+          关系库
+          <Select v-model="selectLinkDB" style="width:200px" @on-change="selectLinkDBChange">
+              <Option v-for="item in linkDBList" :value="item.id" :key="item.id">{{ item.name }}</Option>
+          </Select>
+        </div>
+        <div class="margin-top-10">
+            <!-- 默认选取已经产生关联的，否则选取条件下的，支持跨库 -->
+            关系表
+          <Select v-model="selectLinkTable" style="width:200px" @on-change="selectLinkTableChange" 
+           filterable remote :remote-method="remoteLinkTableSearch" :loading="selectIsLoading">
+              <Option v-for="item in linkTableList" :value="item.id" :key="item.id">{{ item.eName }}</Option>
+          </Select>
+        </div>
+        <div class="margin-top-10">
+            <!-- 默认选取已经产生关联的，否则选取条件下的，支持跨库 -->
+          关系字段
+          <Select v-model="selectLinkColumn" style="width:200px" @on-change="selectLinkColumnChange" 
+           filterable remote :remote-method="remoteLinkColumnSearch" :loading="selectIsLoading">
+              <Option v-for="item in linkColumnList" :value="item.id" :key="item.id">{{ item.eName }}</Option>
+          </Select>
+        </div>
+    </Modal>
     </div>
 </template>
 
@@ -106,49 +128,74 @@ export default {
   },
   data() {
     return {
-      selectIsLoading: false,
-      treeTableName: "",
-      listColumn: [
-        {
-          title: "字段",
-          width: 120,
-          key: "eName"
+        tableId: 0,
+        selectSrcColumn: "",
+        selectLinkType: "",
+        linkDBList: [],
+        selectLinkDB: "",
+        linkTableList: [],
+        selectLinkTable: "",
+        linkColumnList: [],
+        selectLinkColumn: "",
+        setLinkModal: false,
+        collapseStatus: "",
+        selectIsLoading: false,
+        treeTableName: "",
+        listColumn: [
+            {
+            title: "字段",
+            width: 120,
+            key: "eName"
+            },
+            {
+            title: "备注",
+            key: "remark",
+            editable: false
+            },
+            {
+            title: "外键/数据关系",
+            width: 250,
+            key: "links",
+            showlink: true
+            },
+            {
+            title: "类型",
+            width: 140,
+            key: "type"
+            },
+            {
+            title: "废弃",
+            width: 120,
+            key: "is_discarded",
+            editable: true
+            }
+        ],
+        listData: [],
+        tableDataModel: {
+            id: 0,
+            eName: "",
+            cName: "",
+            type: "",
+            remark: "",
+            is_discarded: 0
         },
-        {
-          title: "类型",
-          width: 120,
-          key: "type"
+        groupRelation: {
+            dbName: "",
+            groupInfo: []
         },
-        {
-          title: "备注",
-          key: "remark",
-          editable: true
+        DBId: 0,
+        cNameEditIsHide: true,
+        searchInput: "",
+        searchList: [],
+        searchList1: [],
+        columnLinkModel: {
+        　  src_column_id: 0,
+        　  src_table_id: 0,
+        　  relation_type: 0,
+        　  link_column_id: 0,
+        　  link_table_id: 0,
         },
-        {
-          title: "是否废弃",
-          width: 120,
-          key: "is_discarded",
-          editable: true
-        }
-      ],
-      listData: [],
-      tableDataModel: {
-        id: 0,
-        eName: "",
-        cName: "",
-        type: "",
-        remark: "",
-        is_discarded: 0
-      },
-      groupRelation: {
-        dbName: "",
-        groupInfo: []
-      },
-      DBId: 0,
-      cNameEditIsHide: true,
-      searchInput: "",
-      searchList: [],
-      searchList1: []
+        routeList: []
     };
   },
   methods: {
@@ -162,31 +209,84 @@ export default {
         is_discarded: 0
       };
     },
+    initColumnLinkModel() {
+        this.columnLinkModel = {
+            src_column_id: 0,
+            src_table_id: 0,
+            relation_type: 0,
+            link_column_id: 0,
+            link_table_id: 0,
+        };
+        this.selectLinkTable = ""
+        this.selectLinkColumn = ""
+        this.selectLinkDB = ""
+        this.selectSrcColumn = ""
+        this.selectLinkType = ""
+    },
     getData() {
       // console.log(this.$route)
       this.DBId = this.$route.query.id;
       this.isSearch=0;
-      this.getTableGroupRelationListNet();
-           setInterval(()=>{
-              this.isSearch++;
-          },500);
+      this.getTableGroupRelationListInitNet(this.DBId);
+          //  setInterval(()=>{
+          //     this.isSearch++;
+          // },500);
     },
-    getTableGroupRelationListNet() {
+    getTableRouteListNet(table_id) {
+      axios
+        .get("/v1/table/getTableRouteList", {
+          params: { id: table_id }
+        })
+        .then(res => {
+          if (res.data.success) {
+              this.routeList = res.data.message
+            return res.data.message;
+          } else {
+            this.$Message.error("失败");
+          }
+        });
+    },
+    getTableGroupRelationListInitNet(db_id) {
       axios
         .get("/v1/database/getTableGroupRelationList", {
-          params: { id: this.DBId }
+          params: { id: db_id }
         })
         .then(res => {
           if (res.data.success) {
             // debugger
             this.groupRelation = res.data.message;
-            this.treeTableName = this.groupRelation.groupInfo[0].children[0].title;
-            this.getColumnListByTableNameNet(this.treeTableName);
-            this.getTableInfoByNameNet(this.treeTableName);
+            let tableId = this.groupRelation.groupInfo[0].children[0].tableId;
+            this.tableId = tableId
+            this.initTableinfo(tableId)
+            console.log(this.routeList)
           } else {
             this.$Message.error("失败");
           }
         });
+    },
+    getTableGroupRelationListNet(db_id) {
+        let table_id = this.tableId
+      axios
+        .get("/v1/database/getTableGroupRelationList", {
+          params: { id: db_id }
+        })
+        .then(res => {
+          if (res.data.success) {
+            // debugger
+            this.groupRelation = res.data.message;
+            this.initTableinfo(table_id)
+          } else {
+            this.$Message.error("失败");
+          }
+        });
+    },
+    initTableinfo(table_id) {
+        this.getColumnListByTableIdNet(table_id);
+        this.getTableInfoByIdNet(table_id)
+        // this.routeList = this.getTableRouteListNet(tableId)
+        // 暂时注释
+        // this.getTableRouteListNet(table_id)
+        this.changeTreeSelected(table_id)
     },
     getTreeTableInfo(selectedArray) {
       let isHasChildren = selectedArray[0].children;
@@ -196,6 +296,7 @@ export default {
         selectedArray[0].selected = false;
       } else {
         id = selectedArray[0].tableId;
+        this.tableId = id
         this.getColumnListByTableIdNet(id);
         this.getTableInfoByIdNet(id);
       }
@@ -229,7 +330,8 @@ export default {
         });
     },
     getColumnListByTableIdNet(tableId) {
-      axios
+        this.columnLinkModel.src_table_id = tableId
+        axios
         .get("/v1/table/getColumnListByTableId", {
           params: { id: tableId}
         })
@@ -264,6 +366,10 @@ export default {
       } else if (key === "remark") {
         this.editColumnRemarkByIdNet(val[index][key], val[index]["id"], key);
       }
+    },
+    handleLinkGo(val, index, key, table_id, db_id) {
+        this.tableId = table_id
+        this.getTableGroupRelationListNet(db_id)
     },
     editColumnRemarkByIdNet(val, index, key) {
       axios
@@ -312,54 +418,74 @@ export default {
       this.cNameEditIsHide = !this.cNameEditIsHide;
     },
     remoteSearch(query) {
-      if(this.isSearch%3!=0){
-        return;
-      }
-      var index = query.indexOf(".");
+      // if(this.isSearch%3!=0){
+      //   return;
+      // }
+
       var content = { DBId: this.DBId, content: query };
-      if(content != "") {
-        if (index > 0) {
-          // table.column
-          this.getSearchList(0, content);
-        } else if (index == -1) {
-          // table
-          this.getSearchList(1, content);
-        } else if (index == 0) {
-          // .column
-          this.getSearchList(2, content);
+
+      var cindex = query.indexOf("#");
+      if(cindex == 0) {
+          this.getSearchList(3, content);
+      } else {
+
+        var index = query.indexOf(".");
+        
+        if(content != "") {
+            if (index > 0) {
+            // table.column
+            this.getSearchList(0, content);
+            } else if (index == -1) {
+            // table
+            this.getSearchList(1, content);
+            } else if (index == 0) {
+            // .column
+            this.getSearchList(2, content);
+            }
         }
       }
-      
     },
     getSearchList(searchType, content) {
-      if (searchType == 0) {
-        // table.column
-        this.selectIsLoading = true;
-        axios.post("/v1/table/getSearchByTableColumn", content).then(res => {
-          if (res.data.success) {
-            // this.$Message.success("成功");
-            this.searchList = res.data.message;
-            this.selectIsLoading = false;
-          } else {
-            this.$Message.error("失败");
-          }
+        if (searchType == 0) {
+            // table.column
+            this.selectIsLoading = true;
+            axios.post("/v1/table/getSearchByTableColumn", content).then(res => {
+                if (res.data.success) {
+                    // this.$Message.success("成功");
+                    this.searchList = res.data.message;
+                    this.selectIsLoading = false;
+                } else {
+                    this.$Message.error("失败");
+                }
+            });
+        } else if (searchType == 1) {
+            // table
+            this.selectIsLoading = true;
+            axios.post("/v1/table/getSearchByTable", content).then(res => {
+            if (res.data.success) {
+                //  this.$Message.success("成功");
+                this.searchList = res.data.message;
+                this.selectIsLoading = false;
+            } else {
+                this.$Message.error("失败");
+            }
         });
-      } else if (searchType == 1) {
-        // table
-        this.selectIsLoading = true;
-        axios.post("/v1/table/getSearchByTable", content).then(res => {
-          if (res.data.success) {
-            //  this.$Message.success("成功");
-            this.searchList = res.data.message;
-            this.selectIsLoading = false;
-          } else {
-            this.$Message.error("失败");
-          }
-        });
-      } else if (searchType == 2) {
-        // .column
-        this.selectIsLoading = true;
-        axios.post("/v1/table/getSearchByColumn", content).then(res => {
+        } else if (searchType == 2) {
+            // .column
+            this.selectIsLoading = true;
+            axios.post("/v1/table/getSearchByColumn", content).then(res => {
+                if (res.data.success) {
+                    // this.$Message.success("成功");
+                    this.searchList = res.data.message;
+                    this.selectIsLoading = false;
+                } else {
+                    this.$Message.error("失败");
+                }
+            });
+        } else if (searchType == 3) {
+            // #字段备注
+            this.selectIsLoading = true;
+            axios.post("/v1/table/getSearchByColumnRemark", content).then(res => {
             if (res.data.success) {
                 // this.$Message.success("成功");
                 this.searchList = res.data.message;
@@ -375,24 +501,177 @@ export default {
         if(id > 0) {
           this.getColumnListByTableIdNet(id);
           this.getTableInfoByIdNet(id);
-          this.changeTreeSelected(id)
+          this.changeTreeSelected(id);
+          this.tableId = id
         }
         
     },
     changeTreeSelected(id) {
       this.groupRelation.groupInfo.forEach(grops =>{
         grops.children.forEach(item =>{
-          if(item.id==id){
+            console.log(item)
+          if(item.tableId==id){
             this.$set(item,'selected',true);
           }else{
             this.$set(item,'selected',false);
           }
         })
       })
-    }
+    },
+    addColumnLink() {
+      this.setLinkModal = false
+      this.columnLinkModel.relation_type = this.selectLinkType
+      this.columnLinkModel.link_table_id = this.selectLinkTable
+      this.columnLinkModel.link_column_id = this.selectLinkColumn
+      this.columnLinkModel.src_column_id = this.selectSrcColumn
+      this.addColumnLinkNet()
+    },
+    addColumnLinkNet() {
+        let DBId = this.selectLinkDB
+        let tableId = this.selectLinkTable
+        axios.post("/v1/table/addColumnLink",
+            this.columnLinkModel
+            ).then((res)=>{
+                if(res.data.success){
+                    this.$Message.success("成功");
+                    // 为什么this.selectLinkDB没用 作用域不一样
+                    this.getTableGroupRelationListNet(DBId)
+                }else{
+                    this.$Message.error("失败")
+                }
+            }
+            )
+            
+            this.initColumnLinkModel()
+    },
+    setCloumnLink() {
+        this.setLinkModal = true
+        this.getDatabaseListNet()
+
+    },
+    getDatabaseListNet() {
+        // todo id写死了
+        return axios.get("/v1/database/getDatabaseList",
+        {"params":{"id": 2}}).then((res)=>{
+            if(res.data.success){
+                this.linkDBList = res.data.message;
+                // return res
+            }else{
+                this.$Message.error("失败")
+            }
+        }
+        )
+    },
+    getLinkTableListNet(id) {
+        return axios.get("/v1/table/getLinkTableList",
+        {"params":{"id": id}}).then((res)=>{
+            if(res.data.success){
+                this.linkTableList = res.data.message;
+            }else{
+                this.$Message.error("失败")
+            }
+        }
+        )
+    },
+    getLinkColumnListNet(id) {
+        return axios.get("/v1/table/getLinkColumnList",
+        {"params":{"id": id}}).then((res)=>{
+            if(res.data.success){
+                this.linkColumnList = res.data.message;
+            }else{
+                this.$Message.error("失败")
+            }
+        }
+        )
+    },
+    selectLinkDBChange(val) {
+        // todo selectLinkTable?
+        this.getLinkTableListNet(val)
+        this.selectLinkTable = ""
+        this.selectLinkColumn = ""        
+    },
+    selectLinkTableChange(val) {
+        this.getLinkColumnListNet(val)
+        this.selectLinkColumn = ""
+    },
+    selectLinkColumnChange() {
+        
+    },
+    remoteLinkTableSearch(query) {
+        this.selectIsLoading = true;
+        axios.post("/v1/table/getTableListByTableName", {
+          id: this.selectLinkDB,
+          content: query
+        }).then(res => {
+          if (res.data.success) {
+            // this.$Message.success("成功");
+            this.linkTableList = res.data.message;
+            this.selectIsLoading = false;
+          } else {
+            this.$Message.error("失败");
+          }
+        });
+    },
+    remoteLinkColumnSearch(query) {
+        this.selectIsLoading = true;
+        axios.post("/v1/table/getColumnListByColName", {
+          id: this.selectLinkTable,
+          content: query
+        }).then(res => {
+          if (res.data.success) {
+            // this.$Message.success("成功");
+            this.linkColumnList = res.data.message;
+            this.selectIsLoading = false;
+          } else {
+            this.$Message.error("失败");
+          }
+        });
+    },
+    updateComment() {
+        // console.log(this.tableId)
+        let db_id = this.DBId
+        let table_id = this.tableId
+        axios.post("/v1/table/updateComment", {
+          id: table_id, DBId : db_id
+        }).then(res => {
+          if (res.data.success) {
+            // this.$Message.success("成功");
+            this.getTableGroupRelationListNet(db_id)  
+          } else {
+            this.$Message.error("失败");
+          }
+        });
+    },
+    exportData (type, filename) {
+      console.log(this.$refs)
+                if (type === 1) {
+                    this.$refs.table1.$children[0].exportCsv({
+                        filename: filename,
+                        // columns: this.listColumn.filter((col, index) => index = 1),
+                    });
+                } 
+                // else if (type === 2) {
+                //     this.$refs.table.exportCsv({
+                //         filename: 'Sorting and filtering data',
+                //         original: false
+                //     });
+                // } else if (type === 3) {
+                //     this.$refs.table.exportCsv({
+                //         filename: 'Custom data',
+                //         columns: this.columns8.filter((col, index) => index < 4),
+                //         data: this.data7.filter((data, index) => index < 4)
+                //     });
+                // }
+            }      
   },
   created() {
-    this.getData();
-  }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+    vm.getData();
+    
+  })
+    // next()
+},
 };
 </script>
