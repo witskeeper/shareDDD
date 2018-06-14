@@ -1,3 +1,4 @@
+#user management
 CREATE TABLE `user` (
 `id` int(11) NOT NULL auto_increment,
 `username` varchar(255) NOT NULL unique,
@@ -11,51 +12,95 @@ PRIMARY KEY(`id`)
 
 ALTER TABLE `user` ADD unique(`username`);
 
-CREATE TABLE `environment` (
+CREATE TABLE `user_sys` (
 `id` int(11) NOT NULL auto_increment,
-`name` varchar(255) NOT NULL unique,
-`url` varchar(255) default NULL,
-`create_userid` int(11) default NULL,
-`create_username` varchar(255) default NULL,
-`datatemplate` longtext default NULL,
-`dbname` varchar(255) DEFAULT NULL,
-`dbhostname` varchar(255) DEFAULT NULL,
-`dbport` varchar(255) DEFAULT NULL,
-`dbusername` varchar(255) DEFAULT NULL,
-`dbpasswd` varchar(255) DEFAULT NULL,
+`username` varchar(255) NOT NULL,
+`mobile` varchar(20) NOT NULL unique,
+`userid` varchar(255) NOT NULL,
+`unionid` varchar(255) NOT NULL,
+`openid` varchar(255) NOT NULL,
+`department_id` int(11) default NULL,
+`roles` varchar(255) NOT NULL,
+`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
+`remarks` varchar(255) default NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-ALTER TABLE `environment` ADD unique(`name`);
+ALTER TABLE `user_sys` ADD unique(`username`);
 
+CREATE TABLE `business` (
+`id` int(11) NOT NULL auto_increment,
+`department_id` int(11) default 0 NOT NULL,
+`business_name` varchar(255) default 0 NOT NULL,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+# 待使用
+CREATE TABLE `authority` (
+`id` int(11) NOT NULL auto_increment,
+`powerId` int(11) default 0 NOT NULL,
+`businessId` int(11) default 0 NOT NULL,
+`userId` int(11) default 0 NOT NULL,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+# 待使用，特权who（用户、角色、部门），what（按钮、页面、模块、产品），how（只读、读写）
+CREATE TABLE `privilege` (
+`id` int(11) NOT NULL auto_increment,
+`privilege_master` int(11) default 0 NOT NULL,
+`privilege_master_value` int(11) default 0 NOT NULL,
+`privilege_access` int(11) default 0 NOT NULL,
+`privilege_access_value` int(11) default 0 NOT NULL,
+`privilege_operation` tinyint(4) default 0 COMMENT '0: enable 1: disable',
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+# project management（项目概念为一个版本，其中可能包含多个应用的迭代）
 CREATE TABLE `project` (
 `id` int(11) NOT NULL auto_increment,
 `name` varchar(255) NOT NULL unique,
 `create_userid` int(11) NOT NULL,
 `create_username` varchar(255) NOT NULL,
 `version` varchar(255) DEFAULT NULL,
+`business_id` int(11) NOT NULL,
 `remarks` varchar(255) DEFAULT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
 ALTER TABLE `project` ADD unique(`name`);
 
-CREATE TABLE `group_info` (
+CREATE TABLE `application` (
 `id` int(11) NOT NULL auto_increment,
-`name` varchar(255) NOT NULL,
+`name` varchar(255) NOT NULL unique,
 `create_userid` int(11) NOT NULL,
-`type` tinyint(4) DEFAULT 0 COMMENT '0: api 1: case',
-`projectid` int(11) NOT NULL,
-`parent_groupid` int(11) DEFAULT 0,
-`ischild` tinyint(4) DEFAULT 0 COMMENT '0:not child 1:is child',
+`create_username` varchar(255) NOT NULL,
+`discribe` varchar(255) DEFAULT NULL,
+`business_id` int(11) NOT NULL,
+`remarks` varchar(255) DEFAULT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+ALTER TABLE `application` ADD unique(`name`);
+
+CREATE TABLE `application_version` (
+`id` int(11) NOT NULL auto_increment,
+`application_id` int(11) NOT NULL,
+`project_id` int(11) NOT NULL,
+`version` varchar(255) NOT NULL unique,
+`create_userid` int(11) NOT NULL,
+`create_username` varchar(255) NOT NULL,
+`discribe` varchar(255) DEFAULT NULL,
+`business_id` int(11) NOT NULL,
+`remarks` varchar(255) DEFAULT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+ALTER TABLE `application_version` ADD unique(`version`);
+
+# interface management
 
 CREATE TABLE `interface` (
 `id` int(11) NOT NULL auto_increment,
@@ -80,6 +125,40 @@ CREATE TABLE `interface` (
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `group_info` (
+`id` int(11) NOT NULL auto_increment,
+`name` varchar(255) NOT NULL,
+`create_userid` int(11) NOT NULL,
+`type` tinyint(4) DEFAULT 0 COMMENT '0: api 1: case',
+`projectid` int(11) NOT NULL,
+`parent_groupid` int(11) DEFAULT 0,
+`ischild` tinyint(4) DEFAULT 0 COMMENT '0:not child 1:is child',
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `environment` (
+`id` int(11) NOT NULL auto_increment,
+`name` varchar(255) NOT NULL unique,
+`url` varchar(255) default NULL,
+`create_userid` int(11) default NULL,
+`create_username` varchar(255) default NULL,
+`datatemplate` longtext default NULL,
+`dbname` varchar(255) DEFAULT NULL,
+`dbhostname` varchar(255) DEFAULT NULL,
+`dbport` varchar(255) DEFAULT NULL,
+`dbusername` varchar(255) DEFAULT NULL,
+`dbpasswd` varchar(255) DEFAULT NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `environment` ADD unique(`name`);
+
+#case management
 
 CREATE TABLE `testcase` (
 `id` int(11) NOT NULL auto_increment,
@@ -197,7 +276,8 @@ CREATE TABLE `session_manage` (
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-# add
+# db management
+
 CREATE TABLE `databaseManage` (
 `id` int(11) NOT NULL auto_increment,
 `name` varchar(255) NOT NULL,
@@ -267,32 +347,6 @@ CREATE TABLE `DBLog` (
 `gmt_create` datetime DEFAULT NULL,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE `authority` (
-`id` int(11) NOT NULL auto_increment,
-`powerId` int(11) default 0 NOT NULL,
-`businessId` int(11) default 0 NOT NULL,
-`userId` int(11) default 0 NOT NULL,
-PRIMARY KEY(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE `user_sys` (
-`id` int(11) NOT NULL auto_increment,
-`username` varchar(255) NOT NULL,
-`mobile` varchar(20) NOT NULL unique,
-`userid` varchar(255) NOT NULL,
-`unionid` varchar(255) NOT NULL,
-`openid` varchar(255) NOT NULL,
-`department_id` int(11) default NULL,
-`roles` varchar(255) NOT NULL,
-`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
-`remarks` varchar(255) default NULL,
-`gmt_create` datetime DEFAULT NULL,
-`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-PRIMARY KEY(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-ALTER TABLE `user_sys` ADD unique(`username`);
 
 # db二期新加
  CREATE TABLE `column_link` (
