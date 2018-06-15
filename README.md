@@ -15,10 +15,10 @@ ALTER TABLE `user` ADD unique(`username`);
 CREATE TABLE `user_sys` (
 `id` int(11) NOT NULL auto_increment,
 `username` varchar(255) NOT NULL,
+`passwd` varchar(255) default NULL,
 `mobile` varchar(20) NOT NULL unique,
 `userid` varchar(255) NOT NULL,
 `unionid` varchar(255) NOT NULL,
-`openid` varchar(255) NOT NULL,
 `department_id` int(11) default NULL,
 `roles` varchar(255) NOT NULL,
 `status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
@@ -33,9 +33,10 @@ ALTER TABLE `user_sys` ADD unique(`username`);
 CREATE TABLE `business` (
 `id` int(11) NOT NULL auto_increment,
 `department_id` int(11) default 0 NOT NULL,
-`business_name` varchar(255) default 0 NOT NULL,
+`name` varchar(255) default 0 NOT NULL,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 # 待使用
 CREATE TABLE `authority` (
 `id` int(11) NOT NULL auto_increment,
@@ -59,11 +60,10 @@ PRIMARY KEY(`id`)
 CREATE TABLE `project` (
 `id` int(11) NOT NULL auto_increment,
 `name` varchar(255) NOT NULL unique,
+`version` varchar(255) DEFAULT NULL,
+`discribe` varchar(255) DEFAULT NULL,
 `create_userid` int(11) NOT NULL,
 `create_username` varchar(255) NOT NULL,
-`version` varchar(255) DEFAULT NULL,
-`business_id` int(11) NOT NULL,
-`remarks` varchar(255) DEFAULT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)
@@ -73,10 +73,9 @@ ALTER TABLE `project` ADD unique(`name`);
 CREATE TABLE `application` (
 `id` int(11) NOT NULL auto_increment,
 `name` varchar(255) NOT NULL unique,
+`discribe` varchar(255) DEFAULT NULL,
 `create_userid` int(11) NOT NULL,
 `create_username` varchar(255) NOT NULL,
-`discribe` varchar(255) DEFAULT NULL,
-`business_id` int(11) NOT NULL,
 `remarks` varchar(255) DEFAULT NULL,
 `gmt_create` datetime DEFAULT NULL,
 `gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
