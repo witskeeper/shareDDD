@@ -40,7 +40,8 @@ class ProjectSQLMapper:
         select * from project where id = %(projectId)s
         """
         getProjectListSQL="""
-        select * from project
+        select project.* from project left join user on user.department_id = project.department_id
+        where user.id=%(userId)s
         """
         editProjectSQL="""
         update project set name=%(name)s,remarks=%(remarks)s,gmt_create=now() where id = %(projectId)s

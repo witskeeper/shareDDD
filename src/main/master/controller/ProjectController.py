@@ -105,7 +105,8 @@ class ProjectHandler(tornado.web.RequestHandler):
         return ProjectService().getProjectInfoById(projectId)
 
     def getProjectList(self):
-        return ProjectService().getProjectList()
+        userId = self.get_secure_cookie("userId")
+        return ProjectService().getProjectList(userId = userId)
 
     @AdminDecoratorServer.webInterceptorDecorator(SystemConfig.adminHost)
     def deleteProject(self):

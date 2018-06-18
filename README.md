@@ -11,6 +11,18 @@ PRIMARY KEY(`id`)
 
 ALTER TABLE `user` ADD unique(`username`);
 
+CREATE TABLE `department` (
+`id` int(11) NOT NULL auto_increment,
+`department_name` varchar(255) NOT NULL unique,
+`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
+`remarks` varchar(255) default NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `department` ADD unique(`department_name`);
+
 CREATE TABLE `environment` (
 `id` int(11) NOT NULL auto_increment,
 `name` varchar(255) NOT NULL unique,
