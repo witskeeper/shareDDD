@@ -71,19 +71,19 @@ export const appRouter = [
         path: '/interface',
         icon: 'ios-infinite',
         name: 'interface',
-        title: '接口管理',
+        title: '项目管理',
         component: Main,
         children: [
             {
                 path: 'interface-manage',
-                title: '项目接口',
+                title: '项目中心',
                 name: 'interface-manage',
                 icon: 'link',
                 component: resolve => { require(['@/views/interface/interface-manage.vue'], resolve); }
             },
             {
                 path: 'project-document',
-                title: '项目文档',
+                title: '指挥中心',
                 name: 'project-document',
                 icon: 'android-send',
                 component: resolve => { require(['@/views/interface/project-document.vue'], resolve); }
@@ -94,22 +94,36 @@ export const appRouter = [
         path: '/testcacse',
         icon: 'social-buffer',
         name: 'testcase',
-        title: '用例管理',
+        title: '测试管理',
         component: Main,
         children: [
             {
                 path: 'test-collection',
                 icon: 'compose',
                 name: 'test-collection',
-                title: '用例集',
+                title: '测试服务',
                 component: resolve => { require(['@/views/testcase/test-collection/test-collection.vue'], resolve); }
             },
             {
                 path: 'test-suite',
                 icon: 'pound',
                 name: 'test-suite',
-                title: '用例套件',
+                title: '测试任务',
                 component: resolve => { require(['@/views/testcase/test-suite/test-suite.vue'], resolve); }
+            },
+            {
+                path: 'test-measure',
+                icon: 'pound',
+                name: 'test-measure',
+                title: '测试度量',
+                component: resolve => { require(['@/views/testcase/test-measure/test-measure.vue'], resolve); }
+            },
+            {
+                path: 'test-experiment',
+                icon: 'pound',
+                name: 'test-experiment',
+                title: '实验中心',
+                component: resolve => { require(['@/views/testcase/test-experiment/test-experiment.vue'], resolve); }
             }
         ]
     },
@@ -117,7 +131,7 @@ export const appRouter = [
         path: '/environment',
         icon: 'arrow-move',
         name: 'environment',
-        title: '环境管理',
+        title: '协作管理',
         component: Main,
         children: [
             {
@@ -193,7 +207,7 @@ export const appRouter = [
         path: '/performance',
         icon: 'earth',
         name: 'performance',
-        title: '性能监控',
+        title: '监控中心',
         component: Main,
         children: [
             {
