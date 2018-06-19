@@ -26,10 +26,10 @@ class UserSQLMapper:
     def __setSQL(self):
         #WRITE SQL FOR API
         addUserSQL="""
-        insert into user (username,passwd,remarks,gmt_create) values (%(userName)s,%(userPasswd)s,%(remarks)s,now())
+        insert into user (username,passwd,mobile,userid_ding,unionid,department_id,roles,remarks,gmt_create) values (%(userName)s,%(userPasswd)s,%(mobile)s,%(userid_ding)s,(unionid)s,%(department_id)s,%(roles)s,%(remarks)s,now())
         """
         getUserInfoSQL="""
-        select id,username,passwd,remarks from user where username= %(userName)s and status = 0
+        select id,username,mobile,department_id,roles,status from user where username= %(userName)s and status = 0
         """
         deleteUserInfoSQL="""
         delete from user where id = %(userId)s
@@ -40,17 +40,8 @@ class UserSQLMapper:
         deleteUserInfoByNameSQL="""
         delete from user where username = %(userName)s
         """
-        addSysUserSQL = """
-        insert into user_sys (username,mobile,userid,unionid,openid,department_id,roles,gmt_create) values (%(userName)s,%(mobile)s,%(userid)s,(unionid)s,%(openid)s,%(department_id)s,%(roles)s,now())
-        """
-        getSysUserListSQL = """
-        select id,username,department_id,roles from user_sys where status = 0
-        """
-        getSysUserInfoByNameSQL = """
-        select username,mobile,userid,department_id,roles,status from user_sys where username = %(userName)s
-        """
-        deleteSysUserInfoByNameSQL = """
-        delete from user_sys where username = %(userName)s
+        getUserListSQL = """
+        select id,username,department_id,roles from user where status = 0
         """
 
         #SET SQL FOR DAO
@@ -59,7 +50,4 @@ class UserSQLMapper:
         self.data.setdefault("deleteUser", deleteUserInfoSQL)
         self.data.setdefault("getUserInfoById", getUserInfoByIdSQL)
         self.data.setdefault("deleteUserInfoByName",deleteUserInfoByNameSQL)
-        self.data.setdefault("addSysUser", addSysUserSQL)
-        self.data.setdefault("getSysUserList", getSysUserListSQL)
-        self.data.setdefault("getSysUserInfoByName", getSysUserInfoByNameSQL)
-        self.data.setdefault("deleteSysUserInfoByName", deleteSysUserInfoByNameSQL)
+        self.data.setdefault("getUserList", getUserListSQL)

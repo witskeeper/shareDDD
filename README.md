@@ -3,22 +3,9 @@ CREATE TABLE `user` (
 `id` int(11) NOT NULL auto_increment,
 `username` varchar(255) NOT NULL unique,
 `passwd` varchar(255) NOT NULL,
-`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
-`remarks` varchar(255) default NULL,
-`gmt_create` datetime DEFAULT NULL,
-`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-PRIMARY KEY(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-ALTER TABLE `user` ADD unique(`username`);
-
-CREATE TABLE `user_sys` (
-`id` int(11) NOT NULL auto_increment,
-`username` varchar(255) NOT NULL,
-`passwd` varchar(255) default NULL,
-`mobile` varchar(20) NOT NULL unique,
-`userid` varchar(255) NOT NULL,
-`unionid` varchar(255) NOT NULL,
+`mobile` varchar(20) default NULL,
+`userid_ding` varchar(255) default NULL,
+`unionid` varchar(255) default NULL,
 `department_id` int(11) default NULL,
 `roles` varchar(255) NOT NULL,
 `status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
@@ -28,14 +15,19 @@ CREATE TABLE `user_sys` (
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-ALTER TABLE `user_sys` ADD unique(`username`);
+ALTER TABLE `user` ADD unique(`username`);
 
-CREATE TABLE `business` (
+CREATE TABLE `department` (
 `id` int(11) NOT NULL auto_increment,
-`department_id` int(11) default 0 NOT NULL,
-`name` varchar(255) default 0 NOT NULL,
+`department_name` varchar(255) NOT NULL unique,
+`status` tinyint(4) default 0 COMMENT '0: enable 1: disable',
+`remarks` varchar(255) default NULL,
+`gmt_create` datetime DEFAULT NULL,
+`gmt_modify` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `department` ADD unique(`department_name`);
 
 # 待使用
 CREATE TABLE `authority` (

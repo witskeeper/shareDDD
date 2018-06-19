@@ -62,21 +62,21 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.getSysUserInfo(params.index)
+                                        this.getUserInfo(params.index)
                                     }
                                 }
                             }, '详情'),
-//                            h('Button', {
-//                                props: {
-//                                    type: 'error',
-//                                    size: 'small'
-//                                },
-//                                on: {
-//                                    click: () => {
-//                                        this.remove(params.index)
-//                                    }
-//                                }
-//                            }, '删除')
+                            h('Button', {
+                                props: {
+                                    type: 'primary',
+                                    size: 'small'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.remove(params.index)
+                                    }
+                                }
+                            }, '权限分配')
                         ]);
                     }
                 }
@@ -87,7 +87,7 @@ export default {
     },
     methods: {
         getData () {
-            axios.get("/v1/user/getSysUserList"
+            axios.get("/v1/user/getUserList"
                 ).then((res)=>{
                 console.log(res)
                 if(res.data.success){
@@ -99,8 +99,8 @@ export default {
             }
             )
         },
-        getSysUserInfo(index){
-            axios.get("/v1/user/getSysUserInfoByName",{params:{userName:this.list[index].username}}
+        getUserInfo(index){
+            axios.get("/v1/user/getUserInfo",{params:{userName:this.list[index].username}}
                 ).then((res)=>{
                 console.log(res)
                 if(res.data.success){
@@ -119,9 +119,9 @@ export default {
                 content: `姓名：${this.userInfo[0].username}<br>部门：${this.userInfo[0].department_id}<br>角色：${this.userInfo[0].roles}<br>手机：${this.userInfo[0].mobile}<br>状态:${this.userInfo[0].status}`
             })
         },
-//        remove (index) {
-//            this.list.splice(index, 1);
-//        },
+        remove (index) {
+            this.list.splice(index, 1);
+        },
     },
     created () {
         this.getData()
